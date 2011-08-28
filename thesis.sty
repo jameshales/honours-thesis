@@ -1,0 +1,62 @@
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+
+% Modal FEL operators
+\newcommand{\knows}{\raisebox{-1pt}{$\Box$}}
+\newcommand{\suspects}{\raisebox{-1pt}{$\Diamond$}}
+\newcommand{\allrefs}{{\ensuremath{\mathopen{\blacktriangleright}}}}
+\newcommand{\somerefs}{{\ensuremath{\mathopen{\triangleright}}}}
+
+% Bisimulation notation
+\newcommand{\bisrel}{\ensuremath{\mathfrak{R}}}
+\newcommand{\bisim}{{\raisebox{.3ex}[0mm][0mm]{\ensuremath{\medspace \underline{\! \leftrightarrow\!}\medspace}}}}
+\newcommand{\refinement}{\preceq}
+\newcommand{\simulation}{\succeq}
+
+% Cover logic operators
+\newcommand{\covers}{\nabla}
+\newcommand{\revoc}{\triangle}
+
+% Logical operators
+\newcommand{\proves}{\vdash}
+\newcommand{\entails}{\vDash}
+\newcommand{\nproves}{\nvdash}
+\newcommand{\nentails}{\nvDash}
+
+% FEL abbreviations
+\newcommand{\lang}{\ensuremath{\mathcal{L}}}
+\newcommand{\logicC}{\ensuremath{\lang^{\mathbf{C}}}}
+\newcommand{\logicK}{\ensuremath{\lang^{\mathbf{K}}}}
+\newcommand{\logicS}{\ensuremath{\lang^{\mathbf{S5}}}}
+\newcommand{\logicKD}{\ensuremath{\lang^{\mathbf{KD45}}}}
+\newcommand{\logicKi}{\ensuremath{\logicK_{(1)}}}
+\newcommand{\logicSi}{\ensuremath{\logicS_{(1)}}}
+\newcommand{\logicKDi}{\ensuremath{\logicKD_{(1)}}}
+\newcommand{\langF}{\ensuremath{\lang_\somerefs}}
+\newcommand{\logicCF}{\ensuremath{\logicC_\somerefs}}
+\newcommand{\logicKF}{\ensuremath{\logicK_\somerefs}}
+\newcommand{\logicSF}{\ensuremath{\logicS_\somerefs}}
+\newcommand{\logicKDF}{\ensuremath{\logicKD_\somerefs}}
+\newcommand{\logicKiF}{\ensuremath{\logicK_{\somerefs(1)}}}
+\newcommand{\logicSiF}{\ensuremath{\logicS_{\somerefs(1)}}}
+\newcommand{\logicKDiF}{\ensuremath{\logicKD_{\somerefs(1)}}}
+\newcommand{\classC}{\textit{C}}
+\newcommand{\classK}{\textit{K}}
+\newcommand{\classS}{\textit{S5}}
+\newcommand{\classKD}{\textit{KD45}}
+\newcommand{\classSi}{\ensuremath{\mathit{S5}_{(1)}}}
+\newcommand{\classKDi}{\ensuremath{\mathit{KD45}_{(1)}}}
+\newcommand{\axiomKi}{\ensuremath{\mathrm{\mathbf{K}}_{(1)}}}
+\newcommand{\axiomSi}{\ensuremath{\mathrm{\mathbf{S5}}_{(1)}}}
+\newcommand{\axiomKDi}{\ensuremath{\mathrm{\mathbf{KD45}}_{(1)}}}
+\newcommand{\axiomFi}{\ensuremath{\mathrm{\mathbf{FEL}_{(1)}}}}
+\newcommand{\axiomKiF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{K}_{(1)}}}}
+\newcommand{\axiomSiF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{S5}_{(1)}}}}
+\newcommand{\axiomKDiF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{KD45}_{(1)}}}}
+
+\newcommand{\satSiF}{\ensuremath{\mathsf{M}^\mathbf{S5}_{\somerefs(1)}}}
+\newcommand{\satKDiF}{\ensuremath{\mathsf{M}^\mathbf{KD45}_{\somerefs(1)}}}
+
+% Other abbreviations
+\newcommand{\bnfalt}{\mid}
+\renewcommand{\implies}{\rightarrow}
+\renewcommand{\iff}{\leftrightarrow}

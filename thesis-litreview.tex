@@ -1,0 +1,208 @@
+\chapter{Literature review}
+
+\section{Introduction}
+
+Informative updates can be loosely defined as actions performed in an epistemic
+system that result in new information being provided to agents in the system.
+The field of dynamic epistemic logic considers how the knowledge of a collection
+of agents may change as a result of such informative updates. Informative
+updates may provide agents with increased certainty about facts about the world,
+but they may also increase uncertainty about the knowledge of other agents. The
+former typically happens when the informative update takes the form of an
+announcement or message to a particular agent, which makes a statement
+containing facts about the world. The latter typically happens when, from the
+point of view of the agent, it is clear that some informative update occurred,
+such as a private message to another agent, but it is not known exactly which
+informative update occurred.
+
+Previous work in dynamic epistemic logic has considered various logical systems
+in which informative updates can be modelled and reasoned about. Particularly of
+interest to my research area, the future event logic, are logics that introduce
+operators representing the application of specific informative updates, or
+operators representing quantification over informative updates.
+
+\section{Review of previous techniques in dynamic epistemic logic}
+
+Techniques in dynamic epistemic logic have been based on a variety of
+definitions of informative updates. Important definitions for modelling
+informative updates include public announcements, epistemic actions, action
+models, and refinements of Kripke models. I will briefly introduce these
+different definitions of informative updates, and the logics that have been
+based on them. Typically each definition of informative update comes with a
+method for applying the update to an epistemic system, for reasoning about the
+consequences of the update, and for quantifying over arbitrary informative
+updates.
+
+\subsection*{Public announcements}
+
+A public announcement is a simple form of informative update, in which
+information is announced to all agents in an epistemic system at once.  The
+information that is announced takes the form of an epistemic formula. The result
+of a public announcement is that the information that is announced becomes
+common knowledge, which means that as a result of the announcement, all of the
+agents in the system know the information, all of the agents know that all
+agents know the information, all of the agents know that all agents know that
+all agents know the information, and so on. In terms of the Kripke model
+representation of the epistemic system, this has the effect of restricting the
+Kripke model to only those possible worlds which are consistent with the
+announced formula, removing those possible worlds which are inconsistent with
+the announcement. As such it is a very simple matter to apply a public
+announcement to a Kripke model.
+
+The public announcement logic was introduced and axiomatised by
+Plaza\cite{plaza2007logics} and more generally by Gerbrandy and
+Groenvald\cite{gerbrandy1997reasoning}. The logic introduces an operator that
+has the effect of performing a public announcement to all agents in the
+epistemic system. The operator, $[\phi]\psi$ takes an epistemic formula $\phi$,
+and a public announcement logic formula $\psi$, and states that after $\phi$ is
+publicly announced, $\psi$ holds. This allows one to reason about the
+consequences of the public announcement in the epistemic system.
+
+Public announcements are a very limited form of informative update, because the
+result of a public announcement is necessarily common knowledge to all of the
+agents in the system. Public announcements cannot model informative updates in
+which the result of the update is only known to some agents in the system, or in
+which the update introduces new uncertainty to some agents. Examples of such
+informative updates are private messages, that only the recipient of the message
+knows the contents of the message, and other agents may be aware of the message,
+but are uncertain as to its contents.
+
+\subsection*{Epistemic actions}
+
+Epistemic actions capture a more sophisticated notion of an informative update
+than public announcements. Epistemic actions are formulae that are built using
+operators that restrict the result of a particular epistemic action to a subset
+of the agents, or that signify that one of several possible epistemic actions
+may have occurred, but from the point of view of some agents it is uncertain
+which action actually occurred. This allows epistemic actions to model
+informative updates in which not all agents know of the results of the
+informative update, or in which the informative update results in further
+uncertainty, something that is not possible with public announcements.
+
+The logic of epistemic actions is a generalisation of the public announcement
+logic, which was pioneered by van
+Ditmarsch\cite{vanditmarsch1999logic}\cite{vanditmarsch2001knowledge}\cite{vanditmarsch2007dynamic}.
+As in the public announcement logic, a new operator is introduced that has the
+effect of performing an epistemic action.  The operator, $[\phi]\psi$ takes an
+epistemic action $\phi$ and an epistemic action logic formula, $\psi$, and
+states that after the epistemic action $\phi$ is performed, $\psi$ holds.
+
+\subsection*{Action models}
+
+Action models provide a representation of informative updates that is similar
+in its capabilities to epistemic actions. Unlike public announcements and
+epistemic actions, which are both represented by formulae, an action model is
+represented by a graph. Nodes in an action model are labelled by epistemic
+formulae, known as preconditions. The edges in an action model are labelled by
+agents from the epistemic system, much in the way that edges are labelled in an
+epistemic Kripke model.
+
+An action model is applied to a Kripke model by restricting the Cartesian
+product of the two graphs according to the preconditions and adjacencies in the
+action model.  Applying an action model to a Kripke model may result in possible
+worlds from the Kripke model being duplicated, having the effect that the
+results of the informative update may be uncertain to some agents. The
+restriction applied to the Cartesian product may result in different agents
+receiving different information from the informative update.
+
+The logic of action models was introduced by Baltag, Solecki and
+Moss\cite{baltag2004logics}. Again, an operator is introduced that has the
+effect of performing an informative update, this time in the form of applying an
+action model to the Kripke model that represents the current epistemic system.
+The operator, $[M,s]\psi$ takes a pointed action model, $(M, s)$, and an action
+model logic formula $\psi$, and states that after the action model $(M, s)$ is
+applied, $\psi$ holds.
+
+Action models and epistemic actions can mostly represent the same kinds of
+informative updates. In general it is possible to translate between action
+models and epistemic actions, however there are some exceptions to this. Both
+kinds of informative updates are interesting for their own reasons; epistemic
+actions describe informative updates intuitively, but applying them is not as
+easy, whereas action models provide an algorithmic approach to applying an
+informative update, however it is not as intuitive how a particular action model
+represents a particular informative update. There are of course kinds of
+informative updates that may only be represented using one of the
+representations and not the other.
+
+\subsection*{Arbitrary public announcement logic and arbitrary event model
+logic}
+
+Balbiani, Baltag, van Ditmarsch, et al.\cite{balbiani2007arbitrary} introduced
+the arbitrary public announcement logic, which is an extension of the public
+announcement logic, providing quantification over arbitrary public
+announcements. It introduces an operator, $\Box\psi$, which means that after any
+public announcement, $\psi$ holds. Its dual operator, $\Diamond\psi$ means that
+after some public announcement, $\psi$ holds.
+
+The same paper briefly discusses a possible arbitrary event model logic, which
+is a generalisation of arbitrary public announcement logic, allowing for any
+kind of informative update, via the application of an action model update. This
+is interesting because it attempts to do what the future event logic does,
+however with some differences (notably, it also has an operator for applying
+specific informative updates, which the future event logic does not have).
+
+French and van Ditmarsch\cite{french2008undecidability} later showed that the
+arbitrary public announcement logic was undecidable for the satisfiability
+problem, and therefore by extension, the arbitrary event model logic is also
+undecidable.
+
+\section{Review of future event logic}
+
+French and van Ditmarsch\cite{french2009simulation} introduced the future event
+logic, which is an extension of epistemic logic that provides an operator for
+quantification over refinements of Kripke models. French and van Ditmarsch
+provide the semantics for the logic, and show that quantifying over refinements
+of Kripke models is equivalent to quantifying over arbitrary action model
+updates, up to the limits of action models (as action models are necessarily
+finite, whereas refinements are not).
+
+The paper compares the semantics of the future event logic to previously defined
+logics and structures built on epistemic logic, in order to show that it
+faithfully captures the idea of informative updates to epistemic systems. In
+particular, comparisons are made to the bisimulation quantified epistemic logic,
+and to the arbitrary event model logic. 
+
+The future event logic is related to the bisimulation quantified epistemic
+logic, described by French\cite{french2006bisimulation}, as bisimulations and
+refinements are related ideas. The refinement quantifier introduced in the
+future event logic can be viewed as a weaker version of the bisimulation
+quantifiers. However, the two logics have completely different interpretations
+and applications with respect to epistemic logic.
+
+The arbitrary event model logic is conceptually similar to the future event
+logic, in the sense that it tries to represent the same notions. The main
+difference between the two logics is that the arbitrary event model logic has an
+operator for applying a specific action model update, whereas the future event
+logic does not. French and van Ditmarsch\cite{french2009simulation} in fact show
+that if such an operator is added to the future event logic, then the resulting
+logic is equivalent to the arbitrary event model logic.
+
+The future event logic is discussed further in depth by French, Pinchinat and
+van Ditmarsch\cite{french2010future}, where an axiomatisation of the logic, and
+a tableau method for solving the satisfiability problem is presented. The
+axiomatisation is shown to be sound and complete, and interestingly the
+completeness proof is done via a syntactic reduction of arbitrary formulae in
+the future event logic to formulae in the epistemic logic. This reduction shows
+that the future event logic is no more expressive than the epistemic logic
+(although it is more succinct), and also proves that the future event logic is
+decidable in the satisfiability problem, a useful property that is not shared
+with the arbitrary event model logic. A proof is given to show that the future
+event logic is exponentially more succinct than the epistemic logic, a fact
+which is used to show that the tableau method presented in the paper is likely
+to have optimal algorithmic complexity.
+
+The version of the future event logic that is axiomatised by French, Pinchinat
+and van Ditmarsch\cite{french2010future} was an extension of the single-agent
+epistemic logic K, which is a normal modal logic over the set of all Kripke
+models. Conventional epistemic logic works in S5, the set of reflexive,
+transitive and symmetric Kripke models. French, Pinchinat and van Ditmarsch
+briefly discuss the possibility of extending their axiomatisation to S5 and
+KD45, although leave this for future research.
+
+My area of research in the future event logic will focus on a review of the
+results presented in French, Pinchinat and van Ditmarsch's latest
+paper\cite{french2010future}, including of their axiomatisation, completeness
+proof, and solution to the satisfiability problem. It will include an
+implementation and analysis of their results. My research will also explore
+axiomatising the logic in S5, which will likely take from the axiomatisation,
+soundness and completeness proofs presented by French, et al. 
