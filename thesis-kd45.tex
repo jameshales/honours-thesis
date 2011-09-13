@@ -251,8 +251,8 @@ $N_t \entails \phi$ and $tR^N_a = \{t\}$.
 Suppose that $\phi$ is an $a$-disjunctive normal formula, and that $M_s$ is a
 doxastic model such that $M_s \entails \phi$. 
 
-Let $t$ be a state such that $t \notin S^M$. Then we construct the model $N =
-(S^N, R^N, V^N)$, where:
+Let $t$ be a state such that $t \notin S^{N^\gamma}$ for every $\gamma \in
+\Gamma$. Then we construct the model $N = (S^N, R^N, V^N)$, where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M\\
@@ -379,7 +379,8 @@ S^N &=& \{t\} \cup \bigcup_{\gamma \in \Gamma} S^{N^\gamma}\\
 R^N_a &=& \{(t, t^\gamma) \mid \gamma \in \Gamma\} \cup \{(t^\gamma,
 t^{\gamma'} \mid \gamma, \gamma' \in \Gamma\} \cup \bigcup_{\gamma \in
 \Gamma} R^{N^\gamma}_a\\
-R^N_b &=& \{(t, t)\} \cup \bigcup_{\gamma \in \Gamma} R^{N^\gamma}_b \text{ for
+R^N_b &=& \{(t, t') \mid \gamma \in \Gamma, s' \in sR^M_b, t' \in S^N, (s', t') \in
+\mathcal{R}^\gamma \} \cup \bigcup_{\gamma \in \Gamma} R^{N^\gamma}_b \text{ for
 $b \in A - \{a\}$}\\
 V^N(p) &=& \begin{cases}
 \{t\} \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{if $s \in
@@ -391,22 +392,36 @@ V^M(p)$}\\
 We note that $N$ is a doxastic model. For each $b \in A - \{a\}$, the relation
 $R^N_b$ consists of the union of the relations $R^{N^\gamma}_b$ for each $\gamma
 \in \Gamma$, which are each disjoint, and are also serial, transitive and
-Euclidean, along with the relationship $(t, t)$. The relationship $(t,t)$ is
-also disjoint to these relations, is transitive and Euclidean, and along with
-the rest of the relations $R^{N^\gamma}_b$, ensures that $R^N_b$ is serial. The
-relation $R^N_a$ consists of the union of the relations $R^{N^\gamma}_a$ for
-each $\gamma \in \Gamma$, which are each disjoint and are also serial,
-transitive and Euclidean, along with the relationships $\{(t, t^\gamma) \mid
-\gamma \in \Gamma\} \cup \{(t^\gamma, t^{\gamma'}) \mid \gamma, \gamma' \in
-\Gamma\}$. These relationships are not disjoint from the $R^{N^\gamma}_a$,
-however as we have assumed that the $t^\gamma R^{N^\gamma}_a = \{t^\gamma\}$,
-these are the only parts of these relations that we must consider to determine
-if $R^N_a$ is transitive and Euclidean. We observe that the union of these
-reflexive relationships, along with the extra part added in $R^N_a$, almost
-forms an equivalence class, except for the fact that $(t, t) \notin R^N_a$.
-Hence it $R^N_a$ is transitive and Euclidean. $R^N_a$ is also serial as each of
-the $R^{N^\gamma}_a$ are serial for $S^{N^\gamma}$, and $R^N_a$ adds at least
-one relation involving $t$.
+Euclidean, along with the relationship $\{(t, t') \mid \gamma \in \Gamma, s'
+\in sR^M_b, t' \in S^N, (s', t') \in \mathcal{R}^\gamma \}$. The additional
+relationship simply relates $t$ to the successors of $s \in S^M$ as they appear
+in $N$ (i.e. so they are mapped according to the simulation relations
+$\mathcal{R}^\gamma$), and so preserve the transitive and reflexive
+properties, and along with the rest of the relations $R^{N^\gamma}_b$, ensures
+that $R^N_b$ is serial. The relation $R^N_a$ consists of the union of the
+relations $R^{N^\gamma}_a$ for each $\gamma \in \Gamma$, which are each disjoint
+and are also serial, transitive and Euclidean, along with the relationships
+$\{(t, t^\gamma) \mid \gamma \in \Gamma\} \cup \{(t^\gamma, t^{\gamma'}) \mid
+\gamma, \gamma' \in \Gamma\}$. These relationships are not disjoint from the
+$R^{N^\gamma}_a$, however as we have assumed that the $t^\gamma R^{N^\gamma}_a =
+\{t^\gamma\}$, these are the only parts of these relations that we must consider
+to determine if $R^N_a$ is transitive and Euclidean. We observe that the union
+of these reflexive relationships, along with the extra part added in $R^N_a$,
+almost forms an equivalence class, except for the fact that $(t, t) \notin
+R^N_a$.  Hence it $R^N_a$ is transitive and Euclidean. $R^N_a$ is also serial as
+each of the $R^{N^\gamma}_a$ are serial for $S^{N^\gamma}$, and $R^N_a$ adds at
+least one relation involving $t$.
+
+We note that by construction, for each $\gamma \in \Gamma$, we have that
+$N_{t^\gamma} \entails \gamma$. As each $\gamma$ is an $a$-disjunctive normal
+formula, a similar argument to that used in Lemma \ref{kd45-successors} can be
+used to show that the $a$-edges added to the $t^\gamma$ states does not
+effect the truth value of $\gamma$ in $N_{t^\gamma}$, and that in-bound
+$b$-edges to $t^\gamma$ do not effect the truth value of any formulae at
+$N_{t^\gamma}$. Hence $N_{t^\gamma} \entails \gamma$ for every $\gamma \in
+\Gamma$, and for every $t' \in tR^N$, by construction $t' = t^\gamma$ for some
+$\gamma \in \Gamma$, and hence $N_{t'} \entails \gamma$. Therefore $N_t \entails
+\covers_a \Gamma$.
 
 We next construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$,
 where:
@@ -416,6 +431,85 @@ $$\mathcal{R} = \{(t, s)\} \cup \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
 By construction, the valuation of $N_t$ matches that of $M_s$, and each of the
 $\mathcal{R}^\gamma$ are $a$-simulations, hence $\mathcal{R}$ satisfies {\bf
 atoms}.
+
+Let $u \in S^N$ and $u' \in S^M$ such that $(u, u') \in \mathcal{R}$. Suppose
+that $(u, u') \in \mathcal{R}^\gamma$ for some $\gamma \in \Gamma$. Then as
+$\mathcal{R}^\gamma$ is an $a$-simulation, it satisfies {\bf forth-$b$} for
+every $b \in A$. Hence for every $v \in uR^N_b$ there exists some $v' \in
+u'R^M_b$ such that $(v', v') \in \mathcal{R}^\gamma \subseteq \mathcal{R}$.
+Suppose instead that $(u, u') \notin \mathcal{R}^\gamma$ for every $\gamma \in
+\Gamma$. Then $(u, u') = (t, s)$. Then for every $v \in tR^N_a$, we note that,
+by construction, $v = t^\gamma$ for some $\gamma \in \Gamma$, and so we can take
+$s^\gamma \in sR^M_a$, and note that $(t^\gamma, s^\gamma) \in
+\mathcal{R}^\gamma \subseteq \mathcal{R}$, by hypothesis (as
+$\mathcal{R}^\gamma$ is an $a$-simulation between $N^\gamma_{t^\gamma}$ and
+$M_{s^\gamma}$). For every $b \in A - \{a\}$, and every $v \in t^\gamma R^N_b$,
+we note that by construction there exists some $\gamma \in \Gamma$ and $v' \in
+sR^M_b$ such that $(v', v) \in \mathcal{R}^\gamma \subseteq \mathcal{R}$. Hence
+$\mathcal{R}$ satisfies {\bf forth-$b$} for every $b \in A$.
+
+A similar argument to above shows that $\mathcal{R}$ satisfies {\bf forth-$b$}
+for every $b \in A - \{a\}$.
+
+Hence $\mathcal{R}$ is an $a$-simulation from $N_t$ to $M_s$. Hence $N_t
+\refinement_a M_s$.
+
+Hence $M_s \entails \somerefs_a \covers_a \Gamma$.
+
+Conversely, suppose that $M_s \entails \covers_a \Gamma$. Then there exists a
+doxastic model $N_t \refinement_a M_s$, via some $a$-simulation $\mathcal{R}$,
+such that $N_t \entails \covers_a \Gamma$. From the definition of the cover
+operator, this implies that $N_t \entails \knows_a \bigvee_{\gamma \in \Gamma}
+\gamma \land \bigwedge_{\gamma \in \Gamma} \suspects_a \gamma$. In particular we
+note that for every $\gamma \in \Gamma$, $N_t \entails \suspects_a \gamma$, and
+so there exists some $t^\gamma \in tR^N_a$ such that $N_{t^\gamma} \entails
+\gamma$. As $t^\gamma \in tR^N_a$, and $(t, s) \in \mathcal{R}$, by {\bf
+forth-$a$} there exists some $s^\gamma \in sR^M_a$ such that $(t^\gamma, s^\gamma)
+\in \mathcal{R}$. Hence $\mathcal{R}$ is also an $a$-simulation from
+$N_{t^\gamma}$ to $M_{s^\gamma}$, and so $M_{s^\gamma} \entails \somerefs_a
+\gamma$, and as $s^\gamma \in sR^M_a$, we also have that $M_s \entails \suspects_a
+\somerefs_a \gamma$. As this holds for every $\gamma \in \Gamma$, we finally
+have that $M_s \entails \bigwedge_{\gamma \in \Gamma} \suspects_a \somerefs_a
+\gamma$.
+
+\paragraph{GMulti} Suppose that $M_s$ is a doxastic model such that $M_s
+\entails \covers_b \{ \somerefs_a \gamma \mid \gamma \in \Gamma\}$, where $a \ne
+b$ and $\Gamma$ is a finite set of formulae. From the definition of the cover
+operator, this implies that $M_s \entails \knows_b \bigvee_{\gamma \in \Gamma}
+\somerefs_a \gamma \land \bigwedge_{\gamma \in \Gamma} \suspects_b \somerefs_a
+\gamma$. In particular, we note that for every $\gamma \in \Gamma$, there exists
+some $s^\gamma \in sR^M_b$ such that $M_{s^\gamma} \entails \somerefs_a \gamma$.
+Then there exists a doxastic model $N^\gamma_{t^\gamma} \refinement_a
+M_{s^\gamma}$, via some $a$-simulation $\mathcal{R}$, such that
+$N^\gamma_{t^\gamma} \entails \gamma$. Without loss of generality, we assume
+that the $N^\gamma$ are disjoint.
+
+Let $t$ be a state such that $t \notin S^{N^\gamma}$ for every $\gamma \in
+\Gamma$. Then we construct a model $N = (S^N, R^N, V^N)$, where:
+
+\begin{eqnarray*}
+S^N &=& \{t\} \cup \bigcup_{\gamma \in \Gamma} S^{N^\gamma}\\
+R^N_b &=& \{(t, t^\gamma) \mid \gamma \in \Gamma\} \cup \{(t^\gamma,
+t^{\gamma'}) \mid \gamma, \gamma' \in \Gamma\} \cup \bigcup_{\gamma \in \Gamma}
+R^{N^\gamma}_b\\
+R^N_c &=& \{(t, t') \mid \gamma \in \Gamma, s' \in sR^M_c, t' \in S^N, (s', t')
+\in \mathcal{R}^\gamma\} \cup \bigcup_{\gamma \in \Gamma} R^{N^\gamma}_c \text{
+for $c \in A - \{b\}$}\\
+V^N(p) &=& \begin{cases}
+\{t\} \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) \text{ if $s \in
+V^M(p)$}\\
+\bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) \text{ otherwise}
+\end{cases}
+\end{eqnarray*}
+
+We note that $N$ is a doxastic model, by similar arguments as used in the proof
+for {\bf GKD45}.
+
+We next construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
+
+$$\mathcal{R} = \{(t, s)\} \cup \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
+
+% TODO
 
 \end{proof}
 
