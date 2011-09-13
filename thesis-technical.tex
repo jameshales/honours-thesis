@@ -1,0 +1,95 @@
+\chapter{Technical preliminaries}
+
+We recall the definitions given by van Ditmarsch, French and
+Pinchinat~\cite{french2010future} in describing the future event logic, and we
+adapt those definitions to be suitable for doxastic logic (\logicKD{}) and
+epistemic logic (\logicS{}).  Specifically, when we are discussing the
+extensions of the future event logic to doxastic and epistemic logics, we
+restrict the Kripke models under discussion to those in the class of doxastic or
+epistemic models respectively.
+
+Let $A$ be a non-empty, finite set of agents, and let $P$ be a non-empty,
+countable set of propositional atoms.
+
+\begin{definition}[Kripke model]
+A \textit{Kripke model} $M = (S, R, V)$ consists of a \textit{domain} $S$, which
+is a set of states (or worlds), \textit{accessibility} $R : A \to \mathcal{P}(S
+\times S)$, and a \textit{valuation} $V : P \to \mathcal{P}(S)$. 
+
+The class of all Kripke models is called \classK{}. We write $M \in \classK{}$
+to denote that $M$ is a Kripke model.
+\end{definition}
+
+For $R(a)$, we write $R_a$. Given two states $s, t \in S$, we write $R_a(s,
+t)$ to denote that $(s, t) \in R_a$. We write $sR_a$ for $\{t | (s, t) \in
+R_a\}$. As we will be required to discuss several models at once, we will use
+the convention that $M = (S^M, R^M, V^M)$, $N = (S^N, R^N, V^N)$, and so on. For
+$s \in S^M$ we will let $M_s$ refer to the pair $(M, s)$, also known as the
+pointed Kripke model of $M$ at state $s$.
+
+\begin{definition}[Doxastic model]
+A \textit{doxastic model} is a Kripke model $M = (S, R, V)$ such that the
+relation $R_a$ is serial, transitive, and Euclidean for all $a \in A$. The class
+of all doxastic models is called \classKD{}. We write $M \in \classKD{}$ to
+denote that $M$ is a doxastic model.
+\end{definition}
+
+\begin{definition}[Epistemic model]
+An \textit{epistemic model} is a Kripke model $M = (S, R, V)$ such that the
+relation $R_a$ is an equivalence relation for all $a \in A$. The class of all
+epistemic models is called \classS{}. We write $M \in \classS{}$ to denote that
+$M$ is an epistemic model.
+\end{definition}
+
+Throughout this paper we will be presenting results in both doxastic and
+epistemic logic.  As such, when we are discussing doxastic logic, we will assume
+that all Kripke models are implicitly doxastic models, and likewise when we are
+discussing epistemic logic, we will assume that all Kripke models are implicitly
+epistemic models. When we are discussing results in general modal logic, we will
+not assume any restrictions on the Kripke models.
+
+\begin{definition}[Bisimulation]
+Let $M = (S, R, V)$ and $M' = (S', R', V')$ be Kripke models. A non-empty
+relation $\mathcal{R} \subseteq S \times S'$ is a \textit{bisimulation} if and
+only if for all $s \in S$ and $s' \in S'$, with $(s, s') \in \mathcal{R}$, for
+all $a \in A$:
+
+\begin{description}
+\item[atoms] $s \in V(p)$ if and only if $s' \in V'(p)$ for all
+$p \in P$
+
+\item[forth-$a$] for all $t \in S$, if $R_a(s, t)$, then there is a
+$t' \in S'$ such that $R'_a(s', t')$ and $(t,
+t') \in \mathcal{R}$
+
+\item[back-$a$] for all $t' \in S'$, if $R'_a(s',
+t')$, then there is a $t \in S$ such that $R_a(s, t)$ and $(t, t')
+\in \mathcal{R}$.
+\end{description}
+
+We call $M_s$ and $M'_{s'}$ bisimilar, and write $M_s \bisim M'_{s'}$ to denote
+that there is a bisimulation between $M_s$ and $M'_{s'}$.
+\end{definition}
+
+\begin{definition}[Simulation and refinement]
+Let $M$ and $M'$ be Kripke models. A non-empty relation $\mathcal{R}
+\subseteq S \times S'$ is a \textit{simulation} if and only if it satisfied {\bf
+atoms} and {\bf forth-$a$} for every $a \in A$.
+
+We call $M'_{s'}$ a simulation of $M_s$ and we call $M_s$ a refinement of
+$M'_{s'}$. We write $M'_{s'} \simulation M_s$ to denote this, or alternatively,
+$M_s \refinement M'_{s'}$.
+
+A relation that satisfies {\bf atoms} and {\bf forth-$b$} for every $b \in A$,
+and satisfies {\bf back-$b$} for every $b \in A - \{a\}$, for some $a \in A$, is
+an $a$\textit{-simulation}. 
+
+We call $M'_{s'}$ an $a$-simulation of $M_s$, and we call $M_s$ an
+$a$-refinement of $M'_{s'}$. We write $M'_{s'} \simulation_a M_s$ to denote
+this, or alternatively, $M_s \refinement_a M'_{s'}$.
+\end{definition}
+
+We will use $a$-refinements to define the semantics of the future event logic.
+The significance of refinements is that the finite refinements of a Kripke model
+are exactly the models that result from the execution of an action
+model~\cite{french2009simulation}.
