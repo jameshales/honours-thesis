@@ -7,7 +7,9 @@ restricts the logic \logicK{}, as defined by van Ditmarsch and
 French~\cite{french2009simulation}, to deal with only models and refinements of
 models that are in \classKD{}.
 
-\begin{definition}[Language of \langF{}]
+% TODO - more motiviation
+
+\begin{definition}[Language of \langF{}] % TODO - move to the K section
 Given a finite set of agents $A$ and a set of propositional atoms $P$, the
 language of \langF{} is defined by the following abstract syntax:
 
@@ -36,7 +38,7 @@ $\covers_a \Gamma ::= \knows_a \bigvee_{\gamma \in \Gamma} \gamma \land
 \bigwedge_{\gamma \in \Gamma} \suspects_a \gamma$. The cover operator is relied
 on for our axiomatisation, in much the same way it is relied on for the
 axiomatisation of \logicKiF{} presented by van Ditmarsch, French and
-Pinchinat~\cite{french2010future}.
+Pinchinat~\cite{french2010future}. % TODO - include citation for cover operator
 
 \begin{definition}[Semantics of \logicCF]
 Let $M = (S, R, V)$ be a doxastic model. The interpretation of $\phi \in
@@ -60,18 +62,23 @@ the refinement operator, $\allrefs_a$, varies for each logic, as the refinements
 considered in the interpretation of the operator in \logicKDF{} must be taken
 from the class of doxastic models, \classKD{}, whereas in \logicKF{} they may be
 arbitrary Kripke models from \classK{}. It is for this reason that \logicKDF{}
-is not a conservative extension of \logicKF{}. For example, whilst $\somerefs_a
-\knows_a \bot$ is valid in \logicKF{}, as given any Kripke model $M_s$, one can
-always take the refinement of $M_s$ such that $s$ has no $a$-successors, this
-formula is not valid in \logicKDF{}, as every doxastic model has the serial
-property, and thus $\knows_a \bot$ is not valid in any doxastic model.
+is not a conservative extension of \logicKF{}. 
+
+For example, the formula $\somerefs_a \knows_a \bot$ is valid in \logicKF{}, as
+given any pointed Kripke model $M_s$, one can always form an $a$-refinement
+$M'_{s'}$ of $M_s$ which simply removes all $a$-edges from $s$ in $M_s$, so that
+$M'_{s'} \entails \knows_a \bot$. However $\somerefs_a \knows_a \bot$ is not
+valid in \logicKDF{}, as all doxastic models have the serial property, and
+hence there are no models in which $\knows_a \bot$ is true; therefore no
+doxastic models can have a refinement where that is true.
 
 \begin{lemma}
 The logic \logicKDF{} is bisimulation invariant.
 \end{lemma}
 
 The proof for the bisimulation invariance of \logicKF{}, given by van Ditmarsch,
-French and Pinchinat~\cite{french2010future} also applies to \logicKDF{}.
+French and Pinchinat~\cite{french2010future} also applies to \logicKDF{}. 
+% TODO - more explanation?
 
 % TODO - examples
 
@@ -82,16 +89,18 @@ formulae of \logicKDi{}. The prenex normal form prohibits modal operators
 showed that all \logicKDi{} formulae are equivalent to a formula in prenex
 normal form. The prenex normal form simplified the axiomatisation and proof of
 soundness by avoiding complications that would arise due to the transitivity of
-\classKD{} models.
+doxastic models.
 
 We introduce a disjunctive normal form for the multi-agent logic \logicKD{},
 which achieves the same purpose in terms of our axiomatisation as the prenex
 normal form did for the single-agent \logicKD{}. In the multi-agent logic, it is
 not possible to express all formulae in a form which prohibits nested modal
-operators, however it is possible to prohibit the modal operators belonging to
-an agent $a$ (i.e. $\knows_a$ and $\suspects_a$) from appearing directly within
-the scope of another modal operator belonging to $a$. This similarly allows us
-to avoid complications due to transitivity.
+operators as in the prenex normal form, however it is possible to prohibit the
+modal operators belonging to an agent $a$ (i.e. $\knows_a$ and $\suspects_a$)
+from appearing directly within the scope of another modal operator belonging to
+$a$. This allows us to avoid complications due to transitivity in our proof of
+soundness for our axiomatisation of \logicKDF{}, in much the same way that
+prenex normal form did for the axiomatisation of \logicKDiF{}.
 
 \begin{definition}[Disjunctive normal form]
 A formula in $a$-disjunctive normal form is defined by the following abstract syntax:
@@ -131,6 +140,14 @@ We have the following equivalences in \logicKD{}:
 This is proven by Meyer and van der Hoek~\cite{meyer2004epistemic} for
 \logicSi{}, however the same proof also applies to \logicKD{}.
 
+Meyer and van der Hoek remarked that the only use of the reflexivity axiom of
+\logicS{}, {\bf T}, in the proof, is in the form of the theorems $\proves \knows
+\knows \phi \implies \knows \phi$, and $\proves \knows \neg \knows \phi \implies
+\neg \knows \phi$. Therefore the proof holds for any logic which replaces {\bf
+T} with axioms entailing both of these properties. Both of these properties are
+obviously valid in \logicKD{}, and therefore the proof by Meyer and van der
+Hoek~\cite{meyer2004epistemic} applies to this result.
+
 \begin{lemma}\label{kd45-dnf}
 Every well-formed formula of \logicKD{} is equivalent to a formula in
 disjunctive normal form.
@@ -153,7 +170,7 @@ argument, over $\alpha'$, to show that De Morgan's law can be repeatedly applied
 to $\alpha'$ until the negation is pushed inwards, so that the only negations
 are applied to propositional formulae (the result of which is a propositional
 formula), thus yielding a formula equivalent to $\phi$. The result of this
-process is a formula in disjunctive normal form.
+process is a formula in disjunctive normal form. % TODO - more detail
 
 Suppose that $\phi = \alpha \land \beta$. Then by the induction hypothesis, $\alpha$
 and $\beta$ are equivalent to some $\alpha'$ and $\beta'$ in disjunctive normal
@@ -177,7 +194,7 @@ that $\phi = \suspects_a \psi$.
 
 Proceeding in this fashion we may move all conjuncts of $\psi'$ containing an
 $a$-modality to the outside, so that they are conjuncts of $\phi$, thus
-obtaining a formula in disjunctive normal form.
+obtaining a formula in disjunctive normal form. % TODO - Make clearer
 \end{proof}
 
 \begin{definition}[Cover disjunctive normal form]
@@ -211,18 +228,30 @@ cover disjunctive normal form.
 
 \begin{proof}
 Let $\phi$ be a \logicKD{} formula.  Without loss of generality, we may assume
-that $\phi$ is in disjunctive normal form (by Lemma \ref{kd45-dnf}).
+that $\phi$ is in disjunctive normal form (by Lemma \ref{kd45-dnf}). We use an
+inductive argument over the structure of $\phi$ to show that it can be converted
+into cover disjunctive normal form.
 
-Given a formula in disjunctive normal form, we consider each disjunct separately. We
-can convert each term $\knows_a \gamma$ or $\suspects_a \gamma$ into an equivalent
-term using the cover operator, using the equivalences $\knows_a \gamma \equiv
-\covers_a \{ \gamma \}$ and $\suspects_a \gamma \equiv \covers_a \{ \gamma, \top
-\}$.
+The base case is where $\phi$ is a disjunctive normal formula containing no
+modal operators. Then $\phi$ is simply a propositional formula. We can add
+vacuous cover operators of the form $\covers_a \{\top\}$ for each $a \in A$.
+
+Suppose that $\phi$ contains conjuncts of the form $\knows_a \gamma$ or
+$\suspects_a \gamma$, where $\gamma$ is an $a$-disjunctive normal formula. By
+the induction hypothesis, $\gamma$ is equivalent to some cover disjunctive
+normal formula. We note that since $\gamma$ is an $a$-disjunctive normal
+formula, any $a$-cover operator at the top-level of the equivalent cover
+disjunctive normal formula must be vacuous. Therefore the $a$-cover operator may
+be removed, yielding a formula in $a$-cover disjunctive normal form.
+
+We can then convert the modal terms using the equivalences $\knows_a \gamma
+\equiv \covers_a \{\gamma\}$ and $\suspects_a \gamma \equiv \covers_a \{\gamma,
+\top\}$. We can add vacuous cover operators of the form $\covers_a \{\top\}$ for
+any agent $a \in A$ which is not represented in our disjunct.
 
 An inductive argument can be used to show that we can collapse the resulting
-conjunction of cover operators into a single term containing one cover
-operator applied to a set of propositional formulae. We use the following
-equivalence to achieve this.
+conjunction of cover operators so that each agent is represented by a cover
+operator only once. We use the following equivalence to achieve this.
 
 $$
 \covers_a \Gamma \land \covers_a \Gamma' \equiv 
@@ -233,14 +262,13 @@ $$
 \big)
 $$
 
+We note that as each of the $\gamma \in \Gamma$ and $\gamma' \in \Gamma'$ are
+$a$-cover disjunctive normal formulae, a method similar to that used in the
+proof of Lemma \ref{kd45-dnf} can be used to yield $a$-cover disjunctive normal
+formulae that are equivalent to conjunctions and disjunctions of these formulae.
+
 Repeating this for each disjunct in our original formula leaves us with a
 formula in cover logic disjunctive normal form.
-
-We note that at each state we never introduce new modalities, rather we convert
-$\knows_a$ and $\suspects_a$ operators into $\covers_a$ operators, and then
-proceed to collapse $\covers_a$. Thus if a formula is an $a$-disjunctive normal
-formula, containing no $a$-modalities, then the result of the above translation
-is an $a$-cover disjunctive normal formula.
 \end{proof}
 
 The cover logic prenex normal form will be used in our completeness proofs.
@@ -256,7 +284,7 @@ Suppose that $\phi$ is an $a$-disjunctive normal formula, and that $M_s$ is a
 doxastic model such that $M_s \entails \phi$. 
 
 Let $t \notin S^M$ and $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we can construct a doxastic model $N = (S^N, R^N, V^N)$ where:
+Then we construct a doxastic model $N = (S^N, R^N, V^N)$ where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M\\
@@ -278,20 +306,20 @@ relation $R^M_a$, combined with the relationship $(t,t)$. The latter addition
 ensures the serial property given the new element in $S^N$, and as there are no
 other relationships involving $t$, its addition preserves the transitivity and
 Euclideaness of $R^M_a$. Hence $R^N_a$ is serial, transitive and Euclidean.
-The relation $R^N_b$ for $b \in A - \{a\}$ consists of the relation $R^M_b$,
-combined with relationships from $t$ to all of the successors of $s \in S^M$. As
-$R^M_b$ is transitive and Euclidean, and these relationships simply duplicate
-all of the relationships starting at $s$, adding these duplicate relationships
-preserves the properties of transitivity and Euclideaness. As $R^M_b$ is serial
-for $S^M$, and $tR^M_b = sR^M_b \ne \emptyset$, then $R^N_b$ is serial for
-$S^N$. Therefore $N$ is a doxastic model.
+As $R^M_b$ is serial for $S^M$, and $tR^M_b = sR^M_b \ne \emptyset$, then
+$R^N_b$ is serial for $S^N$. The relation $R^N_b$ for $b \in A - \{a\}$ consists
+of the relation $R^M_b$, combined with relationships from $t$ to all of the
+successors of $s \in S^M$. As $R^M_b$ is transitive and Euclidean, the
+additional relationships, which are simply duplicates of relationships starting
+at $s$ from $R^M_b$, also satisfy transitivity and Euclideaness, therefore
+$R^N_b$ is also transitive and Euclidean. Therefore $N$ is a doxastic model.
 
 We next show that for every $b \in A - \{a\}$ and each successor $s' \in sR^M_b$
-of $s$, the state $N_{s'}$ is bisimilar to $M_{s'}$, by the bisimulation
+of $s$, the state $N_{s'}$ is bisimilar to $M_{s'}$. This is by the bisimulation
 relation $\mathcal{R} = \{(s', s') \mid s' \in S^M \}$, mapping states in
-$M$ to their corresponding states in $N$. This is clear because the only state
-in $S^N$ which is not in $S^M$ is $t$, and there are no edges leading to $t$
-from any state in $S^M$.
+$M$ to their corresponding states in $N$. This is clearly a bisimulation as the
+only state in $S^N$ which is not in $S^M$ is $t$, and there are no edges leading
+to $t$ from any state in $S^M$.
 
 As $\phi$ is in $a$-disjunctive normal form, $\phi$ has the form $\phi =
 \delta_1 \lor \cdots \lor \delta_m$, where each $\delta_i$ has the form
@@ -299,17 +327,17 @@ $\delta_i = \gamma_i1 \land \cdots \land \gamma_i{n_i}$, and each $\gamma_{ij}$ 
 either a propositional formula, or has the form $\knows_b \psi$ or $\suspects_b
 \psi$ for some $b \in A - \{a\}$.  As $M_s \entails \phi$, there exists some $i
 = 1, \dots, m$ such that $M_s \entails \delta_i$. Therefore, for every $j = 1,
-\dots, n_i$, we have that $M_s \entails \gamma_{ij}$.  Suppose that
+\dots, n_i$, we have that $M_s \entails \gamma_{ij}$. Suppose that
 $\gamma_{ij}$ is a propositional formula. Then by construction $N_t$ has the
 same valuation as $M_s$, and hence is equivalent under propositional formulae.
 Therefore $N_t \entails \gamma_{ij}$.  Suppose instead that $\gamma_{ij} =
 \suspects_b \psi$ for some $b \in A - \{a\}$ and some formula $\psi$. Then there
 exists some $s' \in sR^M_b$ such that $M_{s'} \entails \psi$. From above, we
 know that $N_{s'}$ is bisimilar to $M_{s'}$, and so by bisimulation invariance
-we have that $N_{s'} \entails \psi$.  By construction, $s' \in tR^N_b$, and
-hence $N_t \entails \suspects_b \psi$. A similar argument can be used for the
-case where $\gamma_{ij} = \knows_b \psi$. Hence for every $j = 1, \dots, n_i$, we
-have that $N_t \entails \gamma_ij$.
+we have that $N_{s'} \entails \psi$.  By construction, $s' \in sR^M_b = tR^N_b$,
+and hence $N_t \entails \suspects_b \psi$. A similar argument can be used for
+the case where $\gamma_{ij} = \knows_b \psi$. Hence for every $j = 1, \dots,
+n_i$, we have that $N_t \entails \gamma_ij$.
 
 Hence $N_t \entails \delta_i$ and so $N_t \entails \psi$.
 \end{proof}
@@ -328,17 +356,20 @@ $$
 {\bf D} & \knows \phi \implies \suspects \phi\\
 {\bf 4} & \knows \phi \implies \knows \knows \phi\\
 {\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
-{\bf G0} & \allrefs_a (\phi \implies \psi) \implies \allrefs_a \phi \implies
+{\bf RP} & \allrefs_a (\phi \implies \psi) \implies \allrefs_a \phi \implies
 \allrefs_a \psi\\
-{\bf G1} & \allrefs_a \alpha \iff \alpha \text{ where $\alpha$ is a
+{\bf RK} & \allrefs_a \alpha \iff \alpha \text{ where $\alpha$ is a
 propositional formula}\\
-{\bf GKD45} & \somerefs_a \covers_a \Gamma \iff \bigwedge_{\gamma \in \Gamma}
-\suspects_a \somerefs_a \gamma \text{ where $\Gamma$ is a set of $a$-disjunctive
+{\bf RComm} & \somerefs_a \covers_b \Gamma \iff \covers_b \{\somerefs_a \gamma
+\mid \gamma \in \Gamma\}\\ 
+&\qquad\text{where $a \neq b$ and $\Gamma$ is a set of $b$-disjunctive normal formulae}\\
+{\bf RDist} & \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b \implies
+\somerefs_a \bigwedge_{b \in A} \covers_b \Gamma_b\\
+&\qquad\text{where $\Gamma_b$ is a set of $b$-disjunctive normal formulae for every $b \in A$}\\
+{\bf RKD45} & \somerefs_a \covers_a \Gamma \iff \bigwedge_{\gamma \in \Gamma}
+\suspects_a \somerefs_a \gamma\\
+&\qquad\text{where $\Gamma$ is a non-empty set of $a$-disjunctive
 normal formulae}\\
-{\bf GMulti} & \somerefs_a \covers_b \Gamma \iff \covers_b \{\somerefs_a \gamma
-\mid \gamma \in \Gamma\} \text{ where $a \neq b$}\\
-{\bf GKD45Multi} & \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b \implies
-\somerefs_a \bigwedge_{b \in A} \covers_b \Gamma_b
 \end{array}
 $$
 
@@ -348,9 +379,9 @@ $$
 \begin{array}{rl}
 {\bf MP} & \text{From $\proves \phi \implies \psi$ and $\proves \phi$, infer
 $\proves \psi$}\\
-{\bf Nec1} & \text{From $\proves \knows_a (\phi \implies \psi)$ and $\proves
+{\bf NecK} & \text{From $\proves \knows_a (\phi \implies \psi)$ and $\proves
 \knows_a \phi$, infer $\proves \knows_a \psi$}\\
-{\bf Nec2} & \text{From $\proves \allrefs_a (\phi \implies \psi)$ and $\proves
+{\bf NecR} & \text{From $\proves \allrefs_a (\phi \implies \psi)$ and $\proves
 \allrefs_a \phi$, infer $\proves \allrefs_a \psi$}
 \end{array}
 $$
@@ -362,36 +393,36 @@ The axiomatisation \axiomKDF{} is sound in \logicKDF{}.
 
 \begin{proof}
 The soundness of the axioms {\bf P}, {\bf K}, {\bf D}, {\bf 4}, and {\bf 5} and the
-rules {\bf MP} and {\bf Nec1} can be shown by the same reasoning used to show
-that they are sound in \logicKD{}. The soundness of the axioms {\bf G0} and {\bf
-G1}, and the rule {\bf Nec2} can be shown by the same reasoning used to show
+rules {\bf MP} and {\bf NecK} can be shown by the same reasoning used to show
+that they are sound in \logicKD{}. The soundness of the axioms {\bf RP} and {\bf
+RK}, and the rule {\bf NecR} can be shown by the same reasoning used to how
 that they are sound in the \logicKiF{}~\cite{french2010future}.
 
-All that remains to be shown is the soundness of {\bf GKD45}, {\bf GMulti}, and
-{\bf GKD45Multi}.
+All that remains to be shown is the soundness of {\bf RKD45}, {\bf RComm}, and
+{\bf RDist}.
 
-\paragraph{GKD45}
+\paragraph{RKD45}
 Suppose that $M_s$ is a doxastic model such that $M_s \entails \bigwedge_{\gamma
-\in \Gamma} \suspects_a \somerefs_a \gamma$, where $\Gamma$ is a set of
+\in \Gamma} \suspects_a \somerefs_a \gamma$, where $\Gamma$ is a non-empty set of
 $a$-disjunctive normal formulae.
 
 Then for every $\gamma \in \Gamma$, we have that $M_s \entails \suspects_a
 \somerefs_a \gamma$. So there exists a state $s^\gamma \in sR^M$ such
 that $M_{s^\gamma} \entails \somerefs_a \gamma$. Therefore there exists a
-doxastic model $N_{t^\gamma} \refinement_a M_{s^\gamma}$, via some $a$-simulation
-relation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails \gamma$.
-Without loss of generality, as $\gamma$ is an $a$-disjunctive normal formula, we
-may assume that $t^\gamma R^{N^\gamma}_a = \{t^\gamma\}$ (by Lemma
-\ref{kd45-successors}) and that each of the $N^\gamma$ are disjoint from each
-other and from $M$.
+doxastic model $N^\gamma_{t^\gamma} \refinement_a M_{s^\gamma}$, via some
+$a$-simulation relation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma}
+\entails \gamma$.  Without loss of generality, as $\gamma$ is an $a$-disjunctive
+normal formula, we may assume that $t^\gamma R^{N^\gamma}_a = \{t^\gamma\}$ (by
+Lemma \ref{kd45-successors}) and that each of the $N^\gamma$ are disjoint from
+each other and from $M$.
 
 Let $t \notin S^M$ and $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we can construct a doxastic model $N = (S^N, R^N, V^N)$ where:
+Then we construct a doxastic model $N = (S^N, R^N, V^N)$ where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M \cup \bigcup_{\gamma \in \Gamma} S^{N^\gamma}\\
 R^N_a &=& \{(t, t^\gamma) \mid \gamma \in \Gamma\} 
-\cup \{(t^\gamma, t^{\gamma'} \mid \gamma, \gamma' \in \Gamma\} 
+\cup \{(t^\gamma, t^{\gamma'}) \mid \gamma, \gamma' \in \Gamma\} 
 \cup R^M_a
 \cup \bigcup_{\gamma \in \Gamma} R^{N^\gamma}_a\\
 R^N_b &=& \{(t, t') \mid t' \in sR^M_b\}
@@ -412,29 +443,35 @@ V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
 \includegraphics{diagram}
 }
 \caption{
-To construct the model $N$ we have taken the model $M$, along with the models
-$N^\gamma$ for every $\gamma \in \Gamma$, and linked them together with a new
-state, $t$. The state $t$ is connected via an $a$-edge to the nodes $t^\gamma$
-in each of the $N^\gamma$ models, and connected via $b$-edges to each of the
-$b$-successors of $s$ in $M$.}
+The model $N$ is constructed by taking the model $M$ and the models $N^\gamma$
+for every $\gamma \in \Gamma$, and connecting them with an extra node $t$. $t$
+is connected via an $a$-edge to $t^\gamma$ from each of the $N^\gamma$, and is
+also connected via a $b$-edge to each $b$-successor of $s$ in $M$.
+}
 \end{center}
 \end{figure}
 
-As $M$, and each $N^\gamma$, for $\gamma \in \Gamma$, are a doxastic models,
-then the relations $R^M_a$ and $R^{N^\gamma}_a$ for $\gamma \in \Gamma$ are
-serial, transitive and Euclidean. Then the relation $R^N_a$ is trivially serial,
-as it is the union of $R^M_a$ and each $R^{N^\gamma}$, along with a relationship
-from $t$ to each $t^\gamma$, ensuring that the relation is also serial at $t$.
-As the relation $R^M_a$ is over the set $S^M$, it is disjoint to the rest of the
-relation, which by construction is over $\{t\} \cup \bigcup_{\gamma \in
-\Gamma} S^{N^\gamma}$, and so its transitivity and Euclideaness is preserved. We
-note also that we have assumed that $t^\gamma R^{N^\gamma} = \{t^\gamma\}$ for
-every $\gamma \in \Gamma$, and so we can consider the rest of the $R^{N^\gamma}$
-relations as separate parts of the relations for the purposes of determining
-transitivity and Euclideaness, one part consisting of $t$ and each $t^\gamma$,
-and the rest consisting of each $S^{N^\gamma}$ without $t^\gamma$. We observe
-that the relation over $t$ and each $t^\gamma$ is almost an equivalence class,
-but without the reflexive $(t,t)$ relationship, and so it is transitive and
+We must show that $N$ is a doxastic model, that $N_t$ is an $a$-refinement of
+$M_s$, and that for every $t^\gamma \in tR^N_a$ we have that $N_{t^\gamma}
+\entails \gamma$. The latter will be shown by proving that for every $\gamma \in
+\Gamma$, the state $N_{t^\gamma}$ is bisimilar to $N^\gamma_{t^\gamma}$.
+
+First we show that $N$ is a doxastic model. As $M$, and each $N^\gamma$, for
+$\gamma \in \Gamma$, are a doxastic models, then the relations $R^M_a$ and
+$R^{N^\gamma}_a$ for $\gamma \in \Gamma$ are serial, transitive and Euclidean.
+Then the relation $R^N_a$ is trivially serial, as it is the union of $R^M_a$ and
+each $R^{N^\gamma}$, along with a relationship from $t$ to each $t^\gamma$,
+ensuring that the relation is also serial at $t$.  As the relation $R^M_a$ is
+over the set $S^M$, it is disjoint to the rest of the relation, which by
+construction is over $\{t\} \cup \bigcup_{\gamma \in \Gamma} S^{N^\gamma}$, and
+so its transitivity and Euclideaness is preserved. We note also that we have
+assumed that $t^\gamma R^{N^\gamma} = \{t^\gamma\}$ for every $\gamma \in
+\Gamma$, and so we can consider the rest of the $R^{N^\gamma}$ relations as
+separate parts of the relations for the purposes of determining transitivity and
+Euclideaness, one part consisting of $t$ and each $t^\gamma$, and the rest
+consisting of each $S^{N^\gamma}$ without $t^\gamma$. We observe that the
+relation over $t$ and each $t^\gamma$ is almost an equivalence class, but
+without the reflexive $(t,t)$ relationship, and so it is transitive and
 Euclidean. Each $R^{N^\gamma}_a$ is also transitive and Euclidean, and as they
 are in a sense separate from the rest of the relation, combining these relations
 preserves these properties. Therefore $R^N_a$ is serial, transitive and
@@ -454,17 +491,8 @@ $R^N_b$ also has transitivity and Euclideaness.
 Therefore $N$ is a doxastic model, as the relations $R^N_a$ and $R^N_b$ for
 $b \in A - \{a\}$ are serial, transitive and Euclidean.
 
-We next show that for every $\gamma \in \Gamma$, we have that $N_{t^\gamma}
-\entails \gamma$. As each $\gamma$ is an $a$-disjunctive normal formula, a
-similar argument to that used in Lemma \ref{kd45-successors} can be used to show
-that $N_{t^\gamma}$ is bisimilar to $N^\gamma_{t^\gamma}$ (as there are only
-edges added going into $N_{t^\gamma}$, not coming out). Therefore, as for every
-$\gamma \in \Gamma$ we have that $N^\gamma_{t^\gamma} \entails \gamma$, by
-bisimulation invariance we also have that $N_{t^\gamma} \entails \gamma$. Hence
-$N_t \entails \covers_a \Gamma$.
-
-We next construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$,
-where:
+We next show that $N_t$ is an $a$-refinement of $M_s$. We construct an
+$a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
 
 $$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M \} \cup \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
 
@@ -493,8 +521,19 @@ A similar argument to above shows that $\mathcal{R}$ satisfies {\bf forth-$b$}
 for every $b \in A - \{a\}$.
 
 Hence $\mathcal{R}$ is an $a$-simulation from $N_t$ to $M_s$. Thus $N_t
-\refinement_a M_s$. As $N_t \entails \covers_a \Gamma$ we therefore have that
-$M_s \entails \somerefs_a \covers_a \Gamma$.
+\refinement_a M_s$. 
+
+We next show that for every $\gamma \in \Gamma$, we have that $N_{t^\gamma}
+\entails \gamma$. As each $\gamma$ is an $a$-disjunctive normal formula, a
+similar argument to that used in Lemma \ref{kd45-successors} can be used to show
+that $N_{t^\gamma}$ is bisimilar to $N^\gamma_{t^\gamma}$ (as there are only
+edges added going into $N_{t^\gamma}$, not coming out). Therefore, as for every
+$\gamma \in \Gamma$ we have that $N^\gamma_{t^\gamma} \entails \gamma$, by
+bisimulation invariance we also have that $N_{t^\gamma} \entails \gamma$. Hence
+$N_t \entails \covers_a \Gamma$.
+
+As $N_t \refinement_a M_s$, and $N_t \entails \covers_a \Gamma$ we therefore
+have that $M_s \entails \somerefs_a \covers_a \Gamma$.
 
 Conversely, suppose that $M_s \entails \covers_a \Gamma$. Then there exists a
 doxastic model $N_t \refinement_a M_s$, via some $a$-simulation $\mathcal{R}$,
@@ -512,7 +551,7 @@ also have that $M_s \entails \suspects_a \somerefs_a \gamma$. Therefore we
 finally have that $M_s \entails \bigwedge_{\gamma \in \Gamma} \suspects_a
 \somerefs_a \gamma$.
 
-\paragraph{GMulti} Suppose that $M_s$ is a doxastic model such that $M_s
+\paragraph{RComm} Suppose that $M_s$ is a doxastic model such that $M_s
 \entails \covers_b \{ \somerefs_a \gamma \mid \gamma \in \Gamma\}$, where $a \ne
 b$ and $\Gamma$ is a finite set of formulae. From the definition of the cover
 operator, this implies that $M_s \entails \knows_b \bigvee_{\gamma \in \Gamma}
@@ -546,18 +585,18 @@ V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
 \end{eqnarray*}
 
 We note that $N$ is a doxastic model, by similar arguments as used in the proof
-for {\bf GKD45}.
+for {\bf RKD45}.
 
 We next construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
 
 $$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M\} \cup \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
 
 We note that $\mathcal{R}$ is an $a$-simulation, by similar arguments as used in
-the proof for {\bf GKD45}. In particular, this means that $N_t \refinement_a
+the proof for {\bf RKD45}. In particular, this means that $N_t \refinement_a
 M_s$.
 
 We also note that for every $\gamma \in \Gamma$ that $N_{t^\gamma} \bisim
-N^\gamma_{t^\gamma}$, by similar arguments as used in the proof for {\bf GKD45}.
+N^\gamma_{t^\gamma}$, by similar arguments as used in the proof for {\bf RKD45}.
 In particular, this means that as $N^\gamma_{t^\gamma} \entails \gamma$ that we
 also have $N_{t^\gamma} \entails \gamma$, for every $\gamma \in \Gamma$.
 Therefore $N_t \entails \covers_b \Gamma$.
@@ -566,37 +605,36 @@ Therefore $M_s \entails \somerefs_a \covers_b \Gamma$.
 
 The converse, $\somerefs_a \covers_b \Gamma \implies \covers_b \{\somerefs_a
 \gamma \mid \gamma \in \Gamma\}$ follows a similar proof to the relevant part in
-the proof for {\bf GKD45}.
+the proof for {\bf RKD45}.
 
-\paragraph{GKD45Multi} Suppose that $M_s$ is a doxastic model such that $M_s
+\paragraph{RDist} Suppose that $M_s$ is a doxastic model such that $M_s
 \entails \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b$, where $\Gamma_b$
 is a set of $b$-disjunctive formulae for each $b \in A$.
 
 Then as $a \in A$, we have that $M_s \entails \somerefs_a \covers_a \Gamma_a$,
-which by {\bf GKD45} implies that $M_s \entails \bigwedge_{\gamma \in
+which by {\bf RKD45} implies that $M_s \entails \bigwedge_{\gamma \in
 \Gamma_a} \suspects_a \somerefs_a \gamma$. We also have for every $b \in A -
-\{a\}$ that $M_s \entails \somerefs_a \covers_b \Gamma_b$, which by {\bf GMulti}
+\{a\}$ that $M_s \entails \somerefs_a \covers_b \Gamma_b$, which by {\bf RComm}
 implies that $M_s \entails \covers_b \{\somerefs_a \gamma \mid \gamma \in
 \Gamma_b\}$, which by the definition of the cover operator implies that $M_s
 \entails \bigwedge_{\gamma \in \Gamma_b} \suspects_b \somerefs_a \gamma$.
-Hence for every $b \in A$ we have that $M_s \entails \bigwedge_{\gamma \in
-\Gamma_b} \suspects_b \somerefs_a \gamma$.
-
-This implies that for each $b \in A$ and each $\gamma \in \Gamma_b$ that there
-exists some $t^{\gamma} \in sR^M_b$ such that $M_{t^\gamma} \entails \somerefs_a
-\gamma$. Therefore there exists a doxastic model $N^\gamma_{t^\gamma}
-\refinement_a M_{t^\gamma}$, via some $a$-simulation relation
-$\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails \gamma$.  Without
-loss of generality, as $\gamma$ is a $b$-disjunctive normal formula, we may
-assume that $t^\gamma R^{N^\gamma}_b = \{t^\gamma\}$ (by Lemma
+Hence for every $b \in A$ and $\gamma \in \Gamma_b$, we have that $\suspects_b
+\somerefs_a \gamma$. This implies that for each $b \in A$ and each $\gamma \in
+\Gamma_b$ that there exists some $t^{\gamma} \in sR^M_b$ such that
+$M_{t^\gamma} \entails \somerefs_a \gamma$. Therefore there exists a doxastic
+model $N^\gamma_{t^\gamma} \refinement_a M_{t^\gamma}$, via some $a$-simulation
+relation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails \gamma$.
+Without loss of generality, as $\gamma$ is a $b$-disjunctive normal formula, we
+may assume that $t^\gamma R^{N^\gamma}_b = \{t^\gamma\}$ (by Lemma
 \ref{kd45-successors}), and that the $N^\gamma$ are disjoint.
 
 Let $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we can construct a doxastic model $N = (S, R^N, V^N)$ where:
+Then we construct a doxastic model $N = (S, R^N, V^N)$ where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b} S^{N^\gamma}\\
-R^N_b &=& \{(t, t^{\gamma}) \mid b \in A, \gamma \in \Gamma_b\} \cup
+R^N_b &=& \{(t, t^{\gamma}) \mid b \in A, \gamma \in \Gamma_b\} 
+\cup \{(t^\gamma, t^{\gamma'}) \mid \gamma, \gamma' \in \Gamma_b\}
 \bigcup_{b \in A, \gamma \in \Gamma_b} R^{N^\gamma}_b \text{ for $b \in A$}\\
 V^N(p) &=& 
 \begin{cases}
@@ -608,7 +646,7 @@ V^N(p) &=&
 \end{proof}
 
 We note that $N$ is a doxastic model, by similar arguments as used in the proof
-for {\bf GKD45}.
+for {\bf RKD45}.
 
 We next construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
 
@@ -616,11 +654,11 @@ $$\mathcal{R} = \{(t, s)\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b}
 \mathcal{R}^\gamma$$
 
 We note that this is an $a$-simulation, by similar arguments as used in the
-proof for {\bf GKD45}. In particular, this means that $N_t \refinement_a M_s$.
+proof for {\bf RKD45}. In particular, this means that $N_t \refinement_a M_s$.
 
 We also note that for every $b \in A$, and $\gamma \in \Gamma_b$ that
 $N_{t^\gamma} \bisim N^\gamma_{t^\gamma}$, by similar arguments as used in the
-proof for {\bf GKD45}. In particular, this means that as $N^\gamma_{t^\gamma}
+proof for {\bf RKD45}. In particular, this means that as $N^\gamma_{t^\gamma}
 \entails \gamma$ that we also have $N_{t^\gamma} \entails \gamma$, for every $b
 \in A$ and $\gamma \in \Gamma_b$. Therefore $N_t \entails \covers_b \Gamma_b$
 for every $b \in A$, and therefore $N_t \entails \bigwedge_{b \in A} \covers_b

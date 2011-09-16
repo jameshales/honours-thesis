@@ -20,12 +20,11 @@ The class of all Kripke models is called \classK{}. We write $M \in \classK{}$
 to denote that $M$ is a Kripke model.
 \end{definition}
 
-For $R(a)$, we write $R_a$. Given two states $s, t \in S$, we write $R_a(s,
-t)$ to denote that $(s, t) \in R_a$. We write $sR_a$ for $\{t | (s, t) \in
-R_a\}$. As we will be required to discuss several models at once, we will use
-the convention that $M = (S^M, R^M, V^M)$, $N = (S^N, R^N, V^N)$, and so on. For
-$s \in S^M$ we will let $M_s$ refer to the pair $(M, s)$, also known as the
-pointed Kripke model of $M$ at state $s$.
+For $R(a)$, we write $R_a$. We write $sR_a$ for $\{t | (s, t) \in R_a\}$. As we
+will be required to discuss several models at once, we will use the convention
+that $M = (S^M, R^M, V^M)$, $N = (S^N, R^N, V^N)$, and so on. For $s \in S^M$
+we will let $M_s$ refer to the pair $(M, s)$, also known as the pointed Kripke
+model of $M$ at state $s$.
 
 \begin{definition}[Doxastic model]
 A \textit{doxastic model} is a Kripke model $M = (S, R, V)$ such that the
@@ -42,11 +41,12 @@ $M$ is an epistemic model.
 \end{definition}
 
 Throughout this paper we will be presenting results in both doxastic and
-epistemic logic.  As such, when we are discussing doxastic logic, we will assume
-that all Kripke models are implicitly doxastic models, and likewise when we are
-discussing epistemic logic, we will assume that all Kripke models are implicitly
-epistemic models. When we are discussing results in general modal logic, we will
-not assume any restrictions on the Kripke models.
+epistemic logic.  As such, when we are discussing doxastic logic, we will
+assume that all Kripke models are implicitly doxastic models, and likewise when
+we are discussing epistemic logic, we will assume that all Kripke models are
+implicitly epistemic models, unless this has to be explicitly proven as part of
+a proof. When we are discussing results in general modal logic, we will not
+assume any restrictions on the Kripke models.
 
 \begin{definition}[Bisimulation]
 Let $M = (S, R, V)$ and $M' = (S', R', V')$ be Kripke models. A non-empty
@@ -88,6 +88,12 @@ We call $M'_{s'}$ an $a$-simulation of $M_s$, and we call $M_s$ an
 $a$-refinement of $M'_{s'}$. We write $M'_{s'} \simulation_a M_s$ to denote
 this, or alternatively, $M_s \refinement_a M'_{s'}$.
 \end{definition}
+
+Whilst we have introduced simulations and refinements as relations between
+models, we will often also refer to Kripke models as refinements or simulations
+of other models. For example, if $M_s \refinement_a M'_{s'}$ then we call $M_s$
+an $a$-refinement of $M'_{s'}$, and we call $M'_{s'}$ an $a$-simulation of
+$M_s$.
 
 We will use $a$-refinements to define the semantics of the future event logic.
 The significance of refinements is that the finite refinements of a Kripke model
