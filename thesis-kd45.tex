@@ -3,7 +3,7 @@
 \section{Syntax and semantics}
 
 Here we define the syntax and semantics of the logic \logicKDF{}, which
-restricts the logic \logicK{}, as defined by van Ditmarsch and
+restricts the logic \logicKF{}, as defined by van Ditmarsch and
 French~\cite{french2009simulation}, to deal with only models and refinements of
 models that are in \classKD{}.
 
@@ -40,7 +40,7 @@ on for our axiomatisation, in much the same way it is relied on for the
 axiomatisation of \logicKiF{} presented by van Ditmarsch, French and
 Pinchinat~\cite{french2010future}. % TODO - include citation for cover operator
 
-\begin{definition}[Semantics of \logicCF]
+\begin{definition}[Semantics of \logicKDF{}]
 Let $M = (S, R, V)$ be a doxastic model. The interpretation of $\phi \in
 \logicKDF$ is defined inductively.
 
@@ -82,14 +82,14 @@ French and Pinchinat~\cite{french2010future} also applies to \logicKDF{}.
 
 % TODO - examples
 
-In previous work we gave an axiomatisation of the single-agent logic,
-\logicKDiF{}, which relied upon a prenex normal form for the well-formed
-formulae of \logicKDi{}. The prenex normal form prohibits modal operators
-($\knows$ and $\suspects$) from appearing within other modal operators, and we
-showed that all \logicKDi{} formulae are equivalent to a formula in prenex
-normal form. The prenex normal form simplified the axiomatisation and proof of
-soundness by avoiding complications that would arise due to the transitivity of
-doxastic models.
+In previous work we gave an axiomatisation of the single-agent variant of
+\logicKDF{}, called \logicKDiF{}, which relied upon a prenex normal form for the
+well-formed formulae of \logicKDi{}. The prenex normal form prohibits modal
+operators ($\knows$ and $\suspects$) from appearing within other modal
+operators, and we showed that all \logicKDi{} formulae are equivalent to a
+formula in prenex normal form. The prenex normal form simplified the
+axiomatisation and proof of soundness by avoiding complications that would
+arise due to the transitivity of doxastic models.
 
 We introduce a disjunctive normal form for the multi-agent logic \logicKD{},
 which achieves the same purpose in terms of our axiomatisation as the prenex
@@ -110,8 +110,7 @@ A formula in $a$-disjunctive normal form is defined by the following abstract sy
 \delta &::=& \pi \bnfalt \knows_b \gamma_b \bnfalt \suspects_b \gamma_b \bnfalt
 \delta \land \delta\\
 \end{eqnarray*}
-
-Where $\pi$ stands for a propositional formula, $b \in A - \{a\}$, and
+where $\pi$ stands for a propositional formula, $b \in A - \{a\}$, and
 $\gamma_b$ stands for a formula in $b$-disjunctive normal form.
 
 A formula in disjunctive normal form is defined by the following abstract syntax:
@@ -121,8 +120,7 @@ A formula in disjunctive normal form is defined by the following abstract syntax
 \delta &::=& \pi \bnfalt \knows_a \gamma_a \bnfalt \suspects_a \gamma_a \bnfalt
 \delta \land \delta\\
 \end{eqnarray*}
-
-Where $\pi$ stands for a propositional formula, $a \in A$, and $\gamma_a$
+where $\pi$ stands for a propositional formula, $a \in A$, and $\gamma_a$
 stands for a formula in $a$-disjunctive normal form.
 \end{definition}
 
@@ -205,8 +203,7 @@ $$
 \alpha ::= \pi \land \bigwedge_{b \in A - \{a\}} \covers_b \Gamma_b \bnfalt
 \alpha \lor \alpha
 $$
-
-Where $\pi$ stands for a propositional formula, and $\Gamma_b$ stands for a
+where $\pi$ stands for a propositional formula, and $\Gamma_b$ stands for a
 finite, non-empty set of formulae in $b$-cover disjunctive normal form.
 
 A formula in cover disjunctive normal form is defined by the following abstract
@@ -216,8 +213,7 @@ $$
 \alpha ::= \pi \land \bigwedge_{a \in A} \covers_a \Gamma_a \bnfalt
 \alpha \lor \alpha
 $$
-
-Where $\pi$ stands for a propositional formula, and $\Gamma_a$ stands for a
+where $\pi$ stands for a propositional formula, and $\Gamma_a$ stands for a
 finite, non-empty set of formulae in $a$-cover disjunctive normal form.
 \end{definition}
 
@@ -247,8 +243,9 @@ be removed, yielding a formula in $a$-cover disjunctive normal form.
 We can then convert the modal terms using the equivalences $\knows_a \gamma
 \equiv \covers_a \{\gamma\}$ and $\suspects_a \gamma \equiv \covers_a \{\gamma,
 \top\}$. We can add vacuous cover operators of the form $\covers_a \{\top\}$ for
-any agent $a \in A$ which is not represented in our disjunct. We note that each
-resulting set of formulae applied to a cover operator is non-empty.
+any agent $a \in A$ which is not represented in each disjunct of $\phi$. We
+note that each resulting set of formulae applied to a cover operator is
+non-empty.
 
 An inductive argument can be used to show that we can collapse the resulting
 conjunction of cover operators so that each agent is represented by a cover
@@ -287,7 +284,7 @@ Suppose that $\phi$ is an $a$-disjunctive normal formula, and that $M_s$ is a
 doxastic model such that $M_s \entails \phi$. 
 
 Let $t \notin S^M$ and $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we construct a doxastic model $N = (S^N, R^N, V^N)$ where:
+Then we construct a Kripke model $N = (S^N, R^N, V^N)$ where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M\\
@@ -361,9 +358,9 @@ $$
 {\bf D} & \knows \phi \implies \suspects \phi\\
 {\bf 4} & \knows \phi \implies \knows \knows \phi\\
 {\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
-{\bf RP} & \allrefs_a (\phi \implies \psi) \implies \allrefs_a \phi \implies
+{\bf R} & \allrefs_a (\phi \implies \psi) \implies \allrefs_a \phi \implies
 \allrefs_a \psi\\
-{\bf RK} & \allrefs_a \alpha \iff \alpha \text{ where $\alpha$ is a
+{\bf RP} & \allrefs_a \alpha \iff \alpha \text{ where $\alpha$ is a
 propositional formula}\\
 {\bf RComm} & \somerefs_a \covers_b \Gamma \iff \covers_b \{\somerefs_a \gamma
 \mid \gamma \in \Gamma\}\\ 
@@ -400,8 +397,8 @@ The axiomatisation \axiomKDF{} is sound in \logicKDF{}.
 The soundness of the axioms {\bf P}, {\bf K}, {\bf D}, {\bf 4}, and {\bf 5} and the
 rules {\bf MP} and {\bf NecK} can be shown by the same reasoning used to show
 that they are sound in \logicKD{}. The soundness of the axioms {\bf RP} and {\bf
-RK}, and the rule {\bf NecR} can be shown by the same reasoning used to how
-that they are sound in the \logicKiF{}~\cite{french2010future}.
+R}, and the rule {\bf NecR} can be shown by the same reasoning used to how
+that they are sound in the logic \logicKiF{}~\cite{french2010future}.
 
 All that remains to be shown is the soundness of {\bf RKD45}, {\bf RComm}, and
 {\bf RDist}.
@@ -423,7 +420,7 @@ each $\gamma$ is an $a$-disjunctive normal formula, by Lemma
 \{t^\gamma\}$.
 
 Let $t \notin S^M$ and $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we construct a doxastic model $N = (S^N, R^N, V^N)$ where:
+Then we construct a Kripke model $N = (S^N, R^N, V^N)$ where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M \cup \bigcup_{\gamma \in \Gamma} S^{N^\gamma}\\
@@ -494,33 +491,42 @@ Therefore $N$ is a doxastic model.
 We next show that $N_t$ is an $a$-refinement of $M_s$. We construct an
 $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
 
-$$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M \} \cup \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
+$$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M \} 
+\cup \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
 
 We must show that $\mathcal{R}$ satisfies {\bf atoms}, {\bf forth-$b$} for every
 $b \in A$, and {\bf back-$b$} for every $b \in A - \{a\}$.
 
 We note that, by construction, the valuation of $N$ matches the valuation of its
 corresponding states in $M$ and each $N^\gamma$, and the valuation of $N_t$
-matches that of $M_s$. Therefore $\mathcal{R}$ satisfies {\bf atoms}.
 
 We next show that $\mathcal{R}$ satisfies {\bf forth-$b$} for every $b \in A$.
-Let $b \in A$, $u \in S^N$ and $v \in S^M$ such that $(u, v) \in
-\mathcal{R}$. Suppose that $(u, v) \in \mathcal{R}^\gamma$ for some $\gamma \in
-\Gamma$. Then as $\mathcal{R}^\gamma$ is an $a$-simulation, it satisfies {\bf
-forth-$b$} for every $b \in A$. Hence for every $u' \in uR^N_b$, there exists
-some $v' \in vR^M_b$ such that $(u', v') \in \mathcal{R}^\gamma \subseteq
-\mathcal{R}$. Suppose instead that $(u, v) = (s', s')$ for some $s' \in S^M$.
-Then we note that $s'R^N_b = s'R^M_b$, and hence for every $s'' \in s'R^N_b$ we
-have that $s'' \in s'R^M_b$, and that $(s'', s'') \in \mathcal{R}$. Finally suppose
-that $(u, u') = (t, s)$. Then suppose that $b = a$. By construction, $tR^N_a =
-\{t^\gamma \mid \gamma \in \Gamma\}$, and hence $v = t^\gamma$ for some $\gamma
-\in \Gamma$. Hence we can take $s^\gamma \in sR^M_a$, and note that as
-$\mathcal{R}^\gamma$ is an $a$-simulation from $M_{s^\gamma}$ to
-$N^\gamma_{t^\gamma}$, we know that $(t^\gamma, s^\gamma) \in \mathcal{R}^\gamma
-\subseteq \mathcal{R}$. Suppose that $b \neq a$. Then by construction, $tR^M_b =
-sR^M_b$, hence for every $t' \in tR^M_b$, we have that $t' \in sR^M_b$, and
-hence we know that $(t', t') \in \mathcal{R}$. Hence $\mathcal{R}$ satisfies
-{\bf back-$b$} for every $b \in A$.
+Let $b \in A$, $u \in S^N$ and $v \in S^M$ such that $(u, v) \in \mathcal{R}$.
+Suppose that $(u, v) \in \mathcal{R}^\gamma$ for some $\gamma \in \Gamma$.
+Suppose further that $b = a$ and $u = t^\gamma$ for some $\gamma \in \Gamma$.
+Then $t^\gamma R^N_a = tR^N_a = \{t^{\gamma'} \mid \gamma' \in \Gamma\}$.  As
+$M$ is a doxastic model, we have that $s^\gamma R^M_a = sR^M_a = \{s^{\gamma'}
+\mid \gamma' \in \Gamma\}$, and as each $\mathcal{R}^{\gamma'}$ is an
+$a$-simulation between $N^{\gamma'}_{t^{\gamma'}}$ and $M_{s^{\gamma'}}$, we
+have that for every $\gamma' \in \Gamma$, $(t^{\gamma'}, s^{\gamma'}) \in
+\mathcal{R}^{\gamma'} \subseteq \mathcal{R}$. Otherwise consider any other $(u,
+v) \in \mathcal{R}^\gamma$.  Then as $\mathcal{R}^\gamma$ is an $a$-simulation,
+it satisfies {\bf forth-$b$} for every $b \in A$. Hence for every $u' \in
+uR^{N^\gamma}_b$, there exists some $v' \in vR^M_b$ such that $(u', v') \in
+\mathcal{R}^\gamma \subseteq \mathcal{R}$. Suppose that $b = a$ and $u =
+t^\gamma$ for some $\gamma \in \Gamma$.  Suppose instead that $(u, v) = (s',
+s')$ for some $s' \in S^M$.  Then we note that $s'R^N_b = s'R^M_b$, and hence
+for every $s'' \in s'R^N_b$ we have that $s'' \in s'R^M_b$, and that $(s'', s'')
+\in \mathcal{R}$. Finally suppose that $(u, u') = (t, s)$. Then suppose that $b
+= a$. By construction, $tR^N_a = \{t^\gamma \mid \gamma \in \Gamma\}$, and hence
+$v = t^\gamma$ for some $\gamma \in \Gamma$. Hence we can take $s^\gamma \in
+sR^M_a$, and note that as $\mathcal{R}^\gamma$ is an $a$-simulation from
+$M_{s^\gamma}$ to $N^\gamma_{t^\gamma}$, we know that $(t^\gamma, s^\gamma) \in
+\mathcal{R}^\gamma \subseteq \mathcal{R}$. Suppose that $b \neq a$. Then by
+construction, $tR^M_b = sR^M_b$, hence for every $t' \in tR^M_b$, we have that
+$t' \in sR^M_b$, and hence we know that $(t', t') \in \mathcal{R}$. Hence
+$\mathcal{R}$ satisfies {\bf back-$b$} for every $b \in A$.
+matches that of $M_s$. Therefore $\mathcal{R}$ satisfies {\bf atoms}.
 
 A similar argument to above shows that $\mathcal{R}$ satisfies {\bf forth-$b$}
 for every $b \in A - \{a\}$.
@@ -558,22 +564,23 @@ finally have that $M_s \entails \bigwedge_{\gamma \in \Gamma} \suspects_a
 
 Therefore {\bf RKD45} is sound.
 
-\paragraph{RComm} Suppose that $M_s$ is a doxastic model such that $M_s
-\entails \covers_b \{ \somerefs_a \gamma \mid \gamma \in \Gamma\}$, where $a \ne
-b$ and $\Gamma$ is a set of $b$-disjunctive normal formulae. From the definition
-of the cover operator, this implies that $M_s \entails \knows_b \bigvee_{\gamma
-\in \Gamma} \somerefs_a \gamma \land \bigwedge_{\gamma \in \Gamma} \suspects_b
-\somerefs_a \gamma$. In particular, we note that for every $\gamma \in \Gamma$,
-there exists some $s^\gamma \in sR^M_b$ such that $M_{s^\gamma} \entails
-\somerefs_a \gamma$.  Then there exists a doxastic model $N^\gamma_{t^\gamma}
-\refinement_a M_{s^\gamma}$, via some $a$-simulation $\mathcal{R}^\gamma$, such
-that $N^\gamma_{t^\gamma} \entails \gamma$. Without loss of generality, as
-$\gamma$ is a $b$-disjunctive normal formula, we may assume that $t^\gamma
+\paragraph{RComm} 
+Suppose that $M_s$ is a doxastic model such that $M_s \entails \covers_b \{
+\somerefs_a \gamma \mid \gamma \in \Gamma\}$, where $a \ne b$ and $\Gamma$ is a
+set of $b$-disjunctive normal formulae. From the definition of the cover
+operator, this implies that $M_s \entails \knows_b \bigvee_{\gamma \in \Gamma}
+\somerefs_a \gamma \land \bigwedge_{\gamma \in \Gamma} \suspects_b \somerefs_a
+\gamma$. In particular, we note that for every $\gamma \in \Gamma$, there
+exists some $s^\gamma \in sR^M_b$ such that $M_{s^\gamma} \entails \somerefs_a
+\gamma$.  Then there exists a doxastic model $N^\gamma_{t^\gamma} \refinement_a
+M_{s^\gamma}$, via some $a$-simulation $\mathcal{R}^\gamma$, such that
+$N^\gamma_{t^\gamma} \entails \gamma$. Without loss of generality, as $\gamma$
+is a $b$-disjunctive normal formula, we may assume that $t^\gamma
 R^{N^\gamma}_b = \{t^\gamma\}$ (by Lemma \ref{kd45-successors}), and that the
 $N^\gamma$ are disjoint.
 
 Let $t$ be a state such that $t \notin S^{N^\gamma}$ for every $\gamma \in
-\Gamma$. Then we construct a model $N = (S^N, R^N, V^N)$, where:
+\Gamma$. Then we construct a Kripke model $N = (S^N, R^N, V^N)$, where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M \bigcup_{\gamma \in \Gamma} S^{N^\gamma}\\
@@ -616,7 +623,8 @@ the proof for {\bf RKD45}.
 
 Therefore {\bf RComm} is sound.
 
-\paragraph{RDist} Suppose that $M_s$ is a doxastic model such that $M_s
+\paragraph{RDist} 
+Suppose that $M_s$ is a doxastic model such that $M_s
 \entails \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b$, where $\Gamma_b$
 is a set of $b$-disjunctive formulae for each $b \in A$.
 
@@ -638,13 +646,13 @@ may assume that $t^\gamma R^{N^\gamma}_b = \{t^\gamma\}$ (by Lemma
 \ref{kd45-successors}), and that the $N^\gamma$ are disjoint.
 
 Let $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we construct a doxastic model $N = (S, R^N, V^N)$ where:
+Then we construct a Kripke model $N = (S, R^N, V^N)$ where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b} S^{N^\gamma}\\
 R^N_b &=& \{(t, t^{\gamma}) \mid b \in A, \gamma \in \Gamma_b\} 
 \cup \{(t^\gamma, t^{\gamma'}) \mid \gamma, \gamma' \in \Gamma_b\}
-\bigcup_{b \in A, \gamma \in \Gamma_b} R^{N^\gamma}_b \text{ for $b \in A$}\\
+\cup \bigcup_{b \in A, \gamma \in \Gamma_b} R^{N^\gamma}_b \text{ for $b \in A$}\\
 V^N(p) &=& 
 \begin{cases}
 \{t\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b} V^{N^\gamma}(p) & \text{if $s
@@ -695,7 +703,7 @@ The forward direction is the axiom {\bf RDist}.
 The converse can be derived in a more general form as $\somerefs_a (\phi \land
 \psi) \implies \somerefs_a \phi \land \somerefs_a \psi$. The derivation is
 similar to the derivation for $\knows_a (\phi \land \psi) \implies \knows_a \phi
-\land \knows_a \psi$ in the modal logic \logicK{}, using the axiom {\bf RK} in
+\land \knows_a \psi$ in the modal logic \logicK{}, using the axiom {\bf R} in
 place of {\bf K}.
 \end{proof}
 
@@ -717,11 +725,11 @@ the $\somerefs_a$ operator.
 
 \begin{itemize}
 \item $\somerefs_a (\phi \lor \psi)$ iff $\somerefs \phi \lor \somerefs \psi$.
-(Derivable from {\bf P} and {\bf RK})
+(Derivable from {\bf P} and {\bf R})
 \item $\somerefs_a (\pi \land \bigwedge_{b \in A} \covers_b \Gamma_b)$ iff
 $\pi \land \bigwedge_{\gamma \in \Gamma_a} \suspects_a \somerefs_a \gamma \land
 \bigwedge_{b \in A - \{a\}} \covers_b \{\somerefs_a \gamma \mid \gamma \in
-\Gamma_b\}$ (Derivable from {\bf P}, {\bf RK}, {\bf RP}, {\bf RDist}, {\bf
+\Gamma_b\}$ (Derivable from {\bf P}, {\bf R}, {\bf RP}, {\bf RDist}, {\bf
 RKD45} and {\bf RComm})
 \end{itemize}
 
@@ -781,6 +789,3 @@ The axiomatisation \axiomKDF{} is sound and complete for the logic \logicKDF{}.
 The soundness proof is given in Lemma~\ref{kd45-sound} and the completeness
 proof is given in Lemma~\ref{kd45-complete}.
 \end{proof}
-
-
-\section{Decision procedures}
