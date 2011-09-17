@@ -215,6 +215,20 @@ V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
 \text{ for $p \in P$}
 \end{eqnarray*}
 
+\begin{figure}[H]
+\begin{center} % TODO - better diagram
+\scalebox{0.4}{
+\includegraphics{rk}
+}
+\caption{
+The model $N$ is constructed by taking the model $M$ and the models $N^\gamma$
+for every $\gamma \in \Gamma$, and connecting them with an extra node $t$. $t$
+is connected via an $a$-edge to $t^\gamma$ from each of the $N^\gamma$, and is
+also connected via a $b$-edge to each $b$-successor of $s$ in $M$.
+}
+\end{center}
+\end{figure}
+
 We must show that $N_t$ is an $a$-refinement of $M_s$, and that for every
 $t^\gamma \in tR^N_a$ we have that $N_{t^\gamma} \entails \gamma$. The latter
 will be shown by proving that for every $\gamma \in \Gamma$, the state

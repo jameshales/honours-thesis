@@ -443,13 +443,15 @@ V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
 \begin{figure}[H]
 \begin{center} % TODO - better diagram
 \scalebox{0.4}{
-\includegraphics{diagram}
+\includegraphics{rkd45}
 }
 \caption{
 The model $N$ is constructed by taking the model $M$ and the models $N^\gamma$
 for every $\gamma \in \Gamma$, and connecting them with an extra node $t$. $t$
 is connected via an $a$-edge to $t^\gamma$ from each of the $N^\gamma$, and is
-also connected via a $b$-edge to each $b$-successor of $s$ in $M$.
+also connected via a $b$-edge to each $b$-successor of $s$ in $M$. We must also
+have $a$-edges between each of the $t^\gamma$ to ensure that the resulting model
+is transitive and Euclidean.
 }
 \end{center}
 \end{figure}
