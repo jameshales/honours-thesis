@@ -1,16 +1,24 @@
 \usepackage{amsfonts, amsmath, amssymb, amsthm}
 
+% Terms
+\newcommand{\newcommandm}[2]{\newcommand{#1}{\ensuremath{#2}}}
+\newcommandm{\Agents}{A}
+\newcommandm{\Atoms}{P}
+\newcommandm{\agent}{a}
+\newcommandm{\States}{S}
+\newcommandm{\state}{s}
+
 % Modal FEL operators
 \newcommand{\knows}{\raisebox{-1pt}{$\Box$}}
 \newcommand{\suspects}{\raisebox{-1pt}{$\Diamond$}}
-\newcommand{\allrefs}{{\ensuremath{\mathopen{\blacktriangleright}}}}
-\newcommand{\somerefs}{{\ensuremath{\mathopen{\triangleright}}}}
+\newcommandm{\allrefs}{{\mathopen{\blacktriangleright}}}
+\newcommandm{\somerefs}{{\mathopen{\triangleright}}}
 
 % Bisimulation notation
-\newcommand{\bisrel}{\ensuremath{\mathfrak{R}}}
+\newcommandm{\bisrel}{\mathfrak{R}}
 \newcommand{\bisim}{{\raisebox{.3ex}[0mm][0mm]{\ensuremath{\medspace \underline{\! \leftrightarrow\!}\medspace}}}}
-\newcommand{\refinement}{\preceq}
-\newcommand{\simulation}{\succeq}
+\newcommandm{\refinement}{\preceq}
+\newcommandm{\simulation}{\succeq}
 
 % Cover logic operators
 \newcommand{\covers}{\nabla}
@@ -26,39 +34,39 @@
 
 % FEL abbreviations
 % -- Logics
-\newcommand{\lang}{\ensuremath{\mathcal{L}}}
-\newcommand{\langF}{\ensuremath{\lang_\somerefs}}
-\newcommand{\logic}{\lang}
-\newcommand{\logicC}{\ensuremath{\logic^{\mathbf{C}}}}
-\newcommand{\logicK}{\ensuremath{\logic^{\mathbf{K}}}}
-\newcommand{\logicKD}{\ensuremath{\logic^{\mathbf{KD45}}}}
-\newcommand{\logicS}{\ensuremath{\logic^{\mathbf{S5}}}}
-\newcommand{\logicKi}{\ensuremath{\logicK_{(1)}}}
-\newcommand{\logicSi}{\ensuremath{\logicS_{(1)}}}
-\newcommand{\logicKDi}{\ensuremath{\logicKD_{(1)}}}
-\newcommand{\logicCF}{\ensuremath{\logicC_\somerefs}}
-\newcommand{\logicKF}{\ensuremath{\logicK_\somerefs}}
-\newcommand{\logicSF}{\ensuremath{\logicS_\somerefs}}
-\newcommand{\logicKDF}{\ensuremath{\logicKD_\somerefs}}
-\newcommand{\logicKiF}{\ensuremath{\logicK_{\somerefs(1)}}}
-\newcommand{\logicSiF}{\ensuremath{\logicS_{\somerefs(1)}}}
-\newcommand{\logicKDiF}{\ensuremath{\logicKD_{\somerefs(1)}}}
+\newcommandm{\lang}{\mathcal{L}}
+\newcommandm{\langF}{\lang_\somerefs}
+\newcommandm{\logic}{\lang}
+\newcommandm{\logicC}{\logic^{\mathbf{C}}}
+\newcommandm{\logicK}{\logic^{\mathbf{K}}}
+\newcommandm{\logicKD}{\logic^{\mathbf{KD45}}}
+\newcommandm{\logicS}{\logic^{\mathbf{S5}}}
+\newcommandm{\logicKi}{\logicK_{(1)}}
+\newcommandm{\logicSi}{\logicS_{(1)}}
+\newcommandm{\logicKDi}{\logicKD_{(1)}}
+\newcommandm{\logicCF}{\logicC_\somerefs}
+\newcommandm{\logicKF}{\logicK_\somerefs}
+\newcommandm{\logicSF}{\logicS_\somerefs}
+\newcommandm{\logicKDF}{\logicKD_\somerefs}
+\newcommandm{\logicKiF}{\logicK_{\somerefs(1)}}
+\newcommandm{\logicSiF}{\logicS_{\somerefs(1)}}
+\newcommandm{\logicKDiF}{\logicKD_{\somerefs(1)}}
 % -- Classes of models
 \newcommand{\classC}{\textit{C}}
 \newcommand{\classK}{\textit{K}}
 \newcommand{\classS}{\textit{S5}}
 \newcommand{\classKD}{\textit{KD45}}
 % -- Axiomatisations
-\newcommand{\axiomKi}{\ensuremath{\mathrm{\mathbf{K}}_{(1)}}}
-\newcommand{\axiomSi}{\ensuremath{\mathrm{\mathbf{S5}}_{(1)}}}
-\newcommand{\axiomKDi}{\ensuremath{\mathrm{\mathbf{KD45}}_{(1)}}}
-\newcommand{\axiomFi}{\ensuremath{\mathrm{\mathbf{FEL}_{(1)}}}}
-\newcommand{\axiomKiF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{K}_{(1)}}}}
-\newcommand{\axiomSiF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{S5}_{(1)}}}}
-\newcommand{\axiomKDiF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{KD45}{(1)}}}}
-\newcommand{\axiomKF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{K}}}}
-\newcommand{\axiomSF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{S5}}}}
-\newcommand{\axiomKDF}{\ensuremath{\mathrm{\mathbf{FEL}^\mathbf{KD45}}}}
+\newcommandm{\axiomKi}{\mathrm{\mathbf{K}}_{(1)}}
+\newcommandm{\axiomSi}{\mathrm{\mathbf{S5}}_{(1)}}
+\newcommandm{\axiomKDi}{\mathrm{\mathbf{KD45}}_{(1)}}
+\newcommandm{\axiomFi}{\mathrm{\mathbf{FEL}_{(1)}}}
+\newcommandm{\axiomKiF}{\mathrm{\mathbf{FEL}^\mathbf{K}_{(1)}}}
+\newcommandm{\axiomSiF}{\mathrm{\mathbf{FEL}^\mathbf{S5}_{(1)}}}
+\newcommandm{\axiomKDiF}{\mathrm{\mathbf{FEL}^\mathbf{KD45}{(1)}}}
+\newcommandm{\axiomKF}{\mathrm{\mathbf{FEL}^\mathbf{K}}}
+\newcommandm{\axiomSF}{\mathrm{\mathbf{FEL}^\mathbf{S5}}}
+\newcommandm{\axiomKDF}{\mathrm{\mathbf{FEL}^\mathbf{KD45}}}
 
 % BNF abbreviations
 \newcommand{\bnfalt}{\mid}

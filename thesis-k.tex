@@ -160,10 +160,8 @@ $$
 \begin{array}{rl}
 {\bf MP} & \text{From $\proves \phi \implies \psi$ and $\proves \phi$, infer
 $\proves \psi$}\\
-{\bf NecK} & \text{From $\proves \knows_a (\phi \implies \psi)$ and $\proves
-\knows_a \phi$, infer $\proves \knows_a \psi$}\\
-{\bf NecR} & \text{From $\proves \allrefs_a (\phi \implies \psi)$ and $\proves
-\allrefs_a \phi$, infer $\proves \allrefs_a \psi$}
+{\bf NecK} & \text{From $\proves \phi$ infer $\proves \knows_a \phi$}\\
+{\bf NecR} & \text{From $\proves \phi$ infer $\proves \allrefs_a \phi$}
 \end{array}
 $$
 \end{definition}
@@ -215,7 +213,7 @@ V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
 \text{ for $p \in P$}
 \end{eqnarray*}
 
-\begin{figure}[H]
+\begin{figure}
 \begin{center} % TODO - better diagram
 \scalebox{0.4}{
 \includegraphics{rk}
