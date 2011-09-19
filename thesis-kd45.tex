@@ -276,7 +276,8 @@ The cover logic prenex normal form will be used in our completeness proofs.
 \begin{lemma}\label{kd45-successors}
 If $\phi$ is a formula in $a$-disjunctive normal form, and $M_s$ is a doxastic
 model such that $M_s \entails \phi$, then there exists a model $N_t$ such that
-$N_t \entails \phi$ and $tR^N_a = R^N_at = \{t\}$.
+$N_t \entails \phi$ and $tR^N_a = R^N_at = \{t\}$ and $R^N_bt = \emptyset$ for
+every $b \in A - \{a\}$.
 \end{lemma}
 
 \begin{proof}
@@ -297,7 +298,8 @@ V^M(p) & \text{otherwise}
 \end{cases}
 \end{eqnarray*}
 
-We note that $tR^N_a = R^N_at = \{t\}$.
+We note that $tR^N_a = R^N_at = \{t\}$ and $R^N_bt = \emptyset$ for every $b
+\in A - \{a\}$.
 
 We must first show that $N$ is a doxastic model, and then that $N_t \entails
 \phi$. The latter will be shown by proving that for every $s' \in tR^N_b$, the
@@ -456,8 +458,7 @@ is transitive and Euclidean.
 
 We must show that $N$ is a doxastic model, that $N_t$ is an $a$-refinement of
 $M_s$, and that for every $t^\gamma \in tR^N_a$ we have that $N_{t^\gamma}
-\entails \gamma$. The latter will be shown by proving that for every $\gamma \in
-\Gamma$, the state $N_{t^\gamma}$ is bisimilar to $N^\gamma_{t^\gamma}$.
+\entails \gamma$. 
 
 First we show that $N$ is a doxastic model. We must show two cases: that $R^N_a$
 is serial, transitive and Euclidean, and that $R^N_b$ is also serial, transitive
@@ -536,12 +537,11 @@ Hence $\mathcal{R}$ is an $a$-simulation from $N_t$ to $M_s$. Thus $N_t
 
 We next show that for every $\gamma \in \Gamma$, we have that $N_{t^\gamma}
 \entails \gamma$. As each $\gamma$ is an $a$-disjunctive normal formula, a
-similar argument to that used in Lemma \ref{kd45-successors} can be used to show
-that $N_{t^\gamma}$ is bisimilar to $N^\gamma_{t^\gamma}$ (as there are only
-edges added going into $N_{t^\gamma}$, not coming out). Therefore, as for every
-$\gamma \in \Gamma$ we have that $N^\gamma_{t^\gamma} \entails \gamma$, by
-bisimulation invariance we also have that $N_{t^\gamma} \entails \gamma$. Hence
-$N_t \entails \covers_a \Gamma$.
+similar argument to that used in Lemma \ref{kd45-successors} can be used to
+show that each of the successors of $N_{t^\gamma}$ are bisimilar to
+corresponding successors of $N^\gamma_{t^\gamma}$ (trivially, as $N$ contains
+no edges involving states in $S^{N^\gamma} - \{t^\gamma\}$, other than those in
+$N^\gamma$), and therefore that $N_{t^\gamma} \entails \gamma$. 
 
 As $N_t \refinement_a M_s$, and $N_t \entails \covers_a \Gamma$ we therefore
 have that $M_s \entails \somerefs_a \covers_a \Gamma$.
