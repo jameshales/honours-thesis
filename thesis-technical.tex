@@ -1,12 +1,14 @@
 \chapter{Technical preliminaries}
 
-We recall the definitions given by van Ditmarsch, French and
-Pinchinat~\cite{french2010future} in describing the future event logic, and we
-adapt those definitions to be suitable for doxastic logic (\logicKD{}) and
-epistemic logic (\logicS{}).  Specifically, when we are discussing the
-extensions of the future event logic to doxastic and epistemic logics, we
-restrict the Kripke models under discussion to those in the class of doxastic or
-epistemic models respectively.
+%We recall the definitions given by van Ditmarsch, French and
+%Pinchinat~\cite{french2010future} in describing the future event logic, and we
+%adapt those definitions to be suitable for doxastic logic (\logicKD{}) and
+%epistemic logic (\logicS{}).  Specifically, when we are discussing the
+%extensions of the future event logic to doxastic and epistemic logics, we
+%restrict the Kripke models under discussion to those in the class of doxastic or
+%epistemic models respectively.
+
+% TODO - Pre-amble about modal logics
 
 Let $A$ be a non-empty, finite set of agents, and let $P$ be a non-empty,
 countable set of propositional atoms.
@@ -20,11 +22,12 @@ The class of all Kripke models is called \classK{}. We write $M \in \classK{}$
 to denote that $M$ is a Kripke model.
 \end{definition}
 
-For $R(a)$, we write $R_a$. We write $sR_a$ for $\{t \mid (s, t) \in R_a\}$ and we
-write $R_at$ for $\{s \mid (s, t) \in R_a\}$. As we will be required to discuss
-several models at once, we will use the convention that $M = (S^M, R^M, V^M)$,
-$N = (S^N, R^N, V^N)$, and so on. For $s \in S^M$ we will let $M_s$ refer to the
-pair $(M, s)$, also known as the pointed Kripke model of $M$ at state $s$.
+For $R(a)$, we write $R_a$. We write $sR_a$ for $\{t \mid (s, t) \in R_a\}$ and
+we write $R_at$ for $\{s \mid (s, t) \in R_a\}$. As we will be required to
+discuss several models at once, we will use the convention that $M = (S^M, R^M,
+V^M)$, $N = (S^N, R^N, V^N)$, and so on. For $s \in S^M$ we will let $M_s$ refer
+to the pair $(M, s)$, also known as the pointed Kripke model of $M$ at state
+$s$.
 
 \begin{definition}[Doxastic model]
 A \textit{doxastic model} is a Kripke model $M = (S, R, V)$ such that the
@@ -39,6 +42,111 @@ relation $R_a$ is an equivalence relation for all $a \in A$. The class of all
 epistemic models is called \classS{}. We write $M \in \classS{}$ to denote that
 $M$ is an epistemic model.
 \end{definition}
+
+% TODO - Motivation
+
+\begin{definition}[Language of \lang{}]
+Given a finite set of agents $A$ and a set of propositional atoms $P$, the
+language of \langF{} is defined by the following abstract syntax:
+$$
+\phi ::=    p \bnfalt
+            \neg \phi \bnfalt
+            \phi \land \phi \bnfalt
+            \knows_a \phi \bnfalt
+$$
+where $p \in P$.
+\end{definition}
+
+Standard abbreviations include:
+$\top ::= \phi \lor \neg \phi$;
+$\bot ::= \neg \top$;
+$\phi \lor \psi ::= \neg (\neg \phi \land \neg \psi)$;
+$\phi \implies \psi ::= \neg \phi \lor \psi$;
+and $\suspects_a \phi ::= \neg \knows_a \neg \phi$.
+
+% TODO - Motiviation - \knows can be thought of as...
+
+\begin{definition}[Semantics of \logicK{}]
+Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
+be a Kripke model taken from \classC{}. The interpretation of $\phi \in \logicK$
+is defined inductively.
+\begin{eqnarray*}
+M_s &\entails& p \text{ iff } s \in V_p\\
+M_s &\entails& \neg \phi \text{ iff } M_s \nentails \phi\\
+M_s &\entails& \phi \land \psi \text{ iff } M_s \entails \phi \text{ and } M_s
+\entails \psi\\
+M_s &\entails& \knows_a \phi \text{ if for all } t \in S : (s, t) \in R_a \text{
+implies } M_t \entails \phi\\
+\end{eqnarray*}
+\end{definition}
+
+The logics \logicK{}, \logicKD{} and \logicS{} are instances of \logicC{} with
+classes \classK{}, \classKD{} and \classS{} respectively. It should be noted
+that \logicKD{} is a conservative extension of \logicK{}, and \logicS{} is a
+conservative extension of \logicKD{} (and also of \logicK{}). This is because
+any formula that is valid with respect to a particular class of Kripke models
+is also valid for any subset of those Kripke models.
+
+% TODO - Properties of K, KD45, S5
+% TODO - Examples
+
+\begin{definition}[Axiomatisation \axiomK{}]
+The axiomatisation \axiomK{} is a substitution schema consisting of the
+following axioms:
+$$
+\begin{array}{rl}
+{\bf P} & \text{All propositional tautologies}\\
+{\bf K} & \knows (\phi \implies \psi) \implies \knows \phi \implies \knows
+\psi\\
+\end{array}
+$$
+Along with the rules:
+$$
+\begin{array}{rl}
+{\bf MP} & \text{From $\proves \phi \implies \psi$ and $\proves \phi$, infer
+$\proves \psi$}\\
+{\bf NecK} & \text{From $\proves \phi$ infer $\proves \knows_a \phi$}\\
+\end{array}
+$$
+\end{definition}
+
+% TODO - Find citation
+
+\begin{definition}[Axiomatisation \axiomKD{}]
+The axiomatisation \axiomKD{} is a substitution schema consisting of the axioms
+and rules of \axiomK{}, along with the additional axioms:
+$$
+\begin{array}{rl}
+{\bf D} & \knows \phi \implies \suspects \phi\\
+{\bf 4} & \knows \phi \implies \knows \knows \phi\\
+{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+\end{array}
+$$
+\end{definition}
+
+The additional axioms for \axiomKD{} correspond to the properties of \classKD{}
+models. {\bf D} corresponds to the serial property, {\bf 4} corresponds to the
+transitive property, and {\bf 5} corresponds to the Euclidean property.
+
+% TODO - Find citation
+
+\begin{definition}[Axiomatisation \axiomS{}]
+The axiomatisation \axiomS{} is a substitution schema consisting of the axioms
+and rules of \axiomK{}, along with the additional axioms:
+$$
+\begin{array}{rl}
+{\bf T} & \knows \phi \implies \suspects \phi\\
+{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+\end{array}
+$$
+\end{definition}
+
+Once again, the additional axioms for \axiomS{} correspond to the properties of
+\classS{} models. {\bf T} corresponds to the reflexive property, and {\bf 5}
+corresponds to the Euclidean property, noting that reflexivity and Euclideaness
+together imply transitivity and symmetry.
+
+% TODO - Find citation
 
 Throughout this paper we will be presenting results in both doxastic and
 epistemic logic.  As such, when we are discussing doxastic logic, we will
@@ -71,6 +179,12 @@ We call $M_s$ and $M'_{s'}$ bisimilar, and write $M_s \bisim M'_{s'}$ to denote
 that there is a bisimulation between $M_s$ and $M'_{s'}$.
 \end{definition}
 
+\begin{lemma}
+The logics \logicK{}, \logicKD{} and \logicS{} are bisimulation invariant.
+\end{lemma}
+
+% TODO - Find citation
+
 \begin{definition}[Simulation and refinement]
 Let $M$ and $M'$ be Kripke models. A non-empty relation $\mathcal{R}
 \subseteq S \times S'$ is a \textit{simulation} if and only if it satisfied {\bf
@@ -95,7 +209,26 @@ of other models. For example, if $M_s \refinement_a M'_{s'}$ then we call $M_s$
 an $a$-refinement of $M'_{s'}$, and we call $M'_{s'}$ an $a$-simulation of
 $M_s$.
 
-We will use $a$-refinements to define the semantics of the future event logic.
+\begin{definition}[Positive formulae]
+A positive formula is defined by the following abstract syntax:
+$$
+\phi ::=    p \bnfalt 
+            \neg p \bnfalt
+            \phi \land \phi \bnfalt
+            \phi \lor \phi \bnfalt
+            \knows_a \phi
+$$
+\end{definition}
+
+\begin{lemma}
+Let $M_s$ and $M'_{s'}$ be Kripke models such that $M'_{s'} \refinement M_s$,
+and let $\phi$ be a positive formula. If $M_s \entails \phi$ then $M'_{s'}
+\entails \phi$.
+\end{lemma}
+
+% TODO - Citation (Simulation and refinement?) or proof
+
 The significance of refinements is that the finite refinements of a Kripke model
 are exactly the models that result from the execution of an action
-model~\cite{french2009simulation}.
+model~\cite{french2009simulation}. We will use $a$-refinements to define the
+semantics of the future event logic.

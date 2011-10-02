@@ -10,7 +10,6 @@ introduced by van Ditmarsch and French~\cite{french2009simulation}.
 \begin{definition}[Language of \langF{}] % TODO - move to the K section
 Given a finite set of agents $A$ and a set of propositional atoms $P$, the
 language of \langF{} is defined by the following abstract syntax:
-
 $$
 \phi ::=    p \bnfalt
             \neg \phi \bnfalt
@@ -41,7 +40,6 @@ Pinchinat~\cite{french2010future}. % TODO - include citation for cover operator
 \begin{definition}[Semantics of \logicKF{}]
 Let $M = (S, R, V)$ be a Kripke model. The interpretation of $\phi \in
 \logicKF$ is defined inductively.
-
 \begin{eqnarray*}
 M_s &\entails& p \text{ iff } s \in V_p\\
 M_s &\entails& \neg \phi \text{ iff } M_s \nentails \phi\\
@@ -75,13 +73,45 @@ disjunctive normal form, which we will define now.
 
 \begin{definition}[Disjunctive normal form]
 A formula in disjunctive normal form is defined by the following abstract syntax:
-
 $$
-\alpha ::= \pi \land \bigwedge_{a \in A} \covers_a \Gamma_a \bnfalt \alpha \lor \alpha
+\alpha ::= \pi \land \bigwedge_{a \in B \subseteq A} \covers_a \Gamma_a \bnfalt \alpha \lor \alpha
 $$
-where $\pi$ stands for a propositional formula, $a \in A$, and $\Gamma_a$ stands
-for a finite set of formulae in disjunctive normal form.
+where $\pi$ stands for a propositional formula, and for $a \in B \subseteq A$,
+$\Gamma_a$ stands for a finite set of formulae in disjunctive normal form.
 \end{definition}
+
+To show that every \lang{} formula is equivalent to a disjunctive normal
+formula, we first introduce the negation normal form and a corresponding lemma
+for that form.
+
+\begin{definition}[Negation normal form]
+A formula in negation normal form is defined by the following abstract syntax:
+$$
+\alpha ::= p \bnfalt 
+\neg p \bnfalt
+\alpha \land \alpha \bnfalt
+\alpha \lor \alpha \bnfalt
+\knows_a \alpha \bnfalt
+\suspects_a \alpha
+$$
+where $p \in P$ and $a \in A$.
+\end{definition}
+
+\begin{lemma}
+Every formula of \lang{} is equivalent to a formula in negation normal form,
+under the semantics of \logicK{}.
+\end{lemma}
+
+\begin{proof}
+We use an inductive argument over the structure of our formula, using the
+following equivalences to push the negations into the propositions.
+
+\begin{eqnarray*}
+\neg \neg \alpha &\iff& \alpha\\
+\neg (\alpha \land \beta) &\iff& \neg \alpha \lor \neg \beta\\
+\neg \knows_a \alpha &\iff& \suspects_a \neg \alpha
+\end{eqnarray*}
+\end{proof}
 
 \begin{lemma}\label{k-dnf}
 Every well-formed formula of \logicK{} is equivalent to a formula in disjunctive
@@ -89,26 +119,44 @@ normal form.
 \end{lemma}
 
 \begin{proof}
-Let $\phi$ be a \logicK{} formula. We use an inductive argument over the
+Let $\phi$ be a \logicK{} formula. Without loss of generality, we assume that
+$\phi$ is in negation normal form. We use an inductive argument over the
 structure of $\phi$ to show that it can be converted into cover disjunctive
 normal form.
 
-The base case is where $\phi$ is a propositional formula. Then we can add
-vacuous cover operators of the form $\covers_a \{\top\}$ for each $a \in A$ to
-yield a formula in disjunctive normal form.
+The base case is where $\phi$ is an atom or a negation of an atom, in which case
+we are done.
 
-Suppose that $\phi$ contains conjuncts of the form $\knows_a \gamma$ or
-$\suspects_a \gamma$. By the induction hypothesis we may assume that $\gamma$ is
-in disjunctive normal form. Then we can convert these terms using the
-equivalences $\knows_a \gamma \equiv \covers_a \{\gamma\} \lor \covers_a
-\emptyset$ and $\suspects_a \gamma \equiv \covers_a \{\gamma, \top\}$. We can
-add vacuous cover operators of the form $\covers_a \{\top\}$ for any agent $a
-\in A$ which is not represented in each disjunct of $\phi$.
+Suppose that $\phi = \alpha \lor \beta$. By the induction hypothesis we
+may assume without loss of generality that $\alpha$ and $\beta$ are in
+disjunctive normal form. Then $\alpha \lor \beta$ is a disjunctive normal
+formula.
 
-An inductive argument can be used to show that we can collapse the resulting
-conjunction of cover operators so that each agent is represented by a cover
-operator only once. We use the following equivalence to achieve this.
+Suppose that $\phi = \knows_a \alpha$. By the induction hypothesis we may
+assume without loss of generality that $\alpha$ is in disjunctive normal form.
+Then $\knows_a \equiv \covers_a \{\alpha\} \lor \covers_a \emptyset$, which is
+a disjunctive normal formula.
 
+Suppose that $\phi = \suspects_a \alpha$. By the induction hypothesis we may
+assume without loss of generality that $\alpha$ is in disjunctive normal form.
+Then $\suspects_a \equiv \covers_a \{\alpha, \top\}$, which is a disjunctive
+normal formula.
+
+Suppose that $\phi = \alpha \land \beta$. By the induction hypothesis we may
+assume without loss of generality that $\alpha$ and $\beta$ are in disjunctive
+normal form. Then $\alpha = \delta_1 \lor \cdots \lor \delta_m$ and $\beta =
+\gamma_1 \lor \cdots \lor \gamma_n$ for some $m, n \in \mathbb{N}$.  Then $\phi
+\equiv \bigvee_{i \leq m, j \leq n} \delta_i \land \gamma_j$. As $\alpha$ and
+$\beta$ were in disjunctive normal form, for each $i \leq m$ and $j
+\leq n$, we have that $\delta_i = \pi \land \bigwedge_{a \in B \subseteq A}
+\covers_a \Gamma_a$ and $\gamma_j = \rho \land \bigwedge_{a \in C \subseteq A}
+\covers_a \Gamma'_a$. Then we can write $\delta_i \land \gamma_j \equiv (\pi
+\land \rho) \land \bigwedge_{a \in B \subseteq A} \covers_a \Gamma_a \land
+\bigwedge_{a \in C \subseteq A} \covers_a \Gamma'_a$. We note that the same
+agent $a$ may appear twice across the two sets of agents $B$ and $C$, with
+potentially different sets of formulae $\Gamma_a$ and $\Gamma'_a$, so we must
+somehow combine the two sets so that each agent appears only once. To achieve
+this we use the following equivalence:
 $$
 \covers_a \Gamma \land \covers_a \Gamma' \equiv 
 \covers_a \big( 
@@ -117,14 +165,12 @@ $$
 \{ \gamma' \land \bigvee_{\gamma \in \Gamma} \gamma \mid \gamma' \in \Gamma' \}
 \big)
 $$
-
 We note that as each $\gamma \in \Gamma$ and $\gamma' \in \Gamma'$ are assumed
 to be disjunctive normal formulae, that applying a disjunction over each of
 these sets yields a disjunctive normal formula. Conjoining two disjunctive
-normal formulae does not yield a disjunctive normal formula, however we note
-that we can use the distributivity of conjunction over disjunction, and then
-recursively collapse the duplicated cover operators, to yield a formula in
-disjunctive normal form.
+normal formulae does not yield a disjunctive normal formula, however we can
+recursively apply the same translation described here to the conjunction in
+order to yield a disjunctive normal formula.
 
 Repeating this for each disjunct in our original formula leaves us with a
 formula in cover logic disjunctive normal form.
@@ -132,10 +178,9 @@ formula in cover logic disjunctive normal form.
 
 \section{Axiomatisation}
 
-\begin{definition}[\axiomKF]
+\begin{definition}[Axiomatisation \axiomKF]
 The axiomatisation \axiomKF{} is a substitution schema consisting of the
 following axioms:
-
 $$
 \begin{array}{rl}
 {\bf P} & \text{All propositional tautologies}\\
@@ -153,9 +198,7 @@ propositional formula}\\
 \suspects_a \somerefs_a \gamma\\
 \end{array}
 $$
-
 Along with the rules:
-
 $$
 \begin{array}{rl}
 {\bf MP} & \text{From $\proves \phi \implies \psi$ and $\proves \phi$, infer
