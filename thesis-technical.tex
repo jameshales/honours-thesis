@@ -25,7 +25,7 @@ necessarily true. In doxastic and epistemic logic on the other hand, $\knows_a$
 is said to represent belief and knowledge respectively.
 
 In this chapter we will provide some of the technical preliminaries that are
-required throughout this paper. We give a short introduction to modal, doxastic
+required throughout this paper. We give a short introduction to modal, doxastic,
 and epistemic logics, and give the definition of a refinement that is used by
 the future event logic. We also give some useful results that we refer to later
 in the paper.
@@ -91,8 +91,16 @@ epistemic models is called \classS{}. We write $M \in \classS{}$ to denote that
 $M$ is an epistemic model.
 \end{definition}
 
-We will now give a precise definition of the language of modal logic, and its
-semantics.
+Throughout this paper we will be presenting results in both doxastic and
+epistemic logic.  As such, when we are discussing doxastic logic, we will
+assume that all Kripke models are implicitly doxastic models, and likewise when
+we are discussing epistemic logic, we will assume that all Kripke models are
+implicitly epistemic models, unless this has to be explicitly proven as part of
+a proof. When we are discussing results in general modal logic, we will not
+assume any restrictions on the Kripke models.
+
+We will now give a precise definition of the language of basic modal logic, and
+its semantics.
 
 \begin{definition}[Language of \lang{}]
 Given a finite set of agents $A$ and a set of propositional atoms $P$, the
@@ -136,7 +144,9 @@ in a Kripke model $M$ if and only if $M_s \entails \phi$ for every $s \in S^M$,
 and we write $M \entails \phi$. We say that $\phi$ is valid in \classC{} if and
 only if $\phi$ is valid in every $M \in \classC{}$, and we write $\classC{}
 \entails \phi$, or if the class of models is clear by context, we may simply
-write $\entails \phi$.
+write $\entails \phi$. When we are discussing multiple logics at once, we may
+add a subscript to the turnstile symbol, e.g. $\entails_\logicC \phi$, to make
+it more explicit which logic we are referring to.
 
 The logics \logicK{}, \logicKD{} and \logicS{} are instances of \logicC{} with
 classes \classK{}, \classKD{} and \classS{} respectively. It should be noted
@@ -234,7 +244,10 @@ $$
 
 We say that a formula $\phi$ is {\em provable} or {\em derivable} under an
 axiomatisation if and only if it can be derived using some finite sequence of
-axioms and rules from that axiomatisation.
+axioms and rules from that axiomatisation, and we write $\proves \phi$. When we
+are discussing multiple logics at once, we may add a subscript to the turnstile
+symbol, e.g. $\proves_\logicC \phi$, to make it more explicit which logic we are
+referring to.
 
 An axiomatisation of a logic must have two important properties: {\em soundness}
 and {\em completeness}. An axiomatisation is sound with respect to a logic if
@@ -286,13 +299,14 @@ Once again, the additional axioms for \axiomS{} correspond to the properties of
 corresponds to the Euclidean property. We note that reflexivity and Euclideaness
 together imply transitivity and symmetry.
 
-Throughout this paper we will be presenting results in both doxastic and
-epistemic logic.  As such, when we are discussing doxastic logic, we will
-assume that all Kripke models are implicitly doxastic models, and likewise when
-we are discussing epistemic logic, we will assume that all Kripke models are
-implicitly epistemic models, unless this has to be explicitly proven as part of
-a proof. When we are discussing results in general modal logic, we will not
-assume any restrictions on the Kripke models.
+van Ditmarsch and French~\cite{french2010future} defined the future event logic,
+an extension of modal logic that introduces an operator for quantifying over the
+{\em refinements} of a Kripke model. The significance of refinements is that the
+finite refinements of a Kripke model are exactly the models that result from the
+execution of an action model. Here we define the notion of a bisimulation, and
+then define simulations and refinements in terms of the properties of
+bisimulations. We then remark on some properties of refinements that make them
+suitable for representing informative updates.
 
 \begin{definition}[Bisimulation]
 Let $M = (S, R, V)$ and $M' = (S', R', V')$ be Kripke models. A non-empty
@@ -317,11 +331,22 @@ We call $M_s$ and $M'_{s'}$ bisimilar, and write $M_s \bisim M'_{s'}$ to denote
 that there is a bisimulation between $M_s$ and $M'_{s'}$.
 \end{definition}
 
+In the introduction of this chapter we remarked that modal logics are used to
+reason about the {\em intrinsic} properties of Kripke models. The concept of
+bisimilar Kripke models tells us how these intrinsic properties differ from the
+extrinsic properties of Kripke models. In particular, for finite Kripke models,
+bisimilar Kripke models satisfy precisely the same set of modal formulae as one
+another. This means that bisimilar Kripke models are indistinguishable by modal
+formulae. This property is known as bisimulation invariance.
+
 \begin{lemma}
 The logics \logicK{}, \logicKD{} and \logicS{} are bisimulation invariant.
 \end{lemma}
 
 % TODO - Find citation
+
+If we relax the properties of bisimulation slightly, we get a related notion
+known as a {\em simulation}, or its reverse relation, a {\em refinement}.
 
 \begin{definition}[Simulation and refinement]
 Let $M$ and $M'$ be Kripke models. A non-empty relation $\mathcal{R}
@@ -343,9 +368,13 @@ this, or alternatively, $M_s \refinement_a M'_{s'}$.
 
 Whilst we have introduced simulations and refinements as relations between
 models, we will often also refer to Kripke models as refinements or simulations
-of other models. For example, if $M_s \refinement_a M'_{s'}$ then we call $M_s$
-an $a$-refinement of $M'_{s'}$, and we call $M'_{s'}$ an $a$-simulation of
-$M_s$.
+of other models. If $M_s \refinement_a M'_{s'}$ then we call $M_s$ an
+$a$-refinement of $M'_{s'}$, and we call $M'_{s'}$ an $a$-simulation of $M_s$.
+
+As we have mentioned before, the future event logic quantifies over informative
+updates by quantifying over the refinements of a Kripke model. We will briefly
+introduce two properties to illustrate how refinements correspond to the notion
+of an informative update.
 
 \begin{definition}[Positive formulae]
 A positive formula is defined by the following abstract syntax:
@@ -358,15 +387,38 @@ $$
 $$
 \end{definition}
 
-\begin{lemma}
+\begin{proposition}
 Let $M_s$ and $M'_{s'}$ be Kripke models such that $M'_{s'} \refinement M_s$,
 and let $\phi$ be a positive formula. If $M_s \entails \phi$ then $M'_{s'}
 \entails \phi$.
-\end{lemma}
+\end{proposition}
 
-% TODO - Citation (Simulation and refinement?) or proof
+Using an epistemic interpretation, the positive formulae can be interpreted as
+those formulae that only mention {\em positive knowledge}. This is as opposed to
+formulae which mention negative knowledge, such as $\neg \knows_a p$, or
+suspicions. Intuitively one can say that an informative update should only cause
+an agent to gain additional information, and thus anything that an agent knows
+before an informative update, the agent should continue to know after an
+informative update. This is not quite accurate, as a formula that involves may
+potentially be invalidated by an informative update. For example, suppose that
+we have a situation where $\knows_a \neg \knows_b p$, i.e. that $a$ knows that
+$b$ doesn't know that $p$. Then it is reasonable that an informative update
+could tell $b$ that $p$, and so after the informative update $\knows_b p$. This
+invalidates the statement that $\knows_a \neg \knows_b p$. Thus not all
+knowledge is retained by an informative update, only positive knowledge, as
+encoded by the notion of positive formulae, is retained.
 
-The significance of refinements is that the finite refinements of a Kripke model
-are exactly the models that result from the execution of an action
-model~\cite{french2009simulation}. We will use $a$-refinements to define the
-semantics of the future event logic.
+\begin{proposition}
+On finite epistemic models, every finite refinement is equivalent to the
+execution an action model.
+\end{proposition}
+
+This is shown by van Ditmarsch and French~\cite{french2009simulation}
+
+The property that every finite refinements is equivalent to the execution of an
+action model is the main justification for refinements as representations of
+informative updates. Although we do not explicitly define action models in this
+paper, it should be noted that action models are inherently finite structures,
+whereas the refinements of even a finite model can potentially be infinite, and
+therefore the above property does not hold for the infinite refinements of
+epistemic models.
