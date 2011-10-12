@@ -4,13 +4,13 @@
 As has been said earlier, modal logic is used to reason about the intrinsic
 properties of Kripke models. Under the {\em possible worlds} interpretation of
 modal logic, a Kripke model is said to encode information about the possible
-ways that the world could be, with respect to a specific set of facts modelled
-as propositional atoms. If we use the analogy of knowledge, then we can view the
-possible worlds as a way to represent the notion of imperfect knowledge. If an
-agent knew everything that there was to know about the world, then they would
-only consider one world possible: the actual world; whereas, if an agent was
-unsure about some fact $p$, then the agent would consider at least two worlds
-possible: the world where $p$ is true, and the world where $p$ is false.
+ways that the world could be, with respect to a specific set of facts (modelled
+as propositional atoms). If we use the analogy of knowledge, then we can view
+the possible worlds as a way to represent the notion of imperfect knowledge. If
+an agent knew everything that there was to know about the world, then they
+would only consider one world possible: the actual world; whereas, if an agent
+was unsure about some fact $p$, then the agent would consider at least two
+worlds possible: the world where $p$ is true, and the world where $p$ is false.
 
 Modal logics allow us to reason about these possible worlds by qualifying
 statements with operators known as modalities. If we are considering a
@@ -56,22 +56,22 @@ $s$.
 As we have seen, a Kripke model is essentially a set of states, a set of
 relations over those states, and a valuation over the set of states. Under the
 possible worlds interpretation, we view each of those states as a possible
-world, and the actual world is simply another possible world. Sometimes we
-designate the actual world by referring to a pointed Kripke model $M_s$, where
-the state $s$ is the actual world. The valuation at each state represents the
-propositional atoms that are true at that state, and the set of relations
-defines which worlds each agents considers to be possible at each state. For
-example, if $(s, t) \in R_a$, then we say that the agent $a$ considers the state
-$t$ to be a possible world, when in the state $s$. Thus the set $sR_a$ is the
-set of possible worlds for $a$ at the state $s$.
+world, and the actual world is simply one of these possible worlds. Sometimes
+we may designate the actual world by referring to a pointed Kripke model $M_s$,
+where the state $s$ is the actual world. The valuation at each state represents
+the propositional atoms that are true at that state, and the set of relations
+defines which worlds each agents considers to be possible at each state. If $t
+\in sR_a$, then we say that the agent $a$ considers the state $t$ to be
+possible when $s$ is the actual world. Thus the set $sR_a$ is the set of
+possible worlds for $a$ in the state $s$.
 
-Modal logics are interpreted over classes of Kripke models. The most general
+Modal logics are interpreted over classes of Kripke models. The simplest normal
 modal logic, \logicK{}, is interpreted over the class of all Kripke models,
 \classK{}. Variants of modal logic are interpreted over subclasses of \classK{},
 which impose structural constraints on the types of Kripke models that are
 allowed. Doxastic logic, \logicKD{}, and epistemic logic, \logicS{}, are two
 variants of modal logic that are interpreted over different classes of Kripke
-models, the class of doxastic models, \classKD{} and the class of epistemic
+models: the class of doxastic models, \classKD{}, and the class of epistemic
 models, \classS{}, respectively. As we will see later, the constraints that are
 placed on these classes of models gives us properties that make doxastic logic
 and epistemic logic represent simple notions that we have about belief and
@@ -154,63 +154,82 @@ that \logicKD{} is a conservative extension of \logicK{}, and \logicS{} is a
 conservative extension of \logicKD{} (and also of \logicK{}). This means that
 every valid formula in \logicK{} is also valid in \logicKD{}, and likewise for
 \logicKD{} and \logicS{}. This is because any formula that is valid with respect
-to a particular class of Kripke models is also valid for any subset of those
+to a particular class of Kripke models is also valid for any subclass of those
 Kripke models.
 
 % TODO - Properties of K, KD45, S5
 \begin{proposition}[Properties of \logicK{}, \logicKD{} and
 \logicS{}]\label{modal-properties}
-We have the following validities:
+Let $\phi, \psi \in \lang$. Then the following are valid:
 
 \begin{enumerate}
-\item $\classK \entails \knows_a (p \land q) \iff \knows_a p \land
-\knows_a q$
-\item $\classK \entails \suspects_a (p \lor q) \iff \suspects_a p \lor
-\suspects_a q$
-\item $\classK \entails \knows_a (p \implies q) \implies \knows_a p
-\implies \knows_a q$
-\item $\classKD \entails \knows_a p \implies \suspects_a p$
-\item $\classKD \entails \knows_a p \implies \knows_a \knows_a p$
-\item $\classKD \entails \neg\knows_a p \implies \knows_a \neg \knows_a p$
-\item $\classS \entails \knows_a p \implies p$
+\item\label{modal-property-k} $\classK \entails \knows_a (\phi \implies \psi) \implies \knows_a \phi
+\implies \knows_a \psi$
+\item\label{modal-property-conj} $\classK \entails \knows_a \phi \land \knows_a \psi \iff \knows_a (\phi \land \psi)$
+\item $\classK \entails \suspects_a \phi \lor \suspects_a \psi \iff \suspects_a (\phi
+\lor \psi)$
+\item\label{modal-property-d} $\classKD \entails \knows_a \phi \implies \suspects_a \phi$
+\item\label{modal-property-4} $\classKD \entails \knows_a \phi \implies \knows_a \knows_a \phi$
+\item\label{modal-property-5} $\classKD \entails \neg\knows_a \phi \implies \knows_a \neg \knows_a \phi$
+\item\label{modal-property-t} $\classS \entails \knows_a \phi \implies \phi$
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
 \begin{enumerate}
-\item Let $M_s \in \classK{}$ such that $M_s \entails \knows_a (p \land q)$.
-Then for every $t \in sR_a$, we have $M_t \entails p \land q$. Therefore for every $t
-\in sR_a$, we have $M_t \entails p$, and therefore we have that $M_s \entails
-\knows_a p$. Likewise we have $M_s \entails \knows_a q$. Therefore $M_s \entails
-\knows_a p \land \knows_a q$.
-
-Conversely, let $M_s \in \classK{}$ such that $M_s \entails \knows_a p \land
-\knows_a q$. Then for every $t \in sR_a$, we have $M_t \entails p$, and $M_t
-\entails q$, and therefore that $M_t \entails p \land q$. Therefore $M_s
-\entails \knows_a (p \land q)$.
+\item Let $M_s \in \classK{}$ such that $M_s \entails \knows_a (\phi \implies \psi)$
+and $M_s \entails \knows_a \phi$. Then for every $t \in sR_a$, we have $M_t
+\entails \phi \implies \psi$ and $M_t \entails \phi$. Therefore for every $t \in sR_a$,
+we have $M_t \entails \psi$, and therefore we have that $M_s \entails \knows_a \psi$.
 \item Omitted.
 \item Omitted.
-\item Let $M_s \in \classKD{}$ such that $M_s \entails \knows_a p$. Then for
-every $t \in sR_a$, we have $M_t \entails p$. As $M_s \in \classKD{}$, we have
+\item Let $M_s \in \classKD{}$ such that $M_s \entails \knows_a \phi$. Then for
+every $t \in sR_a$, we have $M_t \entails \phi$. As $M_s \in \classKD{}$, we have
 that $R_a$ is serial. Therefore $sR_a \neq \emptyset$, and so there exists some
-$t \in sR_a$ such that $M_t \entails p$. Therefore $\suspects_a p$.
-\item Let $M_s \in \classKD{}$ such that $M_s \entails \knows_a p$. Then
+$t \in sR_a$ such that $M_t \entails \phi$. Therefore $\suspects_a \phi$.
+\item Let $M_s \in \classKD{}$ such that $M_s \entails \knows_a \phi$. Then
 consider $t \in sR_a$ and $t' \in tR_a$. As $M_s \in \classKD{}$, we have that
-$R_a$ is transitive. Therefore $t' \in sR_a$ and so $M_{t'} \entails p$.
-Therefore $M_t \entails \knows_a p$, and so $M_s \entails \knows_a \knows_a p$. 
-\item Omitted.
-\item Let $M_s \in \classS{}$ such that $M_s \entails \knows_a p$. Then for
-every $t \in sR_a$, we have $M_t \entails p$. As $M_s \in \classS{}$, we have
-that $R_a$ is reflexive. Therefore $s \in sR_a$, and so $M_s \entails p$.
+$R_a$ is transitive. Therefore $t' \in sR_a$, and so $M_{t'} \entails \phi$.
+Therefore $M_t \entails \knows_a \phi$, and so $M_s \entails \knows_a \knows_a \phi$. 
+\item Let $M_s \in \classKD{}$ such that $M_s \entails \neg \knows_a \phi$. Then
+there exists some $t \in sR_a$ such that $M_t \entails \neg \phi$. Then consider
+$t' \in sR_a$. As $M_s \in \classKD{}$, we have that $R_a$ is Euclidean.
+Therefore $t \in t'R_a$, and so $M_t \entails \neg \knows_a \phi$. Therefore $M_s
+\entails \knows_a \neg \knows_a \phi$.
+\item Let $M_s \in \classS{}$ such that $M_s \entails \knows_a \phi$. Then for
+every $t \in sR_a$, we have $M_t \entails \phi$. As $M_s \in \classS{}$, we have
+that $R_a$ is reflexive. Therefore $s \in sR_a$, and so $M_s \entails \phi$.
 \end{enumerate}
 \end{proof}
 
-We note that the proof of $\knows_a p \implies \suspects_a p$ relies only on the
-fact that \classKD{} is serial, and similarly the proofs for $\knows_a p
-\implies \knows_a \knows_a p$ relies only on the transitive property of
-\classKD{}, and $\knows_a p \implies p$ relies only on the reflexive property of
-\classS{}. Although not shown here, the proof for $\neg \knows_a p \implies
-\knows_a \neg \knows_a p$ relies only on the Euclidean property of \classKD{}.
+We note that the properties described in Proposition~\ref{modal-properties}
+capture intuitive properties of belief and knowledge that lead to doxastic and
+epistemic logics being referred to as the logics of belief and knowledge. The
+property (\ref{modal-property-d}) is commonly known as the {\em Consistency
+Axiom}, and ensures that an agent cannot have inconsistent beliefs.  The
+related, but stronger property, (\ref{modal-property-t}) is commonly known as
+the {\em Truth Axiom}, and ensures that an agent can only know statements that
+are actually true. The properties (\ref{modal-property-4}), and
+(\ref{modal-property-5}) are commonly known as the {\em Positive Introspection
+Axiom} and the {\em Negative Introspection Axiom} respectively, and ensures that
+if an agent knows (or believes) a statement, then they know that they know it
+(or believe that they believe it), and likewise if they do not know or believe a
+statement.
+
+We note that the proofs of properties (\ref{modal-property-d}),
+(\ref{modal-property-4}) and (\ref{modal-property-5}) rely only on the serial,
+transitive and Euclidean properties of \classKD{} models, respectively. We also
+note that the proof of property (\ref{modal-property-t}) relies only on the
+reflexive property of \classS{} models. In fact, the class of Kripke models that
+satisfy each of these properties are precisely the class of Kripke models that
+satisfy the corresponding relational properties we have described; for example,
+the class of Kripke models that satisfy property (\ref{modal-property-d}) is
+precisely the class of models that have the serial property, and the class of
+Kripke models that satisfy property (\ref{modal-property-4}) is precisely the
+class of models that have the transitive property. This demonstrates a
+connection between the structural constraints imposed upon doxastic and
+epistemic models, and the properties we have described above, and we will refer
+back to this connection shortly.
 
 We will now provide a Hilbert-style axiomatisation for \logicK{}, \logicKD{} and
 \logicS{}. A Hilbert-style axiomatisation gives a method for deriving valid
@@ -270,16 +289,10 @@ $$
 $$
 \end{definition}
 
-The additional axioms for \axiomKD{} correspond to the properties of \classKD{}
-models. {\bf D} corresponds to the serial property, {\bf 4} corresponds to the
-transitive property, and {\bf 5} corresponds to the Euclidean property. The
-class of serial Kripke models is precisely the class of Kripke models that
-satisfy {\bf D}, and similarly the class of transitive models and the class of
-Euclidean models are those Kripke models that satisfy {\bf 4} and {\bf 5}
-respectively. The proofs of soundness of these axioms follows the same reasoning
-as used to prove the similar validities in Proposition~\ref{modal-properties}.
-We note again that the proof for each of these axioms relies only on its
-corresponding property of \classKD{} models.
+We note that the additional axioms for \axiomKD{} correspond to the properties
+of \classKD{} models described in Proposition~\ref{modal-properties}. The axioms
+{\bf D}, {\bf 4} and {\bf 5} serve to restrict the logic to considering only the
+Kripke models that are serial, transitive and Euclidean.
 
 % TODO - Find citation
 
@@ -294,19 +307,27 @@ $$
 $$
 \end{definition}
 
-Once again, the additional axioms for \axiomS{} correspond to the properties of
-\classS{} models. {\bf T} corresponds to the reflexive property, and {\bf 5}
-corresponds to the Euclidean property. We note that reflexivity and Euclideaness
-together imply transitivity and symmetry.
+Once again, we note that the additional axioms for \axiomS{} correspond to the
+properties of \classS{} models described in Proposition~\ref{modal-properties}.
+The axioms {\bf T} and {\bf 5} serve to restrict the logic to considering only
+the Kripke models that are reflexive and Euclidean.  We note that the reflexive
+and Euclidean properties together imply transitivity and symmetry.
+
+Having covered modal, epistemic and doxastic logics, we will now move on to the
+focus of this paper, the future event logic. We will describe the variants of
+the future event logic in detail in Chapters~\ref{chapter-modal},
+\ref{chapter-doxastic} and \ref{chapter-epistemic}, however we will define some
+of the basic concepts here, so that we can discuss the background of the logic
+in more detail. 
 
 van Ditmarsch and French~\cite{french2010future} defined the future event logic,
 an extension of modal logic that introduces an operator for quantifying over the
 {\em refinements} of a Kripke model. The significance of refinements is that the
 finite refinements of a Kripke model are exactly the models that result from the
 execution of an action model. Here we define the notion of a bisimulation, and
-then define simulations and refinements in terms of the properties of
-bisimulations. We then remark on some properties of refinements that make them
-suitable for representing informative updates.
+define simulations and refinements in terms of the properties of bisimulations.
+We then remark on some properties of refinements that make them suitable for
+representing informative updates.
 
 \begin{definition}[Bisimulation]
 Let $M = (S, R, V)$ and $M' = (S', R', V')$ be Kripke models. A non-empty
@@ -397,16 +418,17 @@ Using an epistemic interpretation, the positive formulae can be interpreted as
 those formulae that only mention {\em positive knowledge}. This is as opposed to
 formulae which mention negative knowledge, such as $\neg \knows_a p$, or
 suspicions. Intuitively one can say that an informative update should only cause
-an agent to gain additional information, and thus anything that an agent knows
-before an informative update, the agent should continue to know after an
-informative update. This is not quite accurate, as a formula that involves may
-potentially be invalidated by an informative update. For example, suppose that
-we have a situation where $\knows_a \neg \knows_b p$, i.e. that $a$ knows that
-$b$ doesn't know that $p$. Then it is reasonable that an informative update
-could tell $b$ that $p$, and so after the informative update $\knows_b p$. This
-invalidates the statement that $\knows_a \neg \knows_b p$. Thus not all
-knowledge is retained by an informative update, only positive knowledge, as
-encoded by the notion of positive formulae, is retained.
+an agent to gain additional information, and cannot cause an agent to {\em
+forget} any any information. Thus anything that an agent knows before an
+informative update, the agent should continue to know after an informative
+update.  This is not quite accurate, as a formula that involves negative
+knowledge may potentially be invalidated by an informative update. For example,
+suppose that we have a situation where $\knows_a \neg \knows_b p$, i.e. that $a$
+knows that $b$ doesn't know that $p$. Then it is reasonable that an informative
+update could tell $b$ that $p$, and so after the informative update $\knows_b
+p$. This invalidates the statement that $\knows_a \neg \knows_b p$. Thus not all
+knowledge is retained by an informative update, only positive knowledge should
+be retained.
 
 \begin{proposition}
 On finite epistemic models, every finite refinement is equivalent to the
