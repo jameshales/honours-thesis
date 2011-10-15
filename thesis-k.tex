@@ -1,13 +1,17 @@
-\chapter{Modal logic}\label{chapter-modal}
+In this chapter we will introduce the semantics of the refinement quantified
+modal logics, as introduced by van Ditmarsch and
+French~\cite{french2009simulation}. van Ditmarsch, French and
+Pinchinat~\cite{french2010future} later provided an axiomatisation for the
+single-agent refinement quantified modal logic, in the class of \classK{}. We
+extend these results with an axiomatisation for the multi-agent case.
 
 \section{Syntax and semantics}
 
-Here we reintroduce the syntax and semantics of the logic \logicKF{}, as
-introduced by van Ditmarsch and French~\cite{french2009simulation}.
+We begin with a definition of the language, \langF{}, of the refinement
+quantified modal logic, along with a definition of its semantics over a general
+class of frames.
 
-% TODO - more motiviation
-
-\begin{definition}[Language of \langF{}] % TODO - move to the K section
+\begin{definition}[Language of \langF{}]
 Given a finite set of agents $A$ and a set of propositional atoms $P$, the
 language of \langF{} is defined by the following abstract syntax:
 $$
@@ -20,14 +24,9 @@ $$
 where $a \in A$ and $p \in P$.
 \end{definition}
 
-Standard abbreviations include:
-$\top ::= \phi \lor \neg \phi$;
-$\bot ::= \neg \top$;
-$\phi \lor \psi ::= \neg (\neg \phi \land \neg \psi)$;
-$\phi \implies \psi ::= \neg \phi \lor \psi$;
-and $\suspects_a \phi ::= \neg \knows_a \neg \phi$.
-We use an abbreviation for the dual of the $\allrefs_a$ operator,
-$\somerefs_a \phi ::= \neg \allrefs_a \neg \phi$.
+We use the standard abbreviations from basic modal logic, along with an
+abbreviation for the dual of the $\allrefs_a$ operator, $\somerefs_a \phi ::=
+\neg \allrefs_a \neg \phi$.
 
 We also use the cover operator $\covers_a \Gamma$, where $\Gamma$ is a finite
 set of formulae, which is an abbreviation for 
@@ -37,9 +36,10 @@ on for our axiomatisation, in much the same way it is relied on for the
 axiomatisation of \logicKiF{} presented by van Ditmarsch, French and
 Pinchinat~\cite{french2010future}. % TODO - include citation for cover operator
 
-\begin{definition}[Semantics of \logicKF{}]
-Let $M = (S, R, V)$ be a Kripke model. The interpretation of $\phi \in
-\logicKF$ is defined inductively.
+\begin{definition}[Semantics of \logicCF{}]
+Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
+be a Kripke model taken from \classC{}. The interpretation of $\phi$ is defined
+inductively.
 \begin{eqnarray*}
 M_s &\entails& p \text{ iff } s \in V_p\\
 M_s &\entails& \neg \phi \text{ iff } M_s \nentails \phi\\
@@ -47,12 +47,39 @@ M_s &\entails& \phi \land \psi \text{ iff } M_s \entails \phi \text{ and } M_s
 \entails \psi\\
 M_s &\entails& \knows_a \phi \text{ if for all } t \in S : (s, t) \in R_a \text{
 implies } M_t \entails \phi\\
-M_s &\entails& \allrefs_a \phi \text{ iff for all } M'_{s'} \in \classK : M_s
+M_s &\entails& \allrefs_a \phi \text{ iff for all } M'_{s'} \in \classC : M_s
 \simulation_a M'_{s'} \text{ implies } M'_{s'} \entails \phi\\
 \end{eqnarray*}
 \end{definition}
 
-% TODO - remark about logic
+We use the same terminology and notation for satisfiability and validity as is
+used for basic modal logics. As we sometimes discuss basic modal logics and
+refinement quantified modal logics at the same time, we may add a subscript to
+the turnstile operator, e.g. $\classK \entails_\somerefs \phi$, to make it
+explicit that we are working in the refinement quantified version of the logic.
+
+The logics \logicKF{}, \logicKDF{} and \logicSF{} are instances of \logicCF{},
+with classes \classK{}, \classKD{} and \classS{} respectively. 
+
+It should be emphasised that the interpretation of the refinement quantifier,
+$\allrefs_a$, varies for each logic, as the refinements considered in the
+interpretation of each logic must be taken from the appropriate class of Kripke
+models. It is for this reason that \logicSF{} and \logicKDF{} are not
+conservative extensions of \logicKF{}. For example, $\somerefs_a \knows_a \bot$
+is valid in \logicKF{}, but not in \logicSF{} or \logicKDF{}. This is because
+given any pointed model in \classK{}, one can construct an $a$-refinement from
+that model by deleting the $a$-edges starting at the designated state; in this
+resulting $a$-refinement, $\knows_a \bot$ is satisfied, and hence $\somerefs_a
+\knows_a \bot$ is satisfied in the original model. However because of the serial
+property of \classS{} and \classKD{} models, $\knows_a \bot$ is not even
+satisfiable in \logicSF{} or \logicKDF{}, and hence $\somerefs_a \knows_a \bot$
+is not satisfiable as well.
+
+We also note that for a class of frames \classC{}, the refinement quantified
+modal logic \logicCF{} is a conservative extension of the basic modal logic
+\logicC{}. This is because the interpretation of any formula that does not
+contain a $\allrefs_a$ operator is defined to be the same as the interpretation
+of that formula in basic modal logic.
 
 \begin{lemma}
 The logic \logicKF{} is bisimulation invariant.
@@ -60,16 +87,27 @@ The logic \logicKF{} is bisimulation invariant.
 
 This is proven by van Ditmarsch, French and Pinchinat~\cite{french2010future}.
 
+\begin{lemma}
+The logics \logicKDF{} and \logicSF{} are bisimulation invariant.
+\end{lemma}
+
+The proof for bisimulation invariance in \logicKF{}, given by van Ditmarsch,
+French and Pinchinat~\cite{french2010future} applies to \logicSF{} and
+\logicKDF{}.
+
 % TODO - examples
 
-In previous work, van Ditmarsch, French and Pinchinat gave an axiomatisation of
-the single-agent variant of \logicKF{}, called \logicKiF{}. The axiomatisation
-was formulated in terms of the cover operator, $\covers$, an abbreviation
-introduced previously. The completeness proof consisted of a translation of
-\logicKiF{} formulae into \logicKi{} formulae, a translation which relied on the
-formulae being in a disjunctive normal form, using the cover operator. Our
-axiomatisation for the multi-agent logic \logicKF{} relies on the same
-disjunctive normal form, which we will define now.
+\section{Technical preliminaries}
+
+In previous work, van Ditmarsch, French and Pinchinat~\cite{french2010future}
+gave an axiomatisation of the single-agent variant of the refinement quantified
+modal logic \logicKF{}.  The axiomatisation was formulated in terms of the cover
+operator, $\covers$, an abbreviation which we defined previously. The
+completeness proof consisted of a provably correct translation of formulae from
+refinement quantified modal logic to basic modal logic, a translation which
+relied on a disjunctive normal form, using the cover operator. Our
+axiomatisation for the multi-agent refinement quantified modal logic relies on
+the same disjunctive normal form, which we will define now.
 
 \begin{definition}[Disjunctive normal form]
 A formula in disjunctive normal form is defined by the following abstract syntax:
@@ -97,66 +135,77 @@ $$
 where $p \in P$ and $a \in A$.
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{k-nnf}
 Every formula of \lang{} is equivalent to a formula in negation normal form,
 under the semantics of \logicK{}.
 \end{lemma}
 
 \begin{proof}
-We use an inductive argument over the structure of our formula, using the
-following equivalences to push the negations into the propositions.
-
+Similar to negation normal forms in propositional logic, we can recursively push
+the negations inwards using the following equivalences:
 \begin{eqnarray*}
-\neg \neg \alpha &\iff& \alpha\\
-\neg (\alpha \land \beta) &\iff& \neg \alpha \lor \neg \beta\\
-\neg \knows_a \alpha &\iff& \suspects_a \neg \alpha
+\neg \neg \phi &\iff& \phi\\
+\neg (\phi \land \psi) &\iff& \neg \phi \lor \neg \psi\\
+\neg \knows_a \phi &\iff& \suspects_a \neg \phi
 \end{eqnarray*}
 \end{proof}
 
 \begin{lemma}\label{k-dnf}
-Every well-formed formula of \logicK{} is equivalent to a formula in disjunctive
-normal form.
+Every formula of \lang{} is equivalent to a formula in disjunctive normal form,
+under the semantics of \logicK{}.
 \end{lemma}
 
 \begin{proof}
-Let $\phi$ be a \logicK{} formula. Without loss of generality, we assume that
-$\phi$ is in negation normal form. We use an inductive argument over the
-structure of $\phi$ to show that it can be converted into cover disjunctive
-normal form.
+Let $\alpha \in \lang$. Without loss of generality, by Lemma~\ref{k-nnf}, we may
+assume that $\alpha$ is in negation normal form. We prove by induction over the
+structure of $\alpha$ that $\alpha$ is equivalent to a formula in disjunctive
+normal form. The induction hypothesis is that all subformulae of $\alpha$ have
+equivalents in disjunctive normal form.
 
-The base case is where $\phi$ is an atom or a negation of an atom, in which case
-we are done.
+The base case is when $\alpha = p$ or $\alpha = \neg p$ for some $p \in P$, in
+which case we are done.
 
-Suppose that $\phi = \alpha \lor \beta$. By the induction hypothesis we
-may assume without loss of generality that $\alpha$ and $\beta$ are in
-disjunctive normal form. Then $\alpha \lor \beta$ is a disjunctive normal
-formula.
+Suppose that $\alpha = \phi \lor \psi$. By the induction hypothesis, there are
+formulae $\phi'$ and $\psi'$ in disjunctive normal form that are equivalent to
+$\phi$ and $\psi$ respectively. Then $\phi \lor \psi \iff \phi' \lor \psi'$,
+which is in disjunctive normal form.
 
-Suppose that $\phi = \knows_a \alpha$. By the induction hypothesis we may
-assume without loss of generality that $\alpha$ is in disjunctive normal form.
-Then $\knows_a \equiv \covers_a \{\alpha\} \lor \covers_a \emptyset$, which is
-a disjunctive normal formula.
+Suppose that $\alpha = \knows_a \phi$. By the induction hypothesis, there is a
+formula $\phi'$ in disjunctive normal form that is equivalent to $\phi$. Then
+$\knows_a \phi \iff \covers_a \{\phi\} \lor \covers_a \emptyset$, which is in
+disjunctive normal form.
 
-Suppose that $\phi = \suspects_a \alpha$. By the induction hypothesis we may
-assume without loss of generality that $\alpha$ is in disjunctive normal form.
-Then $\suspects_a \equiv \covers_a \{\alpha, \top\}$, which is a disjunctive
-normal formula.
+Suppose that $\alpha = \suspects_a \phi$. By the induction hypothesis, there is
+a formula $\phi'$ in disjunctive normal form that is equivalent to $\phi$. Then
+$\suspects_a \phi \iff \covers_a \{\phi, \top\}$, which is in disjunctive normal
+form.
 
-Suppose that $\phi = \alpha \land \beta$. By the induction hypothesis we may
-assume without loss of generality that $\alpha$ and $\beta$ are in disjunctive
-normal form. Then $\alpha = \delta_1 \lor \cdots \lor \delta_m$ and $\beta =
-\gamma_1 \lor \cdots \lor \gamma_n$ for some $m, n \in \mathbb{N}$.  Then $\phi
-\equiv \bigvee_{i \leq m, j \leq n} \delta_i \land \gamma_j$. As $\alpha$ and
-$\beta$ were in disjunctive normal form, for each $i \leq m$ and $j
-\leq n$, we have that $\delta_i = \pi \land \bigwedge_{a \in B \subseteq A}
-\covers_a \Gamma_a$ and $\gamma_j = \rho \land \bigwedge_{a \in C \subseteq A}
-\covers_a \Gamma'_a$. Then we can write $\delta_i \land \gamma_j \equiv (\pi
-\land \rho) \land \bigwedge_{a \in B \subseteq A} \covers_a \Gamma_a \land
-\bigwedge_{a \in C \subseteq A} \covers_a \Gamma'_a$. We note that the same
-agent $a$ may appear twice across the two sets of agents $B$ and $C$, with
-potentially different sets of formulae $\Gamma_a$ and $\Gamma'_a$, so we must
-somehow combine the two sets so that each agent appears only once. To achieve
-this we use the following equivalence:
+Suppose that $\alpha = \phi \land \psi$. By the induction hypothesis, there are
+formulae $\phi'$ and $\psi'$ in disjunctive normal form that are equivalent to
+$\phi$ and $\psi$ respectively. Then $\phi \land \psi \iff \phi' \land \psi'$.
+As $\phi'$ and $\psi'$ are in disjunctive normal form, then $\phi' = \delta_1
+\lor \cdots \lor \delta_m$ and $\psi' = \gamma_1 \lor \cdots \lor \gamma_m$ for
+some $m, n \geq 0$, where each of the $\delta_i$ and $\gamma_i$ are terms of the
+form $\pi \land \bigwedge_{a \in B \subseteq A} \covers_a \Gamma_a$.  Then we
+can rewrite $\alpha$ as a disjunction of conjunctions, by the following
+equivalence:
+$$
+\phi' \land \psi' \iff \bigvee_{i \leq m, j \leq n} \delta_i \land \gamma_j
+$$
+
+For each $i \leq m$ and $j \leq n$, we have that $\delta_i = \pi \land
+\bigwedge_{a \in B \subseteq A} \covers_a \Gamma_a$, and $\gamma_j = \rho \land
+\bigwedge_{a \in C \subseteq A} \covers_a \Gamma'_a$, where $\pi$ and $\rho$ are
+propositional formulae, and each $\Gamma_a$ and $\Gamma'_a$ is a set of
+disjunctive normal formulae. Then we can write each conjunction as: 
+$$\delta_i \land \gamma_i \iff (\pi \land \rho) \land \bigwedge_{a \in B
+\subseteq A} \covers_a \Gamma_a \land \bigwedge_{a \in C \subseteq A} \covers_a
+\Gamma'_a$$
+
+We note that the sets of agents $B$ and $C$ may intersect, and hence the same
+agent may appear in each of those sets, possibly with different sets of formulae
+$\Gamma_a$ and $\Gamma'_a$. We can combine the two sets of formulae into one, so
+that each agent appears only once, using the following equivalence:
 $$
 \covers_a \Gamma \land \covers_a \Gamma' \equiv 
 \covers_a \big( 
@@ -168,15 +217,23 @@ $$
 We note that as each $\gamma \in \Gamma$ and $\gamma' \in \Gamma'$ are assumed
 to be disjunctive normal formulae, that applying a disjunction over each of
 these sets yields a disjunctive normal formula. Conjoining two disjunctive
-normal formulae does not yield a disjunctive normal formula, however we can
-recursively apply the same translation described here to the conjunction in
-order to yield a disjunctive normal formula.
+normal formulae does not yield a disjunctive normal formula, however an
+inductive argument can be used to show that recursively applying the same
+translation described here, to each of these conjunctions, yields a disjunctive
+normal formula.
 
 Repeating this for each disjunct in our original formula leaves us with a
 formula in cover logic disjunctive normal form.
 \end{proof}
 
+We note that, similar to disjunctive normal forms in propositional logic, the
+translation into disjunctive normal form in modal logic results in a formula
+that is exponentially larger than the original formula in the worst case.
+
 \section{Axiomatisation}
+
+We provide an axiomatisation of the multi-agent refinement quantified modal
+logic, \logicKF{}, and prove its soundness and completeness.
 
 \begin{definition}[Axiomatisation \axiomKF]
 The axiomatisation \axiomKF{} is a substitution schema consisting of the
@@ -209,6 +266,21 @@ $\proves \psi$}\\
 $$
 \end{definition}
 
+% TODO - compare to single-agent axiomatisation
+The axiomatisation \axiomKF{} shares many of the axioms and rules of the
+axiomatisation from the single-agent case. The axioms {\bf P}, {\bf K}, {\bf R},
+{\bf RP} and {\bf RK}, and the rules {\bf MP}, {\bf NecK} and {\bf NecR} are
+essentially the same as the axioms that van Ditmarsch, French and
+Pinchinat~\cite{french2010future} used in the single-agent case. The differences
+are that \axiomKF{} contains axioms for handling the interaction between
+multiple agents. The axioms {\bf RComm} and {\bf RDist} are novel axioms used to
+handle the situation where a refinement quantifier is applied to a cover
+operator of a different agent, and where a refinement quantifier is applied to a
+conjunction of cover operators belonging to different agents.
+
+We will now show that the axiomatisation is sound with respect to \classK{}
+models.
+
 \begin{lemma}\label{k-sound}
 The axiomatisation \axiomKF{} is sound in \logicKF{}.
 \end{lemma}
@@ -216,29 +288,32 @@ The axiomatisation \axiomKF{} is sound in \logicKF{}.
 \begin{proof}
 The soundness of the axioms {\bf P}, and {\bf K}, and the rules {\bf MP} and
 {\bf NecK} can be shown by the same reasoning used to show that they are sound
-in \logicK{}. The soundness of the axioms {\bf RP} and {\bf R}, and the rule
-{\bf NecR} can be shown by the same reasoning used to how that they are sound in
-the logic \logicKiF{}~\cite{french2010future}.
+in \logicK{}. As the axioms {\bf RP} and {\bf R}, and the rule {\bf NecR}
+involve only a single agent, their soundness can be shown by the same reasoning
+used to how that they are sound in the single-agent refinement quantified modal
+logic~\cite{french2010future}.
 
 All that remains to be shown is the soundness of {\bf RK}, {\bf RComm}, and {\bf
 RDist}.
 
 \paragraph{RK}
-Suppose that $M_s$ is a Kripke model such that $M_s \entails \bigwedge_{\gamma
-\in \Gamma} \suspects_a \somerefs_a \gamma$, where $\Gamma$ is a non-empty set
-of formulae.
+Suppose that $M_s \in \classK$ is a Kripke model such that $M_s \entails
+\bigwedge_{\gamma \in \Gamma} \suspects_a \somerefs_a \gamma$.
 
-Then consider $\gamma \in \Gamma$. From $M_s \entails \suspects_a \somerefs_a
-\gamma$, there exists a state $s^\gamma \in sR^M$ such that $M_{s^\gamma}
-\entails \somerefs_a \gamma$. Therefore there exists a Kripke model
-$N^\gamma_{t^\gamma} \refinement_a M_{s^\gamma}$, via some $a$-simulation
-$\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails \gamma$.
+We need to show that $M_s \entails \somerefs_a \covers_a \Gamma$. To do this we
+will construct a model, $N_t$, from parts of $M_s$, construct an $a$-simulation
+from $N_t$ to $M_s$ to show that $N_t \refinement_a M_s$, and finally show that
+$N_t \entails \covers_a \Gamma$.
 
-Without loss of generality we assume that each $N^\gamma$ is disjoint.
+We begin by constructing the model $N_t$. Consider $\gamma \in \Gamma$. From
+$M_s \entails \suspects_a \somerefs_a \gamma$, there exists a state $s^\gamma
+\in sR^M$ such that $M_{s^\gamma} \entails \somerefs_a \gamma$. Therefore there
+exists a Kripke model $N^\gamma_{t^\gamma} \refinement_a M_{s^\gamma}$, via some
+$a$-simulation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails
+\gamma$. Without loss of generality we assume that each $N^\gamma$ is disjoint.
 
-Let $t \notin S^M$ and $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we construct a Kripke model $N = (S^N, R^N, V^N)$ where:
-
+Let $t$ be a state not in $S^M$ or any of the $N^\gamma$. Then we construct a
+Kripke model $N = (S^N, R^N, V^N)$ where:
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M \cup \bigcup_{\gamma \in \Gamma} S^{N^\gamma}\\
 R^N_a &=& \{(t, t^\gamma) \mid \gamma \in \Gamma\}
@@ -249,9 +324,9 @@ R^N_b &=& \{(t, t') \mid t' \in sR^M_b\}
 \cup \bigcup_{\gamma \in \Gamma} R^{N^\gamma}_b \text{ for $b \in A - \{a\}$}\\
 V^N(p) &=& 
 \begin{cases}
-\{t\} \cup V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{if $s
+\displaystyle \{t\} \cup V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{if $s
 \in V^M(p)$}\\
-V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
+\displaystyle V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
 \end{cases}
 \text{ for $p \in P$}
 \end{eqnarray*}
@@ -270,55 +345,55 @@ also connected via a $b$-edge to each $b$-successor of $s$ in $M$.
 \end{center}
 \end{figure}
 
-We must show that $N_t$ is an $a$-refinement of $M_s$, and that for every
-$t^\gamma \in tR^N_a$ we have that $N_{t^\gamma} \entails \gamma$. The latter
-will be shown by proving that for every $\gamma \in \Gamma$, the state
-$N_{t^\gamma}$ is bisimilar to $N^\gamma_{t^\gamma}$.
-
-First we must show that $N_t$ is an $a$-refinement of $M_s$. We construct an
-$a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
-
+We construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
 $$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M \} 
 \cup \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
 
 We must show that $\mathcal{R}$ satisfies {\bf atoms}, {\bf forth-$b$} for every
 $b \in A$, and {\bf back-$b$} for every $b \in A - \{a\}$.
 
-We note that, by construction, the valuation of $N$ matches the valuation of its
-corresponding states in $M$ and each $N^\gamma$, and the valuation of $N_t$
-matches that of $M_s$. Therefore $\mathcal{R}$ satisfies {\bf atoms}.
+\paragraph{atoms} We note that, by construction, the valuation of $N$ matches
+the valuation of its corresponding states in $M$ and each $N^\gamma$, and the
+valuation of $N_t$ matches that of $M_s$. Therefore $\mathcal{R}$ satisfies {\bf
+atoms}.
 
-We next show that $\mathcal{R}$ satisfies {\bf forth-$b$} for every $b \in A$.
-Let $b \in A$, $u \in S^N$ and $v \in S^M$ such that $(u, v) \in \mathcal{R}$.
-Suppose that $(u, v) \in \mathcal{R}^\gamma$ for some $\gamma \in \Gamma$.
-Then as $\mathcal{R}^\gamma$ is an $a$-simulation, it satisfies {\bf forth-$b$}
-for every $b \in A$. Hence for every $u' \in uR^{N^\gamma}_b$, there exists some
-$v' \in vR^M_b$ such that $(u', v') \in \mathcal{R}^\gamma \subseteq
-\mathcal{R}$. Suppose that $b = a$ and $u = t^\gamma$ for some $\gamma \in
-\Gamma$.  Suppose instead that $(u, v) = (s', s')$ for some $s' \in S^M$.  Then
-we note that $s'R^N_b = s'R^M_b$, and hence for every $s'' \in s'R^N_b$ we have
-that $s'' \in s'R^M_b$, and that $(s'', s'') \in \mathcal{R}$. Finally suppose
-that $(u, u') = (t, s)$. Then suppose that $b = a$. By construction, $tR^N_a =
+\paragraph{forth} We next show that $\mathcal{R}$ satisfies {\bf forth-$b$}
+for every $b \in A$.  Let $b \in A$ and let $(u, v) \in \mathcal{R}$.
+
+Suppose that $(u, v) \in \mathcal{R}^\gamma$ for some $\gamma \in \Gamma$.  Then
+as $\mathcal{R}^\gamma$ is an $a$-simulation, it satisfies {\bf forth-$b$} for
+every $b \in A$. Hence for every $u' \in uR^{N^\gamma}_b = uR^N_b$, there exists
+some $v' \in vR^M_b$ such that $(u', v') \in \mathcal{R}^\gamma \subseteq
+\mathcal{R}$. 
+
+Suppose instead that $(u, v) = (s', s')$ for some $s' \in S^M$.  Then we note
+that $s'R^N_b = s'R^M_b$, and hence for every $s'' \in s'R^N_b$ we have that
+$s'' \in s'R^M_b$, and that $(s'', s'') \in \mathcal{R}$. 
+
+Finally suppose that $(u, u') = (t, s)$. We must consider the cases where $b =
+a$ and where $b \neq a$. So suppose that $b = a$. By construction, $tR^N_a =
 \{t^\gamma \mid \gamma \in \Gamma\}$, and hence $v = t^\gamma$ for some $\gamma
 \in \Gamma$. Hence we can take $s^\gamma \in sR^M_a$, and note that as
 $\mathcal{R}^\gamma$ is an $a$-simulation from $M_{s^\gamma}$ to
 $N^\gamma_{t^\gamma}$, we know that $(t^\gamma, s^\gamma) \in \mathcal{R}^\gamma
 \subseteq \mathcal{R}$. Suppose that $b \neq a$. Then by construction, $tR^M_b =
 sR^M_b$, hence for every $t' \in tR^M_b$, we have that $t' \in sR^M_b$, and
-hence we know that $(t', t') \in \mathcal{R}$. Hence $\mathcal{R}$ satisfies
-{\bf back-$b$} for every $b \in A$.
+hence we know that $(t', t') \in \mathcal{R}$. 
 
-A similar argument to above shows that $\mathcal{R}$ satisfies {\bf forth-$b$}
-for every $b \in A - \{a\}$.
+Therefore $\mathcal{R}$ satisfies {\bf forth-$b$} for every $b \in A$.
 
-We next show that for every $\gamma \in \Gamma$, we have that $N_{t^\gamma}
-\entails \gamma$. We show this by showing that $N_{t^\gamma}$ is bisimilar to
-$N^\gamma_{t^\gamma}$. This is clear as $N$ contains a duplicate of the states
-and edges of each $N^\gamma$, and the only additional edges in $N$ that are not in
-$N^\gamma$ are from $t$ to $t^\gamma$. Therefore, as for every $\gamma \in
-\Gamma$, we have that $N^\gamma_{t^\gamma} \entails \gamma$, by bisimulation
-invariance we also have that $N_{t^\gamma} \entails \gamma$. Hence $N_t \entails
-\covers_a \Gamma$.
+\paragraph{back} A similar argument to above shows that $\mathcal{R}$
+satisfies {\bf back-$a$} for every $b \in A - \{a\}$.
+
+Therefore $\mathcal{R}$ is an $a$-simulation, and $N_t \refinement_a M_s$.
+
+Finally we show that $N_t \entails \covers_a \Gamma$. We must show that for each
+$\gamma \in \Gamma$ that $N_{t^\gamma} \entails \gamma$. This follows from the
+fact that $N_{t^\gamma}$ is bisimilar to $N^\gamma_{t^\gamma}$. This is obvious,
+as $N$ contains a duplicate of $N^\gamma$, and $N$ does not add any additional
+edges originating from states in $S^{N^\gamma}$. Hence from bisimulation
+invariance, $N_{t^\gamma} \entails \gamma$ for every $\gamma \in \Gamma$, and
+hence $N_t \entails \covers_a \Gamma$.
 
 As $N_t \refinement_a M_s$, and $N_t \entails \covers_a \Gamma$ we therefore
 have that $M_s \entails \somerefs_a \covers_a \Gamma$.
@@ -342,21 +417,23 @@ finally have that $M_s \entails \bigwedge_{\gamma \in \Gamma} \suspects_a
 Therefore {\bf RK} is sound.
 
 \paragraph{RComm}
-Suppose that $M_s$ is a Kripke model such that $M_s \entails \covers_b \{
-\somerefs_a \gamma \mid \gamma \in \Gamma\}$, where $a \ne b$, and $\Gamma$ is a
-finite set of formulae. From the definition of the cover operator, this implies
-that $M_s \entails \knows_b \bigvee_{\gamma \in \Gamma} \somerefs_a \gamma \land
-\bigwedge_{\gamma \in \Gamma} \suspects_b \somerefs_a \gamma$. In particular, we
-note that for every $\gamma \in \Gamma$, there exists some $s^\gamma \in sR^M_b$
-such that $M_{s^\gamma} \entails \somerefs_a \gamma$.  Then there exists a
-Kripke model $N^\gamma_{t^\gamma} \refinement_a M_{s^\gamma}$, via some
-$a$-simulation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails
-\gamma$. Without loss of generality we may assume that the $N^\gamma$ are
-disjoint.
+Suppose that $M_s \in \classK$ is a Kripke model such that $M_s \entails
+\covers_b \{ \somerefs_a \gamma \mid \gamma \in \Gamma\}$, where $a \neq b$.
 
-Let $t$ be a state such that $t \notin S^{N^\gamma}$ for every $\gamma \in
-\Gamma$. Then we construct a Kripke model $N = (S^N, R^N, V^N)$, where:
+We need to show that $M_s \entails \somerefs_a \covers_b \Gamma$. To do this we
+follow the same strategy as for proving {\bf RK}: we construct an $a$-refinement
+$N_t$, and show that $N_t \entails \covers_b \Gamma$.
 
+We begin by constructing the model $N_t$. Consider $\gamma \in \Gamma$. From
+$M_s \entails \covers_b \{ \somerefs_a \gamma \mid \gamma \in \Gamma \}$, there
+exists a state $s^\gamma \in sR^M_b$ such that $M_{s^\gamma} \entails
+\somerefs_a \gamma$. Therefore there exists a Kripke model $N^\gamma_{t^\gamma}
+\refinement_a M_{s^\gamma}$, via some $a$-simulation $\mathcal{R}^\gamma$, such
+that $N^\gamma_{t^\gamma} \entails \gamma$. Without loss of generality we assume
+that each $N^\gamma$ is disjoint.
+
+Let $t$ be a state not in $S^M$ or any of the $N^\gamma$. Then we construct a
+Kripke model $N = (S^N, R^N, V^N)$ where:
 \begin{eqnarray*}
 S^N &=& \{t\} \cup S^M \bigcup_{\gamma \in \Gamma} S^{N^\gamma}\\
 R^N_b &=& \{(t, t^\gamma) \mid \gamma \in \Gamma\} 
@@ -366,15 +443,15 @@ R^N_c &=& \{(t, t') \mid t' \in sR^M_c\}
 \cup R^M_c \cup \bigcup_{\gamma \in \Gamma} R^{N^\gamma}_c \text{ for $c \in A - \{b\}$}\\
 V^N(p) &=& 
 \begin{cases}
-\{t\} \cup V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{if $s
-\in V^M(p)$}\\
-V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) & \text{otherwise}
+\displaystyle \{t\} \cup V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p)
+& \text{if $s \in V^M(p)$}\\
+\displaystyle V^M(p) \cup \bigcup_{\gamma \in \Gamma} V^{N^\gamma}(p) &
+\text{otherwise}
 \end{cases}
 \text{ for $p \in P$}
 \end{eqnarray*}
 
 We construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
-
 $$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M\} \cup
 \bigcup_{\gamma \in \Gamma} \mathcal{R}^\gamma$$
 
@@ -396,27 +473,32 @@ the proof for {\bf RK}.
 Therefore {\bf RComm} is sound.
 
 \paragraph{RDist}
-Suppose that $M_s$ is a Kripke model such that $M_s \entails \bigwedge_{b \in A}
-\somerefs_a \covers_b \Gamma_b$, where $\Gamma_b$ is a finite set of formulae
-for each $b \in A$.
+Suppose that $M_s \in \classK$ is a Kripke model such that $M_s \entails
+\bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b$.
 
-Then as $a \in A$, we have that $M_s \entails \somerefs_a \covers_a \Gamma_a$,
-and by {\bf RK} this implies that $M_s \entails \bigwedge_{\gamma \in
-\Gamma_a} \suspects_a \somerefs_a \gamma$. We also have for every $b \in A -
-\{a\}$ that $M_s \entails \somerefs_a \covers_b \Gamma_b$, and by {\bf RComm}
-this implies that $M_s \entails \covers_b \{\somerefs_a \gamma \mid \gamma \in
-\Gamma_b\}$, and by the definition of the cover operator implies that $M_s
-\entails \bigwedge_{\gamma \in \Gamma_b} \suspects_b \somerefs_a \gamma$.  Hence
-for every $b \in A$ and $\gamma \in \Gamma_b$, we have that $\suspects_b
-\somerefs_a \gamma$. This implies that for each $b \in A$ and each $\gamma \in
-\Gamma_b$ that there exists some $t^{\gamma} \in sR^M_b$ such that $M_{t^\gamma}
-\entails \somerefs_a \gamma$. Therefore there exists a Kripke model
-$N^\gamma_{t^\gamma} \refinement_a M_{t^\gamma}$, via some $a$-simulation
-relation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails \gamma$.
-Without loss of generality we may assume that the $N^\gamma$ are disjoint.
+We need to show that $M_s \entails \somerefs_a \bigwedge_{b \in A} \covers_b
+\Gamma_b$. To do this we follow the same strategy as for proving {\bf RK}: we
+construct an $a$-refinement $N_t$, and show that $N_t \entails \somerefs_a
+\bigwedge_{b \in A} \covers_b \Gamma_b$.
 
-Let $t \notin S^{N^\gamma}$ for every $\gamma \in \Gamma$.
-Then we construct a Kripke model $N = (S, R^N, V^N)$ where:
+We begin by constructing the model $N_t$. As $a \in A$, we have that $M_s
+\entails \somerefs_a \covers_a \Gamma_a$, and by {\bf RK} this implies that $M_s
+\entails \bigwedge_{\gamma \in \Gamma_a} \suspects_a \somerefs_a \gamma$. We
+also have for every $b \in A - \{a\}$ that $M_s \entails \somerefs_a \covers_b
+\Gamma_b$, and by {\bf RComm} this implies that $M_s \entails \covers_b
+\{\somerefs_a \gamma \mid \gamma \in \Gamma_b\}$, and by the definition of the
+cover operator implies that $M_s \entails \bigwedge_{\gamma \in \Gamma_b}
+\suspects_b \somerefs_a \gamma$.  Hence for every $b \in A$ and $\gamma \in
+\Gamma_b$, we have that $\suspects_b \somerefs_a \gamma$. This implies that for
+each $b \in A$ and each $\gamma_b \in \Gamma_b$ that there exists some $t^{\gamma}
+\in sR^M_b$ such that $M_{t^\gamma} \entails \somerefs_a \gamma$. Therefore
+there exists a Kripke model $N^\gamma_{t^\gamma} \refinement_a M_{t^\gamma}$,
+via some $a$-simulation relation $\mathcal{R}^\gamma$, such that
+$N^\gamma_{t^\gamma} \entails \gamma$.  Without loss of generality we may assume
+that the $N^\gamma$ are disjoint.
+
+Let $t$ be a state not in $S^M$ or any of the $N^\gamma$. Then we construct a
+Kripke model $N = (S^N, R^N, V^N)$ where:
 
 \begin{eqnarray*}
 S^N &=& \{t\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b} S^{N^\gamma}\\
@@ -431,7 +513,6 @@ V^N(p) &=&
 \end{eqnarray*}
 
 We construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
-
 $$\mathcal{R} = \{(t, s)\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b}
 \mathcal{R}^\gamma$$
 
@@ -452,9 +533,11 @@ Therefore $M_s \entails \somerefs_a \bigwedge_{b \in A} \covers_b \Gamma_b$ and
 Therefore the axiomatisation \axiomKF{} is sound.
 \end{proof}
 
+We note that the implication in {\bf RDist} can actually be strengthened to an
+equality, but that this is derivable from the other axioms in \axiomKF{}.
+
 \begin{lemma}
 The following is derivable in \axiomKF{}.
-
 $$
 \proves \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b \iff
 \somerefs_a \bigwedge_{b \in A} \covers_b \Gamma_b \\
@@ -473,15 +556,20 @@ similar to the derivation for $\knows_a (\phi \land \psi) \implies \knows_a \phi
 place of {\bf K}.
 \end{proof}
 
+We show the completeness of the axiomatisation \axiomKF{} by a provably correct
+translation from \langF{} to \lang{}. Completeness then follows from the
+completeness of \logicK{}.
+
 \begin{lemma}\label{k-translation}
-Every formula of \logicKF{} is provably equivalent to a formula of \logicK{}.
+Every formula of \langF{} is provably equivalent to a formula of \lang{} with
+the axiomatisation \axiomKF{}.
 \end{lemma}
 
 \begin{proof}
 Given a formula $\psi$ we prove by induction on the number of occurrences of
 \somerefs{} that $\psi$ is equivalent to a \somerefs-free formula, and
-therefore to a formula in \logicK{}. The base case with no \somerefs operators
-is trivial, as a \somerefs-free formula is a formula in \logicK{}. Now assume
+therefore to a formula in \lang{}. The base case with no \somerefs operators
+is trivial, as a \somerefs-free formula is a formula in \lang{}. Now assume
 that $\psi$ contains $n + 1$ \somerefs-operators. Choose a subformula of type
 $\somerefs_a \phi$ of our given formula, where $\phi$ is \somerefs-free. Without
 loss of generality, by Lemma~\ref{k-dnf} we may assume that $\phi$ is in
@@ -500,23 +588,24 @@ RK} and {\bf RComm})
 \end{itemize}
 
 Replacing $\somerefs_a \phi$ with $\chi$ in $\psi$ gives an equivalent formula
-with one less \somerefs-operator. Thus by induction, all formulae in \logicKF{}
-can be translated into an equivalent formula in \logicK{}.
+with one less \somerefs-operator. Thus by induction, all formulae in \langF{}
+can be translated into an equivalent formula in \lang{} using the axiomatisation
+\axiomKF{}.
 \end{proof}
 
 The rest of the completeness proof is merely a formality to show that, given the
-above translation into \logicK{}, we can show completeness by using these
+above translation into \lang{}, we can show completeness by using these
 translations along with the completeness of \logicK{}.
 
 \begin{corollary}\label{k-derivable}
-Let $\phi \in \logicKF$ be given and $\psi \in \logicK$ be semantically
+Let $\phi \in \langF$ be given and $\psi \in \lang$ be semantically
 equivalent to $\phi$.  If $\psi$ is a theorem in \logicK{}, then $\phi$ is a
 theorem in \axiomKF{}.
 \end{corollary}
 
 \begin{proof}
-Let $\phi \in \logicKF$ and let $\psi \in \logicK$ be semantically equivalent to
-$\phi$. By Lemma~\ref{k-translation}, we can obtain some $\phi' \in \logicK$
+Let $\phi \in \langF$ and let $\psi \in \lang$ be semantically equivalent to
+$\phi$. By Lemma~\ref{k-translation}, we can obtain some $\phi' \in \lang$
 that is semantically equivalent to $\phi$ (and thus also to $\psi$) by following
 the given translation steps. We can extend a derivation of $\psi$ to a
 derivation of $\phi'$ as the two are semantically equivalent in \logicK{}, and by
@@ -531,18 +620,14 @@ in \axiomKF{}. Therefore $\phi$ is a theorem in \axiomKF{}.
 The axiom schema \axiomKF{} is complete for the logic \logicKF{}.
 \end{lemma}
 
-Note that as we are discussing derivability in two different logics in the
-following proof, we use a subscript on the turnstile symbol to denote the logic
-we are working in (e.g. $\proves_{\logicKF}$)
-
 \begin{proof}
-Let $\phi \in \logicKF$ such that $\entails_{\logicKF} \phi$. Then by
+Let $\phi \in \langF$ such that $\classK \entails_\somerefs \phi$. Then by
 Lemma~\ref{k-translation}, there exists a semantically equivalent formula
-$\psi \in \logicK$ which is \somerefs-free. As $\entails_{\logicKF} \phi$ and
-$\phi \iff \psi$, then $\entails_{\logicKF} \psi$. As $\psi$ is
-\somerefs-free, then it follows that $\entails_{\logicK} \psi$, and by the
-completeness of \axiomKF{} it follows that $\proves_{\logicK} \psi$.
-Therefore by Corollary~\ref{k-derivable} we have that $\proves_{\logicKF}
+$\psi \in \lang$ which is \somerefs-free. As $\classK \entails_\somerefs \phi$ and
+$\phi \iff \psi$, then $\classK \entails_\somerefs \psi$. As $\psi$ is
+\somerefs-free, then it follows that $\classK \entails \psi$, and by the
+completeness of \axiomKF{} it follows that $\proves_{\axiomK} \psi$.
+Therefore by Corollary~\ref{k-derivable} we have that $\proves_{\axiomKF}
 \phi$.
 \end{proof}
 
