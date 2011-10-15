@@ -1,5 +1,13 @@
 \chapter{Technical preliminaries}
 
+In this chapter we will provide some of the technical preliminaries that are
+required throughout this paper. We give a short introduction to modal, doxastic,
+and epistemic logics, and give the definition of a refinement that is used by
+the refinement quantified modal logic. We also give some useful results that we
+refer to later in the paper.
+
+\section{Modal, doxastic and epistemic logics}
+
 % Introduction to modal logic
 As has been said earlier, modal logic is used to reason about the intrinsic
 properties of Kripke models. Under the {\em possible worlds} interpretation of
@@ -24,14 +32,8 @@ represent necessity; $\knows_a \phi$ means that $a$ considers $\phi$ to be
 necessarily true. In doxastic and epistemic logic on the other hand, $\knows_a$
 is said to represent belief and knowledge respectively.
 
-In this chapter we will provide some of the technical preliminaries that are
-required throughout this paper. We give a short introduction to modal, doxastic,
-and epistemic logics, and give the definition of a refinement that is used by
-the future event logic. We also give some useful results that we refer to later
-in the paper.
-
-We begin with the definition of a Kripke model, the definition of the modal
-language \lang{}, and the semantics of modal logic.
+To introduce modal logic, we will begin with the definition of a Kripke model,
+the definition of the modal language \lang{}, and the semantics of modal logic.
 
 % Definition of Kripke models
 Let $A$ be a non-empty, finite set of agents, and let $P$ be a non-empty,
@@ -99,8 +101,8 @@ implicitly epistemic models, unless this has to be explicitly proven as part of
 a proof. When we are discussing results in general modal logic, we will not
 assume any restrictions on the Kripke models.
 
-We will now give a precise definition of the language of basic modal logic, and
-its semantics.
+We will now give a precise definition of the language, \lang{}, of basic modal
+logic, and its semantics over a general class of Kripke models.
 
 \begin{definition}[Language of \lang{}]
 Given a finite set of agents $A$ and a set of propositional atoms $P$, the
@@ -123,8 +125,8 @@ and $\suspects_a \phi ::= \neg \knows_a \neg \phi$.
 
 \begin{definition}[Semantics of \logicC{}]
 Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
-be a Kripke model taken from \classC{}. The interpretation of $\phi \in \logicK$
-is defined inductively.
+be a Kripke model taken from \classC{}. The interpretation of $\phi$ is defined
+inductively:
 \begin{eqnarray*}
 M_s &\entails& p \text{ iff } s \in V_p\\
 M_s &\entails& \neg \phi \text{ iff } M_s \nentails \phi\\
@@ -137,16 +139,13 @@ implies } M_t \entails \phi
 
 We say that a formula $\phi$ is {\em satisfied} by a pointed Kripke model $M_s
 \in \classC$ if and only if $M_s \entails \phi$. We say that $\phi$ is satisfied
-by a Kripke model $M$ if and only if $\phi$ is satisfied by $M_s$ for some $s
-\in S^M$.  We say that $\phi$ is {\em satisfiable} in \classC{} if and only if
-$\phi$ is satisfied by some $M \in \classC{}$. We say that $\phi$ is {\em valid}
-in a Kripke model $M$ if and only if $M_s \entails \phi$ for every $s \in S^M$,
-and we write $M \entails \phi$. We say that $\phi$ is valid in \classC{} if and
-only if $\phi$ is valid in every $M \in \classC{}$, and we write $\classC{}
-\entails \phi$, or if the class of models is clear by context, we may simply
-write $\entails \phi$. When we are discussing multiple logics at once, we may
-add a subscript to the turnstile symbol, e.g. $\entails_\logicC \phi$, to make
-it more explicit which logic we are referring to.
+by a Kripke model $M \in \classC$ if and only if $M_s \entails \phi$ for some $s
+\in S^M$. We say that $\phi$ is {\em satisfied} by a class of Kripke models
+$\classC$ if and only if it is satisfied by every Kripke model $M \in \classC$.
+We say that $\phi$ is {\em valid} in a Kripke model $M \in \classC$ if and only
+if $M_s \entails \phi$ for every $s \in S^M$. We write $M \entails \phi$. We say
+that $\phi$ is {\em valid} in a class of Kripke models $\classC$ if and only if
+$M \entails \phi$ for every $M \in \classC$. We write $\classC \entails \phi$.
 
 The logics \logicK{}, \logicKD{} and \logicS{} are instances of \logicC{} with
 classes \classK{}, \classKD{} and \classS{} respectively. It should be noted
@@ -157,21 +156,20 @@ every valid formula in \logicK{} is also valid in \logicKD{}, and likewise for
 to a particular class of Kripke models is also valid for any subclass of those
 Kripke models.
 
-% TODO - Properties of K, KD45, S5
 \begin{proposition}[Properties of \logicK{}, \logicKD{} and
-\logicS{}]\label{modal-properties}
+\logicS{}]\label{pre-properties}
 Let $\phi, \psi \in \lang$. Then the following are valid:
 
 \begin{enumerate}
-\item\label{modal-property-k} $\classK \entails \knows_a (\phi \implies \psi) \implies \knows_a \phi
+\item\label{pre-property-k} $\classK \entails \knows_a (\phi \implies \psi) \implies \knows_a \phi
 \implies \knows_a \psi$
-\item\label{modal-property-conj} $\classK \entails \knows_a \phi \land \knows_a \psi \iff \knows_a (\phi \land \psi)$
+\item\label{pre-property-conj} $\classK \entails \knows_a \phi \land \knows_a \psi \iff \knows_a (\phi \land \psi)$
 \item $\classK \entails \suspects_a \phi \lor \suspects_a \psi \iff \suspects_a (\phi
 \lor \psi)$
-\item\label{modal-property-d} $\classKD \entails \knows_a \phi \implies \suspects_a \phi$
-\item\label{modal-property-4} $\classKD \entails \knows_a \phi \implies \knows_a \knows_a \phi$
-\item\label{modal-property-5} $\classKD \entails \neg\knows_a \phi \implies \knows_a \neg \knows_a \phi$
-\item\label{modal-property-t} $\classS \entails \knows_a \phi \implies \phi$
+\item\label{pre-property-d} $\classKD \entails \knows_a \phi \implies \suspects_a \phi$
+\item\label{pre-property-4} $\classKD \entails \knows_a \phi \implies \knows_a \knows_a \phi$
+\item\label{pre-property-5} $\classKD \entails \neg\knows_a \phi \implies \knows_a \neg \knows_a \phi$
+\item\label{pre-property-t} $\classS \entails \knows_a \phi \implies \phi$
 \end{enumerate}
 \end{proposition}
 
@@ -202,30 +200,30 @@ that $R_a$ is reflexive. Therefore $s \in sR_a$, and so $M_s \entails \phi$.
 \end{enumerate}
 \end{proof}
 
-We note that the properties described in Proposition~\ref{modal-properties}
+We note that the properties described in Proposition~\ref{pre-properties}
 capture intuitive properties of belief and knowledge that lead to doxastic and
 epistemic logics being referred to as the logics of belief and knowledge. The
-property (\ref{modal-property-d}) is commonly known as the {\em Consistency
+property (\ref{pre-property-d}) is commonly known as the {\em Consistency
 Axiom}, and ensures that an agent cannot have inconsistent beliefs.  The
-related, but stronger property, (\ref{modal-property-t}) is commonly known as
+related, but stronger property, (\ref{pre-property-t}) is commonly known as
 the {\em Truth Axiom}, and ensures that an agent can only know statements that
-are actually true. The properties (\ref{modal-property-4}), and
-(\ref{modal-property-5}) are commonly known as the {\em Positive Introspection
+are actually true. The properties (\ref{pre-property-4}), and
+(\ref{pre-property-5}) are commonly known as the {\em Positive Introspection
 Axiom} and the {\em Negative Introspection Axiom} respectively, and ensures that
 if an agent knows (or believes) a statement, then they know that they know it
 (or believe that they believe it), and likewise if they do not know or believe a
 statement.
 
-We note that the proofs of properties (\ref{modal-property-d}),
-(\ref{modal-property-4}) and (\ref{modal-property-5}) rely only on the serial,
+We note that the proofs of properties (\ref{pre-property-d}),
+(\ref{pre-property-4}) and (\ref{pre-property-5}) rely only on the serial,
 transitive and Euclidean properties of \classKD{} models, respectively. We also
-note that the proof of property (\ref{modal-property-t}) relies only on the
+note that the proof of property (\ref{pre-property-t}) relies only on the
 reflexive property of \classS{} models. In fact, the class of Kripke models that
 satisfy each of these properties are precisely the class of Kripke models that
 satisfy the corresponding relational properties we have described; for example,
-the class of Kripke models that satisfy property (\ref{modal-property-d}) is
+the class of Kripke models that satisfy property (\ref{pre-property-d}) is
 precisely the class of models that have the serial property, and the class of
-Kripke models that satisfy property (\ref{modal-property-4}) is precisely the
+Kripke models that satisfy property (\ref{pre-property-4}) is precisely the
 class of models that have the transitive property. This demonstrates a
 connection between the structural constraints imposed upon doxastic and
 epistemic models, and the properties we have described above, and we will refer
@@ -238,9 +236,9 @@ substitution schema, which comprises of a set of axioms and a set of rules. The
 axioms are statements that contain variables, and substituting the variables for
 well-formed formulae gives a valid statement in the logic. The rules provide a
 method for deriving a validity from some other validities. The main results of
-this paper are axiomatisations of this style for the variants of future event
-logic.
-
+this paper are axiomatisations of this style for the variants of refinement
+quantified modal logics.
+ 
 \begin{definition}[Axiomatisation \axiomK{}]
 The axiomatisation \axiomK{} is a substitution schema consisting of the
 following axioms:
@@ -264,9 +262,9 @@ $$
 We say that a formula $\phi$ is {\em provable} or {\em derivable} under an
 axiomatisation if and only if it can be derived using some finite sequence of
 axioms and rules from that axiomatisation, and we write $\proves \phi$. When we
-are discussing multiple logics at once, we may add a subscript to the turnstile
-symbol, e.g. $\proves_\logicC \phi$, to make it more explicit which logic we are
-referring to.
+are discussing multiple axiomatisations at once, we may add a subscript to the
+turnstile symbol, e.g. $\proves_\axiomK \phi$, to make it more explicit which
+logic we are referring to.
 
 An axiomatisation of a logic must have two important properties: {\em soundness}
 and {\em completeness}. An axiomatisation is sound with respect to a logic if
@@ -290,7 +288,7 @@ $$
 \end{definition}
 
 We note that the additional axioms for \axiomKD{} correspond to the properties
-of \classKD{} models described in Proposition~\ref{modal-properties}. The axioms
+of \classKD{} models described in Proposition~\ref{pre-properties}. The axioms
 {\bf D}, {\bf 4} and {\bf 5} serve to restrict the logic to considering only the
 Kripke models that are serial, transitive and Euclidean.
 
@@ -307,27 +305,26 @@ $$
 $$
 \end{definition}
 
+% TODO - Find citation
+
 Once again, we note that the additional axioms for \axiomS{} correspond to the
-properties of \classS{} models described in Proposition~\ref{modal-properties}.
+properties of \classS{} models described in Proposition~\ref{pre-properties}.
 The axioms {\bf T} and {\bf 5} serve to restrict the logic to considering only
 the Kripke models that are reflexive and Euclidean.  We note that the reflexive
 and Euclidean properties together imply transitivity and symmetry.
 
-Having covered modal, epistemic and doxastic logics, we will now move on to the
-focus of this paper, the future event logic. We will describe the variants of
-the future event logic in detail in Chapters~\ref{chapter-modal},
-\ref{chapter-doxastic} and \ref{chapter-epistemic}, however we will define some
-of the basic concepts here, so that we can discuss the background of the logic
-in more detail. 
+\section{Bisimulation and refinements}
 
-van Ditmarsch and French~\cite{french2010future} defined the future event logic,
-an extension of modal logic that introduces an operator for quantifying over the
-{\em refinements} of a Kripke model. The significance of refinements is that the
-finite refinements of a Kripke model are exactly the models that result from the
-execution of an action model. Here we define the notion of a bisimulation, and
-define simulations and refinements in terms of the properties of bisimulations.
-We then remark on some properties of refinements that make them suitable for
-representing informative updates.
+Having covered modal, epistemic and doxastic logics, we will now move on to
+topics more specific to the focus of this paper, the refinement quantified modal
+logics.  van Ditmarsch and French~\cite{french2010future} defined the future
+event logic, an extension of modal logic that introduces an operator for
+quantifying over the {\em refinements} of a Kripke model. The significance of
+refinements is that the finite refinements of a Kripke model are exactly the
+models that result from the execution of an action model. Here we define the
+notion of a bisimulation, and define simulations and refinements in terms of the
+properties of bisimulations.  We then remark on some properties of refinements
+that make them suitable for representing informative updates.
 
 \begin{definition}[Bisimulation]
 Let $M = (S, R, V)$ and $M' = (S', R', V')$ be Kripke models. A non-empty
@@ -392,10 +389,10 @@ models, we will often also refer to Kripke models as refinements or simulations
 of other models. If $M_s \refinement_a M'_{s'}$ then we call $M_s$ an
 $a$-refinement of $M'_{s'}$, and we call $M'_{s'}$ an $a$-simulation of $M_s$.
 
-As we have mentioned before, the future event logic quantifies over informative
-updates by quantifying over the refinements of a Kripke model. We will briefly
-introduce two properties to illustrate how refinements correspond to the notion
-of an informative update.
+As we have mentioned before, refinement quantified modal logics quantify over
+informative updates, by quantifying over the refinements of a Kripke model. We
+will briefly introduce two properties to illustrate how refinements correspond
+to the notion of an informative update.
 
 \begin{definition}[Positive formulae]
 A positive formula is defined by the following abstract syntax:
