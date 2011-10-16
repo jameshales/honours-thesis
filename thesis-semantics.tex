@@ -1,0 +1,97 @@
+\chapter{Syntax and semantics}\label{semantics}
+
+In this chapter we will introduce the syntax and semantics of the refinement
+quantified modal logics, as introduced by van Ditmarsch and
+French~\cite{french2009simulation}. The definitions that we give are general, in
+the sense that the refinement quantified modal, doxastic and epistemic logics
+are instances of these definitions.
+
+We begin with a definition of the language, \langF{}, of the refinement
+quantified modal logics, along with a definition of its semantics over a general
+class of frames.
+
+\begin{definition}[Language of \langF{}]
+Given a finite set of agents $A$ and a set of propositional atoms $P$, the
+language of \langF{} is defined by the following abstract syntax:
+$$
+\phi ::=    p \bnfalt
+            \neg \phi \bnfalt
+            \phi \land \phi \bnfalt
+            \knows_a \phi \bnfalt
+            \allrefs_a \phi
+$$
+where $a \in A$ and $p \in P$.
+\end{definition}
+
+We use the standard abbreviations from basic modal logic, along with an
+abbreviation for the dual of the $\allrefs_a$ operator, $\somerefs_a \phi ::=
+\neg \allrefs_a \neg \phi$.
+
+We also use the cover operator $\covers_a \Gamma$, where $\Gamma$ is a finite
+set of formulae, which is an abbreviation for 
+$\covers_a \Gamma ::= \knows_a \bigvee_{\gamma \in \Gamma} \gamma \land
+\bigwedge_{\gamma \in \Gamma} \suspects_a \gamma$. The cover operator is relied
+on for our axiomatisation, in much the same way it is relied on for the
+axiomatisation of \logicKiF{} presented by van Ditmarsch, French and
+Pinchinat~\cite{french2010future}. % TODO - include citation for cover operator
+
+\begin{definition}[Semantics of \logicCF{}]
+Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
+be a Kripke model taken from \classC{}. The interpretation of $\phi$ is defined
+inductively.
+\begin{eqnarray*}
+M_s &\entails& p \text{ iff } s \in V_p\\
+M_s &\entails& \neg \phi \text{ iff } M_s \nentails \phi\\
+M_s &\entails& \phi \land \psi \text{ iff } M_s \entails \phi \text{ and } M_s
+\entails \psi\\
+M_s &\entails& \knows_a \phi \text{ if for all } t \in S : (s, t) \in R_a \text{
+implies } M_t \entails \phi\\
+M_s &\entails& \allrefs_a \phi \text{ iff for all } M'_{s'} \in \classC : M_s
+\simulation_a M'_{s'} \text{ implies } M'_{s'} \entails \phi\\
+\end{eqnarray*}
+\end{definition}
+
+We use the same terminology and notation for satisfiability and validity as is
+used for basic modal logics. As we sometimes discuss basic modal logics and
+refinement quantified modal logics at the same time, we may add a subscript to
+the turnstile operator, e.g. $\classK \entails_\somerefs \phi$, to make it
+explicit that we are working in the refinement quantified version of the logic.
+
+The logics \logicKF{}, \logicKDF{} and \logicSF{} are instances of \logicCF{},
+with classes \classK{}, \classKD{} and \classS{} respectively. 
+
+It should be emphasised that the interpretation of the refinement quantifier,
+$\allrefs_a$, varies for each logic, as the refinements considered in the
+interpretation of each logic must be taken from the appropriate class of Kripke
+models. It is for this reason that \logicSF{} and \logicKDF{} are not
+conservative extensions of \logicKF{}. For example, $\somerefs_a \knows_a \bot$
+is valid in \logicKF{}, but not in \logicSF{} or \logicKDF{}. This is because
+given any pointed model in \classK{}, one can construct an $a$-refinement from
+that model by deleting the $a$-edges starting at the designated state; in this
+resulting $a$-refinement, $\knows_a \bot$ is satisfied, and hence $\somerefs_a
+\knows_a \bot$ is satisfied in the original model. However because of the serial
+property of \classS{} and \classKD{} models, $\knows_a \bot$ is not even
+satisfiable in \logicSF{} or \logicKDF{}, and hence $\somerefs_a \knows_a \bot$
+is not satisfiable as well.
+
+We also note that for a class of frames \classC{}, the refinement quantified
+modal logic \logicCF{} is a conservative extension of the basic modal logic
+\logicC{}. This is because the interpretation of any formula that does not
+contain a $\allrefs_a$ operator is defined to be the same as the interpretation
+of that formula in basic modal logic.
+
+\begin{lemma}
+The logic \logicKF{} is bisimulation invariant.
+\end{lemma}
+
+This is proven by van Ditmarsch, French and Pinchinat~\cite{french2010future}.
+
+\begin{lemma}
+The logics \logicKDF{} and \logicSF{} are bisimulation invariant.
+\end{lemma}
+
+The proof for bisimulation invariance in \logicKF{}, given by van Ditmarsch,
+French and Pinchinat~\cite{french2010future} applies to \logicSF{} and
+\logicKDF{}.
+
+% TODO - examples
