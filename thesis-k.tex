@@ -159,8 +159,8 @@ under the semantics of \logicK{}.
 Let $\alpha \in \lang$. Without loss of generality, by Lemma~\ref{k-nnf}, we may
 assume that $\alpha$ is in negation normal form. We prove by induction over the
 structure of $\alpha$ that $\alpha$ is equivalent to a formula in disjunctive
-normal form. The induction hypothesis is that all subformulae of $\alpha$ have
-equivalents in disjunctive normal form.
+normal form. The induction hypothesis is that every strict subformula of
+$\alpha$ has an equivalent in disjunctive normal form.
 
 The base case is when $\alpha = p$ or $\alpha = \neg p$ for some $p \in P$, in
 which case we are done.
@@ -224,6 +224,9 @@ normal formula.
 
 Repeating this for each disjunct in our original formula leaves us with a
 formula in cover logic disjunctive normal form.
+
+Therefore every formula of \lang{} is equivalent to a formula in disjunctive
+normal form.
 \end{proof}
 
 We note that, similar to disjunctive normal forms in propositional logic, the
@@ -249,8 +252,8 @@ $$
 propositional formula}\\
 {\bf RComm} & \somerefs_a \covers_b \Gamma \iff \covers_b \{\somerefs_a \gamma
 \mid \gamma \in \Gamma\} \text{ where $a \neq b$}\\
-{\bf RDist} & \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b \implies
-\somerefs_a \bigwedge_{b \in A} \covers_b \Gamma_b\\
+{\bf RDist} & \bigwedge_{b \in B} \somerefs_a \covers_b \Gamma_b \implies
+\somerefs_a \bigwedge_{b \in B} \covers_b \Gamma_b \text{ where $B \subseteq A$}\\
 {\bf RK} & \somerefs_a \covers_a \Gamma \iff \bigwedge_{\gamma \in \Gamma}
 \suspects_a \somerefs_a \gamma\\
 \end{array}
@@ -310,7 +313,7 @@ $M_s \entails \suspects_a \somerefs_a \gamma$, there exists a state $s^\gamma
 \in sR^M$ such that $M_{s^\gamma} \entails \somerefs_a \gamma$. Therefore there
 exists a Kripke model $N^\gamma_{t^\gamma} \refinement_a M_{s^\gamma}$, via some
 $a$-simulation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails
-\gamma$. Without loss of generality we assume that each $N^\gamma$ is disjoint.
+\gamma$. Without loss of generality we assume that the $N^\gamma$ are disjoint.
 
 Let $t$ be a state not in $S^M$ or any of the $N^\gamma$. Then we construct a
 Kripke model $N = (S^N, R^N, V^N)$ where:
@@ -430,7 +433,7 @@ exists a state $s^\gamma \in sR^M_b$ such that $M_{s^\gamma} \entails
 \somerefs_a \gamma$. Therefore there exists a Kripke model $N^\gamma_{t^\gamma}
 \refinement_a M_{s^\gamma}$, via some $a$-simulation $\mathcal{R}^\gamma$, such
 that $N^\gamma_{t^\gamma} \entails \gamma$. Without loss of generality we assume
-that each $N^\gamma$ is disjoint.
+that the $N^\gamma$ are disjoint.
 
 Let $t$ be a state not in $S^M$ or any of the $N^\gamma$. Then we construct a
 Kripke model $N = (S^N, R^N, V^N)$ where:
@@ -474,47 +477,51 @@ Therefore {\bf RComm} is sound.
 
 \paragraph{RDist}
 Suppose that $M_s \in \classK$ is a Kripke model such that $M_s \entails
-\bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b$.
+\bigwedge_{b \in B} \somerefs_a \covers_b \Gamma_b$, where $B \subseteq A$.
 
-We need to show that $M_s \entails \somerefs_a \bigwedge_{b \in A} \covers_b
-\Gamma_b$. To do this we follow the same strategy as for proving {\bf RK}: we
-construct an $a$-refinement $N_t$, and show that $N_t \entails \somerefs_a
-\bigwedge_{b \in A} \covers_b \Gamma_b$.
+We need to show that $M_s \entails \somerefs_a \bigwedge_{b \in B}
+\covers_b \Gamma_b$. To do this we follow the same strategy as for proving {\bf
+RK}: we construct an $a$-refinement $N_t$, and show that $N_t \entails
+\somerefs_a \bigwedge_{b \in B} \covers_b \Gamma_b$.
 
-We begin by constructing the model $N_t$. As $a \in A$, we have that $M_s
-\entails \somerefs_a \covers_a \Gamma_a$, and by {\bf RK} this implies that $M_s
-\entails \bigwedge_{\gamma \in \Gamma_a} \suspects_a \somerefs_a \gamma$. We
-also have for every $b \in A - \{a\}$ that $M_s \entails \somerefs_a \covers_b
-\Gamma_b$, and by {\bf RComm} this implies that $M_s \entails \covers_b
-\{\somerefs_a \gamma \mid \gamma \in \Gamma_b\}$, and by the definition of the
-cover operator implies that $M_s \entails \bigwedge_{\gamma \in \Gamma_b}
-\suspects_b \somerefs_a \gamma$.  Hence for every $b \in A$ and $\gamma \in
-\Gamma_b$, we have that $\suspects_b \somerefs_a \gamma$. This implies that for
-each $b \in A$ and each $\gamma_b \in \Gamma_b$ that there exists some $t^{\gamma}
-\in sR^M_b$ such that $M_{t^\gamma} \entails \somerefs_a \gamma$. Therefore
-there exists a Kripke model $N^\gamma_{t^\gamma} \refinement_a M_{t^\gamma}$,
-via some $a$-simulation relation $\mathcal{R}^\gamma$, such that
-$N^\gamma_{t^\gamma} \entails \gamma$.  Without loss of generality we may assume
-that the $N^\gamma$ are disjoint.
+We begin by constructing the model $N_t$. Suppose that $a \in B$. Then we have
+$M_s \entails \somerefs_a \covers_a \Gamma_a$, and by {\bf RK} this implies that
+$M_s \entails \bigwedge_{\gamma \in \Gamma_a} \gamma$. We also have that for
+every $b \in B - \{a\}$ that $M_s \entails \somerefs_a \covers_a \Gamma_b$, and
+by {\bf RComm} this implies that $M_s \entails \covers_b \{\somerefs_a \gamma
+\mid \gamma \in \Gamma_b\}$, and by the definition of the cover operator, this
+implies that $M_s \entails \bigwedge_{\gamma \in \Gamma_b} \suspects_b
+\somerefs_a \gamma$. Hence for every $b \in B$ and $\gamma \in \Gamma_b$, we
+have that $\suspects_b \somerefs_a \gamma$. This implies that for each $b \in B$
+and each $\gamma \in \Gamma_b$ that there exists some $s^{b,\gamma} \in sR^M_b$ such
+that $M_{s^{a,\gamma}} \entails \somerefs_a \gamma$. Therefore there exists a Kripke
+model $N^{b,\gamma}_{t^{b,\gamma}} \refinement_a M_{s^{a,\gamma}}$ such that
+$N^{b,\gamma}_{t^{b,\gamma}} \entails \gamma$. Without loss of generality we
+may assume that the $N^{b,\gamma}$ are disjoint.
 
-Let $t$ be a state not in $S^M$ or any of the $N^\gamma$. Then we construct a
+Let $t$ be a state not in $S^M$ or any of the $N^{b,\gamma}$. Then we construct a
 Kripke model $N = (S^N, R^N, V^N)$ where:
 
 \begin{eqnarray*}
-S^N &=& \{t\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b} S^{N^\gamma}\\
-R^N_b &=& \{(t, t^{\gamma}) \mid b \in A, \gamma \in \Gamma_b\} 
-\cup \bigcup_{b \in A, \gamma \in \Gamma_b} R^{N^\gamma}_b \text{ for $b \in A$}\\
+S^N &=& \{t\} \cup S^M \cup \bigcup_{b \in A, \gamma \in \Gamma_b} S^{N^{b,\gamma}}\\
+R^N_b &=& \{(t, t^{b,\gamma}) \mid \gamma \in \Gamma_b\} \cup R^M_b \cup
+\bigcup_{c \in B, \gamma \in \Gamma_c} R^{N^{c,\gamma}}_b \text{ for $b \in
+B$}\\
+R^N_b &=& \{(t, t') \mid t' \in sR^M_b\} \cup R^M_b \cup
+\bigcup_{c \in B, \gamma \in \Gamma_c} R^{N^{c,\gamma}}_b \text{ for $b \in A
+\setminus B$}\\
 V^N(p) &=& 
 \begin{cases}
-\{t\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b} V^{N^\gamma}(p) & \text{if $s
-\in V^M(p)$}\\
-\bigcup_{b \in A, \gamma \in \Gamma_b} V^{N^\gamma}(p) & \text{otherwise}
+\displaystyle \{t\} \cup V^M(p) \cup \bigcup_{b \in B, \gamma \in \Gamma_b}
+V^{N^{b,\gamma}}(p) & \text{if $s \in V^M(p)$}\\
+\displaystyle V^M(p) \cup \bigcup_{b \in B, \gamma \in \Gamma_b}
+V^{N^{b,\gamma}}(p) & \text{otherwise}
 \end{cases}
 \end{eqnarray*}
 
 We construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
-$$\mathcal{R} = \{(t, s)\} \cup \bigcup_{b \in A, \gamma \in \Gamma_b}
-\mathcal{R}^\gamma$$
+$$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M\} \bigcup_{b \in A,
+\gamma \in \Gamma_b} \mathcal{R}^\gamma$$
 
 We note that this is an $a$-simulation, by similar arguments as used in the
 proof for {\bf RK}. In particular, this means that $N_t \refinement_a M_s$.
@@ -533,10 +540,11 @@ Therefore $M_s \entails \somerefs_a \bigwedge_{b \in A} \covers_b \Gamma_b$ and
 Therefore the axiomatisation \axiomKF{} is sound.
 \end{proof}
 
-We note that the implication in {\bf RDist} can actually be strengthened to an
-equality, but that this is derivable from the other axioms in \axiomKF{}.
+We note that if the implication in {\bf RDist} is strengthened to an equality,
+that the resulting axiom is also sound. However this is easily derivable from
+the other axioms in \axiomKF{}.
 
-\begin{lemma}
+\begin{lemma}\label{k-rdist-converse}
 The following is derivable in \axiomKF{}.
 $$
 \proves \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b \iff
@@ -560,37 +568,81 @@ We show the completeness of the axiomatisation \axiomKF{} by a provably correct
 translation from \langF{} to \lang{}. Completeness then follows from the
 completeness of \logicK{}.
 
+\begin{lemma}\label{k-equivs}
+The following are provable equivalences using \axiomKF{}:
+
+\begin{enumerate}
+\item $\displaystyle \somerefs_a (\phi \lor \psi) \iff
+\somerefs_a \phi \lor \somerefs_a \psi$
+\item $\displaystyle \somerefs_a (\pi \land \bigwedge_{b
+\in B} \covers_b \Gamma_b) \iff \pi \land \bigwedge_{\gamma \in \Gamma_a}
+\suspects_a \somerefs_a \gamma \land \bigwedge_{b \in B} \covers_b \{\somerefs_a
+\gamma \mid \gamma \in \Gamma_b\}$ where $\pi$ is propositional, $B \subseteq
+A$, and $a \in B$
+\item $\displaystyle \somerefs_a (\pi \land \bigwedge_{b
+\in B} \covers_b \Gamma_b) \iff \pi \land \bigwedge_{b \in B} \covers_b
+\{\somerefs_a \gamma \mid \gamma \in \Gamma_b\}$ where $\pi$ is propositional,
+$B \subseteq A$, and $a \notin B$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) is derivable from {\bf P} and {\bf R} using the same strategy used to prove
+that $\suspects_a (\phi \lor \psi) \iff \suspects_a \phi \lor \suspects_a \psi$
+is derivable from {\bf P} and {\bf K}.
+
+(2) and (3) are derivable, by using {\bf P}, {\bf R} and {\bf RP} to bring the
+propositional part $\pi$ outside the $\somerefs_a$ operator, using {\bf RDist}
+zsh:1: command not found: :pdflatex
+$\somerefs_a$ operator into the cover operators inside the conjunction, and then
+using {\bf RK} or {\bf RComm} as appropriate for each cover operator.
+\end{proof}
+
 \begin{lemma}\label{k-translation}
 Every formula of \langF{} is provably equivalent to a formula of \lang{} with
 the axiomatisation \axiomKF{}.
 \end{lemma}
 
 \begin{proof}
-Given a formula $\psi$ we prove by induction on the number of occurrences of
-\somerefs{} that $\psi$ is equivalent to a \somerefs-free formula, and
-therefore to a formula in \lang{}. The base case with no \somerefs operators
-is trivial, as a \somerefs-free formula is a formula in \lang{}. Now assume
-that $\psi$ contains $n + 1$ \somerefs-operators. Choose a subformula of type
-$\somerefs_a \phi$ of our given formula, where $\phi$ is \somerefs-free. Without
-loss of generality, by Lemma~\ref{k-dnf} we may assume that $\phi$ is in
-disjunctive normal form.  We prove by induction on the structure of $\phi$ that
-$\somerefs_a \phi$ is provably equivalent to a formula $\chi$ without the
-$\somerefs_a$ operator.
+Let $\alpha \in \langF{}$. We prove by induction on the number of occurrences of
+\somerefs{} in $\alpha$ that $\alpha$ is equivalent to a \somerefs{}-free
+formula, and therefore to a formula in \lang{}. The base case where $\alpha$
+contains no \somerefs{} operators is trivial, as a \somerefs{}-free formula is a
+formula in \lang{}. Suppose instead that $\alpha$ contains $n + 1$ \somerefs{}
+operators, and assume that any formula with $n$ \somerefs{} operators is
+provably equivalent to a formula in \lang{}. We use the axioms of \axiomKF{} to
+show that $\alpha$ is provably equivalent to a formula with $n$ \somerefs{}
+operators, and that therefore by the induction hypothesis it is provably
+equivalent to a formula in \lang{}.
 
-\begin{itemize}
-\item $\somerefs_a (\phi \lor \psi)$ iff $\somerefs \phi \lor \somerefs \psi$.
-(Derivable from {\bf P} and {\bf R})
-\item $\somerefs_a (\pi \land \bigwedge_{b \in A} \covers_b \Gamma_b)$ iff
-$\pi \land \bigwedge_{\gamma \in \Gamma_a} \suspects_a \somerefs_a \gamma \land
-\bigwedge_{b \in A - \{a\}} \covers_b \{\somerefs_a \gamma \mid \gamma \in
-\Gamma_b\}$ (Derivable from {\bf P}, {\bf R}, {\bf RP}, {\bf RDist}, {\bf
-RK} and {\bf RComm})
-\end{itemize}
+Choose a subformula from $\alpha$ of type $\somerefs_a \beta$, where $\beta$ is
+\somerefs{}-free. Without loss of generality, by Lemma~\ref{k-dnf} we may assue
+that $\beta$ is in disjunctive normal form. We prove by induction on the
+structure of $\beta$ that $\somerefs_a \beta$ is provably equivalent to a
+formula $\chi \in \lang$. The induction hypothesis is that for any proper
+subformula of $\beta$ that $\somerefs_a \beta$ is equivalent to a formula in
+\lang{}.
 
-Replacing $\somerefs_a \phi$ with $\chi$ in $\psi$ gives an equivalent formula
-with one less \somerefs-operator. Thus by induction, all formulae in \langF{}
-can be translated into an equivalent formula in \lang{} using the axiomatisation
-\axiomKF{}.
+The base case is when $\beta$ is a propositional formula. In this case, from
+{\bf P} and {\bf RP}, we have that $\somerefs_a \beta \iff \beta$, and therefore
+$\somerefs_a \beta$ is equivalent to a formula in \lang{}. 
+
+The inductive case is when $\beta = \phi \lor \psi$, or when $\beta = \pi \land
+\bigwedge_{b \in B} \covers_b \Gamma_b$, where $B \subseteq A$. We note that we
+can use the equivalences from Lemma~\ref{k-equivs} to push the $\somerefs_a$
+operator inside so that it is applied to subformulae of $\beta$. We can then use
+the induction hypothesis to replace each occurrence of the $\somerefs_a$
+operator applied to a subformula of $\beta$ with an equivalent formula in
+\lang{}. The resulting formula is also in \lang{}.
+
+Therefore by the principle of mathematical induction, $\somerefs_a \beta$ is
+equivalent to a formula in $\chi \in \lang{}$ for every $\beta \in \lang{}$. 
+
+Hence replacing $\somerefs_a \beta$ in $\alpha$ with $\chi$ gives a formula
+equivalent to $\alpha$ that contains only $n$ \somerefs operators.
+
+Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
+a formula in \lang{}.
 \end{proof}
 
 The rest of the completeness proof is merely a formality to show that, given the
