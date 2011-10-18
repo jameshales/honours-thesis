@@ -1,36 +1,35 @@
 \chapter{Doxastic logic}\label{kd45}
 
-In this chapter we provide an axiomatisation for the refinement quantified
-doxastic logic, over the class of \classKD{}. The axiomatisation for the
-doxastic variant differs from the basic modal variant due to the interpretation
-of the refinement operator. As we previously remarked in
-Chapter~\ref{semantics}, the doxastic variant is not a conservative extension of
-the basic modal variant, and so any axiomatisation cannot simply be an extension
-of the axiomatisation for the basic modal variant.
+In this chapter we provide an axiomatisation of the multi-agent refinement
+quantified doxastic logic. The axiomatisation for the doxastic variant differs
+from the modal variant due to the interpretation of the refinement operator.
 
 \section{Technical preliminaries}
 
-In previous work, we gave an axiomatisation of the single-agent variant of the
-refinement quantified doxastic logic. Similar to the axiomatisation for the
-single-agent, basic modal variant, the axiomatisation relied on a special form
-for the well-formed formulae of doxastic logic: what we called a prenex normal
-form. The prenex normal form prohibits modal operators ($\knows$ and
-$\suspects$) from appearing within other modal operators. The prenex normal form
-simplified the axiomatisation and proof of soundness, by avoiding complications
-that would arise due to the transitivity of doxastic models, when nested
-modalities are present.
+In Chapter~\ref{single} we gave an axiomatisation of the single-agent variant of
+the refinement quantified doxastic logic. This axiomatisation relied on a
+prenex normal form that restricted formulae by prohibiting nested modalities.
+The prenex normal form simplified the axiomatisation and proof of soundness by
+avoiding complications that would arise due to the transitive and Euclidean
+properties of \classKD{} models when nested modalities are present.
 
 For the axiomatisation of the multi-agent variant, we introduce a disjunctive
-normal form that serves the same purpose for the multi-agent variant as the
-prenex normal form did for the single-agent variant. It is not possible to
-express every multi-agent doxastic formula as an equivalent formula without
-nested modalities; for example, formulae such as $\knows_a \knows_b p$ cannot be
-expressed without such nestings. However, it is possible to express multi-agent
-doxastic formulae as an equivalent formula without direct nestings of modalities
-that belong to the same agent. So for example, formulae such as $\knows_a
-\knows_b p$ are allowed, but formulae such as $\knows_a \knows_a p$ are not.
-This allows us to avoid the same complications due to transitivity that the
-prenex normal form allowed us to avoid.
+normal form that serves the same purpose as the prenex normal form served for
+the single-agent variant. The disjunctive normal form is a generalisation of the
+prenex normal form to multi-agent logics. In multi-agent doxastic logic, it is
+not possible to write every formula without using nested modalities; for
+example, a formula involving multiple agents, such as $\knows_a \knows_b p$
+cannot be simplified any further. Rather, our disjunctive normal form prohibits
+modalities of the same agent from being nested directly within one another,
+without a modality belonging to another agent appearing inbetween. For example,
+$\knows_a \knows_b \suspects_a p$ is allowed, whereas $\knows_a \suspects_a p$ is
+not. This allows us to avoid the same complications due to transitivity and
+Euclideaness that the prenex normal form allowed us to avoid.
+
+Similar to the prenex normal form used in the single-agent case, we will define
+our disjunctive normal form in terms of basic modal operators first, and then
+provide another form which is in terms of the cover operator. We will also show
+a property of these formulae which we rely on for our soundness proof.
 
 \begin{definition}[Disjunctive normal form]
 A formula in $a$-disjunctive normal form is defined by the following abstract syntax:
@@ -51,12 +50,6 @@ A formula in disjunctive normal form is defined by the following abstract syntax
 where $\pi$ stands for a propositional formula, $a \in A$, and $\gamma_a$
 stands for a formula in $a$-disjunctive normal form.
 \end{definition}
-
-We note that, similar to the prenex normal form used previously, our initial
-formulation of the disjunctive normal form is not in terms of the cover
-operator. This is in contrast to the disjunctive normal form used for the basic
-modal logic, however we will later introduce a cover logic disjunctive normal
-form which is similar to both.
 
 We will now show that every formula of \lang{} is equivalent to a formula in
 disjunctive normal form, under the semantics of doxastic logic.
@@ -150,30 +143,32 @@ As in the proof for refinement quantified modal logic, we formulate our
 axiomatisation in terms of the cover operator, $\covers$, so we use a cover
 logic version of this disjunctive normal form.
 
-\begin{definition}[Cover disjunctive normal form]\label{kd45-cdnf}
-A formula in $a$-cover disjunctive normal form is defined by the following
+\begin{definition}[Cover logic disjunctive normal form]\label{kd45-cdnf}
+A formula in $a$-cover logic disjunctive normal form is defined by the following
 abstract syntax:
 
 $$
-\alpha ::= \pi \land \bigwedge_{b \in B \subseteq A - \{a\}} \covers_b \Gamma_b \bnfalt
+\alpha ::= \pi \land \bigwedge_{b \in B} \covers_b \Gamma_b \bnfalt
 \alpha \lor \alpha
 $$
-where $\pi$ stands for a propositional formula, and $\Gamma_b$ stands for a
-finite, non-empty set of formulae in $b$-cover disjunctive normal form.
+where $\pi$ stands for a propositional formula, $B \subseteq A - \{a\}$, and
+$\Gamma_b$ stands for a finite, non-empty set of formulae in $b$-cover
+disjunctive normal form.
 
-A formula in cover disjunctive normal form is defined by the following abstract
+A formula in cover logic disjunctive normal form is defined by the following abstract
 syntax:
 
 $$
-\alpha ::= \pi \land \bigwedge_{a \in B \subseteq A} \covers_a \Gamma_a \bnfalt
+\alpha ::= \pi \land \bigwedge_{a \in B} \covers_a \Gamma_a \bnfalt
 \alpha \lor \alpha
 $$
-where $\pi$ stands for a propositional formula, and $\Gamma_a$ stands for a
-finite, non-empty set of formulae in $a$-cover disjunctive normal form.
+where $\pi$ stands for a propositional formula, $B \subseteq A$, and $\Gamma_a$
+stands for a finite, non-empty set of formulae in $a$-cover logic disjunctive normal
+form.
 \end{definition}
 
 \begin{lemma}\label{kd45-cdnf}
-Every formula of \lang{} is equivalent to a formula in cover disjunctive normal
+Every formula of \lang{} is equivalent to a formula in cover logic disjunctive normal
 form, under the semantics of \logicKD{}.
 \end{lemma}
 
@@ -184,11 +179,11 @@ rewrite $\alpha$ as an equivalent form using the modal version of disjunctive
 normal form. We note that if a subformula $\phi$ of $\alpha$ is in
 $a$-disjunctive normal form, then $\phi$ does not contain any $a$-modalities at
 the top level, and therefore the result of the conversion on the subformula is
-a formula in $a$-cover disjunctive normal form. Thus the result of the
-conversion is a formula in cover disjunctive normal form.
+a formula in $a$-cover logic disjunctive normal form. Thus the result of the
+conversion is a formula in cover logic disjunctive normal form.
 \end{proof}
 
-The cover disjunctive normal form will be used in our completeness proofs.
+The cover logic disjunctive normal form will be used in our completeness proofs.
 
 Finally we show one of the main properties of the doxastic disjunctive normal
 forms, that we rely on for our completeness proofs.
@@ -328,12 +323,12 @@ The axiomatisation \axiomKDF{} is sound for the class of \classKD{} models.
 \end{lemma}
 
 \begin{proof}
-The soundness of the axioms {\bf P}, {\bf K}, {\bf D}, {\bf 4}, and {\bf 5} and
-the rules {\bf MP} and {\bf NecK} can be shown by the same reasoning used to
-show that they are sound in basic doxastic logic. The soundness of the axioms
-{\bf RP} and {\bf R}, and the rule {\bf NecR} can be shown by the same reasoning
-used to how that they are sound in the single-agent refinement quantified modal
-logic~\cite{french2010future}.
+The soundness of the axioms {\bf P} and {\bf K}, and the rules {\bf MP} and
+{\bf NecK} can be shown by the same reasoning used to show that they are sound
+in basic modal logic. As the axioms {\bf RP} and {\bf R}, and the rule {\bf
+NecR} involve only a single agent, their soundness can be shown by the same
+reasoning used to show that they are sound in the single-agent refinement
+quantified modal logic~\cite{french2010future}.
 
 All that remains to be shown is the soundness of {\bf RKD45}, {\bf RComm}, and
 {\bf RDist}.

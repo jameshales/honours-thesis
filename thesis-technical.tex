@@ -3,7 +3,7 @@
 In this chapter we will provide some of the technical preliminaries that are
 required throughout this paper. We give a short introduction to modal, doxastic,
 and epistemic logics, and give the definition of a refinement that is used by
-the refinement quantified modal logic. We also give some useful results that we
+refinement quantified modal logics. We also give some useful results that we
 refer to later in the paper.
 
 \section{Modal, doxastic and epistemic logics}
@@ -108,12 +108,12 @@ logic, and its semantics over a general class of Kripke models.
 Given a finite set of agents $A$ and a set of propositional atoms $P$, the
 language of \langF{} is defined by the following abstract syntax:
 $$
-\phi ::=    p \bnfalt
-            \neg \phi \bnfalt
-            \phi \land \phi \bnfalt
-            \knows_a \phi
+\alpha ::=  p \bnfalt
+            \neg \alpha \bnfalt
+            \phi \land \alpha \bnfalt
+            \knows_a \alpha
 $$
-where $p \in P$.
+where $p \in P$, $a \in A$ and $\alpha \in \lang{}$.
 \end{definition}
 
 Standard abbreviations include:
@@ -239,7 +239,7 @@ method for deriving a validity from some other validities. The main results of
 this paper are axiomatisations of this style for the variants of refinement
 quantified modal logics.
  
-\begin{definition}[Axiomatisation \axiomK{}]
+\begin{definition}[Axiomatisation \axiomK{}]\label{pre-axiom-k}
 The axiomatisation \axiomK{} is a substitution schema consisting of the
 following axioms:
 $$
@@ -390,26 +390,44 @@ models, we will often also refer to Kripke models as refinements or simulations
 of other models. If $M_s \refinement_a M'_{s'}$ then we call $M_s$ an
 $a$-refinement of $M'_{s'}$, and we call $M'_{s'}$ an $a$-simulation of $M_s$.
 
+\begin{lemma}
+The relation $\refinement_a$ is reflexive and transitive, and satisfies teh
+Church-Rosser property over the class of \classK models.
+\end{lemma}
+
 As we have mentioned before, refinement quantified modal logics quantify over
 informative updates, by quantifying over the refinements of a Kripke model. We
 will briefly introduce two properties to illustrate how refinements correspond
 to the notion of an informative update.
 
 \begin{definition}[Positive formulae]
+An $a$-positive formula is defined by the following abstract syntax:
+$$
+\alpha ::=  p \bnfalt
+            \neg p \bnfalt
+            \alpha \land \alpha \bnfalt
+            \alpha \lor \alpha \bnfalt
+            \knows_b \alpha \bnfalt
+            \suspects_c \alpha
+$$
+where $p \in P$, $b \in A$ and $c \in A - \{a\}$.
+
 A positive formula is defined by the following abstract syntax:
 $$
-\phi ::=    p \bnfalt 
+\alpha ::=    p \bnfalt 
             \neg p \bnfalt
-            \phi \land \phi \bnfalt
-            \phi \lor \phi \bnfalt
-            \knows_a \phi
+            \alpha \land \alpha \bnfalt
+            \alpha \lor \alpha \bnfalt
+            \knows_a \alpha
 $$
+where $p \in P$ and $a \in A$.
 \end{definition}
 
 \begin{proposition}
-Let $M_s$ and $M'_{s'}$ be Kripke models such that $M'_{s'} \refinement M_s$,
-and let $\phi$ be a positive formula. If $M_s \entails \phi$ then $M'_{s'}
-\entails \phi$.
+Let $M_s$ and $M'_{s'}$ be Kripke models such that $M'_{s'} \refinement_a M_s$,
+and let $\phi$ be an $a$-positive formula. If $M_s \entails \phi$ then $M'_{s'}
+\entails \phi$. This also holds if $\phi$ is a positive formula and/or $M'_{s'}$
+is a refinement (rather than an $a$-refinement) of $M_s$.
 \end{proposition}
 
 Using an epistemic interpretation, the positive formulae can be interpreted as

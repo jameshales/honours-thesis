@@ -1,0 +1,452 @@
+\chapter{Single-agent epistemic and doxastic logic}\label{single}
+
+In this chapter we will provide a sound and complete axiomatisation of the
+single-agent refinement quantified epistemic and doxastic logics.  Our efforts
+focus mainly on the epistemic variant; as we will see, the axiomatisation for
+the doxastic variant is very similar, and can be derived using similar
+reasoning. We do not go into much detail for the doxastic variant, as in
+Chapter~\ref{kd45} we provide an axiomatisation for the multi-agent doxastic
+variant, a much more general result.
+
+When discussing the single-agent variants of these logics, we will use a
+subscript $(1)$ to denote the single-agent logics, e.g. \logicSi{}, \logicSiF{},
+and so on. We also drop the superfluous subscripts denoting agents in the syntax
+of the logics, e.g. we write \knows{} instead of $\knows_a$.
+
+\section{Technical preliminaries}
+
+In previous work, van Ditmarsch, French and Pinchinat~\cite{french2010future}
+gave an axiomatisation of the single-agent refinement quantified modal logic.
+The axiomatisation was expressed in terms of the cover operator, $\covers$, and
+the proof of completeness consisted of a translation from the refinement
+quantified logic to the basic modal logic, a translation that relied on a
+disjunctive normal form for modal formulae, defined in terms of the cover
+operator. The cover operator allows us to collect all of the modalities that are
+true at a particular state, and consider them all at once. This simplified the
+soundness and completeness proofs of the modal refinement quantified logic. As
+van Ditmarsch, French and Pinchinat~\cite{french2010future} remarked, a proof
+directly in the setting of basic modal logic, without the cover operator, is
+possible, but considerably longer.
+
+Our axiomatisations of the single-agent epistemic and doxastic variants also
+rely on the cover operator, and on a normal form similar to the disjunctive
+normal form used by van Ditmarsch, French and Pinchinat~\cite{french2010future}.
+The normal form that we introduce is called the cover logic prenex normal form,
+which is similar to the disjunctive normal form, except that it prohibits nested
+modalities; thus modalities may only be applied to propositional formulae. As we
+will see, every single-agent epistemic and doxastic formula is equivalent to a
+formula in this prenex normal form. The prenex normal form allows us to avoid
+complications that would arise due to the transitive and symmetric properties of
+\classS{}, or the transitive and Euclidean properties of \classKD{}, that would
+arise when nested modalities are present.
+
+We define the basic prenex normal form first, and then give the definition of
+the cover logic version. We show that every single-agent epistemic or doxastic
+formula is equivalent to a formula in these normal forms.
+
+\begin{definition}[Prenex normal form]
+A formula in prenex normal form is specified by the following abstract syntax: 
+\begin{eqnarray*}
+\alpha &::=& \delta \bnfalt \alpha \lor \alpha\\
+\delta &::=&    \pi \bnfalt
+                \knows \pi \bnfalt
+                \suspects \pi \bnfalt
+                \delta \land \delta
+\end{eqnarray*}
+where $\pi$ stands for a propositional formula.
+\end{definition}
+
+\begin{lemma}\label{single-prenex-s5}
+Every formula of \langi{} is equivalent to a formula in prenex normal form, under
+the semantics of \logicSi{}.
+\end{lemma}
+
+This is shown by Meyer and van der Hoek~\cite{meyer2004epistemic}.
+
+\begin{lemma}\label{single-prenex-kd45}
+Every formula of \langi{} is equivalent to a formula in prenex normal form, under
+the semantics of \logicKDi{}.
+\end{lemma}
+
+\begin{proof}
+The proof given by Meyer and van der Hoek~\cite{meyer2004epistemic} for
+Lemma~\ref{single-prenex-s5} applies also to \logicKDi{}.
+
+Meyer and van der Hoek remarked that the only use of the reflexivity axiom of
+\logicS{}, {\bf T}, in the proof, is in the form of the theorems $\proves \knows
+\knows \phi \implies \knows \phi$, and $\proves \knows \neg \knows \phi \implies
+\neg \knows \phi$. Therefore the proof holds for any logic which replaces {\bf
+T} with axioms entailing both of these properties. Both of these properties are
+obviously valid in \logicKDi{}, and therefore the proof of
+Lemma~\ref{single-prenex-s5} applies to this result.
+\end{proof}
+
+Given this result, we define our cover logic version of the prenex normal form,
+and show that every epistemic or doxastic formula is equivalent to a formula in
+cover logic prenex normal form.
+
+\begin{definition}[Cover logic prenex normal form]
+A formula in cover logic prenex normal form is specified by the following
+abstract syntax: 
+$$\alpha ::= \pi \land \covers \Gamma \bnfalt \alpha \lor \alpha$$
+where $\pi$ is a propositional formula, and $\Gamma$ is a set of propositional
+formulae.
+\end{definition}
+
+\begin{lemma}\label{single-cover-prenex}
+Every formula of \langi{} is equivalent to a formula in cover logic prenex normal
+form, under both the semantics of \logicSi{} and \logicKDi{}.
+\end{lemma}
+
+\begin{proof}
+Without loss of generality, we may assume that our given formula is in prenex
+normal form (by Lemma~\ref{single-prenex-s5} for \logicSi{}, or by
+Lemma~\ref{single-prenex-kd45} for \logicKDi{}).
+
+Given a formula in prenex normal form, we consider each disjunct separately. We
+can convert each term $\knows \gamma$ or $\suspects \gamma$ into an equivalent
+term using the cover operator, using the equivalences $\knows \gamma \equiv
+\covers \{ \gamma \}$ and $\suspects \gamma \equiv \covers \{ \gamma, \top \}$ 
+Note that each resulting term contains a cover operator applied only to
+a set of propositional formulae.
+
+An inductive argument can be used to show that we can collapse the resulting
+conjunction of cover operators into a single term containing one cover
+operator applied to a set of propositional formulae. We use the following
+equivalence to achieve this, and note that at each stage this equivalence
+preserves the property that the cover operator is only applied to a set of
+propositional formulae.
+$$
+\covers \Gamma \land \covers \Gamma' \equiv 
+\covers \big( 
+\{ \gamma \land \bigvee_{\gamma' \in \Gamma'} \gamma' \mid \gamma \in \Gamma \}
+\cup
+\{ \gamma' \land \bigvee_{\gamma \in \Gamma} \gamma \mid \gamma' \in \Gamma' \}
+\big)
+$$
+
+Repeating this for each disjunct in our original formula leaves us with a
+formula in cover logic prenex normal form.
+\end{proof}
+
+\section{Axiomatisation}
+
+We provide an axiomatisation of the single-agent refinement quantified epistemic
+and doxastic logics, \logicSiF{} and \logicKDiF{}, and prove their soundness
+and completeness.
+
+As we are defining several similar axiomatisations at once, we will define their
+common elements as \axiomFi{}, and define the axiomatisations of \logicKDiF{}
+and \logicSiF{}, \axiomKDiF{} and \axiomSiF{} respectively, as extensions of
+\axiomFi{}. We will also define the axiomatisation, \axiomKiF{} of single-agent
+refinement quantified modal logic, so that we can compare our axiomatisations.
+
+\begin{definition}
+The axiomatisation \axiomFi{} is a substitution schema of the following axioms:
+$$
+\begin{array}{rl}
+{\bf P} & \text{All tautologies of propositional logic.}\\
+{\bf K} & \knows (\phi \implies \psi) \implies \knows \phi \implies \knows \psi\\
+{\bf R} & \allrefs (\phi \implies \psi) \implies \allrefs \phi \implies \allrefs \psi\\
+{\bf RP} & \allrefs \alpha \iff \alpha \text{, where $\alpha$ is a propositional formula.}\\
+\end{array}
+$$
+
+Along with the rules:
+$$
+\begin{array}{rl}
+{\bf MP} & \text{From $\proves \phi \implies \psi$ and $\proves \phi$ infer
+$\proves \psi$.}\\
+{\bf NecK} & \text{From $\proves \phi$ infer $\proves \knows \phi$.}\\
+{\bf NecR} & \text{From $\proves \phi$ infer $\proves \allrefs \phi$.}
+\end{array}
+$$
+\end{definition}
+
+The axioms and rules in \axiomFi{} were previously presented by van Ditmarsch,
+French and Pinchinat as axioms of \axiomKiF{}, which we will define now.
+
+\begin{definition}
+The axiomatisation \axiomKiF{} is a substitution schema consisting of the axioms and rules of \axiomFi{}, along with the additional axiom:
+$$
+\begin{array}{rl}
+{\bf RK} & \somerefs \covers \Gamma \iff \bigwedge_{\gamma \in
+\Gamma} \suspects \somerefs \gamma
+\end{array}
+$$
+\end{definition}
+
+The axiomatisation \axiomKiF{} shares axioms and rules from the axiomatisation
+for basic modal logic, \axiomK{}. 
+
+\begin{definition}
+The axiomatisation \axiomSiF{} is a substitution schema consisting of the axioms
+and rules of \axiomFi{}, along with the additional axioms:
+$$
+\begin{array}{rl}
+{\bf T} & \knows \phi \implies \phi\\
+{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+{\bf RS5} & \somerefs \covers \Gamma \iff \bigvee_{\gamma \in \Gamma} \gamma \land 
+\bigwedge_{\gamma \in \Gamma} \suspects \gamma
+\end{array}
+$$
+where $\Gamma$ is a set of propositional formulae.
+\end{definition}
+
+\begin{definition}
+The axiomatisation \axiomKDiF{} is a substitution schema consisting of the axioms
+and rules of \axiomFi{}, along with the additional axioms:
+$$
+\begin{array}{rl}
+{\bf D} & \knows \phi \implies \suspects \phi\\
+{\bf 4} & \knows \phi \implies \knows \knows \phi\\
+{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+{\bf RKD45} & \somerefs \covers \Gamma \iff \bigwedge_{\gamma \in \Gamma} \suspects \gamma
+\end{array}
+$$
+where $\Gamma$ is a set of propositional formulae.
+\end{definition}
+
+We note that many of the axioms from \axiomSiF{} and \axiomKDiF{} are also
+axioms from \axiomS{}, \axiomKD{} and \axiomKiF{}. The differences between
+these two axiomatisations, and \axiomKiF{}, is that \axiomSiF{} and \axiomKDiF{}
+include the additional \axiomS{} and \axiomKD{} axioms respectively, and include
+a different axiom in place of {\bf RK}.
+
+We will now show the soundness of the axiomatisations \axiomSiF{} and
+\axiomKDiF{}.
+
+\begin{lemma}
+The axiomatisation \axiomFi{} is sound for the logics \logicSiF{} and
+\logicKDiF{}.
+\end{lemma}
+
+\begin{proof}
+The soundness of the axioms {\bf P} and {\bf K}, and the rules {\bf MP} and {\bf
+NecK} can be shown by the same reasoning used to show that they are sound in
+basic modal logic. The axioms {\bf R} and {\bf RP}, and the rule {\bf NecR} can
+be shown using the same reasoning that they are sound in the single-agent
+refinement quantified modal logic~\cite{french2010future}.
+\end{proof}
+
+\begin{lemma}\label{single-sound-s5}
+The axiomatisation \axiomSiF{} is sound for the logic \logicSiF{}.
+\end{lemma}
+
+\begin{proof}
+Soundness of the axioms {\bf P}, {\bf K}, {\bf R}, and {\bf RP}, and the rules
+{\bf MP}, {\bf NecK} and {\bf NecR} are shown above. Soundness of the axioms
+{\bf T} and {\bf 5} can be shown by the same reasoning used to show that they
+are sound in basic epistemic logic.
+
+All that is to be shown is the soundness of {\bf RS5}.
+
+Let $\Gamma$ be a finite set of propositional formulae, and let $M_s$ be a model in
+\classS{} such that $M_s \entails \bigvee_{\gamma \in \Gamma} \gamma \land
+\bigwedge_{\gamma \in \Gamma} \suspects \gamma$.
+
+We need to show that $M_s \entails \somerefs \covers \Gamma$. To do this we will
+construct a model $N_s \in \classS$, construct a simulation from $N_s$ to $M_s$
+to show that $N_s \refinement_a M_s$, and finally show that $N_s \entails
+\covers \Gamma$.
+
+We begin by constructing the model $N_s$. We note that for each $\gamma \in
+\Gamma$, there is some successor $s^\gamma \in sR^{M}$ such that $M_{s^\gamma}
+\entails \gamma$.  We can construct the model $N$ such that $S^{N} = \{s\} \cup
+\{s^\gamma \mid \gamma \in \Gamma\}$, $R^{N} = S^{N} \times S^{N}$ and for all
+$p \in P$, $V^{N}(p) = V^M(p) \cap S^{N}$. This model is clearly in \classS.
+
+Furthermore we have that $M'_s \refinement M_s$ by the relation ${\cal
+R} = \{(s, s)\} \cup \{(t^\gamma, t^\gamma) \mid \gamma \in \Gamma\}$
+({\bf atoms} and {\bf forth} are satisfied). 
+
+By construction, for each $\gamma \in \Gamma$, there is a successor $s^\gamma
+\in sR^{N}$ such that $N_{s^\gamma} \entails \gamma$. For each successor $s
+\in sR^{N}$ we have that $N_s \entails \bigvee_{\gamma \in \Gamma}
+\gamma$, as each successor is either one of the $s^\gamma$ for some $\gamma \in
+\Gamma$, in which case $N_{s^\gamma} \entails \gamma$, or it is our initial
+state $s$, in which case $N_s \entails \bigvee_{\gamma \in \Gamma} \gamma$
+follows from our hypothesis that $M_s \entails \bigvee_{\gamma \in \Gamma}
+\gamma$. Therefore $N_s \entails \covers \Gamma$.
+
+Therefore $M_s \entails \somerefs \covers \Gamma$. 
+
+Conversely, let $\Gamma$ be a finite set of propositional formulae, and let
+$M_s$ be a model in \classS{} such that $M_s \entails \somerefs \covers \Gamma$.
+Then there exists some model $N_t \refinement M_s$ in \classS, via some
+simulation ${\cal R} \subseteq S' \times S$, such that $N_t \entails \covers
+\Gamma$.
+
+From the definition of the cover operator, $N_t \entails \knows
+\bigvee_{\gamma \in \Gamma} \gamma \land \bigwedge_{\gamma \in \Gamma} \suspects
+\gamma$. 
+
+As $N \in \classS$, we know that $t \in tR^N$, and so it follows from
+$N_t \entails \knows \bigvee_{\gamma \in \Gamma} \gamma$ that $N_t
+\entails \bigvee_{\gamma \in \Gamma} \gamma$. As we know that $(t, s) \in {\cal
+R}$, from {\bf atoms} we know that $M_s$ and $N_t$ are equivalent for
+propositional formulae. As each $\gamma \in \Gamma$ is propositional, it follows
+that $M_s \entails \bigvee_{\gamma \in \Gamma} \gamma$.
+
+Furthermore, from $N_t \entails \bigwedge_{\gamma \in \Gamma} \suspects
+\gamma$, we know that for every $\gamma \in \Gamma$, there exists some
+$t^\gamma \in tR^{M'}$ such that $N_{t^\gamma} \entails \gamma$. It then
+follows from {\bf forth} that there exists some $s^\gamma \in S^M$ such that
+$s^\gamma \in sR^M$ and $(t^\gamma, s^\gamma) \in {\cal R}$. From {\bf atoms}
+we know that $M_{s^\gamma}$ and $N_{t^\gamma}$ are equivalent for
+propositional formulae. As $\gamma$ is propositional, it follows that
+$M_{s^\gamma} \entails \gamma$ and therefore $M_s \entails \suspects \gamma$ for
+each $\gamma \in \Gamma$.  Therefore $M_s \entails \bigwedge_{\gamma \in \Gamma}
+\suspects \gamma$, and so $M_s \entails \bigvee_{\gamma \in \Gamma} \gamma \land
+\bigwedge_{\gamma \in \Gamma} \suspects \gamma$.
+
+Therefore {\bf RS5} is sound, and so \axiomSiF{} is sound for the logic
+\logicSiF{}.
+\end{proof}
+
+\begin{lemma}\label{single-sound-kd45}
+The axiomatisation \axiomKDiF{} is sound for the logic \logicKDiF{}.
+\end{lemma}
+
+\begin{proof}
+The proof is similar to the proof for Lemma~\ref{fels5-sound}. Instead of
+showing soundness for the \axiomSi{} axioms, we must show that the \axiomKDi{}
+axioms are sound, and this follows from their soundness in \logicKDi{}. The main
+difference in the proof of soundness is for {\bf RKD45} as compared to the proof
+for {\bf RS5}, is that in the right to left direction, we do not have to show
+that $M_s \entails \bigvee_{\gamma \in \Gamma} \gamma$; as doxastic models do
+not have to be reflexive, there is no requirement for $s$ to be in the possible
+worlds for the constructed refinement. For the left to right direction of the
+proof, the refinement $N_t$ is a KD45 model instead of an S5 model, but this has
+no bearing on the rest of the proof.
+\end{proof}
+
+We show the completeness of the axiomatisations \axiomSiF{} and \axiomKDiF{} by
+provably correct translations from \logicSiF{} to \logicSi{}, and from
+\logicKDiF{} to \logicKDi{} respectively. Completeness then follows from the
+completeness of \logicSi{} and \logicKDi{}.
+
+\begin{lemma}\label{single-reduction-s5}
+Every formula of \langFi{} is provably equivalent to a formula of \langi{} with
+the axiomatisation \axiomSiF{}.
+\end{lemma}
+
+\begin{proof}
+Let $\alpha \in \langFi{}$. We assume without loss of generality that all
+\allrefs{} operators are expressed as \somerefs{} operators, by the equivalence
+$\allrefs \phi \iff \neg \somerefs \neg \phi$. We prove by induction on the
+number of occurrences of \somerefs{} in $\alpha$ that $\alpha$ is equivalent to
+a \somerefs{}-free formula, and therefore to a formula in \langi{}. The base case
+where $\alpha$ contains no \somerefs{} is trivial, as a \somerefs{}-free formula
+is a formula in \langi{}. Suppose instead that $\alpha$ contains $n + 1$
+\somerefs{} operators, and assume that any formula with $n$ \somerefs{}
+operators is provably equivalent to a formula in \langi{}. We use the axioms of
+\axiomSiF{} to show that $\alpha$ is provably equivalent to a formula with $n$
+\somerefs{} operators, and that therefore by the induction hypothesis it is
+provably equivalent to a formula in \langi{}.
+
+Choose a subformula from $\alpha$ of type $\somerefs \beta$, where $\beta$ is a
+\somerefs{}-free formula. Without loss of generality, by
+Lemma~\ref{single-cover-prenex} we may assume that $\beta$ is in disjunctive
+normal form. We prove by induction on the structure of $\beta$ that $\somerefs
+\beta$ is provably equivalent to a formula $\chi \in \langi$. The induction
+hypothesis is that for any proper subformula $\phi$ of $\beta$ that $\somerefs
+\phi$ is equivalent to a formula in \langi{}.
+
+The base case is when $\beta$ is a propositional formula. In this case, from
+{\bf P} and {\bf RP}, we have that $\somerefs \beta \iff \beta$, and therefore
+$\somerefs \beta$ is equivalent to a formula in \langi{}.
+
+The inductive case is when $\beta = \phi \lor \psi$, or when $\beta = \pi \land
+\covers \Gamma$. 
+
+Suppose that $\beta = \phi \lor \psi$. Then $\somerefs (\phi \lor \psi) \iff
+\somerefs \phi \lor \somerefs \psi$ is derivable from {\bf P} and {\bf R}. By
+the induction hypothesis, $\somerefs \phi$ and $\somerefs \psi$ are equivalent
+to some $\phi', \psi' \in \langi{}$. Therefore $\somerefs \beta \iff \phi' \lor
+\psi'$, and so $\somerefs \beta$ is equivalent to a formula in \langi{}.
+
+Suppose that $\beta = \pi \land \covers \Gamma$ where $\Gamma$ is a set of
+propositional formulae. Then $\somerefs (\pi \land \covers \Gamma) \iff
+\pi \land \somerefs \covers \Gamma$ is derivable from {\bf P}, {\bf R} and {\bf
+RP}. Moreover, $\pi \land \somerefs \covers \Gamma \iff \pi \land
+\bigvee_{\gamma \in \Gamma} \gamma \land \bigwedge_{\gamma \in \Gamma} \suspects
+\gamma$ is derivable from {\bf RS5}. As each $\gamma \in \Gamma$ is
+propositional, $\somerefs \beta$ is equivalent to a formula in \langi{}.
+
+Therefore by the principle of mathematical induction, $\somerefs \beta$ is
+equivalent to a formula $\chi \in \langi{}$ for every $\beta \in \langFi{}$.
+
+Hence replacing $\somerefs \beta$ in $\alpha$ with $\chi$ gives an equivalent
+formula that contains only $n$ \somerefs{} operators.
+
+Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
+a formula in \langi{}.
+\end{proof}
+
+\begin{lemma}\label{single-reduction-kd45}
+Every formula of \langFi{} is provably equivalent to a formula of \langi{} with
+the axiomatisation \axiomKDiF{}.
+\end{lemma}
+
+The proof is similar to the proof for Lemma~\ref{single-reduction-s5}, with the
+only difference being that the axiom {\bf RKD45} is used in place of {\bf RS5}
+in the induction over the structure of $\beta$.
+
+The rest of the completeness proof is merely a formality to show that, given the
+above translations into \langi{}, we can show completeness by using these
+translations along with the completeness of \logicSi{} and \logicKDi{}.
+
+\begin{corollary}\label{single-derivable-s5}
+Let $\phi \in \langFi$ be given and $\psi \in \langi$ be equivalent to $\phi$
+under the semantics of \logicSiF{}.  If $\psi$ is a theorem in \logicSi{}, then
+$\phi$ is a theorem in \axiomSiF{}.
+\end{corollary}
+
+\begin{proof}
+Let $\phi \in \langFi$ and let $\psi \in \langi$ be semantically equivalent to
+$\phi$. By Lemma~\ref{single-reduction-s5}, we can obtain some $\phi' \in \langi$
+that is semantically equivalent to $\phi$ (and thus also to $\psi$) by following
+the given translation steps. We can extend a derivation of $\psi$ to a
+derivation of $\phi'$ as the two are semantically equivalent under \logicSi{}, and by
+the completeness of \logicSi{} this equivalence is derivable. As \axiomSiF{} is a
+conservative extension of \logicSi{}, this equivalence is therefore also derivable
+in \axiomSiF{}. The derivation can be further extended to $\phi$ by observing that all
+of the reduction steps in Lemma~\ref{single-reduction-s5} are provable equivalences
+in \axiomSiF{}. Therefore $\phi$ is a theorem in \axiomSiF{}.
+\end{proof}
+
+\begin{lemma}\label{single-complete-s5}
+The axiom schema \axiomSiF{} is complete for the logic \logicSiF{}.
+\end{lemma}
+
+\begin{proof}
+Let $\phi \in \langFi$ such that $\entails_\somerefs \phi$. Then by
+Lemma~\ref{single-reduction-s5}, there exists a semantically equivalent formula
+$\psi \in \langi$ which is \somerefs-free. As $\entails_\somerefs \phi$ and
+$\phi \iff \psi$, then $\entails_\somerefs \psi$. As $\psi$ is
+\somerefs-free, then it follows that $\entails \psi$, and by the
+completeness of \axiomSiF{} it follows that $\proves \psi$.
+Therefore by Corollary~\ref{single-derivable-s5} we have that $\proves_\somerefs
+\phi$.
+\end{proof}
+
+\begin{theorem}
+The axiomatisation \axiomSiF{} is sound and complete for the logic \logicSiF{}.
+\end{theorem}
+
+\begin{proof}
+The soundness proof is given in Lemma~\ref{single-sound-s5} and the completeness
+proof is given in Lemma~\ref{single-complete-s5}.
+\end{proof}
+
+\begin{theorem}
+The axiomatisation \axiomKDiF{} is sound and complete for the logic \logicKDiF{}.
+\end{theorem}
+
+\begin{proof}
+The soundness proof is given in Lemma~\ref{single-sound-kd45}, and we note that
+similar results to Corollary~\ref{single-derivable-s5} and
+Lemma~\ref{single-complete-s5} can be shown with minor modifications to their
+proofs, which gives us completeness.
+\end{proof}

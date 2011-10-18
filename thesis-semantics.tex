@@ -14,13 +14,13 @@ class of frames.
 Given a finite set of agents $A$ and a set of propositional atoms $P$, the
 language of \langF{} is defined by the following abstract syntax:
 $$
-\phi ::=    p \bnfalt
-            \neg \phi \bnfalt
-            \phi \land \phi \bnfalt
-            \knows_a \phi \bnfalt
-            \allrefs_a \phi
+\alpha ::=  p \bnfalt
+            \neg \alpha \bnfalt
+            \alpha \land \alpha \bnfalt
+            \knows_a \alpha \bnfalt
+            \allrefs_a \alpha
 $$
-where $a \in A$ and $p \in P$.
+where $p \in P$, $a \in A$ and $\alpha \in \lang{}$.
 \end{definition}
 
 We use the standard abbreviations from basic modal logic, along with an
@@ -35,6 +35,12 @@ on for our axiomatisation, in much the same way it is relied on for the
 axiomatisation of \logicKiF{} presented by van Ditmarsch, French and
 Pinchinat~\cite{french2010future}. % TODO - include citation for cover operator
 
+We note that the basic modalities $\knows_a$ and $\suspects_a$ can be expressed
+in terms of the cover operator, a fact that we will rely upon for all of our
+axiomatisations. We note that $\knows_a \phi \iff \covers_a \{\phi\} \lor
+\covers_a \emptyset$ and $\suspects_a \phi \iff \covers_a \{\phi, \top\}$. 
+% TODO - citation?
+
 \begin{definition}[Semantics of \logicCF{}]
 Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
 be a Kripke model taken from \classC{}. The interpretation of $\phi$ is defined
@@ -47,7 +53,7 @@ M_s &\entails& \phi \land \psi \text{ iff } M_s \entails \phi \text{ and } M_s
 M_s &\entails& \knows_a \phi \text{ if for all } t \in S : (s, t) \in R_a \text{
 implies } M_t \entails \phi\\
 M_s &\entails& \allrefs_a \phi \text{ iff for all } M'_{s'} \in \classC : M_s
-\simulation_a M'_{s'} \text{ implies } M'_{s'} \entails \phi\\
+\simulation_a M'_{s'} \text{ implies } M'_{s'} \entails \phi
 \end{eqnarray*}
 \end{definition}
 
@@ -72,13 +78,13 @@ resulting $a$-refinement, $\knows_a \bot$ is satisfied, and hence $\somerefs_a
 \knows_a \bot$ is satisfied in the original model. However because of the serial
 property of \classS{} and \classKD{} models, $\knows_a \bot$ is not even
 satisfiable in \logicSF{} or \logicKDF{}, and hence $\somerefs_a \knows_a \bot$
-is not satisfiable as well.
+is not satisfiable either.
 
 We also note that for a class of frames \classC{}, the refinement quantified
 modal logic \logicCF{} is a conservative extension of the basic modal logic
 \logicC{}. This is because the interpretation of any formula that does not
-contain a $\allrefs_a$ operator is defined to be the same as the interpretation
-of that formula in basic modal logic.
+contain a $\allrefs_a$ operator is the same as the interpretation of that
+formula in basic modal logic.
 
 \begin{lemma}
 The logic \logicKF{} is bisimulation invariant.
@@ -95,3 +101,21 @@ French and Pinchinat~\cite{french2010future} applies to \logicSF{} and
 \logicKDF{}.
 
 % TODO - examples
+\begin{proposition}[Properties of \logicKF{}, \logicKDF{} and \logicSF{}] Let
+$\phi \in \langF$, let $\psi$ be an $a$-positive formula, and let $\pi$ be a
+propositional formula. Then the following are valid:
+
+\begin{enumerate}
+\item $\classK \entails \allrefs_a \pi \iff \pi$
+\item $\classK \entails \allrefs_a \phi \implies \phi$
+\item $\classK \entails \allrefs_a \psi \iff \psi$
+\item $\classK \entails \somerefs_a \knows_a \bot$
+\item $\classK \entails \somerefs_a \somerefs_b \phi \iff \somerefs_b
+\somerefs_a \phi$
+\item $\classK \entails \somerefs_a \phi \iff \somerefs_a \somerefs_a \phi$
+\item $\classS \entails \pi \iff \somerefs_a \knows_a \pi$
+\end{enumerate}
+\end{proposition}
+
+% TODO - example where \neg \somerefs_a \phi and \phi is not just a
+% contradictory statement in modal logic

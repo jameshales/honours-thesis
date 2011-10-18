@@ -1,10 +1,7 @@
 \chapter{Modal logic}\label{k}
 
 In this chapter we will provide a sound and complete axiomatisation of the
-refinement quantified modal logic, over the class of \classK{}. van Ditmarsch,
-French and Pinchinat~\cite{french2010future} previously gave an axiomatisation
-for the single-agent case of this logic. We extend these results with an
-axiomatisation for the multi-agent case.
+multi-agent refinement quantified modal logic, over the class of \classK{}. 
 
 \section{Technical preliminaries}
 
@@ -21,10 +18,10 @@ the same disjunctive normal form, which we will define now.
 \begin{definition}[Disjunctive normal form]
 A formula in disjunctive normal form is defined by the following abstract syntax:
 $$
-\alpha ::= \pi \land \bigwedge_{a \in B \subseteq A} \covers_a \Gamma_a \bnfalt \alpha \lor \alpha
+\alpha ::= \pi \land \bigwedge_{a \in B} \covers_a \Gamma_a \bnfalt \alpha \lor \alpha
 $$
-where $\pi$ stands for a propositional formula, and for $a \in B \subseteq A$,
-$\Gamma_a$ stands for a finite set of formulae in disjunctive normal form.
+where $\pi$ stands for a propositional formula, $B \subseteq A$, and for $a \in
+B$, $\Gamma_a$ stands for a finite set of formulae in disjunctive normal form.
 \end{definition}
 
 To show that every \lang{} formula is equivalent to a disjunctive normal
@@ -199,11 +196,11 @@ The axiomatisation \axiomKF{} is sound for the class of \classK{} models.
 \end{lemma}
 
 \begin{proof}
-The soundness of the axioms {\bf P}, and {\bf K}, and the rules {\bf MP} and
+The soundness of the axioms {\bf P} and {\bf K}, and the rules {\bf MP} and
 {\bf NecK} can be shown by the same reasoning used to show that they are sound
 in basic modal logic. As the axioms {\bf RP} and {\bf R}, and the rule {\bf
 NecR} involve only a single agent, their soundness can be shown by the same
-reasoning used to how that they are sound in the single-agent refinement
+reasoning used to show that they are sound in the single-agent refinement
 quantified modal logic~\cite{french2010future}.
 
 All that remains to be shown is the soundness of {\bf RK}, {\bf RComm}, and {\bf
@@ -512,24 +509,26 @@ the axiomatisation \axiomKF{}.
 \end{lemma}
 
 \begin{proof}
-Let $\alpha \in \langF{}$. We prove by induction on the number of occurrences of
-\somerefs{} in $\alpha$ that $\alpha$ is equivalent to a \somerefs{}-free
-formula, and therefore to a formula in \lang{}. The base case where $\alpha$
-contains no \somerefs{} operators is trivial, as a \somerefs{}-free formula is a
-formula in \lang{}. Suppose instead that $\alpha$ contains $n + 1$ \somerefs{}
-operators, and assume that any formula with $n$ \somerefs{} operators is
-provably equivalent to a formula in \lang{}. We use the axioms of \axiomKF{} to
-show that $\alpha$ is provably equivalent to a formula with $n$ \somerefs{}
-operators, and that therefore by the induction hypothesis it is provably
-equivalent to a formula in \lang{}.
+Let $\alpha \in \langF{}$. We assume without loss of generality that all
+\allrefs{} operators are expressed as \somerefs{} operators, by the equivalence
+$\allrefs_a \phi \iff \neg \somerefs_a \neg \phi$. We prove by induction on the
+number of occurrences of \somerefs{} in $\alpha$ that $\alpha$ is equivalent to
+a \somerefs{}-free formula, and therefore to a formula in \lang{}. The base
+case where $\alpha$ contains no \somerefs{} operators is trivial, as a
+\somerefs{}-free formula is a formula in \lang{}. Suppose instead that $\alpha$
+contains $n + 1$ \somerefs{} operators, and assume that any formula with $n$
+\somerefs{} operators is provably equivalent to a formula in \lang{}. We use
+the axioms of \axiomKF{} to show that $\alpha$ is provably equivalent to a
+formula with $n$ \somerefs{} operators, and that therefore by the induction
+hypothesis it is provably equivalent to a formula in \lang{}.
 
 Choose a subformula from $\alpha$ of type $\somerefs_a \beta$, where $\beta$ is
-\somerefs{}-free. Without loss of generality, by Lemma~\ref{k-dnf} we may assue
+\somerefs{}-free. Without loss of generality, by Lemma~\ref{k-dnf} we may assume
 that $\beta$ is in disjunctive normal form. We prove by induction on the
 structure of $\beta$ that $\somerefs_a \beta$ is provably equivalent to a
 formula $\chi \in \lang$. The induction hypothesis is that for any proper
-subformula of $\beta$ that $\somerefs_a \beta$ is equivalent to a formula in
-\lang{}.
+subformula $\phi$ of $\beta$ that $\somerefs_a \phi$ is equivalent to a formula
+in \lang{}.
 
 The base case is when $\beta$ is a propositional formula. In this case, from
 {\bf P} and {\bf RP}, we have that $\somerefs_a \beta \iff \beta$, and therefore
@@ -544,10 +543,10 @@ operator applied to a subformula of $\beta$ with an equivalent formula in
 \lang{}. The resulting formula is also in \lang{}.
 
 Therefore by the principle of mathematical induction, $\somerefs_a \beta$ is
-equivalent to a formula in $\chi \in \lang{}$ for every $\beta \in \lang{}$. 
+equivalent to a formula $\chi \in \lang{}$ for every $\beta \in \lang{}$. 
 
-Hence replacing $\somerefs_a \beta$ in $\alpha$ with $\chi$ gives a formula
-equivalent to $\alpha$ that contains only $n$ \somerefs operators.
+Hence replacing $\somerefs_a \beta$ in $\alpha$ with $\chi$ gives an equivalent
+formula that contains only $n$ \somerefs{} operators.
 
 Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
 a formula in \lang{}.
@@ -563,7 +562,7 @@ equivalent to $\phi$.  If $\psi$ is a theorem in \logicK{}, then $\phi$ is a
 theorem in \axiomKF{}.
 \end{corollary}
 
-\begin{proof}
+\begin{proof} % TODO - replace with reference to \ref{single-derivable-s5} ?
 Let $\phi \in \langF$ and let $\psi \in \lang$ be semantically equivalent to
 $\phi$. By Lemma~\ref{k-translation}, we can obtain some $\phi' \in \lang$
 that is semantically equivalent to $\phi$ (and thus also to $\psi$) by following
