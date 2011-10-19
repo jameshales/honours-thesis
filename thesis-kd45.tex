@@ -146,7 +146,6 @@ logic version of this disjunctive normal form.
 \begin{definition}[Cover logic disjunctive normal form]
 A formula in $a$-cover logic disjunctive normal form is defined by the following
 abstract syntax:
-
 $$
 \alpha ::= \pi \land \bigwedge_{b \in B} \covers_b \Gamma_b \bnfalt
 \alpha \lor \alpha
@@ -155,9 +154,8 @@ where $\pi$ stands for a propositional formula, $B \subseteq A - \{a\}$, and
 $\Gamma_b$ stands for a finite, non-empty set of formulae in $b$-cover
 disjunctive normal form.
 
-A formula in cover logic disjunctive normal form is defined by the following abstract
-syntax:
-
+A formula in cover logic disjunctive normal form is defined by the following
+abstract syntax:
 $$
 \alpha ::= \pi \land \bigwedge_{a \in B} \covers_a \Gamma_a \bnfalt
 \alpha \lor \alpha
@@ -423,7 +421,6 @@ from $s$ to its successors, then $R^N_b$ is also transitive and Euclidean.
 Therefore $N$ is a doxastic model.
 
 We construct an $a$-simulation $\mathcal{R}$ from $N_t$ to $M_s$, where:
-
 $$\mathcal{R} = \{(t, s)\} \cup \{(s', s') \mid s' \in S^M \} 
 \cup \bigcup_{\gamma \in \Gamma_a} \mathcal{R}^\gamma$$
 
@@ -638,7 +635,6 @@ within \axiomKDF{}.
 
 \begin{lemma}\label{kd45-rdist-converse}
 The following is derivable in \axiomKDF{}.
-
 $$
 \proves \bigwedge_{b \in A} \somerefs_a \covers_b \Gamma_b \iff
 \somerefs_a \bigwedge_{b \in A} \covers_b \Gamma_b \\

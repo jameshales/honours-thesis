@@ -105,19 +105,20 @@ We will now give a precise definition of the language, \lang{}, of basic modal
 logic, and its semantics over a general class of Kripke models.
 
 \begin{definition}[Language of \lang{}]
-Given a finite set of agents $A$ and a set of propositional atoms $P$, the
-language of \langF{} is defined by the following abstract syntax:
+Given a non-empty, finite set of agents $A$ and a non-empty, countable set of
+propositional atoms $P$, the language of \langF{} is defined by the following
+abstract syntax:
 $$
 \alpha ::=  p \bnfalt
             \neg \alpha \bnfalt
-            \phi \land \alpha \bnfalt
+            \alpha \land \alpha \bnfalt
             \knows_a \alpha
 $$
 where $p \in P$, $a \in A$ and $\alpha \in \lang{}$.
 \end{definition}
 
 Standard abbreviations include:
-$\top ::= \phi \lor \neg \phi$;
+$\top ::= p \lor \neg p$;
 $\bot ::= \neg \top$;
 $\phi \lor \psi ::= \neg (\neg \phi \land \neg \psi)$;
 $\phi \implies \psi ::= \neg \phi \lor \psi$;
