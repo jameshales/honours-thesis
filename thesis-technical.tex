@@ -22,7 +22,7 @@ worlds possible: the world where $p$ is true, and the world where $p$ is false.
 
 Modal logics allow us to reason about these possible worlds by qualifying
 statements with operators known as modalities. If we are considering a
-multi-agent setting, where there is a set $A$ of agents, then modal logic
+multi-agent setting, where there is a set of agents, $A$, then modal logic
 introduces the operators $\knows_a$ and $\suspects_a$ for each agent $a \in A$.
 We can qualify a statement $\phi$ with these operators, where $\knows_a \phi$
 means that $\phi$ is true in every world that the agent $a$ considers possible,
@@ -30,7 +30,11 @@ and $\suspects_a \phi$ is true in at least one of the worlds that the agent $a$
 considers possible. In basic modal logic, the operator $\knows_a$ is said to
 represent necessity; $\knows_a \phi$ means that $a$ considers $\phi$ to be
 necessarily true. In doxastic and epistemic logic on the other hand, $\knows_a$
-is said to represent belief and knowledge respectively.
+is said to represent belief and knowledge respectively. The interpetation in
+terms of knowledge is quite intuitive; if an agent considers a set of possible
+worlds, and some statement $\phi$ is true in all of the worlds that the agent
+considers possible (that is, $\knows_a \phi$), then it can reasonably be said
+that the agent {\em knows} that $\phi$.
 
 To introduce modal logic, we will begin with the definition of a Kripke model,
 the definition of the modal language \lang{}, and the semantics of modal logic.
@@ -213,7 +217,7 @@ are actually true. The properties (\ref{pre-property-4}), and
 Axiom} and the {\em Negative Introspection Axiom} respectively, and ensures that
 if an agent knows (or believes) a statement, then they know that they know it
 (or believe that they believe it), and likewise if they do not know or believe a
-statement.
+statement, then they know or believe that this is the case.
 
 We note that the proofs of properties (\ref{pre-property-d}),
 (\ref{pre-property-4}) and (\ref{pre-property-5}) rely only on the serial,
@@ -402,17 +406,6 @@ will briefly introduce two properties to illustrate how refinements correspond
 to the notion of an informative update.
 
 \begin{definition}[Positive formulae]
-An $a$-positive formula is defined by the following abstract syntax:
-$$
-\alpha ::=  p \bnfalt
-            \neg p \bnfalt
-            \alpha \land \alpha \bnfalt
-            \alpha \lor \alpha \bnfalt
-            \knows_b \alpha \bnfalt
-            \suspects_c \alpha
-$$
-where $p \in P$, $b \in A$ and $c \in A - \{a\}$.
-
 A positive formula is defined by the following abstract syntax:
 $$
 \alpha ::=    p \bnfalt 
@@ -424,28 +417,29 @@ $$
 where $p \in P$ and $a \in A$.
 \end{definition}
 
-\begin{proposition}
-Let $M_s$ and $M'_{s'}$ be Kripke models such that $M'_{s'} \refinement_a M_s$,
-and let $\phi$ be an $a$-positive formula. If $M_s \entails \phi$ then $M'_{s'}
-\entails \phi$. This also holds if $\phi$ is a positive formula and/or $M'_{s'}$
-is a refinement (rather than an $a$-refinement) of $M_s$.
+\begin{proposition}\label{pre-positive}
+Let $M_s$ and $M'_{s'}$ be Kripke models such that $M'_{s'} \refinement M_s$,
+and let $\phi$ be a positive formula. If $M_s \entails \phi$ then $M'_{s'}
+\entails \phi$. 
 \end{proposition}
 
-Using an epistemic interpretation, the positive formulae can be interpreted as
-those formulae that only mention {\em positive knowledge}. This is as opposed to
-formulae which mention negative knowledge, such as $\neg \knows_a p$, or
-suspicions. Intuitively one can say that an informative update should only cause
-an agent to gain additional information, and cannot cause an agent to {\em
-forget} any any information. Thus anything that an agent knows before an
-informative update, the agent should continue to know after an informative
-update.  This is not quite accurate, as a formula that involves negative
-knowledge may potentially be invalidated by an informative update. For example,
-suppose that we have a situation where $\knows_a \neg \knows_b p$, i.e. that $a$
-knows that $b$ doesn't know that $p$. Then it is reasonable that an informative
-update could tell $b$ that $p$, and so after the informative update $\knows_b
-p$. This invalidates the statement that $\knows_a \neg \knows_b p$. Thus not all
-knowledge is retained by an informative update, only positive knowledge should
-be retained.
+Using an epistemic interpretation, one can reasonably say that an informative
+update should only cause an agent to gain additional information, and cannot
+cause an agent to {\em forget} any information that it has previously been told.
+Thus anything that an agent knows before an informative update, the agent should
+continue to know after an informative update. This is not quite accurate, as a
+formula that involves {\em negative knowledge} may be invalidated by an
+informative update. For example, suppose that we have a situation where
+$\knows_a \neg \knows_b p$, i.e. $a$ knows that $b$ doesn't know that $p$. We
+say this situation involves negative knowledge because it refers to a lack of
+knowledge of agent $b$. Then it is reasonable that an informative update could
+tell $b$ that $p$ is true, and so after the informative update, $\knows_b p$.
+This causes $\neg \knows_b p$ to become false, and since it is now false, it
+cannot possibly be known (since only true statements can be known). Thus not all
+knowledge is retained by an informative update, only positive knowledge is
+retained. The fact that refinements preserve positive knowledge is an important
+property for refinements in modelling informative updates in an epistemic
+setting.
 
 \begin{proposition}
 On finite epistemic models, every finite refinement is equivalent to the
