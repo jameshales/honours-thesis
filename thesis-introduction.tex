@@ -2,16 +2,15 @@
 
 % Introduce modal logic
 
-{\em Modal logics} are extensions of propositional logic, used to reason
-intrinsically about the properties of relational structures known as {\em
-Kripke models}, by qualifying the truth of statements with operators known as
-{\em modalities}. {\em Epistemic logic} is a variant of modal logic, commonly
-known as the logic of knowledge, where the Kripke models that are considered
-encode the knowledge that a collection of agents hold about the state of the
-world, and the effect of modalities is to say that an agent {\em knows} a
-statement to be true. {\em Doxastic logic} is a similar variant of modal logic,
-the logic of belief, that considers the beliefs that a collection of agents
-hold.
+{\em Modal logics} are extensions of propositional logic, used to reason about
+the properties of relational structures known as {\em Kripke models}, by
+qualifying the truth of statements with operators known as {\em modalities}.
+{\em Epistemic logic} is a variant of modal logic, commonly known as the logic
+of knowledge, where the Kripke models that are considered encode the knowledge
+that a collection of agents hold about the state of the world, and the effect of
+modalities is to say that an agent {\em knows} a statement to be true. {\em
+Doxastic logic} is a similar variant of modal logic, the logic of belief, that
+considers the beliefs that a collection of agents hold.
 
 % Introduce dynamic epistemic logic
 {\em Dynamic epistemic logic} and {\em dynamic doxastic logic} are fields that
@@ -30,7 +29,7 @@ A classic example is that of the muddy children puzzle, explained by van
 Ditmarsch, van der Hoek and Kooi~\cite{vanditmarsch2007dynamic}:
 
 \begin{quote}
-A group of children has been playing outside and are called back into the house
+``A group of children has been playing outside and are called back into the house
 by their father. The children gather round him. As one may imagine, some of them
 have become dirty from the play and in particular: they may have mud on their
 forehead. Children can only see whether other children are muddy, and not if
@@ -38,7 +37,7 @@ there is any mud on their own forehead. All this is commonly known, and the
 children are, obviously, perfect logicians. Father now says: “At least one of
 you has mud on his or her forehead.” And then: “Will those who know whether they
 are muddy please step forward.” If nobody steps forward, father keeps repeating
-the request.
+the request.''
 \end{quote}
 
 The puzzle is whether each of the children can eventually determine whether
@@ -65,21 +64,21 @@ achieve certain knowledge or belief states after some sequence of informative
 updates. This is an interesting question because, as we have already
 demonstrated with the muddy children puzzle, it is not always obvious whether or
 not certain knowledge or belief states are attainable. This has applications in
-areas such as games with imperfect knowledge, where one may wish to know whether
-certain knowledge can be deduced from given information, or in security
+areas such as games with imperfect information, where one may wish to know
+whether certain knowledge can be deduced from given information, or in security
 protocols, where one may desire assurances that certain knowledge cannot be
 indirectly deduced from seemingly innocuous communication.
+% TODO - Bridge, russian card games, security protocols
 
 % Introduce informative updates
 Previous work has considered a number of different representations of
 informative updates. In the context of epistemic logic, two of the most notable
 are {\em public announcements}, and {\em action models}. Public announcements
 are a relatively simple and restrictive form of informative update, whereas
-actions models are more general and expressive, and are also capable of
-expressing any public announcement. We avoid discussing representations in
-doxastic logic for the time being, as the most notable, belief revision, is
-conceptually different from the epistemic notions of information change that
-the present work is based on.
+actions models are more general and expressive. We avoid discussing
+representations in doxastic logic for the time being, as the most notable,
+belief revision, is conceptually different from the epistemic notions of
+information change that the present work is based on.
 
 % Motivate previous logics
 As we are interested in questions about what knowledge or belief states can
@@ -100,12 +99,12 @@ Plaza~\cite{plaza2007logics}, and also independently by Gerbrandy and
 Groenvald~\cite{gerbrandy1997reasoning} is an extension of epistemic logic that
 introduces an operator for reasoning about the results of a specific public
 announcement. A similar logic, the {\em action model logic}, was introduced by
-Baltag and Moss~\cite{baltag2004logics}, that allows reasoning about the
-results of executing a specific action model. Balbiani, et
+Baltag and Moss~\cite{baltag2004logics}, allows reasoning about the results of
+executing a specific action model. Balbiani, et
 al.~\cite{balbiani2007arbitrary} then explored the {\em arbitrary public
-announcement logic}, an extension of the public announcement logic that adds
-an operator for reasoning about the results of arbitrary public announcements.
-It was later shown by van Ditmarsch and French~\cite{french2008undecidability}
+announcement logic}, an extension of the public announcement logic that adds an
+operator for reasoning about the results of arbitrary public announcements.  It
+was later shown by van Ditmarsch and French~\cite{french2008undecidability}
 that the arbitrary public announcement logic is undecidable. It has not been
 considered whether a similar extension of action model logic would be decidable
 or not, but the effect of the undecidability result in arbitrary public

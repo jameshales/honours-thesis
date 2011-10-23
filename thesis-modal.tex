@@ -1,0 +1,377 @@
+\chapter{Modal, doxastic and epistemic logics}\label{modal}
+
+In this chapter we give a brief introduction to modal, doxastic and epistemic
+logics, the required background material for this paper.
+
+To introduce modal logic, we will begin with the definition of a Kripke model.
+
+% Definition of Kripke models
+Let $A$ be a non-empty, finite set of agents, and let $P$ be a non-empty,
+countable set of propositional atoms.
+
+\begin{definition}[Kripke model]
+A \textit{Kripke model} $M = (S, R, V)$ consists of a \textit{domain} $S$, which
+is a set of states (or worlds), an \textit{accessibility relation} $R : A \to
+\mathcal{P}(S \times S)$, and a \textit{valuation} $V : P \to \mathcal{P}(S)$. 
+
+The class of all Kripke models is called \classK{}. We write $M \in \classK{}$
+to denote that $M$ is a Kripke model.
+\end{definition}
+
+For $R(a)$, we write $R_a$. We write $sR_a$ for $\{t \mid (s, t) \in R_a\}$ and
+we write $R_at$ for $\{s \mid (s, t) \in R_a\}$. As we will be required to
+discuss several models at once, we will use the convention that $M = (S^M, R^M,
+V^M)$, $N = (S^N, R^N, V^N)$, and so on. For $s \in S^M$ we will let $M_s$ refer
+to the pair $(M, s)$, also known as the pointed Kripke model of $M$ at state
+$s$.
+
+Modal logics can be said to model notions such as necessity, knowledge or
+belief. To help with the introduction however, we will for now adopt an analogy
+using knowledge. Under the {\em possible worlds} interpretation of modal logic,
+each agent can be said to live in a world where there are a certain set of facts
+that are true or false. The agent may not have complete knowledge about which of
+those facts are true or false, and so it may consider several possibilities. We
+say that an agent considers several possible worlds, where the truth of each
+fact may be different in each world. Thus each agent considers a set of worlds
+to be possible, and we say that the agent {\em knows} a statement about the
+world to be true if that statement is true in all of the worlds that it
+considers possible. For example, if an agent knew everything that there was to
+know about the world, then it would consider only one world possible: the actual
+world; whereas if an agent was uncertain about a particular statement $\phi$
+about the world, then the agent would consider at least two worlds possible: a
+world where $\phi$ is true and a world where $\phi$ is false.
+
+Kripke models are an encoding of this possible worlds interpretation. Each state
+of the Kripke model represents a world, and the facts that are true at that
+world are represented by the propositional atoms that are true at the state,
+according to the valuation of the Kripke model. At each state, the worlds that
+an agent considers possible are those worlds that are accessible from that state
+according to that agent's accessibility relation.
+
+It should be emphasised that the worlds that an agent considers possible are not
+a global property of the Kripke model, but rather the possible worlds can vary
+from state to state. This is reflected in the fact that the possible worlds are
+represented by the states accessible from a particular state, rather than by a
+fixed subset of states of the Kripke model. Furthermore it should be noted that
+the statements about the world that an agent can know about is not limited just
+to statements directly about the facts of the world; agents may be aware of the
+knowledge of other agents.
+
+In the basic modal logic, we usually refer to the notion of necessity. Thus if a
+statement is true in all of the worlds that an agent considers possible, then
+the agent considers that statement to be necessary. We will explain the
+difference between necessity, knowledge and belief later; for the moment the
+difference is not important.
+
+We will now give a precise definition of the language, \lang{}, of basic modal
+logic, and its semantics over a general class of Kripke models.
+
+\begin{definition}[Language of \lang{}]
+Given a non-empty, finite set of agents $A$ and a non-empty, countable set of
+propositional atoms $P$, the language of \lang{} is defined by the following
+abstract syntax:
+$$
+\alpha ::=  p \bnfalt
+            \neg \alpha \bnfalt
+            \alpha \land \alpha \bnfalt
+            \knows_a \alpha
+$$
+where $p \in P$, $a \in A$ and $\alpha \in \lang{}$.
+\end{definition}
+
+Standard abbreviations include:
+$\top ::= p \lor \neg p$;
+$\bot ::= \neg \top$;
+$\phi \lor \psi ::= \neg (\neg \phi \land \neg \psi)$;
+$\phi \implies \psi ::= \neg \phi \lor \psi$;
+and $\suspects_a \phi ::= \neg \knows_a \neg \phi$.
+
+The symbol $\knows_a$ is said to represent necessity in modal logics. Thus we
+may read $\knows_a \phi$ as ``$a$ considers $\phi$ necessary''. The dual
+operator, $\suspects_a$ represents possibility; hopefully it is intuitive that
+if a statement is not necessarily false, then it is possible. Thus we may read
+$\suspects_a \phi$ as ``$a$ considers $\phi$ possible''.
+
+\begin{definition}[Semantics of \logicC{}]
+Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
+be a Kripke model taken from \classC{}. The interpretation of $\phi$ in a
+pointed Kripke model $M_s$ is defined inductively:
+\begin{eqnarray*}
+M_s &\entails& p \text{ iff } s \in V_p\\
+M_s &\entails& \neg \phi \text{ iff } M_s \nentails \phi\\
+M_s &\entails& \phi \land \psi \text{ iff } M_s \entails \phi \text{ and } M_s
+\entails \psi\\
+M_s &\entails& \knows_a \phi \text{ if for all } t \in S : (s, t) \in R_a \text{
+implies } M_t \entails \phi
+\end{eqnarray*}
+\end{definition}
+
+We say that a formula $\phi$ is {\em satisfied} by a pointed Kripke model $M_s
+\in \classC$ if and only if $M_s \entails \phi$. We say that $\phi$ is satisfied
+by a Kripke model $M \in \classC$ if and only if $M_s \entails \phi$ for some $s
+\in S^M$. We say that $\phi$ is {\em satisfied} by a class of Kripke models
+$\classC$ if and only if it is satisfied by every Kripke model $M \in \classC$.
+We say that $\phi$ is {\em valid} in a Kripke model $M \in \classC$ if and only
+if $M_s \entails \phi$ for every $s \in S^M$. We write $M \entails \phi$. We say
+that $\phi$ is {\em valid} in a class of Kripke models $\classC$ if and only if
+$M \entails \phi$ for every $M \in \classC$. We write $\entails_{\classC} \phi$.
+
+We take a moment to remark on the interpretation of the modal logic. We note
+that modal formulae are interpreted in pointed Kripke models. In our possible
+worlds interpretation, a pointed Kripke model $M_s$ can be said to be a Kripke
+model where we have designated a particular state, $s$, as the actual or current
+world. A propositional variable is interpreted with respect to the valuation at
+the current state of the Kripke model. Negation and conjunction are interpreted
+in the intuitive manner, both at the current state. The most notable aspect of
+the interpretation of modal logic is the interpretation of the $\knows_a$
+operator.  The $\knows_a$ operator effectively moves consideration from the
+current state of the pointed Kripke model to each of the states accessible from
+the current state, under the Kripke model's accessibility relation. This
+captures the notion that we described earlier, that an agent considers a
+statement to be necessary if that statement is true in all of the worlds that it
+considers possible. It should be clear that under this interpretation, the dual
+operator, $\suspects_a$, also captures the notion that an agent considers a
+statement to be possible if that statement is true in at least one of the worlds
+that it considers possible.
+
+Modal logics are interpreted over classes of Kripke models. The simplest normal
+modal logic, \logicK{}, is interpreted over the class of all Kripke models,
+\classK{}. Variants of modal logic are interpreted over subclasses of \classK{},
+which impose constraints on the accessibility relations of the Kripke models.
+Doxastic logic, \logicKD{}, and epistemic logic, \logicS{}, are two variants of
+modal logic that are interpreted over different classes of epistemic models: the
+class of doxastic models, \classKD{}, and the class of epistemic models,
+\classS{}, respectively. As we will see later, the constraints that are imposed
+on these classes of models gives us properties that make doxastic and epistemic
+logic represent simple notions that we have about belief and knowledge.
+
+We will now define doxastic and epistemic models, first defining the relational
+properties that we will use to describe them.
+
+\begin{definition}[Relational properties]
+Let $S$ be a set and let $R \subseteq S \times S$. Then we define the following
+properties of $R$.
+\begin{enumerate}
+\item $R$ is {\em serial} if and only if for every $s \in S$ there
+exists some $t \in S$ such that $(s, t) \in R$.
+\item $R$ is {\em reflexive} if and only if for every $s \in S$ we
+have that $(s, s) \in R$.
+\item $R$ is {\em transitive} if and only if for every $(s, t), (t, r)
+\in R$ we also have that $(s, r) \in R$.
+\item $R$ is {\em Euclidean} if and only if for every $(s, t), (s, r)
+\in R$ we also have that $(t, r) \in R$.
+\item $R$ is {\em symmetric} if and only if for every $(s, t) \in R$
+we also have that $(t, s) \in R$.
+\end{enumerate}
+\end{definition}
+
+We note that if $R$ is reflexive then it is also serial. We also note that 
+$R$ is reflexive and Euclidean, if and only if it is reflexive, transitive and
+symmetric.
+
+\begin{definition}[Doxastic model]
+A \textit{doxastic model} is a Kripke model $M = (S, R, V)$ such that the
+relation $R_a$ is serial, transitive, and Euclidean for all $a \in A$. The class
+of all doxastic models is called \classKD{}. We write $M \in \classKD{}$ to
+denote that $M$ is a doxastic model.
+\end{definition}
+
+\begin{definition}[Epistemic model]
+An \textit{epistemic model} is a Kripke model $M = (S, R, V)$ such that the
+relation $R_a$ is reflexive, transitive and symmetric for all $a \in A$. The
+class of all epistemic models is called \classS{}. We write $M \in \classS{}$ to
+denote that $M$ is an epistemic model.
+\end{definition}
+
+We note that every epistemic model is also a doxastic model, as if a relation
+$R_a$ is reflexive, transitive and symmetric, then it is also serial and
+Euclidean, and therefore satisfies the constraints of a doxastic model.
+
+The logics \logicK{}, \logicKD{} and \logicS{} are instances of \logicC{} with
+classes \classK{}, \classKD{} and \classS{} respectively. It should be noted
+that \logicKD{} is a conservative extension of \logicK{}, and \logicS{} is a
+conservative extension of \logicKD{} (and also of \logicK{}). This means that
+every valid formula in \logicK{} is also valid in \logicKD{}, and likewise for
+\logicKD{} and \logicS{}. This is because any formula that is valid with respect
+to a particular class of Kripke models is also valid for any subclass of those
+Kripke models.
+
+\begin{proposition}[Properties of \logicK{}, \logicKD{} and
+\logicS{}]\label{pre-properties}
+Let $\phi, \psi \in \lang$. Then the following are valid:
+
+\begin{enumerate}
+\item\label{pre-property-k} $\entails_{\classK} \knows_a (\phi \implies \psi) \implies \knows_a \phi
+\implies \knows_a \psi$
+\item\label{pre-property-conj} $\entails_{\classK} \knows_a \phi \land \knows_a \psi \iff \knows_a (\phi \land \psi)$
+\item $\entails_{\classK} \suspects_a \phi \lor \suspects_a \psi \iff \suspects_a (\phi
+\lor \psi)$
+\item\label{pre-property-d} $\entails_{\classKD} \knows_a \phi \implies \suspects_a \phi$
+\item\label{pre-property-4} $\entails_{\classKD} \knows_a \phi \implies \knows_a \knows_a \phi$
+\item\label{pre-property-5} $\entails_{\classKD} \neg\knows_a \phi \implies \knows_a \neg \knows_a \phi$
+\item\label{pre-property-t} $\entails_{\classS} \knows_a \phi \implies \phi$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item Let $M_s \in \classK{}$ such that $M_s \entails \knows_a (\phi \implies \psi)$
+and $M_s \entails \knows_a \phi$. Then for every $t \in sR_a$, we have $M_t
+\entails \phi \implies \psi$ and $M_t \entails \phi$. Therefore for every $t \in sR_a$,
+we have $M_t \entails \psi$, and therefore we have that $M_s \entails \knows_a \psi$.
+\item Exercise.
+\item Exercise.
+\item Let $M_s \in \classKD{}$ such that $M_s \entails \knows_a \phi$. Then for
+every $t \in sR_a$, we have $M_t \entails \phi$. As $M_s \in \classKD{}$, we have
+that $R_a$ is serial. Therefore $sR_a \neq \emptyset$, and so there exists some
+$t \in sR_a$ such that $M_t \entails \phi$. Therefore $\suspects_a \phi$.
+\item Let $M_s \in \classKD{}$ such that $M_s \entails \knows_a \phi$. Then
+consider $t \in sR_a$ and $t' \in tR_a$. As $M_s \in \classKD{}$, we have that
+$R_a$ is transitive. Therefore $t' \in sR_a$, and so $M_{t'} \entails \phi$.
+Therefore $M_t \entails \knows_a \phi$, and so $M_s \entails \knows_a \knows_a \phi$. 
+\item Let $M_s \in \classKD{}$ such that $M_s \entails \neg \knows_a \phi$. Then
+there exists some $t \in sR_a$ such that $M_t \entails \neg \phi$. Then consider
+$t' \in sR_a$. As $M_s \in \classKD{}$, we have that $R_a$ is Euclidean.
+Therefore $t \in t'R_a$, and so $M_t \entails \neg \knows_a \phi$. Therefore $M_s
+\entails \knows_a \neg \knows_a \phi$.
+\item Let $M_s \in \classS{}$ such that $M_s \entails \knows_a \phi$. Then for
+every $t \in sR_a$, we have $M_t \entails \phi$. As $M_s \in \classS{}$, we have
+that $R_a$ is reflexive. Therefore $s \in sR_a$, and so $M_s \entails \phi$.
+\end{enumerate}
+\end{proof}
+
+We note that the properties described in Proposition~\ref{pre-properties}
+capture intuitive properties of belief and knowledge that lead to doxastic and
+epistemic logics being referred to as the logics of belief and knowledge. The
+property (\ref{pre-property-k}) is commonly known as {\em logical omniscience},
+and ensures that an agent knows all logical consequences of its own knowledge.
+The property (\ref{pre-property-d}) is commonly known as the {\em consistency
+axiom}, and ensures that an agent cannot have inconsistent beliefs, i.e. beliefs
+that contradict one another.  The related, but stronger property,
+(\ref{pre-property-t}) is commonly known as the {\em truth axiom}, and ensures
+that an agent can only know statements that are actually true in the current
+world. The properties (\ref{pre-property-4}), and (\ref{pre-property-5}) are
+commonly known as the {\em positive introspection axiom} and the {\em negative
+introspection axiom} respectively, and ensures that if an agent knows (or
+believes) a statement, then they know that they know it (or believe that they
+believe it), and likewise if they do not know or believe a statement, then they
+know or believe that this is the case.
+
+We note that the proofs of properties (\ref{pre-property-d}),
+(\ref{pre-property-4}) and (\ref{pre-property-5}) rely only on the serial,
+transitive and Euclidean properties of \classKD{} models, respectively. We also
+note that the proof of property (\ref{pre-property-t}) relies only on the
+reflexive property of \classS{} models. In fact, the class of Kripke models that
+satisfy each of these properties are precisely the class of Kripke models that
+satisfy the corresponding relational properties we have described; for example,
+the class of Kripke models that satisfy property (\ref{pre-property-d}) is
+precisely the class of models that have the serial property, and the class of
+Kripke models that satisfy property (\ref{pre-property-4}) is precisely the
+class of models that have the transitive property. This demonstrates a
+connection between the structural constraints imposed upon doxastic and
+epistemic models, and the properties we have described above, and we will refer
+back to this connection shortly.
+
+We will now provide a Hilbert-style axiomatisation for \logicK{}, \logicKD{} and
+\logicS{}. A Hilbert-style axiomatisation gives a method for deriving valid
+formulae in a logic. The type of axiomatisation that we give is called a
+substitution schema, which comprises of a set of axioms and a set of rules. The
+axioms are statements that contain variables, and substituting the variables for
+well-formed formulae gives a valid statement in the logic. The rules provide a
+method for deriving a validity from some other validities. The main results of
+this paper are axiomatisations of this style for the variants of refinement
+quantified modal logics.
+ 
+\begin{definition}[Axiomatisation \axiomK{}]\label{pre-axiom-k}
+The axiomatisation \axiomK{} is a substitution schema consisting of the
+following axioms:
+$$
+\begin{array}{rl}
+{\bf P} & \text{All propositional tautologies}\\
+{\bf K} & \knows (\phi \implies \psi) \implies \knows \phi \implies \knows
+\psi\\
+\end{array}
+$$
+
+Along with the rules:
+$$
+\begin{array}{rl}
+{\bf MP} & \text{From $\proves \phi \implies \psi$ and $\proves \phi$, infer
+$\proves \psi$}\\
+{\bf NecK} & \text{From $\proves \phi$ infer $\proves \knows_a \phi$}\\
+\end{array}
+$$
+\end{definition}
+
+We say that a formula $\phi$ is {\em provable} or {\em derivable} under an
+axiomatisation if and only if it can be derived using some finite sequence of
+axioms and rules from that axiomatisation, and we write $\proves \phi$. When we
+are discussing multiple axiomatisations at once, we may add a subscript to the
+turnstile symbol, e.g. $\proves_\axiomK \phi$, to make it more explicit which
+logic we are referring to.
+
+An axiomatisation of a logic must have two important properties: {\em soundness}
+and {\em completeness}. An axiomatisation is sound with respect to a logic if
+and only if every formula that can be derived from the axiomatisation is also
+valid in that logic. An axiomatisation is complete if and only if every formula
+that is valid in the logic is also derivable.
+
+The axiomatisations for \logicKD{} and \logicS{} are extensions of the
+axiomatisation \axiomK{}, which we will now provide.
+
+\begin{definition}[Axiomatisation \axiomKD{}]
+The axiomatisation \axiomKD{} is a substitution schema consisting of the axioms
+and rules of \axiomK{}, along with the additional axioms:
+$$
+\begin{array}{rl}
+{\bf D} & \knows \phi \implies \suspects \phi\\
+{\bf 4} & \knows \phi \implies \knows \knows \phi\\
+{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+\end{array}
+$$
+\end{definition}
+
+We note that the additional axioms for \axiomKD{} correspond to the properties
+of \classKD{} models described in Proposition~\ref{pre-properties}. The axiom of
+{\bf 5} is equivalent to property (\ref{pre-property-5}) from
+Proposition~\ref{pre-properties}. The axioms {\bf D}, {\bf 4} and {\bf 5} serve
+to restrict the logic to considering only the Kripke models that are serial,
+transitive and Euclidean.
+
+% TODO - Find citation
+
+\begin{definition}[Axiomatisation \axiomS{}]
+The axiomatisation \axiomS{} is a substitution schema consisting of the axioms
+and rules of \axiomK{}, along with the additional axioms:
+$$
+\begin{array}{rl}
+{\bf T} & \knows \phi \implies \phi\\
+{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+\end{array}
+$$
+\end{definition}
+
+% TODO - Find citation
+
+Once again, we note that the additional axioms for \axiomS{} correspond to the
+properties of \classS{} models described in Proposition~\ref{pre-properties}.
+The axioms {\bf T} and {\bf 5} serve to restrict the logic to considering only
+the Kripke models that are reflexive and Euclidean.  We note that the reflexive
+and Euclidean properties together imply transitivity and symmetry. Although it
+is not immediately obvious, the axioms {\bf D} and {\bf 4} from doxastic logic
+are both derivable using the axiomatisation \axiomS{}.
+
+Finally we remark on the differences between the notions of belief and knowledge
+that are modelled by doxastic and epistemic logics. As we have seen, doxastic
+and epistemic logics both have a notion of positive introspection and negative
+introspection. This is reflected by the transitive and Euclidean properties of
+\classKD{} and \classS{} models. These properties are shown to be defining of
+these logics by their representations in the axiomatisations \axiomKD{} and
+\axiomS{}, as the axioms {\bf 4} and {\bf 5}. The differences between the logics
+are due to the differences between the consistency axiom and the truth axiom.
+This is reflected by the serial property of \classKD{} models, and by the
+reflexive property of \classS{} models, and these properties are shown to be
+defining of these logics by the axioms {\bf D} and {\bf T} respectively. Thus we
+can simply say that knowledge is true belief, and that belief is like knowledge,
+with the exception that beliefs do not necessarily have to be true, but they do
+have to be consistent.
