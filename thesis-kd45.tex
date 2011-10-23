@@ -711,3 +711,17 @@ The axiomatisation \axiomKDF{} is sound and complete for the logic \logicKDF{}.
 The soundness proof is given in Lemma~\ref{kd45-sound} and the completeness
 proof is given in Lemma~\ref{kd45-complete}.
 \end{proof}
+
+We note that, as in the axiomatisation for the single-agent epistemic and
+doxastic logics, the completeness proofs above were performed with a provably
+correct translation from \langF{} to \lang{}, under the semantics of
+\logicKDF{}. This shows that \logicKDF{} is expressively equivalent to
+\logicKD{}, and allows us to show several results. In particular, \logicKDF{} is
+decidable.
+
+\begin{theorem}
+The logic \logicKDF{} is decidable.
+\end{theorem}
+
+This can be shown by following similar reasoning as used for the proof of
+Theorem~\ref{single-decidable}.

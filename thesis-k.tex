@@ -598,3 +598,17 @@ The axiomatisation \axiomKF{} is sound and complete for the logic \logicKF{}.
 The soundness proof is given in Lemma~\ref{k-sound} and the completeness
 proof is given in Lemma~\ref{k-complete}.
 \end{proof}
+
+We note that, as in the axiomatisation for the single-agent epistemic and
+doxastic logics, the completeness proofs above were performed with a provably
+correct translation from \langF{} to \lang{}, under the semantics of
+\logicKF{}. This shows that \logicKF{} is expressively equivalent to
+\logicK{}, and allows us to show several results. In particular, \logicKF{} is
+decidable.
+
+\begin{theorem}
+The logic \logicKF{} is decidable.
+\end{theorem}
+
+This can be shown by following similar reasoning as used for the proof of
+Theorem~\ref{single-decidable}.

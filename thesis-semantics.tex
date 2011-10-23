@@ -140,18 +140,22 @@ We call $M_s$ and $M'_{s'}$ bisimilar, and write $M_s \bisim M'_{s'}$ to denote
 that there is a bisimulation between $M_s$ and $M'_{s'}$.
 \end{definition}
 
+We note that bisimulation is an equivalence relation.
+
 Bisimulations relate Kripke models that are in a sense indistinguishable to
 modal logics. If two Kripke models are bisimilar, then they each satisfy the
 same set of modal formulae. This is a property of modal logics that is called
 bisimulation invariance.
 
-% TODO - definition of bisimulation invariance
-
 \begin{lemma}
-The logics \logicK{}, \logicKD{} and \logicS{} are bisimulation invariant.
+Let $M_s, M'_{s'} \in \classK$ be Kripke models such that $M_s \bisim M'_{s'}$,
+and let $\phi \in \lang$. Then $M_s \entails \phi$ if and only if $M'_{s'}
+\entails \phi$.
 \end{lemma}
 
-% TODO - Find citation
+This is shown by Blackburn, de Rijke and Venema~\cite{blackburn2002modal}. We
+note that this result holds equally if the models $M_s$ and $M'_{s'}$ are taken
+from subclasses of \classK{}.
 
 If we relax the properties of bisimulation slightly, we get a related notion
 known as a {\em simulation}, or its reverse relation, a {\em refinement}.
@@ -266,18 +270,20 @@ abbreviation for the dual of the $\allrefs_a$ operator, $\somerefs_a \phi ::=
 \neg \allrefs_a \neg \phi$.
 
 We also use the cover operator $\covers_a \Gamma$, where $\Gamma$ is a finite
-set of formulae, which is an abbreviation for 
-$\covers_a \Gamma ::= \knows_a \bigvee_{\gamma \in \Gamma} \gamma \land
-\bigwedge_{\gamma \in \Gamma} \suspects_a \gamma$. The cover operator is relied
-on for our axiomatisation, in much the same way it is relied on for the
-axiomatisation of \logicKiF{} presented by van Ditmarsch, French and
-Pinchinat~\cite{french2010future}. % TODO - include citation for cover operator
+set of formulae, which is an abbreviation for $\covers_a \Gamma ::= \knows_a
+\bigvee_{\gamma \in \Gamma} \gamma \land \bigwedge_{\gamma \in \Gamma}
+\suspects_a \gamma$. An axiomatisation of the modal $\mu$-calculus, using the
+cover operator, was given by Bilkova, Palmigiano and
+Venema~\cite{bilkova2008proof}. The cover operator is relied on for our
+axiomatisation, in much the same way it is relied on for the axiomatisation of
+\logicKiF{} presented by van Ditmarsch, French and
+Pinchinat~\cite{french2010future}.
 
 We note that the basic modalities $\knows_a$ and $\suspects_a$ can be expressed
 in terms of the cover operator, a fact that we will rely upon for all of our
 axiomatisations. We note that $\knows_a \phi \iff \covers_a \{\phi\} \lor
-\covers_a \emptyset$ and $\suspects_a \phi \iff \covers_a \{\phi, \top\}$. 
-% TODO - citation?
+\covers_a \emptyset$ and $\suspects_a \phi \iff \covers_a \{\phi,
+\top\}$~\cite{bilkova2008proof}. 
 
 \begin{definition}[Semantics of \logicCF{}]
 Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$

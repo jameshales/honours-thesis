@@ -450,3 +450,32 @@ similar results to Corollary~\ref{single-derivable-s5} and
 Lemma~\ref{single-complete-s5} can be shown with minor modifications to their
 proofs, which gives us completeness.
 \end{proof}
+
+The completeness proofs above were performed with a provably correct translation
+from \langFi{} to \langi{}, under the semantics of \logicSiF{} and \logicKDiF{}.
+This shows that \logicSiF{} and \logicKDiF{} are expressively equivalent to
+\logicSi{} and \logicKDi{} respectively. This allows us to show that \logicSiF{}
+and \logicKDiF{} share properties of \logicSi{} and \logicKDi{}, via this
+property. In particular, we will show that \logicSiF{} and \logicKDiF{} are
+decidable; that is, that there is a decision procedure for determining whether
+any formula in \langFi{} is valid in \langSiF{} or \langKDiF{}.
+
+% TODO - expressivity ???
+
+\begin{theorem}\label{single-decidable}
+The logics \logicSiF{} and \logicKDiF{} are decidable.
+\end{theorem}
+
+\begin{proof}
+Given a formula $\phi$ in \logicSiF{}, we can find an equivalent $\psi$ in
+\logicSi{} (from Lemma~\ref{single-reduction-s5}). We can therefore determine whether
+$\psi$ is satisfiable using a decision procedure designed for \logicSi{}. The
+decidability for \logicSiF{} therefore follows from the decidability of
+\logicSi{}~\cite{blackburn2002modal}.
+
+The proof for \logicKDiF{} is the same, but relying on
+Lemma~\ref{single-reduction-kd45} for the translation, and on the decidability of
+\logicKDi{}~\cite{blackburn2002modal}.
+\end{proof}
+
+% TODO - other results ???
