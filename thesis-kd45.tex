@@ -728,3 +728,25 @@ The logic \logicKDF{} is decidable.
 
 This can be shown by following similar reasoning as used for the proof of
 Theorem~\ref{single-decidable}.
+
+We finally remark on the challenges involved in an axiomatisation for the
+multi-agent refinement quantified epistemic logic. We can recognise the
+axiomatisations for the multi-agent refinement quantified modal and doxastic
+logics as generalisations of the axiomatisations for the single-agent variants
+of these logics. In each case, we generalise the {\bf RK} or {\bf RKD45} axiom,
+and introduce additional axioms, {\bf RComm} and {\bf RDist} to deal with the
+interactions between different agents in the logics. These axiomatisations have
+been designed so that the proof strategy of a provably correct translation is
+feasible in order to show that the axiomatisations are complete. Consequently
+the soundness proofs for these axioms have been the main technical result.
+
+We have briefly considered an axiomatisation for the multi-agent refinement
+quantified epistemic logic. The obvious generalisations however do not appear to
+be sound. The main obstacle in the epistemic setting is that we do not have a
+result similar to Lemma~\ref{kd45-successors}, due to the symmetry of \classS{}
+models. The $a$-disjunctive normal form used in this chapter ensures that this
+is the case for \classKD{} models, but unfortunately it is not strong enough to
+ensure the same property for \classS{} models. It is because of the symmetric
+property that we cannot combine models in the manner performed in the proof of
+{\bf RKD45}, and expect them to continue to satisfy the formulae we wish them to
+satisfy in the combined model.
