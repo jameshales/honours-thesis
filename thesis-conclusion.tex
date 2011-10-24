@@ -1,5 +1,30 @@
 \chapter{Conclusions}
 
+In this paper we have provided sound and complete axiomatisations for the
+single-agent refinement quantified epistemic and doxastic logics, and for the
+multi-agent refinement quantified modal and doxastic logics. The completeness
+proofs for each of these axiomatisations is performed via a provably correct
+translation from the refinement quantified modal logics to the basic modal
+logics, thus showing that each of the refinement quantified versions of these
+logics are expressively equivalent to the basic modal versions. This allows us
+to prove a number of properties about the refinement quantified modal logics,
+from the properties of basic modal logics, including decidability and the finite
+model property, and allows us to derive model-checking and decision procedures
+for these logics via the translations.
+
+Although the translation gives a decision procedure for the refinement
+quantified modal logics, we note that the decision procedure has a
+non-elementary time complexity. This is the case because of the conversion to
+disjunctive normal forms or prenex normal forms in each of the translations.
+This conversion must be performed for each refinement quantifier in the original
+formula, and results in a worst-case exponential blow-up in the size of the
+formula for each nested refinement operator, and hence a non-elementary time
+complexity. van Ditmarsch, French and Pinchinat~\cite{french2010future} provided
+a decision procedure for the single-agent refinement quantified modal logic that
+runs in 2EXP time, using a tableaux method, so a similar approach may work in
+the setting of the other refinement quantified logics.
+
+
 % Summarise main results - paragraph or two
 % Future work:
 %   - Multi-agent S5

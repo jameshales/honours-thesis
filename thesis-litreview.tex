@@ -10,12 +10,11 @@ Dynamic epistemic logic is the study of information change in modal epistemic
 systems. Information change is performed by informative updates, events that
 provide agents with additional information, whilst leaving factual information
 about the state of the world unchanged. Notable representations for informative
-updates in dynamic epistemic logic include {\em public announcements}, {\em
-epistemic actions}, and {\em action models}. I will briefly discuss these
-representations of informative updates, and the logics that have been devised to
-reason about them.
+updates in dynamic epistemic logic include {\em public announcements} and {\em
+action models}. I will briefly discuss these representations of informative
+updates, and the logics that have been devised to reason about them.
 
-\subsection*{Public announcements}
+\subsection{Public announcements}
 
 A public announcement is a simple form of informative update, that can be
 thought of as information that is announced to all agents in an epistemic system
@@ -31,11 +30,11 @@ every agent, and so these states are removed.
 The public announcement logic was introduced and axiomatised by
 Plaza~\cite{plaza2007logics}, and also independently by by Gerbrandy and
 Groenvald~\cite{gerbrandy1997reasoning}.  The logic introduces an operator
-$[\phi]$, that can be used to reason about the results of a specific public
-announcement. The operator, $[\phi] \psi$ means that after the formula $\phi$ is
-publicly announced, $\psi$ holds in the resulting epistemic state. This allows
-one to reason about the consequences of specific public announcements in the
-epistemic system.
+$[\alpha]$, where $\alpha$ is an epistemic formula, that can be used to reason
+about the results of a specific public announcement. The operator, $[\alpha]
+\phi$ means that after the formula $\alpha$ is publicly announced, $\phi$ holds
+in the resulting epistemic state. This allows one to reason about the
+consequences of specific public announcements in the epistemic system.
 
 Public announcements are a very limited form of informative update, because the
 information contained in a public announcement necessarily becomes common
@@ -45,89 +44,81 @@ the agents in the system. Public announcements are however suited to some
 interesting problems, for example the muddy children puzzle that was discussed
 in the introduction to this paper~\cite{vanditmarsch2007dynamic}.
 
-\subsection*{Epistemic actions}
+\subsection{Action models}
 
-Epistemic actions capture a more general notion of informative updates than
-public announcements. Compared to public announcements, epistemic actions are
-able to represent informative updates where information is provided to only a
-subset of the agents, or where an agent may be aware that one of several
-informative updates may have occurred, but is uncertain as to which specific
-informative update has occurred. 
+Action models capture a more general notion of informative updates than public
+announcements. Compared to public announcements, action models are able to
+represent informative updates that provide information to only a subset of the
+agents, or where an agent may be aware that one of several possible informative
+updates has occurred, but is uncertain as to which update actually occurred. 
 
 For example, we may have a situation with two agents, $a$ and $b$, where neither
-agent knows whether $p$ or $\neg p$, and this fact is common knowledge. The
-agent $a$ may be told privately that $p$ is actually the case, and although $b$
-cannot overhear this information, $b$ is still aware that some private
-communication is taking place. The result of this is that $a$ now knows that
-$p$, whilst $b$ continues to not know whether $p$ or $\neg p$. Furthermore,
-whereas before the informative update, $b$ knew that $a$ doesn't know whether
-$p$ or $\neg p$, after the informative update this is no longer the case; from
-the point of view of $b$, the informative update that occurred may have told $a$
-that $p$, or it may have told $a$ that $\neg p$, or it may have told $a$
-neither of these statements. Whilst the effect of the informative update was to
-provide additional knowledge to $a$, it also provided additional uncertainty to
-$b$.
+agent knows whether a proposition $p$ is true or false, and moreover, both
+agents know about the other's ignorance. There may be an informative update
+where $a$ is told privately that $p$ is in fact true, and although $b$ cannot
+overhear this information, $b$ is still aware that some private communication
+has taken place. The result of this is that $a$ now knows that $p$ is true,
+whilst $b$ still does not know whether $p$ is true or false i.e.  the
+informative update has provided information to only one of the agents.
+Furthermore, whereas before the informative update, $b$ knew that $a$ didn't
+know whether $p$ was true or false, after the informative update this is no
+longer the case. Although $b$ is aware that an informative update has
+occurred, $b$ is uncertain as to which update has actually occurred; from the
+point of view of $b$, it is possible that $a$ was told that $p$ is true, or that
+$a$ was told that $p$ is false, or even that $a$ was not told anything at all.
+Thus $b$ now considers it possible that $a$ knows whether $p$ is true or false,
+and so $b$ no longer knows that $a$ is unaware of the truth of $p$.
 
-Epistemic actions are represented as formulae, built from epistemic formulae
-using special operators. The effect of the operators is to restrict the effect
-of epistemic actions to specific subsets of agents, or to signify that a subset
-of agents is aware that one of several epistemic actions may have occurred, but
-the agents are uncertain as to which one actually occurred. Epistemic actions
-are capable of representing any public announcement.
+Action models are a graph structure, similar to a Kripke model, that represents
+an informative update. The nodes of the action model, called the action points,
+are labelled with epistemic formulae, called preconditions, whilst the edges of
+the action model are labelled with agents, similar to a Kripke model. An action
+model is executed on a Kripke model, giving a new Kripke model that represents
+the knowledge state resulting from the informative update that the action model
+represents. The states of the new Kripke model are the Cartesian product of the
+states of the original Kripke model, and the action points of the action model,
+restricted so that a state is only paired with an action point when the state in
+the original Kripke model satisfies the precondition that labels the action
+point. An edge is formed between a state in the new Kripke model where there was
+an edge between the corresponding states in the original Kripke model, and an
+edge between the corresponding action points. The valuation of a state in the
+new Kripke model comes from the valuation of the corresponding state in the
+original Kripke model.
 
-The logic of epistemic actions is an extension of epistemic logic, 
-introduced by van
-Ditmarsch~\cite{vanditmarsch1999logic,vanditmarsch2001knowledge,vanditmarsch2007dynamic}.
-As in the public announcement logic, a new operator is introduced that has the
-effect of performing an epistemic action. The operator $[\phi] \psi$ means that
-after the epistemic action $\phi$ is performed, $\psi$ holds in the resulting
-epistemic state. As epistemic actions can represent any public announcement, the
-logic of epistemic actions is a generalisation of the public announcement logic.
-
-\subsection*{Action models}
-
-Action models are a representation of informative update that are similar in
-power to epistemic actions. Unlike public announcements and epistemic actions,
-which are both represented by formulae, an action model is represented by a
-graph. Nodes on the action model are labelled with epistemic formulae, known as
-preconditions, and edges are labelled by agents. An action model is {\em
-executed} on a Kripke model by performing an action similar to a Cartesian
-product, and restricting the result according to the preconditions and agents
-that label the action model. 
-
-Similar to an epistemic action, executing an action model on a Kripke model may
-result in different information being provided to different agents in the
-system, and in some cases additional uncertainty being introduced. Action models
-are capable of representing any public announcement.
+The power of action models comes from the restrictions caused by the
+preconditions that label the action points. The preconditions restrict the
+adjacent states in the new Kripke model, to states that satisfied the
+precondition in the original Kripke model. This restriction potentially has the
+effect of providing the agent with additional information.  As the edges of the
+action model are labelled with agents, different agents may have different
+preconditions in adjacent action points. Thus different information can be
+provided to different agents. As multiple preconditions may be satisfied at a
+state in the original Kripke model, several sets of restrictions may apply at
+that state. This has gives effect of performing an informative update, where the
+agent is aware that an informative update has occurred, but is uncertain as to
+which specific informative update has actually occurred. Again, as the edges of
+the action model are labelled with agents, this effect can be different for
+different agents.
 
 The logic of action models was introduced by Baltag, Solecki and
 Moss\cite{baltag2004logics}. Again, an operator is introduced that has the
-effect of performing an informative update, this time in the form of executing an
-action model on the Kripke model that represents the current epistemic state.
-The operator, $[M,s]\psi$ means that after the action model $(M, s)$ is
-executed, $\psi$ holds in the resulting epistemic state. As epistemic actions
-are capable of representing any public announcement, the action model logic is
-a generalisation of public announcement logic.
+effect of performing an informative update, this time in the form of executing
+an action model on the Kripke model that represents the current epistemic
+state.  The operator, $[\mathrm{M,s}]\psi$ means that after the action model
+$(\mathrm{M, s})$ is executed in the current epistemic state, $\psi$ holds in
+the resulting epistemic state. 
 
-Action models and epistemic actions are 
+Epistemic actions are a similar representation of informative updates.
+van
+Ditmarsch~\cite{vanditmarsch1999logic,vanditmarsch2001knowledge,vanditmarsch2007dynamic}
+introduced the logic of epistemic actions, a logic similar to the logic of
+action models. The difference between epistemic actions and action models is
+that an epistemic action is represented as a formula, similar to a
+generalisation of a public announcement, with special operators used to provide
+different information to different agents, or to provide agents with uncertainty
+as to which informative update has actually occurred.
 
-Action models and epistemic actions are similar in their expressive power,
-although it is not known whether they are actually equivalent.
-
-Action models and epistemic actions can mostly represent the same kinds of
-informative updates, however are not equivalent. In general it is possible to
-translate between action models and epistemic actions, but there are exceptions
-to this. % TODO - clarify
-Both kinds of informative updates are interesting for their own reasons;
-epistemic actions provide a representation of informative updates that give a
-more intuitive description of the informative update, but applying an
-epistemic action to a Kripke model is not intuitive; action models on the other
-hand are relatively simple to execute on Kripke models, however it is not
-intuitive how a particular action model represents a particular informative
-update. There some informative updates that may only be represented using one of
-the representations and not the other.
-
-\subsection*{Arbitrary public announcement logic}
+\subsection{Arbitrary public announcement logic}
 
 Balbiani, Baltag, van Ditmarsch, et al.\cite{balbiani2007arbitrary} introduced
 the arbitrary public announcement logic, extension of the public announcement
@@ -161,7 +152,7 @@ information that contradicts its old beliefs. Two notable representations of
 informative updates in doxastic logic include {\em action models} and {\em
 belief revision}, which we discuss briefly.
 
-\subsection*{Action models}
+\subsection{Action models}
 
 The same system of action models for modelling informative updates in epistemic
 models can be generalised to apply to doxastic models. Unlike action models
@@ -188,7 +179,7 @@ an action model, and that refinements preserve the truth of positive formulae.
 Therefore in the doxastic setting, if an agent holds {\em positive beliefs},
 then those beliefs cannot be changed as the result of an action model execution.
 
-\subsection*{Belief revision}
+\subsection{Belief revision}
 
 The AGM approach to belief revision, named for Alchourrón, Gärdenfors and
 Makinson~\cite{alchourron1985logic}, who did much of the initial work in this
@@ -202,18 +193,74 @@ beliefs that may contradict with the new information. Revision can be
 defined as an operation over a set of propositional formulae, and so reasoning
 about belief revision can be done directly in these terms. % TODO - read more
 
-\subsection*{Action models}
+\subsection{Action models}
 
 The same system of action models, as applied to epistemic models, can be
 generalised to apply to doxastic models.
 
 \section{Other related logics}
 
-\subsection*{Description logics}
+\subsection{Group announcement logics}
 
-\subsection*{Propositional dynamic logics}
+The group announcement logic, introduced by {\AA}gotnes et
+al.~\cite{agotnes2010group} is an extension of public announcement logic that
+allows one to reason about whether a group of agents within an epistemic system
+are able to cooperate in order to bring about some knowledge state. The agents
+in the group are able to cooperate by publically announcing statements that the
+agents know, but are unable to announce statements that they do not know. The
+logic introduces an operator, $<G>$, where $G$ is a subset of the agents, and
+the formula $<G> \phi$ means that there is some set of formulae, such every
+formula is known by at least one of the agents, and such that after each agent
+announces the formulae that they know, $\phi$ is true in the resulting
+knowledge state. {\AA}gotnes et al.~\cite{agotnes2010group} provide a sound and
+complete axiomatisation of the group announcement logic, show that it is
+decidable, and give complexity and expressivity results for the logic. Notably,
+the group announcement logic is not as expressive as the arbitrary public
+announcement logic, and it is conjectured that the arbitrary public
+announcement is not as expressive as the group announcement logic either.  The
+difference between group announcement logic and the arbitrary public
+announcement logic is that the group announcement logic essentially quantifies
+over the public announcements that the agents in the group know, whereas the
+arbitrary public announcement logic quantifies over all possible public
+announcements.
 
-\subsection*{Bisimulation quantified logics}
+\subsection{Propositional dynamic logics}
+
+Propositional dynamic logic is a variant of dynamic logic, first introduced by
+Fischer and Ladner~\cite{fischer1979propositional}. Propositional dynamic logic
+is a logic that introduces a concept of performing an action, called a program,
+on a modal state. The programs in propositional dynamic logic are symbolic in
+nature, and do not have any inherent effect on the model that it is performed
+on. Programs can be combined, by composition, repetition, concurrent execution
+or by including a test, where an action is performed only if a particular
+formula is satisfied at the current state. Actions are performed using modal
+operators that are labelled with the actions themselves; hence there is a modal
+operator for every possible action. What differentiates propositional dynamic
+logics from standard modal logics is that the models under consideration have
+algebraic constraints on them, which preserve certain properties about the
+composition of programs, amongst other properties. Propositional dynamic logic
+is decidable, and has decision procedures which have an exponential running time
+in the worst case~\cite{pratt1980near}.
+
+van Benthem, van Eijck and Kooi~\cite{vanbenthem2006logics} showed that the
+action model logic can be translated to propositional dynamic logic, and hence
+propositional dynamic logic is at least as expressive as the action model logic.
+Miller and Moss however showed that adding quantification over action models
+makes the logic undecidable~\cite{miller2005undecidability}.
+
+\subsection{Description logics}
+
+Description logics are logics used for knowledge representation, often used in
+applications involving ontologies, such as artificial intelligence or the
+Semantic Web. Description logics are similar to modal logics, in the sense that
+they are designed to be decidable fragments of first-order logic, and in fact
+many description logics are simply syntactic variations of modal
+logics~\cite{blackburn2002modal}.
+% TODO - dynamic description logics?
+
+\subsection{Bisimulation quantified logics}
+
+% TODO
 
 \section{Future event logic}
 
