@@ -217,15 +217,15 @@ We will now show the soundness of the axiomatisations \axiomSiF{} and
 \axiomKDiF{}.
 
 \begin{lemma}
-The axiomatisation \axiomFi{} is sound for the logics \logicSiF{} and
-\logicKDiF{}.
+The axiomatisation \axiomFi{} is sound with respect to the semantic classes of
+\classKi{}, \classSi{} and \classKDi{}.
 \end{lemma}
 
 \begin{proof}
 The soundness of the axioms {\bf P} and {\bf K}, and the rules {\bf MP} and {\bf
 NecK} can be shown by the same reasoning used to show that they are sound in
 basic modal logic. The axioms {\bf R} and {\bf RP}, and the rule {\bf NecR} can
-be shown using the same reasoning that they are sound in the single-agent
+be shown to be sound using the same reasoning applied in the single-agent
 refinement quantified modal logic~\cite{french2010future}.
 \end{proof}
 
@@ -305,7 +305,8 @@ Therefore {\bf RS5} is sound, and so \axiomSiF{} is sound for the logic
 \end{proof}
 
 \begin{lemma}\label{single-sound-kd45}
-The axiomatisation \axiomKDiF{} is sound for the logic \logicKDiF{}.
+The axiomatisation \axiomKDiF{} is sound with respect to the semantic class
+\classKDi{}.
 \end{lemma}
 
 \begin{proof}
@@ -322,9 +323,25 @@ no bearing on the rest of the proof.
 \end{proof}
 
 We show the completeness of the axiomatisations \axiomSiF{} and \axiomKDiF{} by
-provably correct translations from \logicSiF{} to \logicSi{}, and from
-\logicKDiF{} to \logicKDi{} respectively. Completeness then follows from the
-completeness of \logicSi{} and \logicKDi{}.
+provably correct translations from \langFi{} to \langi{}, using the axioms and
+rules of \axiomSiF{} and \axiomKDiF{}. A provably correct translation uses the
+axioms of our respective axiomatisations in order to translate our given formula
+to an equivalent formula in a different form. In our case, we are translating
+our formulae into a form that does not include any refinement quantifiers (i.e.
+\somerefs{}-free formulae). We can show from the interpretation of refinement
+quantified modal logic that the interpretation of a \somerefs{}-free formula is
+equivalent to the interpretation of that same formula in basic modal logic, and
+that therefore we can prove theorems in the refinement quantified modal logic,
+by translating the formula to a \somerefs{}-free form and then proving that
+theorem in basic modal logic. The completeness of our axiomatisations then
+follows from the completeness of the respective basic modal logics. 
+
+This is the same strategy used by van Ditmarsch, French and
+Pinchinat~\cite{french2010future} to show the completeness of the single-agent
+refinement quantified modal logic, and is the same general strategy that we will
+use for the other logics that we consider in this paper. We will begin by
+providing a provably correct translation from \langFi{} to \langi{}, and follow
+with some results that show that completeness follows from this translation.
 
 \begin{lemma}\label{single-reduction-s5}
 Every formula of \langFi{} is provably equivalent to a formula of \langi{} with
@@ -345,8 +362,8 @@ operators is provably equivalent to a formula in \langi{}. We use the axioms of
 \somerefs{} operators, and that therefore by the induction hypothesis it is
 provably equivalent to a formula in \langi{}.
 
-Choose a subformula from $\alpha$ of type $\somerefs \beta$, where $\beta$ is a
-\somerefs{}-free formula. Without loss of generality, by
+Given any subformula from $\alpha$ of type $\somerefs \beta$, such that $\beta$
+is a \somerefs{}-free formula. Without loss of generality, by
 Lemma~\ref{single-cover-prenex} we may assume that $\beta$ is in disjunctive
 normal form. We prove by induction on the structure of $\beta$ that $\somerefs
 \beta$ is provably equivalent to a formula $\chi \in \langi$. The induction
@@ -393,9 +410,9 @@ The proof is similar to the proof for Lemma~\ref{single-reduction-s5}, with the
 only difference being that the axiom {\bf RKD45} is used in place of {\bf RS5}
 in the induction over the structure of $\beta$.
 
-The rest of the completeness proof is merely a formality to show that, given the
-above translations into \langi{}, we can show completeness by using these
-translations along with the completeness of \logicSi{} and \logicKDi{}.
+The rest of the completeness proof is to show that, given the above translations
+into \langi{}, we can show completeness by using these translations along with
+the completeness of \logicSi{} and \logicKDi{}.
 
 \begin{corollary}\label{single-derivable-s5}
 Let $\phi \in \langFi$ be given and $\psi \in \langi$ be equivalent to $\phi$
@@ -432,7 +449,8 @@ Therefore by Corollary~\ref{single-derivable-s5} we have that $\proves_\somerefs
 \end{proof}
 
 \begin{theorem}
-The axiomatisation \axiomSiF{} is sound and complete for the logic \logicSiF{}.
+The axiomatisation \axiomSiF{} is sound and complete with respect to the
+semantic class \classSi{}.
 \end{theorem}
 
 \begin{proof}
@@ -441,7 +459,8 @@ proof is given in Lemma~\ref{single-complete-s5}.
 \end{proof}
 
 \begin{theorem}
-The axiomatisation \axiomKDiF{} is sound and complete for the logic \logicKDiF{}.
+The axiomatisation \axiomKDiF{} is sound and complete with respect to the
+semantic class \classKDi{}.
 \end{theorem}
 
 \begin{proof}

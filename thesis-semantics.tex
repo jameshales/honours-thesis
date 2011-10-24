@@ -231,14 +231,12 @@ retained. The fact that refinements preserve positive knowledge is an important
 property for refinements in modelling informative updates in an epistemic
 setting.
 
-% TODO - ??? Define action models ???
-
 \begin{proposition}
 On finite epistemic models, every finite refinement is equivalent to the
 execution an action model.
 \end{proposition}
 
-This is shown by van Ditmarsch and French~\cite{french2009simulation}
+This is shown by van Ditmarsch and French~\cite{french2009simulation}.
 
 The property that every finite refinements is equivalent to the execution of an
 action model is the main justification for refinements as representations of
@@ -345,3 +343,19 @@ The logics \logicKDF{} and \logicSF{} are bisimulation invariant.
 The proof for bisimulation invariance in \logicKF{}, given by van Ditmarsch,
 French and Pinchinat~\cite{french2010future} applies to \logicSF{} and
 \logicKDF{}.
+
+In previous work, van Ditmarsch, French and Pinchinat~\cite{french2010future}
+have considered the refinement quantified modal logic, \logicKF{}, based in the
+class of models \classK{}. They provided a sound and complete axiomatisation for
+the single-agent case, showed that it was expressively equivalent to the
+single-agent modal logic, gave a decision procedure for the single-agent case
+that runs in 2EXP time, and showed that the refinement quantified modal logic is
+exponentially more succinct than the refinement quantified modal logic.
+
+In this paper we move towards other variants of refinement quantified modal
+logics, including the single-agent refinement quantified epistemic and doxastic
+logics, and the multi-agent refinement quantified modal and doxastic logics. We
+provide sound and complete axiomatisations for each of these logics, and show
+that they are expressively equivalent to the modal logics that they are based
+on. The expressivity result in particular allows us to show several results for
+each of these logics, notably that they are all decidable.

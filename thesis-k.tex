@@ -5,15 +5,13 @@ multi-agent refinement quantified modal logic, over the class of \classK{}.
 
 \section{Technical preliminaries}
 
-In previous work, van Ditmarsch, French and Pinchinat~\cite{french2010future}
-gave an axiomatisation of the single-agent variant of the refinement quantified
-modal logic \logicKF{}.  The axiomatisation was formulated in terms of the cover
-operator, $\covers$, an abbreviation which we defined previously. The
-completeness proof consisted of a provably correct translation of formulae from
-refinement quantified modal logic to basic modal logic, a translation which
-relied on a disjunctive normal form, using the cover operator. Our
-axiomatisation for the multi-agent refinement quantified modal logic relies on
-the same disjunctive normal form, which we will define now.
+The axiomatisation of the single-agent refinement quantified modal logic given
+by van Ditmarsch, French and Pinchinat~\cite{french2010future} relied on a
+disjunctive normal form defined in terms of the cover operator, $\covers$. We
+introduce the same disjunctive normal form for our result in multi-agent
+refinement quantified modal logic, as we will be using a similar proof strategy
+as used in the single-agent case to show that our axiomatisation is complete,
+via a provably correct translation.
 
 \begin{definition}[Disjunctive normal form]
 A formula in disjunctive normal form is defined by the following abstract syntax:
@@ -192,7 +190,7 @@ We will now show that the axiomatisation is sound with respect to \classK{}
 models.
 
 \begin{lemma}\label{k-sound}
-The axiomatisation \axiomKF{} is sound for the class of \classK{} models.
+The axiomatisation \axiomKF{} is with respect to the semantic class \classK{}.
 \end{lemma}
 
 \begin{proof}
@@ -292,7 +290,7 @@ hence we know that $(t', t') \in \mathcal{R}$.
 
 Therefore $\mathcal{R}$ satisfies {\bf forth-$b$} for every $b \in A$.
 
-\paragraph{back} A similar argument to above shows that $\mathcal{R}$
+\paragraph{back} A similar argument to the above shows that $\mathcal{R}$
 satisfies {\bf back-$a$} for every $b \in A - \{a\}$.
 
 Therefore $\mathcal{R}$ is an $a$-simulation, and $N_t \refinement_a M_s$.
@@ -552,9 +550,9 @@ Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
 a formula in \lang{}.
 \end{proof}
 
-The rest of the completeness proof is merely a formality to show that, given the
-above translation into \lang{}, we can show completeness by using these
-translations along with the completeness of \logicK{}.
+The rest of the completeness proof is to show that, given the above translation
+into \lang{}, we can show completeness by using these translations along with
+the completeness of \logicK{}.
 
 \begin{corollary}\label{k-derivable}
 Let $\phi \in \langF$ be given and $\psi \in \lang$ be semantically
@@ -576,7 +574,7 @@ in \axiomKF{}. Therefore $\phi$ is a theorem in \axiomKF{}.
 \end{proof}
 
 \begin{lemma}\label{k-complete}
-The axiom schema \axiomKF{} is complete for the logic \logicKF{}.
+The axiom schema \axiomKF{} is complete with respect to the semantic class \classK{}.
 \end{lemma}
 
 \begin{proof}
@@ -591,7 +589,8 @@ Therefore by Corollary~\ref{k-derivable} we have that $\proves_{\axiomKF}
 \end{proof}
 
 \begin{theorem}
-The axiomatisation \axiomKF{} is sound and complete for the logic \logicKF{}.
+The axiomatisation \axiomKF{} is sound and complete with respect to the semantic
+class \classK{}.
 \end{theorem}
 
 \begin{proof}
