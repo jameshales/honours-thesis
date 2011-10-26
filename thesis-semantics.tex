@@ -255,9 +255,21 @@ informative updates. Although we do not explicitly define action models in this
 paper, it should be noted that action models are inherently finite structures,
 whereas the refinements of even a finite model can potentially be infinite, and
 therefore the above property does not hold for the infinite refinements of
-epistemic models.
+epistemic models. However van Ditmarsch and French~\cite{french2009simulation}
+show that if the refinement quantified epistemic logic is extended with the
+operator for reasoning about the results of specific action models, then the
+resulting logic is equivalent to the arbitrary action model logic. Hence
+quantifying over the refinements of a model is equivalent to quantifying over
+the informative updates.
 
 \section{Refinement quantified modal logics}
+
+In this section we introduce the syntax and semantics of the refinement
+quantified modal logics. The definitions that we give are general, in the sense
+that the refinement quantified modal, doxastic and epistemic logics are all
+instances of the definition that we give. We also provide some examples and
+basic results that have previously been given by van Ditmarsch, French and
+Pinchinat~\cite{french2010future}.
 
 We begin with a definition of the language, \langF{}, of the refinement
 quantified modal logics, along with a definition of its semantics over a general
@@ -299,7 +311,7 @@ M_s &\entails& \allrefs_a \phi \text{ iff for all } M'_{s'} \in \classC : M_s
 We use the same terminology and notation for satisfiability and validity as is
 used for basic modal logics. As we sometimes discuss basic modal logics and
 refinement quantified modal logics at the same time, we may add a subscript to
-the turnstile operator, e.g. $\classK \entails_\somerefs \phi$, to make it
+the turnstile operator, e.g. $\entails_\somerefs \phi$, to make it
 explicit that we are working in the refinement quantified version of the logic.
 
 The logics \logicKF{}, \logicKDF{} and \logicSF{} are instances of \logicCF{},
@@ -317,7 +329,8 @@ resulting $a$-refinement, $\knows_a \bot$ is satisfied, and hence $\somerefs_a
 \knows_a \bot$ is satisfied in the original model. However because of the serial
 property of \classS{} and \classKD{} models, $\knows_a \bot$ is not even
 satisfiable in \logicSF{} or \logicKDF{}, and hence $\somerefs_a \knows_a \bot$
-is not satisfiable either.
+is not satisfiable either, as the refinement required must be taken from the
+classes of \classS{} or \classKD{}.
 
 We also note that for a class of frames \classC{}, the refinement quantified
 modal logic \logicCF{} is a conservative extension of the basic modal logic
@@ -350,12 +363,12 @@ coin landed on heads by the propositional atom $p$, and the result that the coin
 landed on tails by the negated atom, $\neg p$. This situation can be represented
 by the epistemic model in Figure~\ref{semantics-coin-s5-1}.
 
-\begin{figure}\label{semantics-coin-s5-1}
+\begin{figure}
 \begin{center} 
 \scalebox{0.4}{
 \includegraphics{semantics-coin-s5-1}
 }
-\caption{
+\caption{\label{semantics-coin-s5-1}
 Initially Alice and Bob cannot distinguish between the worlds where the coin
 lands on heads or on tails.
 }
@@ -372,12 +385,12 @@ $$\somerefs_a (\knows_a p \land \neg \knows_b p)$$
 We can show that this statement is satisfied in the actual world of the above
 epistemic model, by giving the $a$-refinement in Figure~\ref{semantics-coin-s5-2}
 
-\begin{figure}\label{semantics-coin-s5-2}
+\begin{figure}
 \begin{center} 
 \scalebox{0.4}{
 \includegraphics{semantics-coin-s5-2}
 }
-\caption{
+\caption{\label{semantics-coin-s5-2}
 After Alice looks at the coin, she can distinguish between the worlds where the
 coin lands on heads or tails, but Bob still cannot.
 }
@@ -395,15 +408,15 @@ $$\somerefs_a (\knows_a p \land \knows_b (\neg \knows_a p \land \neg \knows_a
 \neg p))$$
 
 We can show that this statement is satisfied by the model given in
-Example~\ref{semantics-coin-s5} by giving the $a$-refinement of the
-model in Figure~\ref{semantics-coin-kd45}.
+Figure~\ref{semantics-coin-s5-1} by giving the $a$-refinement of the
+model in Figure~\ref{semantics-coin-kd45-1}.
 
-\begin{figure}\label{semantics-coin-kd45}
+\begin{figure}
 \begin{center} 
 \scalebox{0.4}{
 \includegraphics{semantics-coin-kd45}
 }
-\caption{
+\caption{\label{semantics-coin-kd45-1}
 After Alice looks at the coin, she can distinguish between the worlds where the
 coin lands on heads or tails, but Bob still cannot distinguish between these
 worlds, and neither does he know that Alice can. The actual world is the world
@@ -419,9 +432,8 @@ epistemic setting agents can only know statements that are actually true.
 \end{example}
 
 We briefly list some properties of the refinement quantified modal logic, to
-give some intuition about the logic. These properties were previously given by
-van Ditmarsch and French~\cite{french2009simulation}
-
+give some intuition about the logic. 
+\pagebreak
 \begin{proposition}
 We have the following validities: 
 \begin{enumerate}
@@ -434,6 +446,10 @@ We have the following validities:
 \phi$
 \end{enumerate}
 \end{proposition}
+
+These properties were shown by van Ditmarsch and
+French~\cite{french2009simulation}. We note that these properties are also valid
+in \logicSF{} and \logicKDF{}.
 
 In previous work, van Ditmarsch, French and Pinchinat~\cite{french2010future}
 have considered the refinement quantified modal logic, \logicKF{}, based in the

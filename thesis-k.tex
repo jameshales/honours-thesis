@@ -9,9 +9,8 @@ The axiomatisation of the single-agent refinement quantified modal logic given
 by van Ditmarsch, French and Pinchinat~\cite{french2010future} relied on a
 disjunctive normal form defined in terms of the cover operator, $\covers$. We
 introduce the same disjunctive normal form for our result in multi-agent
-refinement quantified modal logic, as we will be using a similar proof strategy
-as used in the single-agent case to show that our axiomatisation is complete,
-via a provably correct translation.
+refinement quantified modal logic, as we will be using a similar provably
+correct translation in order to show the completeness of our axiomatisation.
 
 \begin{definition}[Disjunctive normal form]
 A formula in disjunctive normal form is defined by the following abstract syntax:
@@ -133,15 +132,17 @@ Therefore every formula of \lang{} is equivalent to a formula in disjunctive
 normal form.
 \end{proof}
 
-We note that, similar to disjunctive normal forms in propositional logic, the
-translation into disjunctive normal form in modal logic results in a formula
-that is exponentially larger than the original formula in the worst case.
+We note that, similar to disjunctive normal forms in propositional logic, and to
+the prenex normal form introduced for the single-agent doxastic and epistemic
+logics, conversion into disjunctive normal form in modal logic can result
+in a formula that is exponentially larger than the original formula in the worst
+case.
 
+\pagebreak
 \section{Axiomatisation}
 
 We provide an axiomatisation of the multi-agent refinement quantified modal
 logic, \logicKF{}, and prove its soundness and completeness.
-
 \begin{definition}[Axiomatisation \axiomKF]
 The axiomatisation \axiomKF{} is a substitution schema consisting of the
 following axioms:
@@ -233,7 +234,8 @@ We will now show that the axiomatisation is sound with respect to \classK{}
 models.
 
 \begin{lemma}\label{k-sound}
-The axiomatisation \axiomKF{} is with respect to the semantic class \classK{}.
+The axiomatisation \axiomKF{} is sound with respect to the semantic class
+\classK{}.
 \end{lemma}
 
 \begin{proof}
@@ -284,12 +286,12 @@ V^N(p) &=&
 
 A representation of this model is pictured in Figure~\ref{k-diagram}.
 
-\begin{figure}\label{k-diagram}
+\begin{figure}
 \begin{center}
 \scalebox{0.4}{
 \includegraphics{rk}
 }
-\caption{
+\caption{\label{k-diagram}
 The model $N$ is constructed by taking the model $M$ and the models $N^\gamma$
 for every $\gamma \in \Gamma$, and connecting them with an extra node $t$. $t$
 is connected via an $a$-edge to $t^\gamma$ from each of the $N^\gamma$, and is
@@ -565,7 +567,7 @@ the axioms of \axiomKF{} to show that $\alpha$ is provably equivalent to a
 formula with $n$ \somerefs{} operators, and that therefore by the induction
 hypothesis it is provably equivalent to a formula in \lang{}.
 
-Choose a subformula from $\alpha$ of type $\somerefs_a \beta$, where $\beta$ is
+Given any subformula from $\alpha$ of type $\somerefs_a \beta$, such that $\beta$ is
 \somerefs{}-free. Without loss of generality, by Lemma~\ref{k-dnf} we may assume
 that $\beta$ is in disjunctive normal form. We prove by induction on the
 structure of $\beta$ that $\somerefs_a \beta$ is provably equivalent to a

@@ -18,13 +18,15 @@ non-elementary time complexity. This is the case because of the conversion to
 disjunctive normal forms or prenex normal forms in each of the translations.
 This conversion must be performed for each refinement quantifier in the original
 formula, and results in a worst-case exponential blow-up in the size of the
-formula for each nested refinement operator, and hence a non-elementary time
-complexity. van Ditmarsch, French and Pinchinat~\cite{french2010future} provided
-a decision procedure for the single-agent refinement quantified modal logic that
-runs in 2EXP time, using a tableaux method, so it is worth considering a similar
+formula. This exponential blow-up is stacked for nested refinement operators,
+and hence the time complexity of computing this translation is non-elementary.
+van Ditmarsch, French and Pinchinat~\cite{french2010future} provided a decision
+procedure for the single-agent refinement quantified modal logic that runs in
+2EXP time, using a tableaux method, so it is worth considering a similar
 approach for the refinement quantified modal logics we have considered here.
-It's unknown whether there is a more efficient model-checking procedure for any
-of the refinement quantified modal logics.
+It is unknown whether there is a model-checking procedure for any of the
+refinement quantified modal logics, that is more efficient than the decision
+procedure.
 
 van Ditmarsch, French and Pinchinat~\cite{french2010future} also showed
 that the multi-agent refinement quantified modal logic is exponentially more
@@ -36,5 +38,5 @@ quantified epistemic logic. We have considered an axiomatisation for the
 multi-agent refinement quantified epistemic logic, but the obvious
 generalisations from the single-agent case do not appear to work.
 
-Finally we may wish to consider the addition of common knowledge to the
-refinement quantified modal logics.
+Finally we may wish to consider the addition of common knowledge operators to
+the refinement quantified modal logics.

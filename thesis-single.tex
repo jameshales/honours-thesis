@@ -44,7 +44,7 @@ We define the basic prenex normal form first, and then give the definition of
 the cover logic version. We show that every single-agent epistemic or doxastic
 formula is equivalent to a formula in these normal forms.
 
-\begin{definition}[Prenex normal form]
+\begin{definition}[Prenex normal form]\label{single-prenex}
 A formula in prenex normal form is specified by the following abstract syntax: 
 \begin{eqnarray*}
 \alpha &::=& \delta \bnfalt \alpha \lor \alpha\\
@@ -80,6 +80,10 @@ T} with axioms entailing both of these properties. Both of these properties are
 obviously valid in \logicKDi{}, and therefore the proof of
 Lemma~\ref{single-prenex-s5} applies to this result.
 \end{proof}
+
+We note that, similar to a disjunctive normal form for propositional logic,
+conversion to the prenex normal form can result in a formula that is
+exponentially larger than the original formula in the worst case.
 
 Given this result, we define our cover logic version of the prenex normal form,
 and show that every epistemic or doxastic formula is equivalent to a formula in
@@ -260,9 +264,10 @@ basic modal logic. The axioms {\bf R} and {\bf RP}, and the rule {\bf NecR} can
 be shown to be sound using the same reasoning applied in the single-agent
 refinement quantified modal logic~\cite{french2010future}.
 \end{proof}
-
+\pagebreak
 \begin{lemma}\label{single-sound-s5}
-The axiomatisation \axiomSiF{} is sound for the logic \logicSiF{}.
+The axiomatisation \axiomSiF{} is sound with respect to the semantic class
+\classSi{}.
 \end{lemma}
 
 \begin{proof}
@@ -360,20 +365,25 @@ rules of \axiomSiF{} and \axiomKDiF{}. A provably correct translation uses the
 axioms of our respective axiomatisations in order to translate our given formula
 to an equivalent formula in a different form. In our case, we are translating
 our formulae into a form that does not include any refinement quantifiers (i.e.
-\somerefs{}-free formulae). We can show from the interpretation of refinement
-quantified modal logic that the interpretation of a \somerefs{}-free formula is
-equivalent to the interpretation of that same formula in basic modal logic, and
-that therefore we can prove theorems in the refinement quantified modal logic,
-by translating the formula to a \somerefs{}-free form and then proving that
-theorem in basic modal logic. The completeness of our axiomatisations then
-follows from the completeness of the respective basic modal logics. 
+\somerefs{}-free formulae). As the refinement quantified versions of our logics
+are conservative extensions of the respective basic modal logics, the
+interpretation of a \somerefs{}-free formula is equivalent to the interpretation
+of that same formula in basic modal logic. Therefore we can prove theorems in
+the refinement quantified modal logic by translating the formula to an
+equivalent \somerefs{}-free form and then proving that theorem in basic modal
+logic. Given this, the completeness of our axiomatisations then follows from the
+completeness of the respective basic modal logics.
 
 This is the same strategy used by van Ditmarsch, French and
 Pinchinat~\cite{french2010future} to show the completeness of the single-agent
 refinement quantified modal logic, and is the same general strategy that we will
-use for the other logics that we consider in this paper. We will begin by
-providing a provably correct translation from \langFi{} to \langi{}, and follow
-with some results that show that completeness follows from this translation.
+use for the other logics that we consider in this paper. 
+
+We will begin by providing a provably correct translation from \langFi{} to
+\langi{}, and follow with some results that show that completeness follows from
+this translation.
+
+\pagebreak
 
 \begin{lemma}\label{single-reduction-s5}
 Every formula of \langFi{} is provably equivalent to a formula of \langi{} with
@@ -432,7 +442,7 @@ formula that contains only $n$ \somerefs{} operators.
 Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
 a formula in \langi{}.
 \end{proof}
-
+\pagebreak
 \begin{lemma}\label{single-reduction-kd45}
 Every formula of \langFi{} is provably equivalent to a formula of \langi{} with
 the axiomatisation \axiomKDiF{}.
