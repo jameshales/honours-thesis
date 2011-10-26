@@ -316,6 +316,74 @@ are $a$-disjunctive normal formulae means that we can invoke
 Lemma~\ref{kd45-successors} in various places, which allows us to ensure that
 the refinement that we construct is a doxastic model.
 
+\begin{example}
+Once again we recall the coin-flipping example given in
+Example~\ref{semantics-coin-s5}.  We note that the derivation given in
+Example~\ref{k-example}, of $\neg \knows_a p \land \neg \knows_a \neg p \land
+\neg \knows_b p \land \neg \knows_b \neg p \implies \somerefs_a (\knows_a p
+\land \neg \knows_b p)$ can be adapted to a derivation in \axiomKDF{}, by
+replacing the instance of {\bf RK} with {\bf RKD45}, noting that the formulae
+inside the cover operators at each application of the axioms {\bf RKD45}, {\bf
+RComm} and {\bf RDist} are all in an appropriate $a$-disjunctive normal form or
+$b$-disjunctive normal form.
+\end{example}
+
+\begin{example}
+We give an example derivation using \axiomKDF{}, based on the coin-flipping
+example of Example~\ref{semantics-coin-kd45}. We suppose that neither Alice nor
+Bob believes that the coin has landed on heads or that it has landed on tails,
+and we show that it is possible for Alice to learn that the coin has landed on
+heads, whilst Bob continues to believe that Alice doesn't believe either way.
+Thus we give a derivation of $\neg \knows_a p \land \neg \knows_a \neg p \land
+\knows_b \neg \knows_a p \land \knows_b \neg \knows_a \neg p) \implies \somerefs_a
+(\knows_a p \land \knows_b \neg \knows_a p)$.  Let $\phi = \neg \knows_a p \land
+\neg \knows_a \neg p \land \knows_b \neg \knows_a p \land \knows_b \neg \knows_a \neg
+p)$.
+$$
+\begin{array}{ll}
+\phi \implies \neg \knows_a \neg p \land \knows_b \neg \knows_a p & \text{({\bf P})}\\
+\phi \implies \suspects_a p \land \knows_b \suspects_a \neg p &
+\text{(Definition of $\suspects$)}\\
+\phi \implies \suspects_a p \land \knows_b (\suspects_a \neg p \land \suspects_a
+\top)&
+\text{(Consequence of {\bf D})}\\
+\phi \implies \suspects_a \neg \neg p \land \knows_b (\suspects_a \neg \neg \neg
+p \land \suspects_a \neg \neg \top)&
+\text{({\bf P})}\\
+\phi \implies \suspects_a \neg \allrefs_a \neg p \land \knows_b (\suspects_a \neg
+\allrefs_a \neg \neg p \land \suspects_a \neg \allrefs_a \neg \top)&
+\text{({\bf RP})}\\
+\phi \implies \suspects_a \somerefs_a p \land \knows_b (\suspects_a \somerefs_a
+\neg p \land \suspects_a \somerefs_a \top)&
+\text{(Definition of $\somerefs$)}\\
+\phi \implies \somerefs_a \covers_a \{p\} \land \knows_b (\suspects_a \somerefs_a
+\neg p \land \suspects_a \somerefs_a \top)&
+\text{({\bf RKD45})}\\
+\phi \implies \somerefs_a \covers_a \{p\} \land \knows_b \somerefs_a \covers_a
+\{\neg p, \top\}&
+\text{({\bf RKD45})}\\
+\phi \implies \somerefs_a \covers_a \{p\} \land \covers_b \{ \somerefs_a \covers_a
+\{\neg p, \top\} \}&
+\text{(Definition of $\covers$)}\\
+\phi \implies \somerefs_a \covers_a \{p\} \land \somerefs_a \covers_b \{
+\covers_a \{\neg p, \top\} \}&
+\text{({\bf RComm})}\\
+\phi \implies \somerefs_a (\covers_a \{p\} \land \covers_b \{
+\covers_a \{\neg p, \top\} \})&
+\text{({\bf RDist})}\\
+\phi \implies \somerefs_a (\knows_a p \land \knows_b 
+\suspects_a \neg p)&
+\text{(Definition of $\covers$)}\\
+\phi \implies \somerefs_a (\knows_a p \land \knows_b 
+\neg \knows_a p)&
+\text{(Definition of $\suspects$)}\\
+\end{array}
+$$
+\end{example}
+
+We will now show that the axiomatisation is sound with respect to \classKD{}
+models.
+
 \begin{lemma}\label{kd45-sound}
 The axiomatisation \axiomKDF{} is sound with respect to the semantic class
 \classKD{}.
@@ -376,7 +444,9 @@ V^{N^\gamma}(p) & \text{if $s \in V^M(p)$}\\
 \text{ for $p \in P$}
 \end{eqnarray*}
 
-\begin{figure}
+A representation of this model is pictured in Figure~\ref{kd45-diagram}.
+
+\begin{figure}\label{kd45-diagram}
 \begin{center} % TODO - better diagram
 \scalebox{0.4}{
 \includegraphics{rkd45}

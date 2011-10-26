@@ -213,6 +213,38 @@ these two axiomatisations, and \axiomKiF{}, is that \axiomSiF{} and \axiomKDiF{}
 include the additional \axiomS{} and \axiomKD{} axioms respectively, and include
 a different axiom in place of {\bf RK}.
 
+\begin{example}
+We give an example derivation using \axiomSiF{}, showing that
+$\proves_{\axiomSiF} p \implies \somerefs \knows p$.
+$$
+\begin{array}{ll}
+\proves \knows \neg p \implies \neg p & \text{({\bf T})}\\
+\proves p \implies p \land \neg \knows \neg p & \text{({\bf P})}\\
+\proves p \implies p \land \suspects p & \text{(Definition of $\suspects$)}\\
+\proves p \implies p \land \suspects \neg \neg p & \text{({\bf P})}\\
+\proves p \implies p \land \suspects \neg \allrefs \neg p & \text{({\bf RP})}\\
+\proves p \implies p \land \suspects \somerefs p & \text{(Definition of $\somerefs$)}\\
+\proves p \implies \somerefs \covers \{ p \} & \text{({\bf RS5})}\\
+\proves p \implies \somerefs \knows p & \text{(Definition of $\covers$)}
+\end{array}
+$$
+\end{example}
+
+\begin{example}
+We give an example derivation using \axiomKDiF{}, showing that
+$\proves_{\axiomKDiF} \suspects p \implies \somerefs \knows p$.
+$$
+\begin{array}{ll}
+\proves \suspects p \implies \suspects p & \text{({\bf P})}\\
+\proves \suspects p \implies \suspects \neg \neg p & \text{({\bf P})}\\
+\proves \suspects p \implies \suspects \neg \allrefs \neg p & \text{({\bf RP})}\\
+\proves \suspects p \implies \suspects \somerefs p & \text{(Definition of $\somerefs$)}\\
+\proves \suspects p \implies \somerefs \covers \{ p \} & \text{({\bf RKD45})}\\
+\proves \suspects p \implies \somerefs \knows p & \text{(Definition of $\covers$)}
+\end{array}
+$$
+\end{example}
+
 We will now show the soundness of the axiomatisations \axiomSiF{} and
 \axiomKDiF{}.
 
@@ -247,7 +279,7 @@ Let $\Gamma$ be a finite set of propositional formulae, and let $M_s$ be a model
 
 We need to show that $M_s \entails \somerefs \covers \Gamma$. To do this we will
 construct a model $N_s \in \classS$, construct a simulation from $N_s$ to $M_s$
-to show that $N_s \refinement_a M_s$, and finally show that $N_s \entails
+to show that $N_s \refinement M_s$, and finally show that $N_s \entails
 \covers \Gamma$.
 
 We begin by constructing the model $N_s$. We note that for each $\gamma \in

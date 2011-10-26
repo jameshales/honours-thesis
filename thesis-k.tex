@@ -174,7 +174,6 @@ $\proves \psi$}\\
 $$
 \end{definition}
 
-% TODO - compare to single-agent axiomatisation
 The axiomatisation \axiomKF{} shares many of the axioms and rules of the
 axiomatisation from the single-agent case. The axioms {\bf P}, {\bf K}, {\bf R},
 {\bf RP} and {\bf RK}, and the rules {\bf MP}, {\bf NecK} and {\bf NecR} are
@@ -185,6 +184,50 @@ multiple agents. The axioms {\bf RComm} and {\bf RDist} are novel axioms used to
 handle the situation where a refinement quantifier is applied to a cover
 operator of a different agent, and where a refinement quantifier is applied to a
 conjunction of cover operators belonging to different agents.
+
+\begin{example}\label{k-example}
+We give an example derivation using \axiomKF{}, based on the coin-flipping
+example given in Example~\ref{semantics-coin-s5}. We suppose that neither Alice
+nor Bob know whether the coin has landed on heads or tails, and we show that it
+is possible for Alice to learn that the coin landed on heads, whilst Bob
+continues to not know. Thus we give a derivation of $\neg \knows_a p \land \neg
+\knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p \implies
+\somerefs_a (\knows_a p \land \neg \knows_b p)$. Let $\phi = \neg \knows_a p \land \neg
+\knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p$.
+$$
+\begin{array}{ll}
+\phi \implies \neg
+\knows_a \neg p \land \neg \knows_b p & \text{({\bf P})}\\
+\phi \implies
+\suspects_a p \land \suspects_b \neg p & \text{(Definition of $\suspects$)}\\
+\phi \implies
+\suspects_a p \land \covers_b \{\neg p, \top\} & \text{(Definition of $\covers$)}\\
+\phi \implies
+\suspects_a \neg \neg p \land \covers_b \{\neg \neg \neg p, \neg \neg \top\} &
+\text{({\bf P})}\\
+\phi \implies
+\suspects_a \neg \allrefs_a \neg p \land \covers_b \{\neg \allrefs_a \neg \neg
+p, \neg \allrefs_a \neg \top\} & \text{({\bf RP})}\\
+\phi \implies
+\suspects_a \somerefs_a p \land \covers_b \{\somerefs_a \neg
+p, \somerefs_a \top\} & \text{(Definition of $\somerefs$)}\\
+\phi \implies
+\somerefs_a \covers_a \{p\} \land \covers_b \{\somerefs_a \neg
+p, \somerefs_a \top\} & \text{({\bf RK})}\\
+\phi \implies
+\somerefs_a \covers_a \{p\} \land \somerefs_a \covers_b \{\neg
+p, \top\} & \text{({\bf RComm})}\\
+\phi \implies
+\somerefs_a (\covers_a \{p\} \land \covers_b \{\neg
+p, \top\}) & \text{({\bf RDist})}\\
+\phi \implies
+\somerefs_a (\knows_a p \land \suspects_b \neg
+p) & \text{(Definition of $\covers$)}\\
+\phi \implies
+\somerefs_a (\knows_a p \knows_b p) & \text{(Definition of $\suspects$)}\\
+\end{array}
+$$
+\end{example}
 
 We will now show that the axiomatisation is sound with respect to \classK{}
 models.
@@ -239,8 +282,10 @@ V^N(p) &=&
 \text{ for $p \in P$}
 \end{eqnarray*}
 
-\begin{figure}
-\begin{center} % TODO - better diagram
+A representation of this model is pictured in Figure~\ref{k-diagram}.
+
+\begin{figure}\label{k-diagram}
+\begin{center}
 \scalebox{0.4}{
 \includegraphics{rk}
 }

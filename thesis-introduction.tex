@@ -89,10 +89,10 @@ logics that allow us to reason about this. There are two main directions that we
 can take with such extensions. The first is logics with which we can reason
 about the results of {\em specific} informative updates; in such a logic we can
 say of some specific informative update that ``after the informative update
-$\phi$, the statement $\psi$ is true in the resulting knowledge state''. The
+$\alpha$, the statement $\phi$ is true in the resulting knowledge state''. The
 second is logics with which we can reason about the results of {\em arbitrary}
 informative updates, by quantifying over them; in such a logic we can say
-that ``there exists an informative update after which $\psi$ is true in the
+that ``there exists an informative update after which $\phi$ is true in the
 resulting knowledge state''.
 
 % Introduce PAL, AML, and APAL
@@ -100,7 +100,7 @@ The {\em public announcement logic}, introduced by
 Plaza~\cite{plaza2007logics}, and also independently by Gerbrandy and
 Groenvald~\cite{gerbrandy1997reasoning} is an extension of epistemic logic that
 introduces an operator for reasoning about the results of a specific public
-announcement. A similar logic, the {\em action model logic}, was introduced by
+announcement. A similar logic, the {\em action model logic}, introduced by
 Baltag and Moss~\cite{baltag2004logics}, allows reasoning about the results of
 executing a specific action model. Balbiani, et
 al.~\cite{balbiani2007arbitrary} then explored the {\em arbitrary public
@@ -121,19 +121,18 @@ model. The finite refinements of a Kripke model can be shown to correspond to
 the results of executing arbitrary action models on that Kripke model, and so
 the effect of quantifying over the refinements of a Kripke model can reasonably
 be said to be equivalent to quantifying over arbitrary informative updates. van
-Ditmarsch, French and Pinchinat~\cite{french2010future} previously gave an
-axiomatisation and decidability results for a simplified version of this logic,
-in the context of single-agent modal logic, as opposed to multi-agent epistemic
-logic.
+Ditmarsch, French and Pinchinat~\cite{french2010future} gave an axiomatisation
+and decidability results for a simplified version of this logic, in the context
+of single-agent modal logic, as opposed to multi-agent epistemic logic.
 
 % The present work
 The present work extends the future event logic to the setting for which it was
-originally intended: epistemic logic. For this paper we will refer to the future
-event logic using the more up to date and general name of {\em refinement
-quantified modal logics}. We consider refinement quantified versions of modal,
-doxastic and epistemic logics. We provide axiomatisations for the refinement
-quantified epistemic and doxastic logics in the single-agent case, and provide
-axiomatisations for the refinement quantified modal and doxastic logics in the
-multi-agent case. As our axiomatisations involve translating the refinement
-quantified logics into basic modal logics, this gives us decidability results,
-and upper bounds on the complexities of these logics, amongst other results.
+originally intended: epistemic logic. We will refer to the future event logic
+using the more general name of {\em refinement quantified modal logics}. We
+consider refinement quantified versions of modal, doxastic and epistemic logics.
+We provide axiomatisations for the refinement quantified epistemic and doxastic
+logics in the single-agent case, and for the refinement quantified modal and
+doxastic logics in the multi-agent case. As our axiomatisations involve
+translating the refinement quantified logics into basic modal logics, this gives
+us decidability results, and upper bounds on the complexities of these logics,
+amongst other results.

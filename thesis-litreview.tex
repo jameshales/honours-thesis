@@ -1,4 +1,4 @@
-\chapter{Literature review}
+\chapter{Literature review}\label{litreview}
 
 We review previous techniques for modelling information change in epistemic
 logic and doxastic logic, and previous work in the refinement quantified modal
@@ -20,17 +20,16 @@ reason about them.
 A public announcement is a simple form of informative update, where a true
 statement is announced to all agents in a system at
 once~\cite{vanditmarsch2007dynamic}.  A public announcement takes the form of an
-epistemic formula $\phi$. As $\phi$ is announced to all agents at once, one
-result of the announcement is that afterwards every agent knows that $\phi$ is
-the case. However in addition to this, as the announcement was made publically,
-every agent also knows that every other agent knows that $\phi$, and also that
-every agent knows this, and so on ad infinitum.  Effectively $\phi$ becomes
-common knowledge amongst all of the agents. In terms of the Kripke model
-representation of the epistemic system, a public announcement has the effect of
-restricting the states of the Kripke model to those states that are consistent
-with $\phi$, as given the additional information that $\phi$ is the case, those
-states that are inconsistent with $\phi$ are now considered inplausible by every
-agent.
+epistemic formula $\alpha$. As $\alpha$ is announced to all agents at once, one
+result of the announcement is that afterwards every agent knows that $\alpha$ is
+true. In addition to this, as the announcement was made publicly, it becomes
+{\em common knowledge}. Common knowledge means that every agent knows $\alpha$,
+every agent knows that every agent knows that $\alpha$, and so on ad infinitum.
+In terms of the Kripke model representation of the epistemic system, a public
+announcement has the effect of restricting the states of the Kripke model to
+those states that are consistent with $\alpha$, as given the additional
+information that $\alpha$ is the case, those states that are inconsistent with
+$\alpha$ are now considered implausible by every agent.
 
 The public announcement logic was axiomatised by Plaza~\cite{plaza2007logics},
 and also independently by by Gerbrandy and
@@ -49,7 +48,7 @@ the agents in the system. Public announcements are however suited to some
 interesting problems, for example the muddy children puzzle that was discussed
 in the introduction to this paper~\cite{vanditmarsch2007dynamic}.
 
-\subsection{Action models}
+\subsection{Action models}\label{litreview-am}
 
 Action models capture a more general notion of informative updates than public
 announcements. Compared to public announcements, action models are able to
@@ -57,19 +56,23 @@ represent informative updates that provide information to only a subset of the
 agents, or where an agent may be aware that one of several possible informative
 updates has occurred, but is uncertain as to which update actually occurred. 
 
-For example, we may have a situation where we have two agents, $a$ and $b$,
-where neither agent knows whether a proposition $p$ is true or false, and
-moreover, both agents know about the other's ignorance. Suppose that $a$ is told
-privately that $p$ is actually true, whilst $b$ is aware that $a$ has been told
-something, but does not actually know what $a$ was told. Then a result of this
-is that $a$ now knows $p$ is true, whilst $b$ does not. Thus the effect of the
-informative update is that only one agent was provided with the additional
-information. Furthermore, $b$ is aware that an informative update has occurred,
-but is uncertain as to which update actually occurred. From the point of view of
-$b$, $a$ may have been told that $p$ is true, or that $p$ is false, or $a$ may
-have been told nothing at all. A result of this is that, whilst $b$ knew that
-$a$ was ignorant to the truth of $p$ before the informative update, after the
-informative update $b$ no longer has this knowledge.
+For example, suppose that Alice and Bob have made a bet on the flip of a coin.
+Alice flips the coin, and holds it on the back of her hand so that neither
+person can see what it is initially. Neither Alice nor Bob know whether the coin
+landed on heads or tails, and each of them knows that the other is ignorant of
+the result of the flip (i.e. it is common knowledge). Alice then lifts her hand,
+and without letting Bob see the coin, sees that the coin landed on heads. Bob
+saw Alice do this, but he didn't see what the coin landed on. The act of Alice
+looking at the coin is an informative update, one result of which is that Alice
+now knows that the coin landed on heads, whilst Bob still doesn't know. Thus the
+effect of this informative update was to provide different information to Alice
+than to Bob.  Furthermore, Bob saw Alice look at the coin, so he's aware that an
+informative update has occurred, but is uncertain as to which update actually
+occurred. From the point of view of Bob, Alice may have learned that the coin
+landed on heads, or that it landed on tails; Bob cannot distinguish between
+these two possibilities. Thus Bob now knows that either Alice knows that the
+coin landed on heads, or that Alice knows that the coin landed on tails, but
+doesn't know which is actually the case.
 
 Action models are represented by relational structures, similar to Kripke
 models~\cite{vanditmarsch2007dynamic}. An action model is executed on a Kripke
@@ -81,8 +84,8 @@ The logic of action models was introduced by Baltag, Solecki and
 Moss~\cite{baltag2004logics}. Again, an operator is introduced that has the
 effect of performing an informative update, this time in the form of executing
 an action model on the Kripke model that represents the current epistemic
-state.  The operator, $[\mathrm{M,s}]\psi$ means that after the action model
-$(\mathrm{M, s})$ is executed in the current epistemic state, $\psi$ holds in
+state.  The operator, $[\mathrm{M,s}]\phi$ means that after the action model
+$(\mathrm{M, s})$ is executed in the current epistemic state, $\phi$ holds in
 the resulting epistemic state. 
 
 Epistemic actions are a similar representation of informative updates.
@@ -101,7 +104,7 @@ represented as a formula.
 \subsection{Arbitrary public announcement logic}
 
 Balbiani, Baltag, van Ditmarsch, et al.~\cite{balbiani2007arbitrary} introduced
-the arbitrary public announcement logic, extension of the public announcement
+the arbitrary public announcement logic, an extension of the public announcement
 logic, that provides an operator for quantifying over arbitrary public
 announcements. It introduces an operator, $\Box\psi$, which means that after
 any arbitrary public announcement, $\psi$ holds. Its dual operator,
@@ -161,10 +164,17 @@ models can be generalised to apply to doxastic
 models~\cite{vanditmarsch2007dynamic}. Unlike action models applied in the
 epistemic setting, action models applied in the doxastic setting do not
 necessarily have to represent a truthful informative update, so it is possible
-for agents to come to believe statements that are not actually true.  By
-contrast to belief revision, it is not possible for action models to cause an
-agent to reject past information. In effect, once an agent has been provided
-with information, it is committed to believe that information forever.
+for agents to come to believe statements that are not actually true. By contrast
+to belief revision, it is not possible for action models to cause an agent to
+reject past information. In effect, once an agent has been provided with
+information, it is committed to believe that information forever. 
+
+It is also possible for an action model to cause a belief that was once founded
+to become unfounded. For example, in the previous coin flipping example, if
+Alice had taken a peek at the coin without Bob's seeing her do so, then the
+result of this is that Alice now believes that the coin landed on heads, whilst
+Bob continues to believe (incorrectly) that Alice does not believe either way
+that the coin landed on heads or tails.
 
 \section{Other related logics}
 
@@ -242,8 +252,9 @@ the Kripke model under consideration, but where a particular propositional atom
 may vary in its interpretation. In effect it is quantifying over the truth value
 of a propositional variable, in models bisimilar to the current Kripke model.
 French~\cite{french2006bisimulation} considered a number of bisimulation
-quantified modal logics, and provided axiomatisations and decidability or
-undecidability results for several such logics.
+quantified modal logics, and provided a translation to the modal
+$\mu$-calculus, and decidability or undecidability results for several such
+logics.
 
 \section{Refinement quantified modal logics}
 
@@ -296,7 +307,7 @@ The refinement quantified modal logic is considered in more depth by van
 Ditmarsch, French and Pinchinat~\cite{french2010future}. They consider the
 single-agent modal variant of the logic, rather than the epistemic variant. An
 axiomatisation of the logic is provided, and is proven sound and complete. The
-soundness proof for the axiomatisation is performed via a provably correct
+completeness proof for the axiomatisation is performed via a provably correct
 translation to single-agent modal logic. This translation shows that the
 single-agent refinement quantified modal logic is expressively equivalent to the
 single-agent modal logic. This expressivity result gives us several results

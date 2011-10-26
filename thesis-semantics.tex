@@ -74,6 +74,22 @@ $\phi \lor \psi ::= \neg (\neg \phi \land \neg \psi)$;
 $\phi \implies \psi ::= \neg \phi \lor \psi$;
 and $\suspects_a \phi ::= \neg \knows_a \neg \phi$.
 
+We also use the cover operator $\covers_a \Gamma$, where $\Gamma$ is a finite
+set of formulae, which is an abbreviation for $\covers_a \Gamma ::= \knows_a
+\bigvee_{\gamma \in \Gamma} \gamma \land \bigwedge_{\gamma \in \Gamma}
+\suspects_a \gamma$. An axiomatisation of the modal $\mu$-calculus, using the
+cover operator, was given by Bilkova, Palmigiano and
+Venema~\cite{bilkova2008proof}. The cover operator is relied on for our
+axiomatisation, in much the same way it is relied on for the axiomatisation of
+\logicKiF{} presented by van Ditmarsch, French and
+Pinchinat~\cite{french2010future}.
+
+We note that the basic modalities $\knows_a$ and $\suspects_a$ can be expressed
+in terms of the cover operator, a fact that we will rely upon for all of our
+axiomatisations. We note that $\knows_a \phi \iff \covers_a \{\phi\} \lor
+\covers_a \emptyset$ and $\suspects_a \phi \iff \covers_a \{\phi,
+\top\}$~\cite{bilkova2008proof}. 
+
 % Semantics of modal logics
 \begin{definition}[Semantics of \logicC{}]
 Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
@@ -178,12 +194,7 @@ $a$-refinement of $M'_{s'}$. We write $M'_{s'} \simulation_a M_s$ to denote
 this, or alternatively, $M_s \refinement_a M'_{s'}$.
 \end{definition}
 
-Whilst we have introduced simulations and refinements as relations between
-models, we will often also refer to Kripke models as refinements or simulations
-of other models. If $M_s \refinement_a M'_{s'}$ then we call $M_s$ an
-$a$-refinement of $M'_{s'}$, and we call $M'_{s'}$ an $a$-simulation of $M_s$.
-
-\begin{lemma}
+\begin{lemma}\label{semantics-preorder}
 The relation $\refinement_a$ is reflexive and transitive, and satisfies the
 Church-Rosser property over the class of \classK{} models.
 \end{lemma}
@@ -223,13 +234,13 @@ informative update. For example, suppose that we have a situation where
 $\knows_a \neg \knows_b p$, i.e. $a$ knows that $b$ doesn't know that $p$. We
 say this situation involves negative knowledge because it refers to a lack of
 knowledge of agent $b$. Then it is reasonable that an informative update could
-tell $b$ that $p$ is true, and so after the informative update, $\knows_b p$.
-This causes $\neg \knows_b p$ to become false, and since it is now false, it
-cannot possibly be known (since only true statements can be known). Thus not all
-knowledge is retained by an informative update, only positive knowledge is
-retained. The fact that refinements preserve positive knowledge is an important
-property for refinements in modelling informative updates in an epistemic
-setting.
+tell $b$ that $p$ is true, and so after the informative update, $\knows_b p$
+becomes true.  This causes $\neg \knows_b p$ to become false, and since it is
+now false, it cannot possibly be known, since only true statements can be
+known. Thus not all knowledge is retained by an informative update, only
+positive knowledge is retained. The fact that refinements preserve positive
+knowledge is an important property for refinements in modelling informative
+updates in an epistemic setting.
 
 \begin{proposition}
 On finite epistemic models, every finite refinement is equivalent to the
@@ -268,22 +279,6 @@ where $p \in P$, $a \in A$ and $\alpha \in \lang{}$.
 We use the standard abbreviations from basic modal logic, along with an
 abbreviation for the dual of the $\allrefs_a$ operator, $\somerefs_a \phi ::=
 \neg \allrefs_a \neg \phi$.
-
-We also use the cover operator $\covers_a \Gamma$, where $\Gamma$ is a finite
-set of formulae, which is an abbreviation for $\covers_a \Gamma ::= \knows_a
-\bigvee_{\gamma \in \Gamma} \gamma \land \bigwedge_{\gamma \in \Gamma}
-\suspects_a \gamma$. An axiomatisation of the modal $\mu$-calculus, using the
-cover operator, was given by Bilkova, Palmigiano and
-Venema~\cite{bilkova2008proof}. The cover operator is relied on for our
-axiomatisation, in much the same way it is relied on for the axiomatisation of
-\logicKiF{} presented by van Ditmarsch, French and
-Pinchinat~\cite{french2010future}.
-
-We note that the basic modalities $\knows_a$ and $\suspects_a$ can be expressed
-in terms of the cover operator, a fact that we will rely upon for all of our
-axiomatisations. We note that $\knows_a \phi \iff \covers_a \{\phi\} \lor
-\covers_a \emptyset$ and $\suspects_a \phi \iff \covers_a \{\phi,
-\top\}$~\cite{bilkova2008proof}. 
 
 \begin{definition}[Semantics of \logicCF{}]
 Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
@@ -344,6 +339,102 @@ The proof for bisimulation invariance in \logicKF{}, given by van Ditmarsch,
 French and Pinchinat~\cite{french2010future} applies to \logicSF{} and
 \logicKDF{}.
 
+% Examples
+\begin{example}\label{semantics-coin-s5}
+We recall the coin-flipping example previously given in
+Section~\ref{litreview-am}.  Suppose that Alice has flipped a coin, and
+initially Alice and Bob do not know whether the coin landed on heads or tails,
+and that both Alice and Bob are aware of each other's ignorance of the result.
+We represent Alice by the symbol $a$, Bob by the symbol $b$, the result that the
+coin landed on heads by the propositional atom $p$, and the result that the coin
+landed on tails by the negated atom, $\neg p$. This situation can be represented
+by the epistemic model in Figure~\ref{semantics-coin-s5-1}.
+
+\begin{figure}\label{semantics-coin-s5-1}
+\begin{center} 
+\scalebox{0.4}{
+\includegraphics{semantics-coin-s5-1}
+}
+\caption{
+Initially Alice and Bob cannot distinguish between the worlds where the coin
+lands on heads or on tails.
+}
+\end{center}
+\end{figure}
+
+Suppose that the coin actually landed on heads. Then the world where $p$ is true
+is the actual world. We ask whether it is possible for Alice to learn that the
+coin landed on heads whilst Bob continues to be ignorant of the result. We can
+represent this question by the following statement in refinement quantified
+epistemic logic:
+$$\somerefs_a (\knows_a p \land \neg \knows_b p)$$ 
+
+We can show that this statement is satisfied in the actual world of the above
+epistemic model, by giving the $a$-refinement in Figure~\ref{semantics-coin-s5-2}
+
+\begin{figure}\label{semantics-coin-s5-2}
+\begin{center} 
+\scalebox{0.4}{
+\includegraphics{semantics-coin-s5-2}
+}
+\caption{
+After Alice looks at the coin, she can distinguish between the worlds where the
+coin lands on heads or tails, but Bob still cannot.
+}
+\end{center}
+\end{figure}
+\end{example}
+
+\begin{example}\label{semantics-coin-kd45}
+We recall the coin-flipping example again, but this time in the setting of
+doxastic logic. We ask whether it is possible for Alice to learn that the coin
+landed on heads whilst Bob continues to believe that Alice is ignorant of the
+result. We can represent this question by the following statement in refinement
+quantified doxastic logic:
+$$\somerefs_a (\knows_a p \land \knows_b (\neg \knows_a p \land \neg \knows_a
+\neg p))$$
+
+We can show that this statement is satisfied by the model given in
+Example~\ref{semantics-coin-s5} by giving the $a$-refinement of the
+model in Figure~\ref{semantics-coin-kd45}.
+
+\begin{figure}\label{semantics-coin-kd45}
+\begin{center} 
+\scalebox{0.4}{
+\includegraphics{semantics-coin-kd45}
+}
+\caption{
+After Alice looks at the coin, she can distinguish between the worlds where the
+coin lands on heads or tails, but Bob still cannot distinguish between these
+worlds, and neither does he know that Alice can. The actual world is the world
+on the bottom.
+}
+\end{center}
+\end{figure}
+
+We note that the statement is not satisfied in the setting of epistemic logic.
+This should be clear, as in an epistemic setting, if Alice knows that the coin
+landed on heads, then Bob cannot know that this isn't the case, because in an
+epistemic setting agents can only know statements that are actually true.
+\end{example}
+
+We briefly list some properties of the refinement quantified modal logic, to
+give some intuition about the logic. These properties were previously given by
+van Ditmarsch and French~\cite{french2009simulation}
+
+\begin{proposition}
+We have the following validities: 
+\begin{enumerate}
+\item $\entails_{\logicKF} \allrefs_a (\phi \implies \psi) \implies \allrefs_a
+\phi \implies \allrefs_a \psi$
+\item $\entails_{\logicKF} \allrefs_a \phi \implies \phi$
+\item $\entails_{\logicKF} \allrefs_a \phi \implies \allrefs_a \allrefs_a \phi$
+\item $\entails_{\logicKF} \phi$ implies $\entails_{\logicKF} \allrefs_a \phi$
+\item $\entails_{\logicKF} \knows_a \allrefs_a \phi \implies \allrefs_a \knows_a
+\phi$
+\end{enumerate}
+\end{proposition}
+
 In previous work, van Ditmarsch, French and Pinchinat~\cite{french2010future}
 have considered the refinement quantified modal logic, \logicKF{}, based in the
 class of models \classK{}. They provided a sound and complete axiomatisation for
@@ -358,4 +449,4 @@ logics, and the multi-agent refinement quantified modal and doxastic logics. We
 provide sound and complete axiomatisations for each of these logics, and show
 that they are expressively equivalent to the modal logics that they are based
 on. The expressivity result in particular allows us to show several results for
-each of these logics, notably that they are all decidable.
+each of these logics, particularly that they are all decidable.
