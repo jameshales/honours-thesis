@@ -348,40 +348,40 @@ Thus we give a derivation of $\neg \knows_a p \land \neg \knows_a \neg p \land
 p)$.
 $$
 \begin{array}{ll}
-\phi \implies \neg \knows_a \neg p \land \knows_b \neg \knows_a p & \text{({\bf P})}\\
-\phi \implies \suspects_a p \land \knows_b \suspects_a \neg p &
+\proves \phi \implies \neg \knows_a \neg p \land \knows_b \neg \knows_a p & \text{({\bf P})}\\
+\proves \phi \implies \suspects_a p \land \knows_b \suspects_a \neg p &
 \text{(Definition of $\suspects$)}\\
-\phi \implies \suspects_a p \land \knows_b (\suspects_a \neg p \land \suspects_a
+\proves \phi \implies \suspects_a p \land \knows_b (\suspects_a \neg p \land \suspects_a
 \top)&
 \text{(Consequence of {\bf D})}\\
-\phi \implies \suspects_a \neg \neg p \land \knows_b (\suspects_a \neg \neg \neg
+\proves \phi \implies \suspects_a \neg \neg p \land \knows_b (\suspects_a \neg \neg \neg
 p \land \suspects_a \neg \neg \top)&
 \text{({\bf P})}\\
-\phi \implies \suspects_a \neg \allrefs_a \neg p \land \knows_b (\suspects_a \neg
+\proves \phi \implies \suspects_a \neg \allrefs_a \neg p \land \knows_b (\suspects_a \neg
 \allrefs_a \neg \neg p \land \suspects_a \neg \allrefs_a \neg \top)&
 \text{({\bf RP})}\\
-\phi \implies \suspects_a \somerefs_a p \land \knows_b (\suspects_a \somerefs_a
+\proves \phi \implies \suspects_a \somerefs_a p \land \knows_b (\suspects_a \somerefs_a
 \neg p \land \suspects_a \somerefs_a \top)&
 \text{(Definition of $\somerefs$)}\\
-\phi \implies \somerefs_a \covers_a \{p\} \land \knows_b (\suspects_a \somerefs_a
+\proves \phi \implies \somerefs_a \covers_a \{p\} \land \knows_b (\suspects_a \somerefs_a
 \neg p \land \suspects_a \somerefs_a \top)&
 \text{({\bf RKD45})}\\
-\phi \implies \somerefs_a \covers_a \{p\} \land \knows_b \somerefs_a \covers_a
+\proves \phi \implies \somerefs_a \covers_a \{p\} \land \knows_b \somerefs_a \covers_a
 \{\neg p, \top\}&
 \text{({\bf RKD45})}\\
-\phi \implies \somerefs_a \covers_a \{p\} \land \covers_b \{ \somerefs_a \covers_a
+\proves \phi \implies \somerefs_a \covers_a \{p\} \land \covers_b \{ \somerefs_a \covers_a
 \{\neg p, \top\} \}&
 \text{(Definition of $\covers$)}\\
-\phi \implies \somerefs_a \covers_a \{p\} \land \somerefs_a \covers_b \{
+\proves \phi \implies \somerefs_a \covers_a \{p\} \land \somerefs_a \covers_b \{
 \covers_a \{\neg p, \top\} \}&
 \text{({\bf RComm})}\\
-\phi \implies \somerefs_a (\covers_a \{p\} \land \covers_b \{
+\proves \phi \implies \somerefs_a (\covers_a \{p\} \land \covers_b \{
 \covers_a \{\neg p, \top\} \})&
 \text{({\bf RDist})}\\
-\phi \implies \somerefs_a (\knows_a p \land \knows_b 
+\proves \phi \implies \somerefs_a (\knows_a p \land \knows_b 
 \suspects_a \neg p)&
 \text{(Definition of $\covers$)}\\
-\phi \implies \somerefs_a (\knows_a p \land \knows_b 
+\proves \phi \implies \somerefs_a (\knows_a p \land \knows_b 
 \neg \knows_a p)&
 \text{(Definition of $\suspects$)}\\
 \end{array}
@@ -464,7 +464,7 @@ for every $\gamma \in \Gamma_a$, and connecting them with an extra node $t$. $t$
 is connected via an $a$-edge to $t^\gamma$ from each of the $N^\gamma$, and is
 also connected via a $b$-edge to each $b$-successor of $s$ in $M$. We must also
 have $a$-edges between each of the $t^\gamma$ to ensure that the resulting model
-is transitive and Euclidean.
+is transitive and Euclidean. $N_t$ is then the desired $a$-refinement of $M_s$.
 }
 \end{center}
 \end{figure}

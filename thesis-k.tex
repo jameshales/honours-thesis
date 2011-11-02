@@ -197,35 +197,35 @@ continues to not know. Thus we give a derivation of $\neg \knows_a p \land \neg
 \knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p$.
 $$
 \begin{array}{ll}
-\phi \implies \neg
+\proves \phi \implies \neg
 \knows_a \neg p \land \neg \knows_b p & \text{({\bf P})}\\
-\phi \implies
+\proves \phi \implies
 \suspects_a p \land \suspects_b \neg p & \text{(Definition of $\suspects$)}\\
-\phi \implies
+\proves \phi \implies
 \suspects_a p \land \covers_b \{\neg p, \top\} & \text{(Definition of $\covers$)}\\
-\phi \implies
+\proves \phi \implies
 \suspects_a \neg \neg p \land \covers_b \{\neg \neg \neg p, \neg \neg \top\} &
 \text{({\bf P})}\\
-\phi \implies
+\proves \phi \implies
 \suspects_a \neg \allrefs_a \neg p \land \covers_b \{\neg \allrefs_a \neg \neg
 p, \neg \allrefs_a \neg \top\} & \text{({\bf RP})}\\
-\phi \implies
+\proves \phi \implies
 \suspects_a \somerefs_a p \land \covers_b \{\somerefs_a \neg
 p, \somerefs_a \top\} & \text{(Definition of $\somerefs$)}\\
-\phi \implies
+\proves \phi \implies
 \somerefs_a \covers_a \{p\} \land \covers_b \{\somerefs_a \neg
 p, \somerefs_a \top\} & \text{({\bf RK})}\\
-\phi \implies
+\proves \phi \implies
 \somerefs_a \covers_a \{p\} \land \somerefs_a \covers_b \{\neg
 p, \top\} & \text{({\bf RComm})}\\
-\phi \implies
+\proves \phi \implies
 \somerefs_a (\covers_a \{p\} \land \covers_b \{\neg
 p, \top\}) & \text{({\bf RDist})}\\
-\phi \implies
+\proves \phi \implies
 \somerefs_a (\knows_a p \land \suspects_b \neg
 p) & \text{(Definition of $\covers$)}\\
-\phi \implies
-\somerefs_a (\knows_a p \knows_b p) & \text{(Definition of $\suspects$)}\\
+\proves \phi \implies
+\somerefs_a (\knows_a p \land \knows_b p) & \text{(Definition of $\suspects$)}\\
 \end{array}
 $$
 \end{example}
@@ -295,7 +295,8 @@ A representation of this model is pictured in Figure~\ref{k-diagram}.
 The model $N$ is constructed by taking the model $M$ and the models $N^\gamma$
 for every $\gamma \in \Gamma$, and connecting them with an extra node $t$. $t$
 is connected via an $a$-edge to $t^\gamma$ from each of the $N^\gamma$, and is
-also connected via a $b$-edge to each $b$-successor of $s$ in $M$.
+also connected via a $b$-edge to each $b$-successor of $s$ in $M$. $N_t$ is
+then the desired $a$-refinement of $M_s$.
 }
 \end{center}
 \end{figure}
