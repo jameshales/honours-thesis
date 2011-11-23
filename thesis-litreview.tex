@@ -29,13 +29,13 @@ In terms of the Kripke model representation of the epistemic system, a public
 announcement has the effect of restricting the states of the Kripke model to
 those states that are consistent with $\alpha$, as given the additional
 information that $\alpha$ is the case, those states that are inconsistent with
-$\alpha$ are now considered implausible by every agent.
+$\alpha$ are now considered impossible by every agent.
 
 The public announcement logic was axiomatised by Plaza~\cite{plaza2007logics},
 and also independently by by Gerbrandy and
 Groenvald~\cite{gerbrandy1997reasoning}.  The logic introduces an operator
 $[\alpha]$, where $\alpha$ is an epistemic formula, that can be used to reason
-about the results of a specific public announcement. The operator, $[\alpha]
+about the results of a specific public announcement. The operator $[\alpha]
 \phi$ means that after the formula $\alpha$ is publicly announced, $\phi$ holds
 in the resulting epistemic state. This allows one to reason about the
 consequences of specific public announcements in the epistemic system.
@@ -46,7 +46,7 @@ knowledge to all agents in the system. Public announcements cannot for example
 model informative updates that provide information privately to only some of
 the agents in the system. Public announcements are however suited to some
 interesting problems, for example the muddy children puzzle that was discussed
-in the introduction to this paper~\cite{vanditmarsch2007dynamic}.
+in the introduction to this thesis.
 
 \subsection{Action models}\label{litreview-am}
 
@@ -84,7 +84,7 @@ The logic of action models was introduced by Baltag, Solecki and
 Moss~\cite{baltag2004logics}. Again, an operator is introduced that has the
 effect of performing an informative update, this time in the form of executing
 an action model on the Kripke model that represents the current epistemic
-state.  The operator, $[\mathrm{M,s}]\phi$ means that after the action model
+state.  The operator $[\mathrm{M,s}]\phi$ means that after the action model
 $(\mathrm{M, s})$ is executed in the current epistemic state, $\phi$ holds in
 the resulting epistemic state. 
 
@@ -174,7 +174,11 @@ to become unfounded. For example, in the previous coin flipping example, if
 Alice had taken a peek at the coin without Bob's seeing her do so, then the
 result of this is that Alice now believes that the coin landed on heads, whilst
 Bob continues to believe (incorrectly) that Alice does not believe either way
-that the coin landed on heads or tails.
+that the coin landed on heads or tails. Bob continues to hold his initial belief
+because he has not been exposed to any information that would cause that belief
+to change. Such a change is not permissible in an epistemic setting, where
+knowledge must be founded, but it is permissible in a doxastic setting, where
+beliefs are allowed to be unfounded.
 
 \section{Other related logics}
 
@@ -188,19 +192,18 @@ in the group are able to cooperate by publicly announcing statements that the
 agents know, but are unable to announce statements that they do not know. The
 logic introduces an operator, $<G>$, where $G$ is a subset of the agents, and
 the formula $<G> \phi$ means that there is some set of formulae, such every
-formula is known by at least one of the agents, and such that after each agent
-announces the formulae that they know, $\phi$ is true in the resulting
+formula is known by at least one of the agents in $G$, and such that after each
+agent announces the formulae that they know, $\phi$ is true in the resulting
 knowledge state. {\AA}gotnes et al.~\cite{agotnes2010group} provide a sound and
 complete axiomatisation of the group announcement logic, show that it is
 decidable, and give complexity and expressivity results for the logic. Notably,
 the group announcement logic is not as expressive as the arbitrary public
-announcement logic, and it is conjectured that the arbitrary public
-announcement is not as expressive as the group announcement logic either.  The
-difference between group announcement logic and the arbitrary public
-announcement logic is that the group announcement logic essentially quantifies
-over the public announcements that the agents in the group know, whereas the
-arbitrary public announcement logic quantifies over all possible public
-announcements.
+announcement logic, and it is conjectured that the arbitrary public announcement
+is not as expressive as the group announcement logic either.  The difference
+between group announcement logic and the arbitrary public announcement logic is
+that the group announcement logic essentially quantifies over the public
+announcements that the agents in the group know, whereas the arbitrary public
+announcement logic quantifies over all possible public announcements.
 
 \subsection{Propositional dynamic logics}
 
@@ -243,16 +246,15 @@ axiomatisation for the resulting logic and showed that it was decidable.
 
 \subsection{Bisimulation quantified modal logics}
 
-Bisimulations are a related notion to refinements over Kripke models. Whilst a
-refinement is a pre-order relation defined over Kripke models, a bisimulation
-can be seen as essentially the equivalence relation that is naturally formed
-from the refinement relation. Bisimulation quantified modal logics extend modal
-logics with an operator for quantifying over the models that are bisimilar to
-the Kripke model under consideration, but where a particular propositional atom
-may vary in its interpretation. In effect it is quantifying over the truth value
-of a propositional variable, in models bisimilar to the current Kripke model.
-French~\cite{french2006bisimulation} considered a number of bisimulation
-quantified modal logics, and provided a translation to the modal
+Bisimulations are a relationship between Kripke models, that preserves the truth
+of modal formulae interpreted over the related Kripke models. Bisimulations are
+defined formally in Section~\ref{bisimulation}. Bisimulation quantified modal
+logics extend modal logics with an operator for quantifying over the models that
+are bisimilar to the Kripke model under consideration, but where a particular
+propositional atom may vary in its interpretation. In effect it is quantifying
+over the truth value of a propositional variable, in models bisimilar to the
+current Kripke model.  French~\cite{french2006bisimulation} considered a number
+of bisimulation quantified modal logics, and provided a translation to the modal
 $\mu$-calculus, and decidability or undecidability results for several such
 logics.
 
@@ -266,10 +268,19 @@ to justify the future event logic as accurately capturing the notion of
 quantifying over arbitrary informative updates. van Ditmarsch and French also
 compare the semantics of the future event logic to previously defined logics, in
 particular to the bisimulation quantified epistemic logic, and to the proposed
-arbitrary action model logic. In this paper we refer to the future event logic
+arbitrary action model logic. In this thesis we refer to the future event logic
 with the more general term of refinement quantified modal logics. The future
 event logic that van Ditmarsch and French initially introduced is the epistemic
 variant, the refinement quantified epistemic logic.
+
+van Ditmarsch and French briefly relate the refinement quantified modal logics
+to the bisimulation quantified modal logics. The notion of bisimulations and
+refinements are related, in that the refinement relation is a pre-order
+relation, and the bisimulation relation is the equivalence relation that is
+naturally induced from this pre-order. The two kinds of logics are however vary
+significantly in their interpretations, as the bisimulation quantifiers bind
+propositional variables, whilst the refinement quantifiers do not bind any
+variables. % TODO - deeper relationships?
 
 van Ditmarsch and French compare the refinement quantified epistemic logic to
 the proposed arbitrary action model logic~\cite{french2009simulation}. The main

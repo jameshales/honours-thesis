@@ -184,15 +184,18 @@ are that \axiomKF{} contains axioms for handling the interaction between
 multiple agents. The axioms {\bf RComm} and {\bf RDist} are novel axioms used to
 handle the situation where a refinement quantifier is applied to a cover
 operator of a different agent, and where a refinement quantifier is applied to a
-conjunction of cover operators belonging to different agents.
+conjunction of cover operators belonging to different agents. We call these
+axioms {\bf RComm} and {\bf RDist} because they correspond to properties that
+are visually similar to commutativity or distributivity of the $\somerefs$
+opereator over the $\covers$ operators for different agents.
 
 \begin{example}\label{k-example}
 We give an example derivation using \axiomKF{}, based on the coin-flipping
 example given in Example~\ref{semantics-coin-s5}. We suppose that neither Alice
 nor Bob know whether the coin has landed on heads or tails, and we show that it
 is possible for Alice to learn that the coin landed on heads, whilst Bob
-continues to not know. Thus we give a derivation of $\neg \knows_a p \land \neg
-\knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p \implies
+continues to not know. Thus we give a derivation of $(\neg \knows_a p \land \neg
+\knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p) \implies
 \somerefs_a (\knows_a p \land \neg \knows_b p)$. Let $\phi = \neg \knows_a p \land \neg
 \knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p$.
 $$
@@ -495,7 +498,7 @@ Therefore the axiomatisation \axiomKF{} is sound.
 \end{proof}
 
 We note that if the implication in {\bf RDist} is strengthened to an equality,
-that the resulting axiom is also sound. However this is easily derivable from
+the resulting axiom is also sound. However this is easily derivable from
 the other axioms in \axiomKF{}.
 
 \begin{lemma}\label{k-rdist-converse}
@@ -548,7 +551,6 @@ is derivable from {\bf P} and {\bf K}.
 
 (2) and (3) are derivable, by using {\bf P}, {\bf R} and {\bf RP} to bring the
 propositional part $\pi$ outside the $\somerefs_a$ operator, using {\bf RDist}
-zsh:1: command not found: :pdflatex
 $\somerefs_a$ operator into the cover operators inside the conjunction, and then
 using {\bf RK} or {\bf RComm} as appropriate for each cover operator.
 \end{proof}
@@ -592,13 +594,13 @@ the induction hypothesis to replace each occurrence of the $\somerefs_a$
 operator applied to a subformula of $\beta$ with an equivalent formula in
 \lang{}. The resulting formula is also in \lang{}.
 
-Therefore by the principle of mathematical induction, $\somerefs_a \beta$ is
+Therefore by the induction, $\somerefs_a \beta$ is
 equivalent to a formula $\chi \in \lang{}$ for every $\beta \in \lang{}$. 
 
 Hence replacing $\somerefs_a \beta$ in $\alpha$ with $\chi$ gives an equivalent
 formula that contains only $n$ \somerefs{} operators.
 
-Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
+Therefore by the induction, $\alpha$ is equivalent to
 a formula in \lang{}.
 \end{proof}
 
