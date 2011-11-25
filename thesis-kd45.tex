@@ -3,7 +3,7 @@
 In this chapter we provide an axiomatisation of the multi-agent refinement
 quantified doxastic logic. The axiomatisation for the doxastic variant differs
 from the modal variant due to the restriction to doxastic models, and due to the
-interpretation of the refinement operator, which is also restricted to
+interpretation of the refinement quantifier, which is also restricted to
 considering only doxastic models.
 
 \section{Technical preliminaries}
@@ -293,11 +293,11 @@ $$ % TODO - fix formatting
 \allrefs_a \psi\\
 {\bf RP} & \allrefs_a \alpha \iff \alpha \text{ where $\alpha$ is a
 propositional formula}\\
-{\bf RComm} & \somerefs_a \covers_b \Gamma_b \iff \covers_b \{\somerefs_a \gamma
+{\bf RComm} & \displaystyle \somerefs_a \covers_b \Gamma_b \iff \covers_b \{\somerefs_a \gamma
 \mid \gamma \in \Gamma_b\} \text{ where $a \neq b$}\\
-{\bf RDist} & \bigwedge_{b \in B} \somerefs_a \covers_b \Gamma_b \implies
+{\bf RDist} & \displaystyle \bigwedge_{b \in B} \somerefs_a \covers_b \Gamma_b \implies
 \somerefs_a \bigwedge_{b \in B} \covers_b \Gamma_b \text{ where $B \subseteq A$}\\
-{\bf RKD45} & \somerefs_a \covers_a \Gamma_a \iff \bigwedge_{\gamma \in
+{\bf RKD45} & \displaystyle \somerefs_a \covers_a \Gamma_a \iff \bigwedge_{\gamma \in
 \Gamma_a} \suspects_a \somerefs_a \gamma
 \end{array}
 $$
@@ -830,9 +830,9 @@ We have briefly considered an axiomatisation for the multi-agent refinement
 quantified epistemic logic. The obvious generalisations however do not appear to
 be sound. The main obstacle in the epistemic setting is that we do not have a
 result similar to Lemma~\ref{kd45-successors}, due to the symmetry of \classS{}
-models. The $a$-alternating disjunctive normal form used in this chapter ensures that this
-is the case for \classKD{} models, but unfortunately it is not strong enough to
-ensure the same property for \classS{} models. It is because of the symmetric
-property that we cannot combine \classS{} models in the manner performed in the
-proof of {\bf RKD45}, and expect them to continue to satisfy the formulae we
-wish them to satisfy in the combined model.
+models. The $a$-alternating disjunctive normal form used in this chapter ensures
+that this is the case for \classKD{} models, but unfortunately it is not strong
+enough to ensure the same property for \classS{} models. It is because of the
+symmetric property that we cannot combine \classS{} models in the manner
+performed in the proof of {\bf RKD45}, and expect them to continue to satisfy
+the formulae we wish them to satisfy in the combined model.

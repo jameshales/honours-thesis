@@ -139,7 +139,7 @@ doxastic systems.
 
 \subsection{Belief revision}
 
-The AGM approach to belief revision, named for Alchourrón, Gärdenfors and
+The AGM approach to belief revision, named for Alchourrón, G{\"a}rdenfors and
 Makinson~\cite{alchourron1985logic}, who did much of the initial work in this
 area, considers the beliefs of an agent as a set of propositional formulae,
 called the belief set, that the agent believes to be true. Informative updates
@@ -157,7 +157,7 @@ Variants of dynamic doxastic logic use different operators for belief revision.
 Segerberg~\cite{segerberg2001basic} provided axiomatisation for some variants of
 dynamic doxastic logics.
 
-\subsection{Action models}
+\subsection{Action models}\label{litreview-am-kd45}
 
 The same system of action models for modelling informative updates in epistemic
 models can be generalised to apply to doxastic
@@ -226,8 +226,8 @@ in the worst case~\cite{pratt1980near}.
 van Benthem, van Eijck and Kooi~\cite{vanbenthem2006logics} showed that the
 action model logic can be translated to propositional dynamic logic, and hence
 propositional dynamic logic is at least as expressive as the action model logic.
-Miller and Moss however showed that adding quantification over action models, as
-in arbitrary action model logic, makes the logic
+Miller and Moss however showed that adding quantification over action models,
+as in arbitrary action model logic, makes the logic
 undecidable~\cite{miller2005undecidability}.
 
 \subsection{Description logics}
@@ -254,38 +254,41 @@ are bisimilar to the Kripke model under consideration, but where a particular
 propositional atom may vary in its interpretation. In effect it is quantifying
 over the truth value of a propositional variable, in models bisimilar to the
 current Kripke model.  French~\cite{french2006bisimulation} considered a number
-of bisimulation quantified modal logics, and provided a translation to the modal
-$\mu$-calculus, and decidability or undecidability results for several such
-logics.
+of bisimulation quantified modal logics, and provided a translation to the
+modal $\mu$-calculus, and decidability or undecidability results for several
+such logics. The notion of a bisimulation is related to the notion of a
+refinement, on which the refinement quantified modal logics are based.
 
 \section{Refinement quantified modal logics}
 
-van Ditmarsch and French~\cite{french2009simulation} introduced the future event
-logic, an extension of epistemic logic that provides an operator for
-quantification over arbitrary refinements of Kripke models. van Ditmarsch and
-French provided the semantics of the logic, and several results and comparisons
-to justify the future event logic as accurately capturing the notion of
-quantifying over arbitrary informative updates. van Ditmarsch and French also
-compare the semantics of the future event logic to previously defined logics, in
-particular to the bisimulation quantified epistemic logic, and to the proposed
-arbitrary action model logic. In this thesis we refer to the future event logic
-with the more general term of refinement quantified modal logics. The future
-event logic that van Ditmarsch and French initially introduced is the epistemic
-variant, the refinement quantified epistemic logic.
+The future event logic, introduced by van Ditmarsch and
+French~\cite{french2009simulation} logic, is an extension of epistemic logic
+that provides an operator for quantification over arbitrary refinements of
+Kripke models. The semantics of the logic were provided by van Ditmarsch and
+French, along with several results and comparisons to justify the future event
+logic as accurately capturing the notion of quantifying over arbitrary
+informative updates. The semantics of the future event logic was also compared
+to previously defined logics, in particular to the bisimulation quantified
+epistemic logic, and to the proposed arbitrary action model logic.  In this
+thesis we refer to the future event logic with the more general term of
+refinement quantified modal logics. The future event logic that van Ditmarsch
+and French initially introduced is the epistemic variant, the refinement
+quantified epistemic logic.
 
-van Ditmarsch and French briefly relate the refinement quantified modal logics
-to the bisimulation quantified modal logics. The notion of bisimulations and
-refinements are related, in that the refinement relation is a pre-order
-relation, and the bisimulation relation is the equivalence relation that is
-naturally induced from this pre-order. The two kinds of logics are however vary
-significantly in their interpretations, as the bisimulation quantifiers bind
-propositional variables, whilst the refinement quantifiers do not bind any
-variables. % TODO - deeper relationships?
+In their paper, van Ditmarsch and French~\cite{french2009simulation} briefly
+relate the refinement quantified modal logics to the bisimulation quantified
+modal logics.  The notion of bisimulations and refinements are related, in that
+the refinement relation is a pre-order relation, and the bisimulation relation
+is the equivalence relation that is naturally induced from this pre-order.
+However the two kinds of logics vary significantly in their interpretations, as
+the bisimulation quantifiers bind propositional variables, whilst the
+refinement quantifiers do not bind any variables. % TODO - deeper
+relationships?
 
-van Ditmarsch and French compare the refinement quantified epistemic logic to
-the proposed arbitrary action model logic~\cite{french2009simulation}. The main
-difference between the two logics is that the refinement quantified epistemic
-logic does not include an operator for reasoning about the results of a specific
+A comparison was also given by van Ditmarsch and French to the proposed
+arbitrary action model logic~\cite{french2009simulation}. The main difference
+between the two logics is that the refinement quantified epistemic logic does
+not include an operator for reasoning about the results of a specific
 informative update. van Ditmarsch and French~\cite{french2009simulation} show
 that if such an operator is added to the refinement quantified epistemic logic,
 then the resulting logic is equivalent to the arbitrary action model logic. The
@@ -317,11 +320,11 @@ single-agent refinement quantified modal logic is expressively equivalent to the
 single-agent modal logic. This expressivity result gives us several results
 about the single-agent refinement quantified modal logic from properties of
 basic modal logic, in particular that the single-agent refinement quantified
-modal logic is decidable. van Ditmarsch, French and Pinchinat also provide an
-explicit decision procedure for the logic, that runs in 2EXP time, using a
-tableau method, which gives an upper bound for the complexity of the logic. The
-refinement quantified modal logic is also shown to be exponentially more
-succinct than the basic modal logic, a result that hints that the decision
-procedure that was given is likely to be optimal. Extending the refinement
-quantified modal logic to the multi-agent cases, and to epistemic and doxastic
-variants, are left as future work.
+modal logic is decidable. An explicit decision procedure was also given by van
+Ditmarsch, French and Pinchinat, that runs in 2EXP time using a tableau method,
+which gives an upper bound for the complexity of the logic. The refinement
+quantified modal logic is also shown to be exponentially more succinct than the
+basic modal logic, a result that hints that the decision procedure that was
+given is likely to be optimal. Extending the refinement quantified modal logic
+to the multi-agent cases, and to epistemic and doxastic variants, are left as
+future work.

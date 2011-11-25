@@ -80,7 +80,7 @@ where $p \in P$, $a \in A$ and $\alpha \in \lang{}$.
 \end{definition}
 
 Standard abbreviations include:
-$\top ::= p \lor \neg p$;
+$\top ::= p \lor \neg p$ for some $p \in P$;
 $\bot ::= \neg \top$;
 $\phi \lor \psi ::= \neg (\neg \phi \land \neg \psi)$;
 $\phi \implies \psi ::= \neg \phi \lor \psi$;
@@ -289,8 +289,7 @@ following axioms:
 $$
 \begin{array}{rl}
 {\bf P} & \text{All propositional tautologies}\\
-{\bf K} & \knows (\phi \implies \psi) \implies \knows \phi \implies \knows
-\psi\\
+{\bf K} & \knows_a (\phi \implies \psi) \implies \knows_a \phi \implies \knows_a \psi\\
 \end{array}
 $$
 
@@ -328,9 +327,9 @@ The axiomatisation \axiomKD{} is a substitution schema consisting of the axioms
 and rules of \axiomK{}, along with the additional axioms:
 $$
 \begin{array}{rl}
-{\bf D} & \knows \phi \implies \suspects \phi\\
-{\bf 4} & \knows \phi \implies \knows \knows \phi\\
-{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+{\bf D} & \knows_a \phi \implies \suspects_a \phi\\
+{\bf 4} & \knows_a \phi \implies \knows_a \knows_a \phi\\
+{\bf 5} & \suspects_a \phi \implies \knows_a \suspects_a \phi\\
 \end{array}
 $$
 \end{definition}
@@ -350,8 +349,8 @@ The axiomatisation \axiomS{} is a substitution schema consisting of the axioms
 and rules of \axiomK{}, along with the additional axioms:
 $$
 \begin{array}{rl}
-{\bf T} & \knows \phi \implies \phi\\
-{\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
+{\bf T} & \knows_a \phi \implies \phi\\
+{\bf 5} & \suspects_a \phi \implies \knows_a \suspects_a \phi\\
 \end{array}
 $$
 \end{definition}

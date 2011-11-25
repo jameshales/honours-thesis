@@ -191,8 +191,9 @@ $$
 \begin{array}{rl}
 {\bf T} & \knows \phi \implies \phi\\
 {\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
-{\bf RS5} & \somerefs \covers \Gamma \iff \bigvee_{\gamma \in \Gamma} \gamma \land 
-\bigwedge_{\gamma \in \Gamma} \suspects \gamma
+{\bf RS5} & \displaystyle \somerefs \covers \Gamma \iff \big( \bigvee_{\gamma \in \Gamma}
+\gamma \big) \land 
+\big( \bigwedge_{\gamma \in \Gamma} \suspects \gamma \big)
 \end{array}
 $$
 where $\Gamma$ is a set of propositional formulae.
@@ -206,7 +207,7 @@ $$
 {\bf D} & \knows \phi \implies \suspects \phi\\
 {\bf 4} & \knows \phi \implies \knows \knows \phi\\
 {\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
-{\bf RKD45} & \somerefs \covers \Gamma \iff \bigwedge_{\gamma \in \Gamma} \suspects \gamma
+{\bf RKD45} & \displaystyle \somerefs \covers \Gamma \iff \bigwedge_{\gamma \in \Gamma} \suspects \gamma
 \end{array}
 $$
 where $\Gamma$ is a set of propositional formulae.
