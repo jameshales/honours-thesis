@@ -21,11 +21,11 @@ consider how the knowledge or beliefs of a collection of agents may change in
 response to {\em informative updates}. Informative updates are events, such as
 messages or announcements, that communicate new information to agents. 
 Informative updates change the knowledge or beliefs of agents, whilst leaving
-the {\em factual} information about the state of the world unchanged.  These
-fields consider questions such as what knowledge or belief states can result
-from specific informative updates, and how or whether a specific knowledge or
-belief state can be achieved from a series of arbitrary informative updates,
-perhaps with restrictions on what kinds of informative updates are allowed.
+information directly about the state of the world unchanged.  These fields
+consider questions such as what knowledge or belief states can result from
+specific informative updates, and how or whether a specific knowledge or belief
+state can be achieved from a series of arbitrary informative updates, perhaps
+with restrictions on what kinds of informative updates are allowed.
 
 % Muddy children example
 A classic example is that of the muddy children puzzle, explained by van
@@ -49,28 +49,37 @@ another, except by stepping forward when they know whether they are muddy or
 not. It can be shown that if there are $m$ muddy children, those children will
 step forward after the father has asked his question $m$ times, at which point
 the remaining children will know that they are not muddy, and so they too will
-step forward the next time the father asks his question.
+step forward the next time the father asks his question. The fact that this is
+the case can be shown by modelling the knowledge of the children using a Kripke
+model, and the father's initial announcement, and each round of the children
+stepping forward or not stepping forward, in response to the father's requests,
+as informative updates.
 
 The muddy children puzzle demonstrates how agents in an epistemic system can
 gain knowledge about the state of the world indirectly. In the case of $m$ muddy
 children, the first $m - 1$ times that the father asks his question, no child
 steps forward, and so the only information that is given is that none of the
-children knows whether or not they are muddy. Despite begin given the same
+children knows whether or not they are muddy. Despite being given the same
 information over and over, that does not directly provide any information about
 whether the children are muddy or not, this is enough for each child to
 eventually determine whether or not they are muddy, and this fact is surprising.
 
 % Motivate dynamic epistemic logic
-Problems of this form motivates our research into dynamic epistemic logic and
+Problems of this form motivate our reserach into dynamic epistemic logic and
 dynamic doxastic logic; we wish to know whether it is possible for agents to
-achieve certain knowledge or belief states after some sequence of informative
-updates. This is an interesting question because, as we have already
-demonstrated with the muddy children puzzle, it is not always obvious whether or
-not certain knowledge or belief states are attainable. This has applications in
-areas such as games with imperfect information, where one may wish to know
-whether certain knowledge can be deduced from given information, or in security
-protocols, where one may desire assurances that certain knowledge cannot be
-indirectly deduced from seemingly innocuous communication.
+achieve certain knowledge or belief after some sequence of informative updates.
+In the particular example of the muddy children puzzle, the fact that the
+desired knowledge is attainable is easy to deduce, since a specific sequence of
+informative updates is given.  More generally however we are interested in
+situations where, rather than performing a specific sequence of informative
+updates, any informative update may be performed.  This is an interesting
+question because, as we have already demonstrated with the muddy children
+puzzle, it is not always obvious whether or not certain knowledge or belief
+states are attainable. This has applications in areas such as games with
+imperfect information, where one may wish to know whether certain knowledge can
+be deduced from given information, or in security protocols, where one may
+desire assurances that certain knowledge cannot be indirectly deduced from
+seemingly innocuous communication.
 
 % Introduce informative updates
 Previous work has considered a number of different representations of

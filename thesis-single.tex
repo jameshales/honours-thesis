@@ -45,7 +45,8 @@ the cover logic version. We show that every single-agent epistemic or doxastic
 formula is equivalent to a formula in these normal forms.
 
 \begin{definition}[Prenex normal form]\label{single-prenex}
-A formula in prenex normal form is specified by the following abstract syntax: 
+A formula in prenex normal form is specified by the following abstract syntax,
+where $\alpha$ is a formula in prenex normal form: 
 \begin{eqnarray*}
 \alpha &::=& \delta \bnfalt \alpha \lor \alpha\\
 \delta &::=&    \pi \bnfalt
@@ -190,8 +191,9 @@ $$
 \begin{array}{rl}
 {\bf T} & \knows \phi \implies \phi\\
 {\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
-{\bf RS5} & \somerefs \covers \Gamma \iff \bigvee_{\gamma \in \Gamma} \gamma \land 
-\bigwedge_{\gamma \in \Gamma} \suspects \gamma
+{\bf RS5} & \displaystyle \somerefs \covers \Gamma \iff \big( \bigvee_{\gamma \in \Gamma}
+\gamma \big) \land 
+\big( \bigwedge_{\gamma \in \Gamma} \suspects \gamma \big)
 \end{array}
 $$
 where $\Gamma$ is a set of propositional formulae.
@@ -205,7 +207,7 @@ $$
 {\bf D} & \knows \phi \implies \suspects \phi\\
 {\bf 4} & \knows \phi \implies \knows \knows \phi\\
 {\bf 5} & \suspects \phi \implies \knows \suspects \phi\\
-{\bf RKD45} & \somerefs \covers \Gamma \iff \bigwedge_{\gamma \in \Gamma} \suspects \gamma
+{\bf RKD45} & \displaystyle \somerefs \covers \Gamma \iff \bigwedge_{\gamma \in \Gamma} \suspects \gamma
 \end{array}
 $$
 where $\Gamma$ is a set of propositional formulae.
@@ -433,14 +435,13 @@ RP}. Moreover, $\pi \land \somerefs \covers \Gamma \iff \pi \land
 \gamma$ is derivable from {\bf RS5}. As each $\gamma \in \Gamma$ is
 propositional, $\somerefs \beta$ is equivalent to a formula in \langi{}.
 
-Therefore by the principle of mathematical induction, $\somerefs \beta$ is
+Therefore by the induction, $\somerefs \beta$ is
 equivalent to a formula $\chi \in \langi{}$ for every $\beta \in \langFi{}$.
 
 Hence replacing $\somerefs \beta$ in $\alpha$ with $\chi$ gives an equivalent
 formula that contains only $n$ \somerefs{} operators.
 
-Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
-a formula in \langi{}.
+Therefore by the induction, $\alpha$ is equivalent to a formula in \langi{}.
 \end{proof}
 \pagebreak
 \begin{lemma}\label{single-reduction-kd45}
