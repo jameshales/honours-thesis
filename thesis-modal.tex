@@ -28,18 +28,19 @@ $s$.
 Modal logics can be said to model notions such as necessity, knowledge or
 belief. To help with the introduction however, we will for now adopt an analogy
 using knowledge. Under the {\em possible worlds} interpretation of modal logic,
-each agent can be said to live in a world where there are a certain set of facts
-that are true or false. The agent may not have complete knowledge about which of
-those facts are true or false, and so it may consider several possibilities. We
-say that an agent considers several possible worlds, where the truth of each
-fact may be different in each world. Thus each agent considers a set of worlds
-to be possible, and we say that the agent {\em knows} a statement about the
-world to be true if that statement is true in all of the worlds that it
-considers possible. For example, if an agent knew everything that there was to
-know about the world, then it would consider only one world possible: the actual
-world; whereas if an agent was uncertain about a particular statement $\phi$
-about the world, then the agent would consider at least two worlds possible: a
-world where $\phi$ is true and a world where $\phi$ is false.
+we are concerned with a collection of agents, and each agent can be said to live
+in a world where there are a certain set of facts that are true or false. The
+agent may not have complete knowledge about which of those facts are true or
+false, and so it may consider several possibilities. We say that an agent
+considers several possible worlds, where the truth of each fact may be different
+in each hypothetical world. Thus each agent considers a set of worlds to be
+possible, and we say that the agent {\em knows} a statement about the world to
+be true if that statement is true in all of the worlds that it considers
+possible. For example, if an agent knew everything that there was to know about
+the world, then it would consider only one world possible: the actual world;
+whereas if an agent was uncertain about a particular statement $\phi$ about the
+world, then the agent would consider at least two worlds possible: a world where
+$\phi$ is true and a world where $\phi$ is false.
 
 Kripke models are an encoding of this possible worlds interpretation. Each state
 of the Kripke model represents a world, and the facts that are true at that
@@ -87,10 +88,15 @@ $\phi \implies \psi ::= \neg \phi \lor \psi$;
 and $\suspects_a \phi ::= \neg \knows_a \neg \phi$.
 
 The symbol $\knows_a$ is said to represent necessity in modal logics. Thus we
-may read $\knows_a \phi$ as ``$a$ considers $\phi$ necessary''. The dual
-operator, $\suspects_a$ represents possibility; hopefully it is intuitive that
-if a statement is not necessarily false, then it is possible. Thus we may read
-$\suspects_a \phi$ as ``$a$ considers $\phi$ possible''.
+may read $\knows_a \phi$ as ``$a$ considers $\phi$ necessary''. In epistemic
+logic, a variant of modal logic, $\knows_a$ is said to represent knowledge, and
+in doxastic logic, $\knows_a$ is said to represent belief; in these settings we
+may read $\knows_a \phi$ as ``$a$ knows $\phi$'' or ``$a$ believes $\phi$''. The
+dual operator, $\suspects_a$ represents possibility; hopefully it is intuitive
+that if a statement is not considered to be necessarily false, then it must be
+considered possible. Similarly, if a statement is not known to be false, or if
+it is not believed to be false, then it must be considered possible.  Thus we
+may read $\suspects_a \phi$ as ``$a$ considers $\phi$ possible''.
 
 \begin{definition}[Semantics of \logicC{}]
 Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
@@ -120,19 +126,20 @@ We take a moment to remark on the interpretation of the modal logic. We note
 that modal formulae are interpreted in pointed Kripke models. In our possible
 worlds interpretation, a pointed Kripke model $M_s$ can be said to be a Kripke
 model where we have designated a particular state, $s$, as the actual or current
-world. A propositional variable is interpreted with respect to the valuation at
-the current state of the Kripke model. Negation and conjunction are interpreted
-in the intuitive manner, both at the current state. The most notable aspect of
-the interpretation of modal logic is the interpretation of the $\knows_a$
-operator.  The $\knows_a$ operator effectively moves consideration from the
-current state of the pointed Kripke model to each of the states accessible from
-the current state, under the Kripke model's accessibility relation. This
-captures the notion that we described earlier, that an agent considers a
-statement to be necessary if that statement is true in all of the worlds that it
-considers possible. It should be clear that under this interpretation, the dual
-operator, $\suspects_a$, also captures the notion that an agent considers a
-statement to be possible if that statement is true in at least one of the worlds
-that it considers possible.
+world. Thus we may consider all other worlds to be purely hypothetical. A
+propositional variable is interpreted with respect to the valuation at the
+current state of the Kripke model. Negation and conjunction are interpreted in
+the intuitive manner, both at the current state. Probably the most unfamiliar
+aspect of the interpretation of modal logic is the interpretation of the
+$\knows_a$ operator.  The $\knows_a$ operator effectively moves consideration
+from the current state of the pointed Kripke model to each of the states
+accessible from the current state, under the Kripke model's accessibility
+relation. This captures the notion that we described earlier, that an agent
+considers a statement to be necessary if that statement is true in all of the
+worlds that it considers possible. It should be clear that under this
+interpretation, the dual operator, $\suspects_a$, also captures the notion that
+an agent considers a statement to be possible if that statement is true in at
+least one of the worlds that it considers possible.
 
 Modal logics are interpreted over classes of Kripke models. The simplest normal
 modal logic, \logicK{}, is interpreted over the class of all Kripke models,
@@ -279,9 +286,9 @@ formulae in a logic. The type of axiomatisation that we give is called a
 substitution schema, which comprises of a set of axioms and a set of rules. The
 axioms are statements that contain variables, and substituting the variables for
 well-formed formulae gives a valid statement in the logic. The rules provide a
-method for deriving a validity from some other validities. The main results of
-this paper are axiomatisations of this style for the variants of refinement
-quantified modal logics.
+method for deriving a new valid statement from already known valid statements.
+The main results of this paper are axiomatisations of this style for the
+variants of refinement quantified modal logics.
  
 \begin{definition}[Axiomatisation \axiomK{}]\label{pre-axiom-k}
 The axiomatisation \axiomK{} is a substitution schema consisting of the
@@ -303,9 +310,6 @@ $\proves \psi$}\\
 $$
 \end{definition}
 
-This axiomatisation is shown to be sound and complete by Hughes and
-Creswell~\cite{hughes1996new}.
-
 We say that a formula $\phi$ is {\em provable} or {\em derivable} under an
 axiomatisation if and only if it can be derived using some finite sequence of
 axioms and rules from that axiomatisation, and we write $\proves \phi$. When we
@@ -318,6 +322,9 @@ and {\em completeness}. An axiomatisation is sound with respect to a logic if
 and only if every formula that can be derived from the axiomatisation is also
 valid in that logic. An axiomatisation is complete if and only if every formula
 that is valid in the logic is also derivable.
+
+The axiomatisation \axiomK{}, given above, is shown to be sound and complete by
+Hughes and Creswell~\cite{hughes1996new}.
 
 The axiomatisations for \logicKD{} and \logicS{} are extensions of the
 axiomatisation \axiomK{}, which we will now provide.
@@ -334,15 +341,15 @@ $$
 $$
 \end{definition}
 
+This axiomatisation is shown to be sound and complete by
+Gabbay~\cite{gabbay2003many}.
+
 We note that the additional axioms for \axiomKD{} correspond to the properties
 of \classKD{} models described in Proposition~\ref{pre-properties}. The axiom of
 {\bf 5} is equivalent to property (\ref{pre-property-5}) from
 Proposition~\ref{pre-properties}. The axioms {\bf D}, {\bf 4} and {\bf 5} serve
 to restrict the logic to considering only the Kripke models that are serial,
 transitive and Euclidean.
-
-This axiomatisation is shown to be sound and complete by
-Gabbay~\cite{gabbay2003many}.
 
 \begin{definition}[Axiomatisation \axiomS{}]
 The axiomatisation \axiomS{} is a substitution schema consisting of the axioms
@@ -379,4 +386,16 @@ reflexive property of \classS{} models, and these properties are shown to be
 defining of these logics by the axioms {\bf D} and {\bf T} respectively. Thus we
 can simply say that knowledge is true belief, and that belief is like knowledge,
 with the exception that beliefs do not necessarily have to be true, but they do
-have to be consistent.
+have to be consistent with one another.
+
+There are of course many other variants of modal logics which correspond to
+slightly different notions of knowledge or belief. For example, one may suppose
+that it is reasonable to be ignorant of one's own ignorance -- that we don't
+have negative introspection in knowledge -- and thus we have the modal logic
+{\bf S4}, which has the axioms and rules of \axiomK{} along with the axioms {\bf
+T} and {\bf 4}, but not {\bf 5}. Another example, one may suppose that beliefs
+do not necessarily have to be consistent with one another -- they may be
+incosistent -- thus we have the modal logic {\bf K45}, which has the axioms and
+rules of \axiomK{} along with the axioms {\bf 4} and {\bf 5}, but not {\bf D}.
+For this thesis we only consider the logics of \axiomK{}, \axiomKD{} and
+\axiomS{}.

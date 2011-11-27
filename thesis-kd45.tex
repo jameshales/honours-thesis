@@ -19,24 +19,24 @@ For the axiomatisation of the multi-agent variant, we introduce what we call an
 alternating disjunctive normal form that serves the same purpose as the prenex
 normal form served for the single-agent variant. The alternating disjunctive
 normal form can be seen as a generalisation of the prenex normal form to
-multi-agent logics.
-The alternating disjunctive
-normal form can be seen as a generalisation of the prenex normal form to
-multi-agent logics.
-In multi-agent doxastic logic, it is not possible to write every formula without
-using nested modalities; for example, a formula involving multiple agents, such
-as $\knows_a \knows_b p$ cannot be expressed without nested modalities. Rather,
-our alternating disjunctive normal form prohibits modalities of the same agent
-from being nested directly within one another, without a modality belonging to
-another agent appearing inbetween.  For example, $\knows_a \knows_b \suspects_a
-p$ is allowed, whereas $\knows_a \suspects_a p$ is not. This allows us to avoid
-the same complications due to transitivity and Euclideaness that the prenex
-normal form allowed us to avoid.
+multi-agent logics. It can alternatively be seen as a restriction of the
+previously defined disjunctive normal form. In multi-agent doxastic logic, it is
+not possible to write every formula without using nested modalities; for
+example, a formula involving nested modalities belonging to different agents,
+such as $\knows_a \knows_b p$ cannot be expressed without nested modalities.
+Thus the prenex normal form previously introduced is not appropriate in this
+setting. Rather, our alternating disjunctive normal form prohibits modalities of
+the same agent from being nested directly within one another, without a modality
+belonging to another agent appearing inbetween.  For example, $\knows_a \knows_b
+\suspects_a p$ is allowed, whereas $\knows_a \suspects_a p$ is not. This allows
+us to avoid the same complications due to transitivity and Euclideaness that the
+prenex normal form allowed us to avoid.
 
 Similar to the prenex normal form used in the single-agent case, we will define
 the alternating disjunctive normal form in terms of basic modal operators first,
 and then provide another form which is in terms of the cover operator. We will
-also show a property of these formulae which we rely on for our soundness proof.
+also show an important property of these formulae which we rely on for our
+soundness proof.
 
 \begin{definition}[Alternating disjunctive normal form]
 A formula in $a$-alternating disjunctive normal form is defined by the following abstract
@@ -198,8 +198,8 @@ conversion is a formula in cover logic alternating disjunctive normal form.
 
 The cover logic alternating disjunctive normal form will be used in our completeness proofs.
 
-Finally we show one of the main properties of the alternating disjunctive normal
-forms, that we rely on for our completeness proofs.
+Finally we show an important property of the alternating disjunctive normal
+form that we rely on for our completeness proofs.
 
 \begin{lemma}\label{kd45-successors}
 If $\phi$ is a formula in $a$-alternating disjunctive normal form, and $M_s \in \classKD$ is
@@ -273,6 +273,7 @@ n_i$, we have that $N_t \entails \gamma_ij$.
 Hence $N_t \entails \delta_i$ and so $N_t \entails \psi$.
 \end{proof}
 
+\pagebreak
 \section{Axiomatisation}
 
 We provide an axiomatisation of the multi-agent refinement quantified doxastic
@@ -316,20 +317,20 @@ $$
 \end{definition}
 
 The axiomatisation \axiomKDF{} is similar to the axiomatisation \axiomKF{} in
-many respects. Notably the differences are the inclusion of the \axiomKD{}
+many respects. The notable differences are the inclusion of the \axiomKD{}
 axioms, {\bf D}, {\bf 4} and {\bf 5}, and the fact that the axioms {\bf RComm},
-{\bf RDist} and {\bf RKD45} are restricted to sets of $a$-alternating disjunctive normal
-formulae. This latter restriction is needed for our soundness proofs. Our
-soundness proofs follow the same style as those for \axiomKF{}: we assume that
-we have a model that satisfies a certain formula, and then manually construct a
-refinement of that model, using parts of the original model. The difference
-between the soundness proofs for \axiomKF{} and the soundness proofs for
-\axiomKDF{} are that in the soundness proof for \axiomKDF{} the refinement that
-we construct must be a doxastic model, whereas in the soundness proof for
-\axiomKF{}, the refinement can be any Kripke model.  The fact that the formulae
-are $a$-alternating disjunctive normal formulae means that we can invoke
-Lemma~\ref{kd45-successors} in various places, which allows us to ensure that
-the refinement that we construct is a doxastic model.
+{\bf RDist} and {\bf RKD45} are restricted to sets of $a$-alternating
+disjunctive normal formulae. This latter restriction is needed for our soundness
+proofs. Our soundness proofs follow the same style as those for \axiomKF{}: we
+assume that we have a model that satisfies a certain formula, and then manually
+construct a refinement of that model, using smaller refinements of the original
+model. The difference between the soundness proofs for \axiomKF{} and the
+soundness proofs for \axiomKDF{} are that in the soundness proof for \axiomKDF{}
+the refinement that we construct must be a doxastic model, whereas in the
+soundness proof for \axiomKF{}, the refinement can be any Kripke model.  The
+fact that the formulae are $a$-alternating disjunctive normal formulae means
+that we can invoke Lemma~\ref{kd45-successors} in various places, which allows
+us to ensure that the refinement that we construct is a doxastic model.
 
 \begin{example}
 Once again we recall the coin-flipping example given in
@@ -804,8 +805,8 @@ We note that, as in the axiomatisation for the single-agent epistemic and
 doxastic logics, the completeness proofs above were performed with a provably
 correct translation from \langF{} to \lang{}, under the semantics of
 \logicKDF{}. This shows that \logicKDF{} is expressively equivalent to
-\logicKD{}, and allows us to show several results. In particular, \logicKDF{} is
-decidable.
+\logicKD{}, and allows us to show several results. In particular, that
+\logicKDF{} is decidable.
 
 \begin{theorem}
 The logic \logicKDF{} is decidable.
@@ -813,26 +814,3 @@ The logic \logicKDF{} is decidable.
 
 This can be shown by following similar reasoning as used for the proof of
 Theorem~\ref{single-decidable}.
-
-We finally remark on the challenges involved in an axiomatisation for the
-multi-agent refinement quantified epistemic logic. We can recognise the
-axiomatisations for the multi-agent refinement quantified modal and doxastic
-logics as generalisations of the axiomatisations for the single-agent variants
-of these logics. In each case, we generalise the {\bf RK} or {\bf RKD45} axiom,
-and introduce additional axioms, {\bf RComm} and {\bf RDist} to deal with the
-interactions between different agents in the logics. These axiomatisations have
-been designed so that the proof strategy of a provably correct translation is
-feasible in order to show that the axiomatisations are complete. Consequently
-the soundness proofs for these axioms have been more challenging than the
-completeness proofs.
-
-We have briefly considered an axiomatisation for the multi-agent refinement
-quantified epistemic logic. The obvious generalisations however do not appear to
-be sound. The main obstacle in the epistemic setting is that we do not have a
-result similar to Lemma~\ref{kd45-successors}, due to the symmetry of \classS{}
-models. The $a$-alternating disjunctive normal form used in this chapter ensures
-that this is the case for \classKD{} models, but unfortunately it is not strong
-enough to ensure the same property for \classS{} models. It is because of the
-symmetric property that we cannot combine \classS{} models in the manner
-performed in the proof of {\bf RKD45}, and expect them to continue to satisfy
-the formulae we wish them to satisfy in the combined model.

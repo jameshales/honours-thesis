@@ -5,28 +5,40 @@ single-agent refinement quantified epistemic and doxastic logics, and for the
 multi-agent refinement quantified modal and doxastic logics. The completeness
 proofs for each of these axiomatisations is performed via a provably correct
 translation from the refinement quantified modal logics to the basic modal
-logics, thus showing that each of the refinement quantified versions of these
-logics are expressively equivalent to the basic modal versions. This allows us
-to prove a number of properties about the refinement quantified modal logics,
-from the properties of basic modal logics, including decidability and the finite
-model property, and allows us to derive model-checking and decision procedures
-for these logics via the translations.
+logics, thus showing that each of the refinement quantified versions of the
+logics we have considered are expressively equivalent to the basic modal
+versions. This allows us to prove a number of properties about these refinement
+quantified modal logics from the properties of the corresponding basic modal
+logics, including decidability and the finite model property, and allows us to
+derive model-checking and decision procedures for these logics via the
+translations.
 
-The results presented in this thesis do not lend themselves directly to
-practical applications, however results in logics based on those we have
-considered may conceivably see practical uses in the future. The logics that we
-have considered quantify over all possible informative updates, whilst practical
-applications often call for restrictions on the informative updates that are
-possible. For example, in the setting of a game, the moves that can and cannot
-be made are dictated by the rules of the game, or in the setting of a security
-protocol, the communication that occurs is dictated by the protocol, and thus
-the information that may be gleaned from these moves or communication is
-accordingly restricted. Furthermore, the notion of informative updates captured
-by refinements is better suited to epistemic settings than to general modal or
-doxastic settings, and so the omission of a result in the multi-agent epistemic
-setting is notable. However it is likely that extensions of these logics to
-other settings may borrow from the techniques used in the results we have
-presented in this thesis.
+The logics presented in this thesis do not lend themselves directly to practical
+applications, however results in logics based on those we have considered may
+conceivably see practical uses in formal verification of software in the future.
+The logics that we have considered quantify over all possible informative
+updates, whilst practical applications often call for restrictions on the
+informative updates that are possible. For example, in the setting of a game,
+the moves that can and cannot be made are dictated by the rules of the game, or
+in the setting of a security protocol, the communication that occurs is dictated
+by the protocol, and thus the information that may be gleaned from these moves
+or communication is accordingly restricted.
+
+Furthermore, the notion of informative updates captured by refinements is better
+suited to epistemic settings than to general modal or doxastic settings, and so
+the omission of a result in the multi-agent epistemic setting is significant.
+Although refinements can correspond to notions other than informative updates,
+the correspondence to informative updates is our primary motivation.  Extensions
+of these logics to other settings, such as to epistemic logic, may borrow from
+the techniques used in the results we have presented in this thesis,
+particularly the cover logic normal forms and the technique of a provably
+correct translation to basic modal logics. However whether these techniques are
+applicable or not depend on the setting that we are considering; for example van
+Ditmarsch, Pinchinat and French~\cite{french2010future} have already
+demonstrated that adding refinement quantifiers to the modal logic {\bf K4}
+results in a logic that is strictly more expressive, and thus the technique of a
+provably correct translation to the corresponding basic modal logic is not
+feasible.
 
 There are several immediate avenues for future work based on the results
 presented in this thesis. We have not considered efficient decision or
@@ -50,9 +62,12 @@ procedure would be desirable.
 A decision procedure based on a tableau method was provided by van Ditmarsch,
 French and Pinchinat~\cite{french2010future} for the single-agent refinement
 quantified modal logic, that runs in 2EXP time in the worst case. A modification
-of this tableau method may be applicable to the decision problem in the
-multi-agent logics that we have considered here, and if it works it is likely to
-perform better than the non-elementary procedure we already have.
+of this tableau method may be applicable to the multi-agent refinement
+quantified epistemic and doxastic logics, and is likely to perform better than
+the non-elementary translation that we already have. A decision procedure for
+the single-agent refinement quantified epistemic and doxastics logics that
+runs in 2EXP time has already been presented by Hales, French and
+Davies~\cite{hales2011refinement}.
 
 Efficient model-checking procedures for these logics have yet to be considered.
 Model-checking procedures can easily be derived from any decision procedure that
@@ -72,21 +87,50 @@ modal logic is exponentially more succinct than the basic modal logic.
 Succinctness results for the refinement quantified doxastic and epistemic logics
 have yet to be considered.
 
-We are also interested in an axiomatisation for the multi-agent refinement
-quantified epistemic logic. We have considered axiomatisations for this case
-already, but the obvious generalisations from the single-agent case, or for the
-multi-agent refinement quantified modal or doxastic logics, do not appear to
-work.  A normal form, similar to the alternating disjunctive normal form used in
-this thesis, may be useful for such an axiomatisation, as it was for the
-multi-agent modal and doxastic cases.
+We may also wish to consider the addition of common knowledge operators to the
+refinement quantified modal logics. In an epsitemic setting, common knowledge
+refers to a situation where a group of agents knows some fact $\phi$, and every
+agent in that group knows that the group knows that $\phi$, and so on ad
+infinitum. A common question in dynamic epistemic logic is whether certain
+knowledge can become common knowledge for a group of agents; common knowledge
+tends to be considerably more difficult for agents to obtain than normal
+knowledge. Common knowledge operators are used to signify that a group of agents
+holds certain knowledge as common knowledge. Combined with refinement
+quantifiers, this would allow us to pose questions such as whether or not
+certain common knowledge is attainable.
 
-Finally we may wish to consider the addition of common knowledge operators to
-the refinement quantified modal logics. In an epistemic setting, common
-knowledge refers to situations where a group of agents share some knowledge, and
-are mutually aware that the other agents share this common knowledge. A common
-question in dynamic epistemic logic is whether certain common knowledge is
-attainable by a group of agents; common knowledge tends to be considerably more
-difficult for agents to obtain than normal knowledge. A common knowledge
-operator signifies that a collection of agents holds certain knowledge as common
-knowledge. Combined with refinement quantifiers, this would allow us to pose
-questions such as whether or not certain common knowledge is attainable.
+We finally remark on the challenges involved in an axiomatisation for the
+multi-agent refinement quantified epistemic logic. We can recognise the
+axiomatisations for the multi-agent refinement quantified modal and doxastic
+logics as generalisations of the axiomatisations for the single-agent variants
+of these logics. In each case, we generalise the {\bf RK} or {\bf RKD45} axiom,
+and introduce additional axioms, {\bf RComm} and {\bf RDist} to deal with the
+interactions between different agents in the logics. These axiomatisations have
+been designed so that the proof strategy of a provably correct translation is
+feasible in order to show that the axiomatisations are complete. Consequently
+the soundness proofs for these axioms have been more challenging than the
+completeness proofs.
+
+We have briefly considered an axiomatisation for the multi-agent refinement
+quantified epistemic logic. The obvious generalisations however do not appear to
+be sound. In the cases for \classK{} and \classKD{}, the soundness proofs for
+our new axioms involve taking refinements in successor states, each of which
+satisfy a particular formula, and combining these refinements into a larger
+model where the corresponding successor states continue to satisfy the
+corresponding formulae. The main obstacle in the epistemic setting is that we do
+not yet have a result that allows us to safely combine such refinements into a
+larger model whilst the successor states continue to satisfy the formulae we
+require them to.  In the case of \classK{}, this was trivial, as we combine the
+refinements using inward edges only, thus the successor states are bisimilar to
+the refinements they were constructed from, and thus satisfy the same formulae.
+In the case of \classKD{}, we relied on the properties of alternating
+disjunctive normal formulae, in particular Lemma~\ref{kd45-successors}, which
+allowed us to combine the refinements successfully.  Whilst every \logicS{}
+formula is equivalent to a formula in alternating disjunctive normal form,
+Lemma~\ref{kd45-successors} does not hold in \logicS{}. This is due to a
+combination of the reflexivity and symmetric properties of \classS{} models. It
+is because of these properties, particularly the symmetric property, that we
+cannot expect models to continue to satisfy the formulae we require them to
+satisfy when we combine them into larger models. A modification of the
+alternating disjunctive normal form may lead to a method to safely combine the
+refinements in the manner we require.
