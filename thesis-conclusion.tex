@@ -125,13 +125,13 @@ refinements using inward edges only, thus the successor states are bisimilar to
 the refinements they were constructed from, and thus satisfy the same formulae.
 In the case of \classKD{}, we relied on the properties of alternating
 disjunctive normal formulae, in particular Lemma~\ref{kd45-successors}, which
-allowed us to combine the refinements successfully.  Whilst every \logicS{}
-formula is equivalent to a formula in alternating disjunctive normal form,
-Lemma~\ref{kd45-successors} does not hold in \logicS{}. This is due to a
-combination of the reflexivity and symmetric properties of \classS{} models. It
-is because of these properties, particularly the symmetric property, that we
-cannot expect models to continue to satisfy the formulae we require them to
-satisfy when we combine them into larger models. 
+allowed us to safely combine the refinements in the presence of the transitive
+and Euclidean edges.  Whilst every \logicS{} formula is equivalent to a formula
+in alternating disjunctive normal form, Lemma~\ref{kd45-successors} does not
+hold in \logicS{}. This is due to a combination of the reflexivity and symmetric
+properties of \classS{} models. It is because of these properties, particularly
+the symmetric property, that we cannot expect models to continue to satisfy the
+formulae we require them to satisfy when we combine them into larger models. 
 
 A modification of the alternating disjunctive normal form may lead to a method
 to safely combine the refinements in the manner we require, and thus give us a
