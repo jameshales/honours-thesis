@@ -131,6 +131,16 @@ Lemma~\ref{kd45-successors} does not hold in \logicS{}. This is due to a
 combination of the reflexivity and symmetric properties of \classS{} models. It
 is because of these properties, particularly the symmetric property, that we
 cannot expect models to continue to satisfy the formulae we require them to
-satisfy when we combine them into larger models. A modification of the
-alternating disjunctive normal form may lead to a method to safely combine the
-refinements in the manner we require.
+satisfy when we combine them into larger models. 
+
+A modification of the alternating disjunctive normal form may lead to a method
+to safely combine the refinements in the manner we require, and thus give us a
+provably correct translation. On the other hand, it may be the case that the
+refinement quantified epistemic logic is more expressive than epistemic logic,
+in which case the technique of a provably correct translation would be
+infeasible. Previously Baltag, Solecki and Moss~\cite{baltag2004logics} gave a
+provably correct translation from the action model logic to epistemic logic; we
+note that if we had a provably correct translation from the refinement
+quantified epistemic logic to epistemic logic, then we could combine these two
+translations to give a translation from the arbitrary action model logic to
+epistemic logic.
