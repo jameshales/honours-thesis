@@ -155,12 +155,12 @@ $$
 \allrefs_a \psi\\
 {\bf RP} & \allrefs_a \alpha \iff \alpha \text{ where $\alpha$ is a
 propositional formula}\\
-{\bf RComm} & \somerefs_a \covers_b \Gamma \iff \covers_b \{\somerefs_a \gamma
+{\bf RComm} & \displaystyle \somerefs_a \covers_b \Gamma \iff \covers_b \{\somerefs_a \gamma
 \mid \gamma \in \Gamma\} \text{ where $a \neq b$}\\
-{\bf RDist} & \bigwedge_{b \in B} \somerefs_a \covers_b \Gamma_b \implies
+{\bf RDist} & \displaystyle \bigwedge_{b \in B} \somerefs_a \covers_b \Gamma_b \implies
 \somerefs_a \bigwedge_{b \in B} \covers_b \Gamma_b \text{ where $B \subseteq A$}\\
-{\bf RK} & \somerefs_a \covers_a \Gamma \iff \bigwedge_{\gamma \in \Gamma}
-\suspects_a \somerefs_a \gamma\\
+{\bf RK} & \displaystyle \somerefs_a \covers_a \Gamma \iff \bigwedge_{\gamma \in \Gamma}
+\suspects_a \somerefs_a \gamma
 \end{array}
 $$
 
@@ -184,15 +184,18 @@ are that \axiomKF{} contains axioms for handling the interaction between
 multiple agents. The axioms {\bf RComm} and {\bf RDist} are novel axioms used to
 handle the situation where a refinement quantifier is applied to a cover
 operator of a different agent, and where a refinement quantifier is applied to a
-conjunction of cover operators belonging to different agents.
+conjunction of cover operators belonging to different agents. We call these
+axioms {\bf RComm} and {\bf RDist} because they correspond to properties that
+are visually similar to commutativity or distributivity of the $\somerefs$
+opereator over the $\covers$ operators for different agents.
 
 \begin{example}\label{k-example}
 We give an example derivation using \axiomKF{}, based on the coin-flipping
 example given in Example~\ref{semantics-coin-s5}. We suppose that neither Alice
 nor Bob know whether the coin has landed on heads or tails, and we show that it
 is possible for Alice to learn that the coin landed on heads, whilst Bob
-continues to not know. Thus we give a derivation of $\neg \knows_a p \land \neg
-\knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p \implies
+continues to not know. Thus we give a derivation of $(\neg \knows_a p \land \neg
+\knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p) \implies
 \somerefs_a (\knows_a p \land \neg \knows_b p)$. Let $\phi = \neg \knows_a p \land \neg
 \knows_a \neg p \land \neg \knows_b p \land \neg \knows_b \neg p$.
 $$
@@ -224,11 +227,7 @@ p, \top\}) & \text{({\bf RDist})}\\
 \proves \phi \implies
 \somerefs_a (\knows_a p \land \suspects_b \neg
 p) & \text{(Definition of $\covers$)}\\
-<<<<<<< HEAD
 \proves \phi \implies
-=======
-\phi \implies
->>>>>>> 162081b39548762fb98f924a91070aa6e5b55a5b
 \somerefs_a (\knows_a p \land \knows_b p) & \text{(Definition of $\suspects$)}\\
 \end{array}
 $$
@@ -269,6 +268,7 @@ exists a Kripke model $N^\gamma_{t^\gamma} \refinement_a M_{s^\gamma}$, via some
 $a$-simulation $\mathcal{R}^\gamma$, such that $N^\gamma_{t^\gamma} \entails
 \gamma$. Without loss of generality we assume that the $N^\gamma$ are disjoint.
 
+\pagebreak
 Let $t$ be a state not in $S^M$ or any of the $S^{N^\gamma}$. Then we construct a
 Kripke model $N = (S^N, R^N, V^N)$ where:
 \begin{eqnarray*}
@@ -392,6 +392,7 @@ exists a state $s^\gamma \in sR^M_b$ such that $M_{s^\gamma} \entails
 that $N^\gamma_{t^\gamma} \entails \gamma$. Without loss of generality we assume
 that the $N^\gamma$ are disjoint.
 
+\pagebreak
 Let $t$ be a state not in $S^M$ or any of the $S^{N^\gamma}$. Then we construct a
 Kripke model $N = (S^N, R^N, V^N)$ where:
 \begin{eqnarray*}
@@ -495,7 +496,7 @@ Therefore the axiomatisation \axiomKF{} is sound.
 \end{proof}
 
 We note that if the implication in {\bf RDist} is strengthened to an equality,
-that the resulting axiom is also sound. However this is easily derivable from
+the resulting axiom is also sound. However this is easily derivable from
 the other axioms in \axiomKF{}.
 
 \begin{lemma}\label{k-rdist-converse}
@@ -548,7 +549,6 @@ is derivable from {\bf P} and {\bf K}.
 
 (2) and (3) are derivable, by using {\bf P}, {\bf R} and {\bf RP} to bring the
 propositional part $\pi$ outside the $\somerefs_a$ operator, using {\bf RDist}
-zsh:1: command not found: :pdflatex
 $\somerefs_a$ operator into the cover operators inside the conjunction, and then
 using {\bf RK} or {\bf RComm} as appropriate for each cover operator.
 \end{proof}
@@ -592,13 +592,13 @@ the induction hypothesis to replace each occurrence of the $\somerefs_a$
 operator applied to a subformula of $\beta$ with an equivalent formula in
 \lang{}. The resulting formula is also in \lang{}.
 
-Therefore by the principle of mathematical induction, $\somerefs_a \beta$ is
+Therefore by the induction, $\somerefs_a \beta$ is
 equivalent to a formula $\chi \in \lang{}$ for every $\beta \in \lang{}$. 
 
 Hence replacing $\somerefs_a \beta$ in $\alpha$ with $\chi$ gives an equivalent
 formula that contains only $n$ \somerefs{} operators.
 
-Therefore by the principle of mathematical induction, $\alpha$ is equivalent to
+Therefore by the induction, $\alpha$ is equivalent to
 a formula in \lang{}.
 \end{proof}
 

@@ -8,10 +8,10 @@ logic, that motivates the present work.
 
 Dynamic epistemic logic is a general term for the study of information change in
 modal epistemic systems. Information change is performed by informative updates,
-events that provide agents with additional information, whilst leaving factual
-information about the state of the world unchanged. Notable representations for
-informative updates in dynamic epistemic logic include {\em public
-announcements} and {\em action models}. I will briefly discuss these
+events that provide agents with additional information, whilst leaving
+information directly about the state of the world unchanged. Notable
+representations for informative updates in dynamic epistemic logic include {\em
+public announcements} and {\em action models}. I will briefly discuss these
 representations of informative updates, and the logics that have been devised to
 reason about them.
 
@@ -29,13 +29,13 @@ In terms of the Kripke model representation of the epistemic system, a public
 announcement has the effect of restricting the states of the Kripke model to
 those states that are consistent with $\alpha$, as given the additional
 information that $\alpha$ is the case, those states that are inconsistent with
-$\alpha$ are now considered implausible by every agent.
+$\alpha$ are now considered impossible by every agent.
 
 The public announcement logic was axiomatised by Plaza~\cite{plaza2007logics},
 and also independently by by Gerbrandy and
 Groenvald~\cite{gerbrandy1997reasoning}.  The logic introduces an operator
 $[\alpha]$, where $\alpha$ is an epistemic formula, that can be used to reason
-about the results of a specific public announcement. The operator, $[\alpha]
+about the results of a specific public announcement. The formula $[\alpha]
 \phi$ means that after the formula $\alpha$ is publicly announced, $\phi$ holds
 in the resulting epistemic state. This allows one to reason about the
 consequences of specific public announcements in the epistemic system.
@@ -45,8 +45,9 @@ information contained in a public announcement necessarily becomes common
 knowledge to all agents in the system. Public announcements cannot for example
 model informative updates that provide information privately to only some of
 the agents in the system. Public announcements are however suited to some
-interesting problems, for example the muddy children puzzle that was discussed
-in the introduction to this paper~\cite{vanditmarsch2007dynamic}.
+interesting problems: for example the muddy children puzzle that was discussed
+in the introduction to this thesis can be modelled in terms of public
+announcements.
 
 \subsection{Action models}\label{litreview-am}
 
@@ -75,18 +76,22 @@ coin landed on heads, or that Alice knows that the coin landed on tails, but
 doesn't know which is actually the case.
 
 Action models are represented by relational structures, similar to Kripke
-models~\cite{vanditmarsch2007dynamic}. An action model is executed on a Kripke
+models~\cite{vanditmarsch2007dynamic}. We write $(\mathrm{M,s})$ to denote a
+{\em pointed action model}, where $\mathrm{M}$ is the action model itself, and
+$\mathrm{s}$ is the node in the action model that represents the actual
+informative update that takes place. An action model is executed on a Kripke
 model, resulting in a new Kripke model. If the action model is said to represent
 an informative update, then the new Kripke model represents the resulting
 knowledge state after the informative update has been performed.
 
 The logic of action models was introduced by Baltag, Solecki and
-Moss~\cite{baltag2004logics}. Again, an operator is introduced that has the
-effect of performing an informative update, this time in the form of executing
-an action model on the Kripke model that represents the current epistemic
-state.  The operator, $[\mathrm{M,s}]\phi$ means that after the action model
-$(\mathrm{M, s})$ is executed in the current epistemic state, $\phi$ holds in
-the resulting epistemic state. 
+Moss~\cite{baltag2004logics}. Similar to the public announcement logic, an
+operator $[\mathrm{M, s}]$ is introduced that has the effect of performing an
+informative update, this time in the form of executing an action model on the
+Kripke model that represents the current epistemic state. The formula
+$[\mathrm{M,s}]\phi$ means that after the action model $(\mathrm{M, s})$ is
+executed in the current epistemic state, $\phi$ holds in the resulting epistemic
+state. 
 
 Epistemic actions are a similar representation of informative updates.
 van
@@ -117,29 +122,30 @@ van Ditmarsch~\cite{french2008undecidability} later showed that the arbitrary
 public announcement was undecidable. Whilst the arbitrary action model logic has
 not been considered in depth, the undecidability result in arbitrary public
 announcement logic has encouraged research into weaker versions of this logic
-instead, as they are more likely to be decidable.
+instead, as they are more likely to be decidable and do not rely on the
+relatively complicated semantics of action models.
 
 \section{Information change in doxastic logics}
 
 In dynamic epistemic logic, we consider how knowledge changes in response to
 informative updates that provide agents with additional information. A key
 property of epistemic systems is that everything that an agent knows must be
-true, and any information that an agent is provided must also be true. A
-consequence of this is that once agents have gained certain information, they do
-not lose this information; further informative updates cannot cause the agent to
-forget past information, or to reconsider the truth of previous statements. By
-contrast, in doxastic systems, the beliefs that an agent holds do not
-necessarily have to be true, and the information that agents are given also do
-not have to be true. Therefore it is reasonable for an agent to reconsider its
-beliefs, and possibly reject past information, if it is provided with new
-information that contradicts its old beliefs. We will briefly discuss {\em
-belief revision}, which models the revision and possible removal of old beliefs,
-and {\em action models}, which can be generalised from epistemic systems to
-doxastic systems.
+true, and any information that an agent is provided with through an informative
+update must also be true. A consequence of this is that once agents have gained
+certain information, they do not lose this information; further informative
+updates cannot cause the agent to forget past information, or to reconsider the
+truth of previous statements. By contrast, in doxastic systems, the beliefs that
+an agent holds do not necessarily have to be true, and the information that
+agents are given also do not have to be true. Therefore it is reasonable for an
+agent to reconsider its beliefs, and possibly reject past information, if it is
+provided with new information that contradicts its old beliefs. We will briefly
+discuss {\em belief revision}, which models the revision and possible removal of
+old beliefs, and {\em action models}, which can be generalised from epistemic
+systems to doxastic systems.
 
 \subsection{Belief revision}
 
-The AGM approach to belief revision, named for Alchourrón, Gärdenfors and
+The AGM approach to belief revision, named for Alchourrón, G{\"a}rdenfors and
 Makinson~\cite{alchourron1985logic}, who did much of the initial work in this
 area, considers the beliefs of an agent as a set of propositional formulae,
 called the belief set, that the agent believes to be true. Informative updates
@@ -157,7 +163,7 @@ Variants of dynamic doxastic logic use different operators for belief revision.
 Segerberg~\cite{segerberg2001basic} provided axiomatisation for some variants of
 dynamic doxastic logics.
 
-\subsection{Action models}
+\subsection{Action models}\label{litreview-am-kd45}
 
 The same system of action models for modelling informative updates in epistemic
 models can be generalised to apply to doxastic
@@ -167,14 +173,18 @@ necessarily have to represent a truthful informative update, so it is possible
 for agents to come to believe statements that are not actually true. By contrast
 to belief revision, it is not possible for action models to cause an agent to
 reject past information. In effect, once an agent has been provided with
-information, it is committed to believe that information forever. 
+information, it is committed to believe that information forever.
 
 It is also possible for an action model to cause a belief that was once founded
 to become unfounded. For example, in the previous coin flipping example, if
 Alice had taken a peek at the coin without Bob's seeing her do so, then the
 result of this is that Alice now believes that the coin landed on heads, whilst
 Bob continues to believe (incorrectly) that Alice does not believe either way
-that the coin landed on heads or tails.
+that the coin landed on heads or tails. Bob continues to hold his initial belief
+because he has not been exposed to any information that would cause that belief
+to change. Such a change is not permissible in an epistemic setting, where
+knowledge must be founded, but it is permissible in a doxastic setting, where
+beliefs are allowed to be unfounded.
 
 \section{Other related logics}
 
@@ -188,19 +198,18 @@ in the group are able to cooperate by publicly announcing statements that the
 agents know, but are unable to announce statements that they do not know. The
 logic introduces an operator, $<G>$, where $G$ is a subset of the agents, and
 the formula $<G> \phi$ means that there is some set of formulae, such every
-formula is known by at least one of the agents, and such that after each agent
-announces the formulae that they know, $\phi$ is true in the resulting
+formula is known by at least one of the agents in $G$, and such that after each
+agent announces the formulae that they know, $\phi$ is true in the resulting
 knowledge state. {\AA}gotnes et al.~\cite{agotnes2010group} provide a sound and
 complete axiomatisation of the group announcement logic, show that it is
 decidable, and give complexity and expressivity results for the logic. Notably,
 the group announcement logic is not as expressive as the arbitrary public
-announcement logic, and it is conjectured that the arbitrary public
-announcement is not as expressive as the group announcement logic either.  The
-difference between group announcement logic and the arbitrary public
-announcement logic is that the group announcement logic essentially quantifies
-over the public announcements that the agents in the group know, whereas the
-arbitrary public announcement logic quantifies over all possible public
-announcements.
+announcement logic, and it is conjectured that the arbitrary public announcement
+is not as expressive as the group announcement logic either.  The difference
+between group announcement logic and the arbitrary public announcement logic is
+that the group announcement logic essentially quantifies over the public
+announcements that the agents in the group know, whereas the arbitrary public
+announcement logic quantifies over all possible public announcements.
 
 \subsection{Propositional dynamic logics}
 
@@ -223,8 +232,8 @@ in the worst case~\cite{pratt1980near}.
 van Benthem, van Eijck and Kooi~\cite{vanbenthem2006logics} showed that the
 action model logic can be translated to propositional dynamic logic, and hence
 propositional dynamic logic is at least as expressive as the action model logic.
-Miller and Moss however showed that adding quantification over action models, as
-in arbitrary action model logic, makes the logic
+Miller and Moss however showed that adding quantification over action models,
+as in arbitrary action model logic, makes the logic
 undecidable~\cite{miller2005undecidability}.
 
 \subsection{Description logics}
@@ -243,45 +252,65 @@ axiomatisation for the resulting logic and showed that it was decidable.
 
 \subsection{Bisimulation quantified modal logics}
 
-Bisimulations are a related notion to refinements over Kripke models. Whilst a
-refinement is a pre-order relation defined over Kripke models, a bisimulation
-can be seen as essentially the equivalence relation that is naturally formed
-from the refinement relation. Bisimulation quantified modal logics extend modal
-logics with an operator for quantifying over the models that are bisimilar to
-the Kripke model under consideration, but where a particular propositional atom
-may vary in its interpretation. In effect it is quantifying over the truth value
-of a propositional variable, in models bisimilar to the current Kripke model.
-French~\cite{french2006bisimulation} considered a number of bisimulation
-quantified modal logics, and provided a translation to the modal
-$\mu$-calculus, and decidability or undecidability results for several such
-logics.
+Bisimulations are a relationship between Kripke models, that preserves the truth
+of modal formulae interpreted over the related Kripke models. Bisimulations are
+defined formally in Section~\ref{bisimulation}. Bisimulation quantified modal
+logics extend modal logics with an operator for quantifying over the models that
+are bisimilar to the Kripke model under consideration, but where a particular
+propositional atom may vary in its interpretation. In effect it is quantifying
+over the truth value of a propositional variable, in models bisimilar to the
+current Kripke model.  French~\cite{french2006bisimulation} considered a number
+of bisimulation quantified modal logics, and provided a translation to the
+modal $\mu$-calculus, and decidability or undecidability results for several
+such logics. The notion of a bisimulation is related to the notion of a
+refinement, on which the refinement quantified modal logics are based.
 
 \section{Refinement quantified modal logics}
 
-van Ditmarsch and French~\cite{french2009simulation} introduced the future event
-logic, an extension of epistemic logic that provides an operator for
-quantification over arbitrary refinements of Kripke models. van Ditmarsch and
-French provided the semantics of the logic, and several results and comparisons
-to justify the future event logic as accurately capturing the notion of
-quantifying over arbitrary informative updates. van Ditmarsch and French also
-compare the semantics of the future event logic to previously defined logics, in
-particular to the bisimulation quantified epistemic logic, and to the proposed
-arbitrary action model logic. In this paper we refer to the future event logic
-with the more general term of refinement quantified modal logics. The future
-event logic that van Ditmarsch and French initially introduced is the epistemic
-variant, the refinement quantified epistemic logic.
+The future event logic, introduced by van Ditmarsch and
+French~\cite{french2009simulation} logic, is an extension of epistemic logic
+that provides an operator for quantification over arbitrary refinements of
+Kripke models. The semantics of the logic were provided by van Ditmarsch and
+French, along with several results and comparisons to justify the future event
+logic as accurately capturing the notion of quantifying over arbitrary
+informative updates. The semantics of the future event logic was also compared
+to previously defined logics, in particular to the bisimulation quantified
+epistemic logic, and to the proposed arbitrary action model logic.  In this
+thesis we refer to the future event logic with the more general term of
+refinement quantified modal logics, to reflect the fact that refinement
+quantifiers are applicable in non-epistemic settings.
 
-van Ditmarsch and French compare the refinement quantified epistemic logic to
-the proposed arbitrary action model logic~\cite{french2009simulation}. The main
-difference between the two logics is that the refinement quantified epistemic
-logic does not include an operator for reasoning about the results of a specific
-informative update. van Ditmarsch and French~\cite{french2009simulation} show
-that if such an operator is added to the refinement quantified epistemic logic,
-then the resulting logic is equivalent to the arbitrary action model logic. The
-semantics of the refinement quantifier in the refinement quantified epistemic
-logic are much simpler than the semantics of the action model quantifier in
-arbitrary action model logic, as they do not rely on the mechanics of action
-models.
+In their paper, van Ditmarsch and French~\cite{french2009simulation} relate the
+refinement quantified modal logics to the bisimulation quantified modal logics.
+The two logics are closely related due to the relationships between
+bisimulations and refinements. The semantics of
+bisimulation quantifiers and refinement quantifiers vary significantly, as the
+bisimulation quantifiers quantify over bisimilar models, and also bind a
+propositional variable, whereas refinement quantifiers quantify over refinements
+and do not bind any variables. However van Ditmarsch and French show that
+because the refinements of a Kripke model correspond to domain restrictions of
+bisimilar Kripke models, the refinement quantifiers can be represented by
+bisimulation quantifiers that quantify over variables that do not appear
+elsewhere in the formula. This shows that the bisimulation quantified modal
+logics are at least as expressive as the refinement quantified modal logics.
+On the other hand, the axiomatisation of the bisimulation quantified modal
+logics was completed using a translation to the modal $\mu$-calculus, whereas
+corresponding results in the refinement quantified modal logics so far have
+relied on translations to basic modal logics. This leads to more desireable
+qualities, such as better model-checking and decision procedures, and simpler
+axiomatisations of the refinement quantified modal logics.
+
+A comparison with the refinement quantified modal logics was also given by van
+Ditmarsch and French to the proposed arbitrary action model
+logic~\cite{french2009simulation}. The main difference between the two logics is
+that the refinement quantified epistemic logic does not include an operator for
+reasoning about the results of a specific informative update. van Ditmarsch and
+French~\cite{french2009simulation} show that if such an operator is added to the
+refinement quantified epistemic logic, then the resulting logic is equivalent to
+the arbitrary action model logic. The semantics of the refinement quantifier in
+the refinement quantified epistemic logic are much simpler than the semantics of
+the action model quantifier in arbitrary action model logic, as they do not rely
+on the mechanics of action models.
 
 Although not considered in detail by van Ditmarsch and French, we compare the
 related refinement quantified doxastic logic to previously defined notions of
@@ -306,11 +335,11 @@ single-agent refinement quantified modal logic is expressively equivalent to the
 single-agent modal logic. This expressivity result gives us several results
 about the single-agent refinement quantified modal logic from properties of
 basic modal logic, in particular that the single-agent refinement quantified
-modal logic is decidable. van Ditmarsch, French and Pinchinat also provide an
-explicit decision procedure for the logic, that runs in 2EXP time, using a
-tableau method, which gives an upper bound for the complexity of the logic. The
-refinement quantified modal logic is also shown to be exponentially more
-succinct than the basic modal logic, a result that hints that the decision
-procedure that was given is likely to be optimal. Extending the refinement
-quantified modal logic to the multi-agent cases, and to epistemic and doxastic
-variants, are left as future work.
+modal logic is decidable. An explicit decision procedure was also given by van
+Ditmarsch, French and Pinchinat, that runs in 2EXP time using a tableau method,
+which gives an upper bound for the complexity of the logic. The refinement
+quantified modal logic is also shown to be exponentially more succinct than the
+basic modal logic, a result that hints that the decision procedure that was
+given is likely to be optimal. Extending the refinement quantified modal logic
+to the multi-agent cases, and to epistemic and doxastic variants, are left as
+future work.

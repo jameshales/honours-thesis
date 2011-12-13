@@ -1,42 +1,146 @@
 \chapter{Conclusions}
 
-In this paper we have provided sound and complete axiomatisations for the
+In this thesis we have provided sound and complete axiomatisations for the
 single-agent refinement quantified epistemic and doxastic logics, and for the
 multi-agent refinement quantified modal and doxastic logics. The completeness
 proofs for each of these axiomatisations is performed via a provably correct
 translation from the refinement quantified modal logics to the basic modal
-logics, thus showing that each of the refinement quantified versions of these
-logics are expressively equivalent to the basic modal versions. This allows us
-to prove a number of properties about the refinement quantified modal logics,
-from the properties of basic modal logics, including decidability and the finite
-model property, and allows us to derive model-checking and decision procedures
-for these logics via the translations.
+logics, thus showing that each of the refinement quantified versions of the
+logics we have considered are expressively equivalent to the basic modal
+versions. This allows us to prove a number of properties about these refinement
+quantified modal logics from the properties of the corresponding basic modal
+logics, including decidability and the finite model property, and allows us to
+derive model-checking and decision procedures for these logics via the
+translations.
 
-Although the translation gives a decision procedure for the refinement
-quantified modal logics, we note that the decision procedure has a
-non-elementary time complexity. This is the case because of the conversion to
-disjunctive normal forms or prenex normal forms in each of the translations.
-This conversion must be performed for each refinement quantifier in the original
-formula, and results in a worst-case exponential blow-up in the size of the
-formula. This exponential blow-up is stacked for nested refinement operators,
-and hence the time complexity of computing this translation is non-elementary.
-van Ditmarsch, French and Pinchinat~\cite{french2010future} provided a decision
-procedure for the single-agent refinement quantified modal logic that runs in
-2EXP time, using a tableaux method, so it is worth considering a similar
-approach for the refinement quantified modal logics we have considered here.
-It is unknown whether there is a model-checking procedure for any of the
-refinement quantified modal logics, that is more efficient than the decision
-procedure.
+The logics presented in this thesis do not lend themselves directly to practical
+applications, however results in logics based on those we have considered may
+conceivably see practical uses in formal verification of software in the future.
+The logics that we have considered quantify over all possible informative
+updates, whilst practical applications often call for restrictions on the
+informative updates that are possible. For example, in the setting of a game,
+the moves that can and cannot be made are dictated by the rules of the game, or
+in the setting of a security protocol, the communication that occurs is dictated
+by the protocol, and thus the information that may be gleaned from these moves
+or communication is accordingly restricted.
 
-van Ditmarsch, French and Pinchinat~\cite{french2010future} also showed
-that the multi-agent refinement quantified modal logic is exponentially more
-succinct than the basic modal logic, so we may also wish to consider the
-succinctness of the refinement quantified epistemic and doxastic models.
+Furthermore, the notion of informative updates captured by refinements is better
+suited to epistemic settings than to general modal or doxastic settings, and so
+the omission of a result in the multi-agent epistemic setting is significant.
+Although refinements can correspond to notions other than informative updates,
+the correspondence to informative updates is our primary motivation.  Extensions
+of these logics to other settings, such as to epistemic logic, may borrow from
+the techniques used in the results we have presented in this thesis,
+particularly the cover logic normal forms and the technique of a provably
+correct translation to basic modal logics. However whether these techniques are
+applicable or not depend on the setting that we are considering; for example van
+Ditmarsch, Pinchinat and French~\cite{french2010future} have already
+demonstrated that adding refinement quantifiers to the modal logic {\bf K4}
+results in a logic that is strictly more expressive, and thus the technique of a
+provably correct translation to the corresponding basic modal logic is not
+feasible.
 
-We are also interested in an axiomatisation for the multi-agent refinement
-quantified epistemic logic. We have considered an axiomatisation for the
-multi-agent refinement quantified epistemic logic, but the obvious
-generalisations from the single-agent case do not appear to work.
+There are several immediate avenues for future work based on the results
+presented in this thesis. We have not considered efficient decision or
+model-checking procedures, succinctness results, or the effects of adding common
+knowledge operators to the logics. Also we have already mentioned that results
+in the multi-agent refinement quantified epistemic logic have yet to be given.
 
-Finally we may wish to consider the addition of common knowledge operators to
-the refinement quantified modal logics.
+The provably correct translation used in the completeness proofs can be used to
+derive a decision procedure for the logics we have considered. However, we note
+that such a decision procedure would have a non-elementary time complexity. This
+complexity is due to the translation to the various normal forms that we have
+considered. Conversion to prenex normal form, disjunctive normal form, or
+alternating disjunctive normal form results in a formula that is exponentially
+larger than the original in the worst-case. As this conversion must be performed
+for each refinement quantifier in the given formula, a formula with nested
+refinement quantifiers results in an exponential increase in formula size for each
+nested quantifier, thus the overall size of the resulting formula is
+non-elementary in the size of the original formula. A more efficient decision
+procedure would be desirable.
+
+A decision procedure based on a tableau method was provided by van Ditmarsch,
+French and Pinchinat~\cite{french2010future} for the single-agent refinement
+quantified modal logic, that runs in 2EXP time in the worst case. A modification
+of this tableau method may be applicable to the multi-agent refinement
+quantified epistemic and doxastic logics, and is likely to perform better than
+the non-elementary translation that we already have. A decision procedure for
+the single-agent refinement quantified epistemic and doxastics logics that
+runs in 2EXP time has already been presented by Hales, French and
+Davies~\cite{hales2011refinement}.
+
+Efficient model-checking procedures for these logics have yet to be considered.
+Model-checking procedures can easily be derived from any decision procedure that
+we may have, however it is often the case that there are model-checking
+procedures for a logic that are more efficient than the corresponding decision
+procedures. It is unknown whether there are model-checking procedures for any of
+the logics considered so far, that are more efficient than the decision
+procedures.
+
+The provably correct translation used in the completeness proofs can also be
+used to show that the refinement quantified modal logics we have considered are
+expressively equivalent to their corresponding basic modal logics, so we raise
+the question of whether the refinement quantified modal logics are more succinct
+than the basic modal logics. It was shown by van Ditmarsch, French and
+Pinchinat~\cite{french2010future} that the multi-agent refinement quantified
+modal logic is exponentially more succinct than the basic modal logic.
+Succinctness results for the refinement quantified doxastic and epistemic logics
+have yet to be considered.
+
+We may also wish to consider the addition of common knowledge operators to the
+refinement quantified modal logics. In an epsitemic setting, common knowledge
+refers to a situation where a group of agents knows some fact $\phi$, and every
+agent in that group knows that the group knows that $\phi$, and so on ad
+infinitum. A common question in dynamic epistemic logic is whether certain
+knowledge can become common knowledge for a group of agents; common knowledge
+tends to be considerably more difficult for agents to obtain than normal
+knowledge. Common knowledge operators are used to signify that a group of agents
+holds certain knowledge as common knowledge. Combined with refinement
+quantifiers, this would allow us to pose questions such as whether or not
+certain common knowledge is attainable.
+
+We finally remark on the challenges involved in an axiomatisation for the
+multi-agent refinement quantified epistemic logic. We can recognise the
+axiomatisations for the multi-agent refinement quantified modal and doxastic
+logics as generalisations of the axiomatisations for the single-agent variants
+of these logics. In each case, we generalise the {\bf RK} or {\bf RKD45} axiom,
+and introduce additional axioms, {\bf RComm} and {\bf RDist} to deal with the
+interactions between different agents in the logics. These axiomatisations have
+been designed so that the proof strategy of a provably correct translation is
+feasible in order to show that the axiomatisations are complete. Consequently
+the soundness proofs for these axioms have been more challenging than the
+completeness proofs.
+
+We have briefly considered an axiomatisation for the multi-agent refinement
+quantified epistemic logic. The obvious generalisations however do not appear to
+be sound. In the cases for \classK{} and \classKD{}, the soundness proofs for
+our new axioms involve taking refinements in successor states, each of which
+satisfy a particular formula, and combining these refinements into a larger
+model where the corresponding successor states continue to satisfy the
+corresponding formulae. The main obstacle in the epistemic setting is that we do
+not yet have a result that allows us to safely combine such refinements into a
+larger model whilst the successor states continue to satisfy the formulae we
+require them to.  In the case of \classK{}, this was trivial, as we combine the
+refinements using inward edges only, thus the successor states are bisimilar to
+the refinements they were constructed from, and thus satisfy the same formulae.
+In the case of \classKD{}, we relied on the properties of alternating
+disjunctive normal formulae, in particular Lemma~\ref{kd45-successors}, which
+allowed us to safely combine the refinements in the presence of the transitive
+and Euclidean edges.  Whilst every \logicS{} formula is equivalent to a formula
+in alternating disjunctive normal form, Lemma~\ref{kd45-successors} does not
+hold in \logicS{}. This is due to a combination of the reflexivity and symmetric
+properties of \classS{} models. It is because of these properties, particularly
+the symmetric property, that we cannot expect models to continue to satisfy the
+formulae we require them to satisfy when we combine them into larger models. 
+
+A modification of the alternating disjunctive normal form may lead to a method
+to safely combine the refinements in the manner we require, and thus give us a
+provably correct translation. On the other hand, it may be the case that the
+refinement quantified epistemic logic is more expressive than epistemic logic,
+in which case the technique of a provably correct translation would be
+infeasible. Previously Baltag, Solecki and Moss~\cite{baltag2004logics} gave a
+provably correct translation from the action model logic to epistemic logic; we
+note that if we had a provably correct translation from the refinement
+quantified epistemic logic to epistemic logic, then we could combine these two
+translations to give a translation from the arbitrary action model logic to
+epistemic logic.

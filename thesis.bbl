@@ -1,0 +1,136 @@
+\begin{thebibliography}{10}
+
+\bibitem{agotnes2010group}
+T.~{\AA}gotnes, P.~Balbiani, H.~van Ditmarsch, and P.~Seban.
+\newblock Group announcement logic.
+\newblock {\em Journal of Applied Logic}, 8(1), pages 62--81, 2010.
+
+\bibitem{alchourron1985logic}
+C.E. Alchourr{\'o}n, P.~G{\"a}rdenfors, and D.~Makinson.
+\newblock On the logic of theory change: Partial meet contraction and revision
+  functions.
+\newblock {\em Journal of symbolic logic}, pages 510--530, 1985.
+
+\bibitem{french2008undecidability}
+C.~Areces, H.~van Ditmarsch, T.~French, and R.~Goldblatt.
+\newblock Undecidability for arbitrary public announcement logic.
+\newblock {\em Advances in Modal Logic}, pages 23--42, 2008.
+
+\bibitem{balbiani2007arbitrary}
+P.~Balbiani, A.~Baltag, H.~van Ditmarsch, A.~Herzig, T.~Hoshi, and T.~de~Lima.
+\newblock What can we achieve by arbitrary announcements?: A dynamic take on
+  fitch's knowability.
+\newblock In {\em Proceedings of the 11th conference on Theoretical aspects of
+  rationality and knowledge}, pages 42--51. ACM, 2007.
+
+\bibitem{baltag2004logics}
+A.~Baltag and L.S. Moss.
+\newblock Logics for epistemic programs.
+\newblock {\em Synthese}, 139(2), pages 165--224, 2004.
+
+\bibitem{vanbenthem2006logics}
+J.~van Benthem, J.~van Eijck, and B.~Kooi.
+\newblock Logics of communication and change.
+\newblock {\em Information and computation}, 204(11), pages 1620--1662, 2006.
+
+\bibitem{bilkova2008proof}
+M.~Bilkova, A.~Palmigiano, and Y.~Venema.
+\newblock Proof systems for the coalgebraic cover modality.
+\newblock {\em Advances in Modal Logic}, pages 1--21, 2008.
+
+\bibitem{blackburn2002modal}
+P.~Blackburn, M.~de~Rijke, and Y.~Venema.
+\newblock {\em Modal logic}, volume~53.
+\newblock Cambridge University Press, 2002.
+
+\bibitem{vanditmarsch1999logic}
+H.~van Ditmarsch.
+\newblock The logic of knowledge games: showing a card.
+\newblock In {\em Proceedings of the BNAIC}, volume~99, pages 35--42.
+  Maastricht University, 1999.
+
+\bibitem{vanditmarsch2001knowledge}
+H.~van Ditmarsch.
+\newblock Knowledge games.
+\newblock {\em Bulletin of Economic Research}, 53(4), pages 249--273, 2001.
+
+\bibitem{french2009simulation}
+H.~van Ditmarsch and T.~French.
+\newblock Simulation and information: Quantifying over epistemic events.
+\newblock {\em Knowledge Representation for Agents and Multi-Agent Systems},
+  pages 51--65, 2009.
+
+\bibitem{french2010future}
+H.~van Ditmarsch, T.~French, and S.~Pinchinat.
+\newblock {Future event logic: axioms and complexity}.
+\newblock In {\em Advances in Modal Logic}, pages 24--27, 2010.
+
+\bibitem{vanditmarsch2007dynamic}
+H.~van Ditmarsch, W.~van~der Hoek, and B.~Kooi.
+\newblock {\em Dynamic epistemic logic}.
+\newblock Springer Verlag, 2007.
+
+\bibitem{fischer1979propositional}
+M.J. Fischer and R.E. Ladner.
+\newblock Propositional dynamic logic of regular programs.
+\newblock {\em Journal of Computer and System Sciences}, 18(2), pages 194--211, 1979.
+
+\bibitem{french2006bisimulation}
+T.~French.
+\newblock Bisimulation quantifiers for modal logics.
+\newblock {\em PhD thesis, University of Western Australia}, 2006.
+
+\bibitem{gabbay2003many}
+D.M. Gabbay.
+\newblock {\em Many-dimensional modal logics: theory and applications}, volume
+  148.
+\newblock North Holland, 2003.
+
+\bibitem{gerbrandy1997reasoning}
+J.~Gerbrandy and W.~Groeneveld.
+\newblock Reasoning about information change.
+\newblock {\em Journal of Logic, Language and Information}, 6(2), pages 147--169,
+  1997.
+
+\bibitem{hales2011refinement}
+J.~Hales, T.~French, and R.~Davies.
+\newblock Refinement quantified logics of knowledge.
+\newblock {\em Electronic Notes in Theoretical Computer Science}, 278:85--98,
+  2011.
+
+\bibitem{meyer2004epistemic}
+W.~van~der Hoek and J.J.C. Meyer.
+\newblock {\em Epistemic logic for AI and computer science}.
+\newblock Cambridge Univ Pr, 2004.
+
+\bibitem{hughes1996new}
+G.E. Hughes and M.J. Cresswell.
+\newblock {\em A new introduction to modal logic}.
+\newblock Burns \& Oates, 1996.
+
+\bibitem{miller2005undecidability}
+J.S. Miller and L.S. Moss.
+\newblock The undecidability of iterated modal relativization.
+\newblock {\em Studia Logica}, 79(3), pages 373--407, 2005.
+
+\bibitem{plaza2007logics}
+J.~Plaza.
+\newblock Logics of public communications.
+\newblock {\em Synthese}, 158(2), pages 165--179, 2007.
+
+\bibitem{pratt1980near}
+V.R. Pratt.
+\newblock A near-optimal method for reasoning about action.
+\newblock {\em Journal of Computer and System Sciences}, 20(2), pages 231--254, 1980.
+
+\bibitem{segerberg2001basic}
+K.~Segerberg.
+\newblock The basic dynamic doxastic logic of AGM.
+\newblock {\em Frontiers in belief revision}, 22, pages 57--84, 2001.
+
+\bibitem{wolter1998dynamic}
+F.~Wolter and M.~Zakharyaschev.
+\newblock Dynamic description logics.
+\newblock {\em Advances in Modal Logic}, pages 431--446, 1998.
+
+\end{thebibliography}

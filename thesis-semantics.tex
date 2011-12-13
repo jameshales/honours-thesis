@@ -1,7 +1,7 @@
 \chapter{Technical preliminaries}\label{semantics}
 
 In this chapter we will introduce the technical preliminaries used throughout
-this paper. We begin by giving the definitions of modal, doxastic and epistemic
+this thesis. We begin by giving the definitions of modal, doxastic and epistemic
 logics that we use. We then introduce the concept of a refinement, and then
 define the syntax and semantics of the refinement quantified modal logics
 themselves.
@@ -46,7 +46,7 @@ epistemic models is called \classS{}. We write $M \in \classS{}$ to denote that
 $M$ is an epistemic model.
 \end{definition}
 
-Throughout this paper we will be presenting results in both doxastic and
+Throughout this thesis we will be presenting results in both doxastic and
 epistemic logic.  As such, when we are discussing doxastic logic, we will
 assume that all Kripke models are implicitly doxastic models, and likewise when
 we are discussing epistemic logic, we will assume that all Kripke models are
@@ -54,7 +54,7 @@ implicitly epistemic models. When we are discussing results in general modal
 logic, we will not assume any restrictions on the Kripke models.
 
 % Syntax of modal logics
-\begin{definition}[Language of \lang{}]
+\begin{definition}[Language \lang{}]
 Given a non-empty, finite set of agents $A$ and a non-empty, countable set of
 propositional atoms $P$, the language of \lang{} is defined by the following
 abstract syntax:
@@ -68,7 +68,7 @@ where $p \in P$, $a \in A$ and $\alpha \in \lang{}$.
 \end{definition}
 
 Standard abbreviations include:
-$\top ::= p \lor \neg p$;
+$\top ::= p \lor \neg p$ for some $p \in P$;
 $\bot ::= \neg \top$;
 $\phi \lor \psi ::= \neg (\neg \phi \land \neg \psi)$;
 $\phi \implies \psi ::= \neg \phi \lor \psi$;
@@ -124,7 +124,7 @@ every valid formula in \logicK{} is also valid in \logicKD{}, and likewise for
 to a particular class of Kripke models is also valid for any subclass of those
 Kripke models.
 
-\section{Bisimulation, simulation and refinements}
+\section{Bisimulation, simulation and refinements}\label{bisimulation}
 
 In this section we introduce refinements, the concept that is central to the
 refinement quantified modal logics. We first introduce the related notion of a
@@ -152,18 +152,18 @@ t')$, then there is a $t \in S$ such that $R_a(s, t)$ and $(t, t')
 \in \mathcal{R}$.
 \end{description}
 
-We call $M_s$ and $M'_{s'}$ bisimilar, and write $M_s \bisim M'_{s'}$ to denote
-that there is a bisimulation between $M_s$ and $M'_{s'}$.
+We call $M_s$ and $M'_{s'}$ bisimilar if there is a bisimulation between $M$ and
+$M'$ linking $s$ and $s'$, and we write $M_s \bisim M'_{s'}$ to denote this.
 \end{definition}
 
-We note that bisimulation is an equivalence relation.
+We note that bisimulation is an equivalence relation~\cite{blackburn2002modal}.
 
 Bisimulations relate Kripke models that are in a sense indistinguishable to
 modal logics. If two Kripke models are bisimilar, then they each satisfy the
 same set of modal formulae. This is a property of modal logics that is called
 bisimulation invariance.
 
-\begin{lemma}
+\begin{lemma}[Bisimulation invariance]
 Let $M_s, M'_{s'} \in \classK$ be Kripke models such that $M_s \bisim M'_{s'}$,
 and let $\phi \in \lang$. Then $M_s \entails \phi$ if and only if $M'_{s'}
 \entails \phi$.
@@ -173,12 +173,18 @@ This is shown by Blackburn, de Rijke and Venema~\cite{blackburn2002modal}. We
 note that this result holds equally if the models $M_s$ and $M'_{s'}$ are taken
 from subclasses of \classK{}.
 
+The notion of bisimulation invariance is an essential property of modal logics.
+Indeed, the modal logic \axiomK{} may be defined as the bisimulation invariant
+fragment of first order logic. Blackburn, de Rijke and
+Venema~\cite{blackburn2002modal} discuss this property in a chapter of their
+book.
+
 If we relax the properties of bisimulation slightly, we get a related notion
 known as a {\em simulation}, or its reverse relation, a {\em refinement}.
 
 \begin{definition}[Simulation and refinement]
 Let $M$ and $M'$ be Kripke models. A non-empty relation $\mathcal{R}
-\subseteq S \times S'$ is a \textit{simulation} if and only if it satisfied {\bf
+\subseteq S \times S'$ is a \textit{simulation} if and only if it satisfies {\bf
 atoms} and {\bf forth-$a$} for every $a \in A$.
 
 We call $M'_{s'}$ a simulation of $M_s$ and we call $M_s$ a refinement of
@@ -201,10 +207,22 @@ Church-Rosser property over the class of \classK{} models.
 
 This is shown by van Ditmarsch and French~\cite{french2009simulation}
 
-As we have mentioned before, refinement quantified modal logics quantify over
-informative updates, by quantifying over the refinements of a Kripke model. We
-will briefly introduce two properties to illustrate how refinements correspond
-to the notion of an informative update.
+It should be clear that bisimulations and refinements are closely related
+notions, as their definitions reuse the properties of {\bf atoms}, {\bf forth}
+and {\bf back}. Bisimulations require all three properties, whilst refinements
+relax the requirement for the {\bf back} property. As a consequence, refinements
+satisfy weaker versions of the properties that bisimulations satisfy. Whilst the
+bisimulation relation is an equivalence relation, the refinement relation is a
+pre-order relation; moreover, we note that the bisimulation relation is the
+equivalence relation that is naturally induced from the pre-order relation of
+refinement. Furthermore, whilst bisimulations of models preserve the truth of
+all modal formulae, refinements of models preserve a restricted class of modal
+formulae, known as positive formulae, which we define shortly.
+
+As we have mentioned previously, refinement quantified modal logics quantify
+over informative updates, by quantifying over the refinements of a Kripke model.
+We will briefly introduce two properties of refinements to illustrate how
+refinements correspond to the notion of an informative update.
 
 \begin{definition}[Positive formulae]
 A positive formula is defined by the following abstract syntax:
@@ -224,27 +242,59 @@ and let $\phi$ be a positive formula. If $M_s \entails \phi$ then $M'_{s'}
 \entails \phi$. 
 \end{proposition}
 
+This is shown by van Ditmarsch and French~\cite{french2009simulation}
+
+The significance of positive formulae is that they are the formulae that should
+be preserved in the result of any informative update.
+
 Using an epistemic interpretation, one can reasonably say that an informative
 update should only cause an agent to gain additional information, and cannot
 cause an agent to {\em forget} any information that it has previously been told.
 Thus anything that an agent knows before an informative update, the agent should
 continue to know after an informative update. This is not quite accurate, as a
-formula that involves {\em negative knowledge} may be invalidated by an
-informative update. For example, suppose that we have a situation where
-$\knows_a \neg \knows_b p$, i.e. $a$ knows that $b$ doesn't know that $p$. We
-say this situation involves negative knowledge because it refers to a lack of
-knowledge of agent $b$. Then it is reasonable that an informative update could
-tell $b$ that $p$ is true, and so after the informative update, $\knows_b p$
-becomes true.  This causes $\neg \knows_b p$ to become false, and since it is
-now false, it cannot possibly be known, since only true statements can be
-known. Thus not all knowledge is retained by an informative update, only
-positive knowledge is retained. The fact that refinements preserve positive
-knowledge is an important property for refinements in modelling informative
-updates in an epistemic setting.
+formula that refers to a lack of knowledge of a particular agent may be
+invalidated by an informative update, if that agent is provided with information
+about what it previously did not know.  For example, suppose that we have a
+situation where $\knows_a \neg \knows_b p$, i.e. $a$ knows that $b$ doesn't know
+that $p$. Then it is reasonable that an informative update could tell $b$ that
+$p$ is true, and so after the informative update, $\knows_b p$ becomes true.
+This causes $\neg \knows_b p$ to become false, and since it is now false, it
+cannot possibly be known, since only true statements can be known.  Thus not all
+knowledge is necessarily retained by an informative update, only positive
+knowledge is guaranteed to be retained. The fact that refinements preserve
+positive knowledge is an important property for refinements in modelling
+informative updates in an epistemic setting.
+
+We can compare this epistemic interpretation to a doxastic interpretation.
+Informative updates for beliefs may carry different connotations than
+informative updates for knowledge; specifically, in some cases beliefs may be
+revised. For example, if we have that $\knows_a p$, i.e. $a$ believes that $p$
+is true, then depending on how you choose to interpret informative updates for
+belief, it may be reasonable for an informative update to cause $a$ to
+reconsider its beliefs. For example, $a$ may find evidence that casts doubt on
+the truth of $p$, leading to a situation where $a$ no longer believes that $p$
+is true, but considers both $p$ and $\neg p$ to be possible, i.e. $\suspects_a p
+\land \suspects_a \neg p$. In another example, $a$ may find compelling evidence
+that $\neg p$ is actually the case, leading to a situation where $\knows_a \neg
+p$. In both of these situations, we initially have a positive formula $\knows_a
+p$, but the truth of this formula is not preserved in an informative update that
+allows beliefs to be revised.
+
+This thesis focuses on quantification over the refinements of Kripke models, and
+thus the informative updates that these refinements correspond to necessarily
+preserve the truth of positive formulae. This prohibits the revision of
+knowledge or beliefs; once an agent knows or believes a positive formula to be
+true, it is committed to that knowledge or belief forever. In the epistemic
+setting this is perfectly intuitive, but in the doxastic setting this is not
+always how informative updates are modelled. We note how this property is
+similar to the properties of executing action models in a doxastic setting; as
+we remarked in Section~\ref{litreview-am-kd45}, action models are not capable of
+revising beliefs. In fact, as we will see next, refinements and action models
+are very closely related.
 
 \begin{proposition}
 On finite epistemic models, every finite refinement is equivalent to the
-execution an action model.
+execution of an action model.
 \end{proposition}
 
 This is shown by van Ditmarsch and French~\cite{french2009simulation}.
@@ -252,7 +302,7 @@ This is shown by van Ditmarsch and French~\cite{french2009simulation}.
 The property that every finite refinements is equivalent to the execution of an
 action model is the main justification for refinements as representations of
 informative updates. Although we do not explicitly define action models in this
-paper, it should be noted that action models are inherently finite structures,
+thesis, it should be noted that action models are inherently finite structures,
 whereas the refinements of even a finite model can potentially be infinite, and
 therefore the above property does not hold for the infinite refinements of
 epistemic models. However van Ditmarsch and French~\cite{french2009simulation}
@@ -290,7 +340,9 @@ where $p \in P$, $a \in A$ and $\alpha \in \langF{}$.
 
 We use the standard abbreviations from basic modal logic, along with an
 abbreviation for the dual of the $\allrefs_a$ operator, $\somerefs_a \phi ::=
-\neg \allrefs_a \neg \phi$.
+\neg \allrefs_a \neg \phi$. For $\allrefs_a \phi$ we say that for every
+$a$-refinement, $\phi$ holds. For $\somerefs_a \phi$ we say that there is an
+$a$-refinement such that $\phi$ holds.
 
 \begin{definition}[Semantics of \logicCF{}]
 Let \classC{} be a class of Kripke models, and let $M = (S, R, V) \in \classC$
@@ -400,10 +452,10 @@ coin lands on heads or tails, but Bob still cannot.
 
 \begin{example}\label{semantics-coin-kd45}
 We recall the coin-flipping example again, but this time in the setting of
-doxastic logic. We ask whether it is possible for Alice to learn that the coin
-landed on heads whilst Bob continues to believe that Alice is ignorant of the
-result. We can represent this question by the following statement in refinement
-quantified doxastic logic:
+doxastic logic. We ask whether it is possible for Alice to come to believe that
+the coin landed on heads whilst Bob continues to believe that Alice is ignorant
+of the result. We can represent this question by the following statement in
+refinement quantified doxastic logic:
 $$\somerefs_a (\knows_a p \land \knows_b (\neg \knows_a p \land \neg \knows_a
 \neg p))$$
 
@@ -433,7 +485,7 @@ epistemic setting agents can only know statements that are actually true.
 
 We briefly list some properties of the refinement quantified modal logic, to
 give some intuition about the logic. 
-\pagebreak
+
 \begin{proposition}
 We have the following validities: 
 \begin{enumerate}
@@ -459,7 +511,7 @@ single-agent modal logic, gave a decision procedure for the single-agent case
 that runs in 2EXP time, and showed that the refinement quantified modal logic is
 exponentially more succinct than the refinement quantified modal logic.
 
-In this paper we move towards other variants of refinement quantified modal
+In this thesis we move towards other variants of refinement quantified modal
 logics, including the single-agent refinement quantified epistemic and doxastic
 logics, and the multi-agent refinement quantified modal and doxastic logics. We
 provide sound and complete axiomatisations for each of these logics, and show
